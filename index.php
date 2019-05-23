@@ -3,49 +3,30 @@
 	<title> Amz Park</title>
 	<link rel="stylesheet" type = "text/css" href="./server_files/css/mycss.css">
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-	<link rel="stylesheet" href="http://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
+	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
 <body style="margin: 0px;" onload="initialize()" onresize="initialize()">
 	<div class="slide-item" style="background-image:url(./server_files/images/park.jpg);background-repeat:no-repeat;background-position:left top;background-size:cover;height: 100%; position: fixed;float:all;width: 100%; opacity: 1;"></div>
-	<ul id="primary_nav" class = "hiddenm"> 
+	<div id = "nav-placeholder">
+	
+</div>
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar.html");
+});
+</script>
 
-		<li class="active interactive">
-			<a id = "menu_control" href="javascript:void(0);" onclick="expand()">
-				<i class="fa fa-bars"></i>
-			</a>
-		</li>
 
-		<li class="current-menu-item">
-			<a href="#">Home</a>
-		</li>
-		<li class="active">
-			<a href="#shows">Shows</a>
-		</li>
-		<li class="active">
-			<a href="#attractions">Attractions</a>
-		</li>
-		<li class="have-child">
-			<a href = "#">Server</a>
-			<ul>
-				<li>
-					<a href="/files">Files</a>
-				</li>
-			</ul>
-		</li>
-		<li class="active">
-			<a href="#info">Contact US</a>
-		</li>
-
-	</ul>
 	<section id = "Get Started">
 		<div class = "component-wrapper">
 			<div class = "fullscreen" style="background-color: rgba(255,255,255,0.7)">
 				<div id= "head-line-container">
 					<h1 id="head-line"> Welcome to My Inn</h1>
 					<div class="row">
-					<div id = "UserLogin" class= "generalButton"> </div>
-					<div id = "EmployeeLogin" class= "generalButton"> </div>
+						<div id = "UserLogin" class= "generalButton"> </div>
+						<div id = "EmployeeLogin" class= "generalButton"> </div>
 					</div>
 				</div>
 			</div>
@@ -58,7 +39,7 @@
 		<div class="component-wrapper " style="background-color: rgba(30,30,30,0.7)">
 			<div style="height: 100px; width: 100%; padding: 0px;"></div>
 			<div id = "attractions-background">
-				<div class="att-outer">
+				<div class="project-outer">
 
 
 					<h1 style="text-align: center;"> Attractions </h1>
@@ -88,55 +69,74 @@
 							</div>
 						</div>
 
-						<div class = "contianer attractions attlist">
+						<div class = "contianer projects attlist">
 							<div class = "column">
 								<?php 
-								$mysqli = new mysqli("localhost", "root", "gary1999", "Park");
+
+								$conn = OCILogon ("ora_gary1999", 'a42252965', "dbhost.students.cs.ubc.ca:1522/stu");
+								if (!$conn) {
+									echo "ERROR";
+								}
+								$stid = OCIParse($conn, 'SELECT * FROM Attractions_InsepectAndDeterminesStatus');
+								if (!$stid) {
+									echo "<br>Cannot parse this command: ". "<br>";
+									$e = OCI_Error($db_conn); 
+           // For OCIParse errors, pass the connection handle.
+									echo htmlentities($e['message']);
+									$success = False;
+								}
+
+								$r = OCIExecute($stid, OCI_DEFAULT);
+								if (!$r) {
+									echo "<br>Cannot execute this command: " . $cmdstr . "<br>";
+									$e = oci_error($statement); 
+           // For OCIExecute errors, pass the statement handle.
+									echo htmlentities($e['message']);
+									$success = False;
+								} else {
+								}
+
 
 								/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
-								if ($result = $mysqli->query("SELECT * FROM Attractions_InsepectAndDeterminesStatus WHERE 1", MYSQLI_USE_RESULT)) {
-									?>
-									<?php while ($row = $result->fetch_assoc()) { ?>
-										<a class = "attlink listanimation listitem" href = "<?php echo $row["Link"]?>">
-											<div class = "image contianer attElem row"> 
+								while ($row = OCI_Fetch_Array($stid, OCI_BOTH)) { ?>
+									<a class = "attlink listanimation listitem" href = "<?php echo $row["Link"]?>">
+										<div class = "image contianer attElem row"> 
 
-												<div class='attimage'>
-													<img class= "attimg"src = "./server_files/images/<?php echo $row["attName"];?>.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;" >
+											<div class='projectimage'>
+												<img class= "attimg"src = "./server_files/images/<?php echo trim($row["ATTNAME"]);?>.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;" >
 
-													<div style = "position: absolute; 
-													bottom: 6px;
-													right: 6px;
-													background-color: rgba(255,255,255,0.5);
-													color: white;
-													padding-left: 10px;
-													padding-right: 10px;
-													border-radius:10px;">
-													<p style="color: #000"><?php echo $row["attName"]; ?></p>
-												</div>
-											</div>
-											<div class="table-wrap">
-												<table class= "attinfo">
-													<tr>
-														<th class = "openTimehead"> Open Time </th>
-														<th class = "closeTimehead"> Close Time </th>
-														<th class = "waitTimehead"> Expect Waiting Time </th>
-													</tr>
-													<tr>
-														<td class = "openTime"><?php echo $row["openTime"]; ?> </td>
-														<td class = "closeTime"><?php echo $row["closeTime"]; ?> </td>
-														<td class = "waitTime"><?php echo $row["expectedWaitingTime"]; ?>min </td>
-													</tr>
-												</table>
+												<div style = "position: absolute; 
+												bottom: 6px;
+												right: 6px;
+												background-color: rgba(255,255,255,0.5);
+												color: white;
+												padding-left: 10px;
+												padding-right: 10px;
+												border-radius:10px;">
+												<p style="color: #000"><?php echo trim( $row["ATTNAME"]); ?></p>
 											</div>
 										</div>
-									</a>
+										<div class="table-wrap">
+											<table class= "attinfo">
+												<tr>
+													<th class = "openTimehead"> Open Time </th>
+													<th class = "closeTimehead"> Close Time </th>
+													<th class = "waitTimehead"> Expect Waiting Time </th>
+												</tr>
+												<tr>
+													<td class = "openTime"><?php echo trim( $row["OPENTIME"]); ?> </td>
+													<td class = "closeTime"><?php echo trim( $row["CLOSETIME"]); ?> </td>
+													<td class = "waitTime"><?php echo trim($row["EXPECTEDWAITINGTIME"]); ?>min </td>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</a>
 
-								<?php } ?>
-								<?php
-								$result->close();
-							}
+							<?php } ?>
+							<?php
 
-							$mysqli->close();
+							oci_close($conn);
 
 							?>
 						</div>
@@ -209,8 +209,11 @@
 
 
 	}
-
 	function initialize(){
+		initializeatt();
+	}
+
+	function initializeatt(){
 		var x = document.getElementsByClassName("attelem");
 		for(var t = 0; t< x.length;t++){
 			var p = x[t].getElementsByTagName("tr");
@@ -255,6 +258,13 @@
 			}
 
 
+		}
+
+		document.addEventListener('keypress', keyfilter);
+		function keyfilter(e){
+			if(e.code == "Enter"){
+				filter();
+			}
 		}
 	}
 
