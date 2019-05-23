@@ -186,14 +186,6 @@ $(function(){
 
 
 <script>
-	function expand() {
-		var x = document.getElementById("primary_nav");
-		if (x.className === "") {
-			x.className += "hiddenm";
-		} else {
-			x.className = "";
-		}
-	}
 	function filter(){
 		var x = document.getElementById("search-attr");
 
