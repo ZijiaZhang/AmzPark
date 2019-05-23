@@ -39,7 +39,7 @@ $(function(){
 		<div class="component-wrapper " style="background-color: rgba(30,30,30,0.7)">
 			<div style="height: 100px; width: 100%; padding: 0px;"></div>
 			<div id = "attractions-background">
-				<div class="project-outer">
+				<div class="att-outer">
 
 
 					<h1 style="text-align: center;"> Attractions </h1>
@@ -69,7 +69,7 @@ $(function(){
 							</div>
 						</div>
 
-						<div class = "contianer projects attlist">
+						<div class = "contianer attractions attlist">
 							<div class = "column">
 								<?php 
 
@@ -102,7 +102,7 @@ $(function(){
 									<a class = "attlink listanimation listitem" href = "<?php echo $row["Link"]?>">
 										<div class = "image contianer attElem row"> 
 
-											<div class='projectimage'>
+											<div class='attimage'>
 												<img class= "attimg"src = "./server_files/images/<?php echo trim($row["ATTNAME"]);?>.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;" >
 
 												<div style = "position: absolute; 
@@ -149,7 +149,7 @@ $(function(){
 <section id = "info" >
 	<div class="simple-chord--wrapper component-wrapper" style="background-color: rgba(100,100,100,0.7);">
 		<div class="simple-chord--inner" style="opacity: 1; color: white">
-			<div class="h-font h2">Contact Me</div>
+			<div class="h-font h2">Contact Us</div>
 			<div class="simple-chord--text body-text">
 				<div> 
 					<div>E-mail: &nbsp;<a class= "emaillink" href="mailto:abcd@gmail.com">&nbsp;&nbsp; abcd@gmail.com</a>

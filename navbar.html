@@ -7,24 +7,35 @@
 		</li>
 
 		<li class="current-menu-item">
-			<a href="#">Home</a>
+			<a id = "Home" href="#">Home</a>
 		</li>
 		<li class="active">
-			<a href="#shows">Shows</a>
+			<a id = "Shows" href="#shows">Shows</a>
 		</li>
 		<li class="active">
-			<a href="#attractions">Attractions</a>
-		</li>
-		<li class="have-child">
-			<a href = "#">Server</a>
-			<ul>
-				<li>
-					<a href="/files">Files</a>
-				</li>
-			</ul>
+			<a id = "Attractions" href="#attractions">Attractions</a>
 		</li>
 		<li class="active">
-			<a href="#info">Contact US</a>
+			<a id = "Info" href="#info">Contact US</a>
 		</li>
 
 	</ul>
+
+	<script type="text/javascript">
+//document.getElementById("primary_nav").innerHTML = window.location.pathname;
+		if(window.location.pathname == "/~***REMOVED***/index.php"
+			||window.location.pathname == "/~***REMOVED***/"){
+			document.getElementById("Home").href = "#";
+			document.getElementById("Shows").href = "#shows";
+			document.getElementById("Attractions").href = "#attractions";
+			document.getElementById("Info").href = "#info";
+		} else if(window.location.pathname == "/~***REMOVED***/login/index.php"||
+			window.location.pathname == "/~***REMOVED***/login/"){
+
+			document.getElementById("Home").href = "../index.php";
+			document.getElementById("Shows").href = "../index.php#shows";
+			document.getElementById("Attractions").href = "../index.php#attractions";
+			document.getElementById("Info").href = "../index.php#info";
+		}
+
+	</script>
