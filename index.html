@@ -36,8 +36,8 @@
 				<div id= "head-line-container">
 					<h1 id="head-line"> Welcome to My Inn</h1>
 					<div class="row">
-					<div id = "UserLogin" class= "generalButton"> </div>
-					<div id = "EmployeeLogin" class= "generalButton"> </div>
+						<div id = "UserLogin" class= "generalButton"> </div>
+						<div id = "EmployeeLogin" class= "generalButton"> </div>
 					</div>
 				</div>
 			</div>
@@ -46,10 +46,10 @@
 	</section>
 
 
-	<section id = "attractions">
+	<section id="attractions">
 		<div class="component-wrapper " style="background-color: rgba(30,30,30,0.7)">
 			<div style="height: 100px; width: 100%; padding: 0px;"></div>
-			<div id = "attractions-background">
+			<div id="attractions-background">
 				<div class="att-outer">
 
 
@@ -59,18 +59,18 @@
 						<div class="Search">
 							<svg style="display: none">
 								<symbol id="magnify" viewBox="0 0 18 18" height="100%" width="100%">
-									<path d="M12.5 11h-.8l-.3-.3c1-1.1 1.6-2.6 1.6-4.2C13 2.9 10.1 0          6.5 0S0 2.9 0 6.5 2.9 13 6.5 13c1.6 0 3.1-.6 4.2-1.6l.3.3v.8l5 5          1.5-1.5-5-5zm-6 0C4 11 2 9 2 6.5S4 2 6.5 2 11 4 11 6.5 9 11 6.5            11z" fill="#fff" fill-rule="evenodd"/>
+									<path d="M12.5 11h-.8l-.3-.3c1-1.1 1.6-2.6 1.6-4.2C13 2.9 10.1 0          6.5 0S0 2.9 0 6.5 2.9 13 6.5 13c1.6 0 3.1-.6 4.2-1.6l.3.3v.8l5 5          1.5-1.5-5-5zm-6 0C4 11 2 9 2 6.5S4 2 6.5 2 11 4 11 6.5 9 11 6.5            11z" fill="#fff" fill-rule="evenodd"></path>
 								</symbol>
 							</svg>
 
 							<div class="search-bar">
 
-								<input type="text" id = "search-attr" class="input" placeholder="&nbsp;">
+								<input type="text" id="search-attr" class="input" placeholder="&nbsp;">
 								<span class="label">Search</span>
 								<span class="highlight"></span>
 
 								<div class="search-btn">
-									<a id = "" href="javascript:void(0);" onclick="filter()">
+									<a id="" href="javascript:void(0);" onclick="filter()">
 										<svg class="icon icon-18">
 											<use xlink:href="#magnify"></use>
 										</svg>
@@ -80,68 +80,87 @@
 							</div>
 						</div>
 
-						<div class = "contianer attractions attlist">
-							<div class = "column">
-								<?php 
-								$mysqli = new mysqli("localhost", "root", "***REMOVED***", "Park");
+						<div class="contianer attractions attlist">
+							<div class="column">
+								<a class="attlink listanimation listitem" href="">
+									<div class="image contianer attElem row"> 
 
-								/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
-								if ($result = $mysqli->query("SELECT * FROM Attractions_InsepectAndDeterminesStatus WHERE 1", MYSQLI_USE_RESULT)) {
-									?>
-									<?php while ($row = $result->fetch_assoc()) { ?>
-										<a class = "attlink listanimation listitem" href = "<?php echo $row["Link"]?>">
-											<div class = "image contianer attElem row"> 
+										<div class="attimage">
+											<img class="attimg" src="./server_files/images/Ferris Wheel.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;">
 
-												<div class='attimage'>
-													<img class= "attimg"src = "./server_files/images/<?php echo $row["attName"];?>.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;" >
-
-													<div style = "position: absolute; 
-													bottom: 6px;
-													right: 6px;
-													background-color: rgba(255,255,255,0.5);
-													color: white;
-													padding-left: 10px;
-													padding-right: 10px;
-													border-radius:10px;">
-													<p style="color: #000"><?php echo $row["attName"]; ?></p>
-												</div>
-											</div>
-											<div class="table-wrap">
-												<table class= "attinfo">
-													<tr>
-														<th class = "openTimehead"> Open Time </th>
-														<th class = "closeTimehead"> Close Time </th>
-														<th class = "waitTimehead"> Expect Waiting Time </th>
-													</tr>
-													<tr>
-														<td class = "openTime"><?php echo $row["openTime"]; ?> </td>
-														<td class = "closeTime"><?php echo $row["closeTime"]; ?> </td>
-														<td class = "waitTime"><?php echo $row["expectedWaitingTime"]; ?>min </td>
-													</tr>
-												</table>
-											</div>
+											<div style="position: absolute; 
+											bottom: 6px;
+											right: 6px;
+											background-color: rgba(255,255,255,0.5);
+											color: white;
+											padding-left: 10px;
+											padding-right: 10px;
+											border-radius:10px;">
+											<p style="color: #000">Ferris Wheel</p>
 										</div>
-									</a>
+									</div>
+									<div class="table-wrap">
+										<table class="attinfo">
+											<tbody><tr style="height: 97px;">
+												<th class="openTimehead tableisnotOk"> Open Time </th>
+												<th class="closeTimehead tableisnotOk"> Close Time </th>
+												<th class="waitTimehead tableisGood tableisGood"> Expect Waiting Time </th>
+											</tr>
+											<tr style="height: 97px;">
+												<td class="openTime">09:00:00 </td>
+												<td class="closeTime">17:00:00 </td>
+												<td class="waitTime">20min </td>
+											</tr>
+										</tbody></table>
+									</div>
+								</div>
+							</a>
 
-								<?php } ?>
-								<?php
-								$result->close();
-							}
+							<a class="attlink listanimation listitem" href="">
+								<div class="image contianer attElem row"> 
 
-							$mysqli->close();
+									<div class="attimage">
+										<img class="attimg" src="./server_files/images/Roller Coaster.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;">
 
-							?>
-						</div>
+										<div style="position: absolute; 
+										bottom: 6px;
+										right: 6px;
+										background-color: rgba(255,255,255,0.5);
+										color: white;
+										padding-left: 10px;
+										padding-right: 10px;
+										border-radius:10px;">
+										<p style="color: #000">Roller Coaster</p>
+									</div>
+								</div>
+								<div class="table-wrap">
+									<table class="attinfo">
+										<tbody><tr style="height: 82px;">
+											<th class="openTimehead tableisnotOk"> Open Time </th>
+											<th class="closeTimehead tableisnotOk"> Close Time </th>
+											<th class="waitTimehead tableisOk tableisOk"> Expect Waiting Time </th>
+										</tr>
+										<tr style="height: 82px;">
+											<td class="openTime">09:00:00 </td>
+											<td class="closeTime">15:00:00 </td>
+											<td class="waitTime">30min </td>
+										</tr>
+									</tbody></table>
+								</div>
+							</div>
+						</a>
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 </section>
 <section id = "info" >
 	<div class="simple-chord--wrapper component-wrapper" style="background-color: rgba(100,100,100,0.7);">
 		<div class="simple-chord--inner" style="opacity: 1; color: white">
-			<div class="h-font h2">Contact Me</div>
+			<div class="h-font h2">Contact US</div>
 			<div class="simple-chord--text body-text">
 				<div> 
 					<div>E-mail: &nbsp;<a class= "emaillink" href="mailto:abcd@gmail.com">&nbsp;&nbsp; abcd@gmail.com</a>
