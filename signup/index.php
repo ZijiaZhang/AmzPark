@@ -9,23 +9,99 @@
 
 <body style="margin: 0px;">
 	<div id = "nav-placeholder">
-	
-</div>
-<script>
-$(function(){
-  $("#nav-placeholder").load("../navbar.html");
-});
-</script>
+
+	</div>
+	<script>
+		$(function(){
+			$("#nav-placeholder").load("../navbar.html");
+		});
+	</script>
+
+
 
 
 </body>
 <div style="height: 100px"></div>
+
+
+	<?php 
+	$ispost = false;
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
+		print_r($_POST);
+		$ispost = true;
+	}
+
+	if(/*$_SERVER["REQUEST_METHOD"] == "POST"*/false) {
+      // username and password sent from form 
+
+		$conn = OCILogon ("***REMOVED***", '***REMOVED***', "***REMOVED***");
+		if (!$conn) {
+			echo "ERROR";
+		}
+		$stid = OCIParse($conn, 'INSERT INTO Attractions_InsepectAndDeterminesStatus');
+		$myusername = $_POST['username'];
+		$mypassword = $_POST['password']; 
+		if (!$stid) {
+			echo "<br>Cannot parse this command: ". "<br>";
+			$e = OCI_Error($conn); 
+           // For OCIParse errors, pass the connection handle.
+			echo htmlentities($e['message']);
+			$success = False;
+		}
+
+		$r = OCIExecute($stid, OCI_DEFAULT);
+		if (!$r) {
+			echo "<br>Cannot execute this command: " . $cmdstr . "<br>";
+			$e = oci_error($statement); 
+           // For OCIExecute errors, pass the statement handle.
+			echo htmlentities($e['message']);
+			$success = False;
+		} else {
+		}
+
+	}
+	
+
+	?>
+
+
+
+<h1>Register</h1>
 <form action ="" method="post">
-	<label>UserName  :</label><input type = "text" name = "username" class = "box"/><br /><br />
-                  <label>Password  :</label><input type = "password" name = "password" class = "box" /><br/><br />
-                  <input type = "submit" value = " Submit "/><br />
+	<label>UserName :</label><input type = "text" name = "username" class = "box"/><br /><br />
+	<label>Password  :</label><input type = "password" name = "password" class = "box" /><br/><br />
+	<label>Adults : </label>  
+	<button type = button id = "addAdult">Add Adult</button>
+	<table class = "adultsTable">
+	<?php
+	if($ispost){
+	foreach($_POST["adults"] as $add){
+		echo "<tr><td><input type='text' name='adults[]' placeholder='Name of an adult' value = '$add'></td></tr>";
+	}
+}
+
+	?>
+
+</table>
+	<label>Children: </label> <input type="text" name="children[]"> <input type="text" name = "responsible[]">
+	<input type = "submit" value = " Submit "/><br />
 </form>
 
 
+<script>
+// Global variables
 
+var $deletething = $('.del_thing');
+
+$('#addAdult').click(function(){
+  $thing_table = $('.adultsTable');
+  // if input is empty, it won't add an empty row
+    // new thing is added to end of table
+    // change to prepend to add to the beginning of table
+    $thing_table.append("<tr><td><input type='text' name='adults[]' placeholder='Name of an adult'></td></tr>");
+  
+  // empties the input when sumbit is clicked
+
+});
+</script>
 </html>

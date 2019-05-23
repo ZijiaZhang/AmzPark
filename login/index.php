@@ -17,6 +17,14 @@ $(function(){
 });
 </script>
 
+<?php
+	if(!$_COOKIE['username'])
+
+
+?>
+
+
+
 
 </body>
 <div style="height: 100px"></div>
