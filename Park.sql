@@ -1,137 +1,145 @@
-CREATE TABLE MaintenanceFacility( 
-	name char(64) PRIMARY KEY,
-	contactInfo char(64)
+CREATE TABLE MaintenanceFacility (
+  name varchar(30) PRIMARY KEY,
+  contact_Info varchar(13)
 );
 
-CREATE TABLE Administrator(
-	admID integer PRIMARY KEY,
-	name char(64),
-	contactInfo char(64),
-	duty char(64)
+CREATE TABLE Administrator (
+  adm_ID varchar(6) PRIMARY KEY,
+  name varchar(15),
+  duty_area varchar(15),
+  password varchar(10)
 );
 
-CREATE TABLE Attractions_InsepectAndDeterminesStatus(
-	attName char(64) PRIMARY KEY,
-	location char(64), 
-	expectedWaitingTime integer, 
-	capacity integer, 
-	status char(64), 
-	restriction char(64), 
-	closeTime char(10), 
-	openTime char(10),
-	admID integer NOT NULL,
-	FOREIGN KEY (admID) REFERENCES Administrator(admID)
+CREATE TABLE Administrator_Duty (
+  duty_area varchar(15) PRIMARY KEY,
+  contact_Info varchar(13)
+);
+
+CREATE TABLE Attractions_Insepect_And_Determines_Status (
+  att_name varchar(15) PRIMARY KEY,
+  location varchar(20),
+  capacity varchar(3),
+  status varchar(6),
+  open_time varchar(5),
+  close_time varchar(5),
+  adm_ID varchar(6) NOT NULL,
+  FOREIGN KEY (adm_ID)
+  REFERENCES Administrator(adm_ID)
+);
+
+CREATE TABLE Attractions_Capacity (
+  capacity varchar(3) PRIMARY KEY,
+  expected_Waiting_Time varchar(3)
 );
 
 CREATE TABLE Repair (
-	maintenanceFacilityName char(64), 
-	attName char(64), 
-	Rdate date,
-    FOREIGN KEY (maintenanceFacilityName) REFERENCES MaintenanceFacility(name),
-    FOREIGN KEY (attName) REFERENCES Attractions_InsepectAndDeterminesStatus (attName) ON DELETE CASCADE,
-	PRIMARY KEY(maintenanceFacilityName,attName)
+  mf_name varchar(30),
+  att_name varchar(15),
+  repaire_date date,
+  PRIMARY KEY (mf_name, att_name),
+  FOREIGN KEY (mf_name)
+  REFERENCES MaintenanceFacility(name),
+  FOREIGN KEY (att_name)
+  REFERENCES Attractions_Insepect_And_Determines_Status(att_name)
 );
 
-CREATE TABLE Entertainments_DetermineStatusAndArrangeTimes(
-	entName char(64), 
-	location char(64), 
-	Edate date, 
-	beginTime char(10), 
-	endTime char(10), 
-	duration integer, 
-	status char(64), 
-	price integer,
-	admID integer NOT NULL,
-    FOREIGN KEY (admID) REFERENCES Administrator(admID),
-	PRIMARY KEY(entName, Edate,beginTime)
+CREATE TABLE Entertainments_Determin_Status (
+  name varchar(15),
+  location varchar(20),
+  perform_time varchar(20),
+  status varchar(6),
+  price varchar(3),
+  adm_ID varchar(3) NOT NULL,
+  PRIMARY KEY (name,perform_time),
+  FOREIGN KEY (adm_ID)
+  REFERENCES Administrator(adm_ID)
+);
+
+CREATE TABLE Entertainments_Duration (
+  name varchar(15) PRIMARY KEY,
+  duration varchar(3)
 );
 
 CREATE TABLE Fireworks (
-	entName char(64), 
-	Edate date, 
-	beginTime char(10), 
-	theme char(64)，
-	FOREIGN KEY (entName,Edate,beginTime) REFERENCES Entertainments_DetermineStatusAndArrangeTimes(entName, Edate,beginTime),
-	PRIMARY KEY(entName, Edate,beginTime)
+  name varchar(15),
+  perform_time varchar(16),
+  theme varchar(15),
+  PRIMARY KEY (name, perform_time),
+  FOREIGN KEY (name, perform_time)
+  REFERENCES Entertainments_Determin_Status (name, perform_time)
 );
 
-CREATE TABLE LiveShows(
-	entName char(64), 
-	Edate date, 
-	beginTime char(10), 
-	performers char(64),
-	category char(64),
-	FOREIGN KEY (entName,Edate,beginTime) REFERENCES Entertainments_DetermineStatusAndArrangeTimes(entName, Edate,beginTime),
-	PRIMARY KEY(entName, Edate,beginTime)
+CREATE TABLE LiveShows (
+  name varchar(15),
+  perform_time varchar(16),
+  performers varchar(30),
+  category varchar (10),
+  PRIMARY KEY(name, perform_time),
+  FOREIGN KEY(name, perform_time)
+  REFERENCES Entertainments_Determin_Status(name, perform_time)
 );
-
 
 CREATE TABLE Plan (
-	planNumber integer PRIMARY KEY
+  plan_Number varchar(2) PRIMARY KEY
 );
 
 CREATE TABLE ofVisiting (
-	planNumber integer, 
-	attName char(64),
-    FOREIGN KEY (planNumber) REFERENCES Plan(planNumber) ON DELETE CASCADE,
-    FOREIGN KEY (attName) REFERENCES Attractions_InsepectAndDeterminesStatus(attName) ON DELETE CASCADE,
-	PRIMARY KEY(planNumber,attName)
+  plan_Number varchar(2),
+  att_Name varchar(15),
+  PRIMARY KEY(plan_Number, att_Name),
+  FOREIGN KEY(plan_Number)
+  REFERENCES Plan (plan_Number),
+  FOREIGN KEY(att_Name)
+  REFERENCES Attractions_Insepect_And_Determines_Status(att_name)
 );
 
-
-CREATE TABLE VGroup (
-	groupID integer PRIMARY KEY,
-	Gsize integer,
-	Password char(64)
+CREATE TABLE Groups (
+  group_ID varchar(3) PRIMARY KEY,
+  group_Size varchar(2),
+  password varchar(12)
 );
 
 CREATE TABLE Reservation_linkedTo_ManagedBy (
-	confirmNumber integer PRIMARY KEY,
-	entertainment_date date NOT NULL, 
-	entertainment_BeginTime char(10) NOT NULL, 
-	entetainment_Name char(64) NOT NULL,
-	FOREIGN KEY (entetainment_Name,entertainment_date,entertainment_BeginTime) REFERENCES Entertainments_DetermineStatusAndArrangeTimes(entName, Edate,beginTime) ON DELETE CASCADE,
-	groupID integer NOT NULL,
-    FOREIGN KEY (groupID) REFERENCES VGroup(groupID) ON DELETE CASCADE
+  confirm_Number varchar(8) PRIMARY KEY,
+  perform_time varchar(16) NOT NULL,
+  entertainment_Name varchar(15) NOT NULL,
+  group_ID varchar(3) NOT NULL,
+  FOREIGN KEY(entertainment_Name, perform_time)
+  REFERENCES Entertainments_Determin_Status(name, perform_time)
+  ON DELETE CASCADE,
+  FOREIGN KEY(group_ID)
+  REFERENCES Groups (group_ID)
 );
 
-CREATE TABLE MakePlan (
-	groupID integer,
-	planNumber integer,
-    FOREIGN KEY (groupID) REFERENCES VGroup(groupID) ON DELETE CASCADE,
-    FOREIGN KEY (planNumber) REFERENCES Plan(planNumber)
+CREATE TABLE Madeby (
+  group_ID varchar(3),
+  plan_Number varchar(2),
+  PRIMARY KEY(group_ID, plan_Number),
+  FOREIGN KEY(group_ID)
+  REFERENCES Groups(group_ID),
+  FOREIGN KEY(plan_Number)
+  REFERENCES Plan
 );
 
-CREATE TABLE YoungVisitor_include (
-	visitorName char(64), 
-	groupID integer NOT NULL,
-    FOREIGN KEY (groupID) REFERENCES VGroup(groupID) ON DELETE CASCADE,
-	PRIMARY KEY (visitorName,groupID)
+CREATE TABLE Young_Visitor_Include_Is_Guarded_By (
+  young_visitor_name varchar(15),
+  young_group_id varchar(3),
+  adult_visitor_name varchar(15) NOT NULL,
+  adult_group_id varchar(3) NOT NULL,
+  FOREIGN KEY (young_group_id)
+  REFERENCES Groups (group_ID)
+  ON DELETE CASCADE,
+  FOREIGN KEY (adult_group_id)
+  REFERENCES Groups (group_ID)
+  ON DELETE CASCADE
 );
 
-CREATE TABLE AdultVisitor_include (
-	visitorName char(64), 
-	groupID integer NOT NULL, 
-	contactInfo char(64),
-	PRIMARY KEY (visitorName,groupID),
-	FOREIGN KEY (groupID) REFERENCES VGroup(groupID) ON DELETE CASCADE
+CREATE TABLE Adult_Visitor_include (
+  visitor_name varchar(15),
+  group_id varchar(3),
+  contact_Info varchar(13),
+  PRIMARY KEY(visitor_name, group_id),
+  FOREIGN KEY (group_id)
+  REFERENCES Groups
+  ON DELETE CASCADE
 );
-
-CREATE TABLE Guarde (
-	youngVisitorName char(64) , 
-	youngGroupID integer, 
-	adultVisitorName char(64), 
-	adultGroupID integer,
-	FOREIGN KEY (youngVisitorName, youngGroupID) REFERENCES YoungVisitor_include(visitorName, groupID) ON DELETE CASCADE,
-	FOREIGN KEY (adultVisitorName, adultGroupID) REFERENCES YoungVisitor_include(visitorName, groupID),
-	PRIMARY KEY (youngVisitorName, youngGroupID, adultVisitorName, adultGroupID)
-);
-
-
-
-INSERT INTO Administrator Values (1,'Gary', 'abcd@gmail.com', 'Responsible for C Part');
-INSERT INTO Attractions_InsepectAndDeterminesStatus Values ('Ferris Wheel','C99', 20, 50,'Open',NULL,'17:00:00','9:00:00',1);
-INSERT INTO Attractions_InsepectAndDeterminesStatus Values ('Roller Coaster','C2', 30, 20,'Open',NULL,'17:00:00','9:00:00',1);
-
-
-
