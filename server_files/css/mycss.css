@@ -449,11 +449,21 @@ div.footer>div.links{
     position: absolute;
     width: 20vw;
     height: 10vh;
+    display: block;
+    text-align: center;
+    line-height: 10vh;
+    font-size: 3vw;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bolder;
+}
 
+.generalButton:link, .generalButton:visited {
+  text-decoration: none;
+  color: white;
 }
 
 #UserLogin{
-  background-color: green;
+  background-color: #4CAF50;
   left: 25vw;
 }
 

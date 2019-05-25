@@ -5,6 +5,8 @@
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
 </head>
 
 <body style="margin: 0px;" onload="initialize()" onresize="initialize()">
@@ -25,8 +27,9 @@ $(function(){
 				<div id= "head-line-container">
 					<h1 id="head-line"> Welcome to My Inn</h1>
 					<div class="row">
-						<div id = "UserLogin" class= "generalButton"> </div>
-						<div id = "EmployeeLogin" class= "generalButton"> </div>
+							<a id = "UserLogin" class= "generalButton" href = "./signup">SIGN UP</a>
+						<a href = "./login" id = "EmployeeLogin" class= "generalButton"> LOGIN
+						</a>
 					</div>
 				</div>
 			</div>
