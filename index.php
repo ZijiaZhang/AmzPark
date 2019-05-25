@@ -80,7 +80,7 @@ $(function(){
 								if (!$conn) {
 									echo "ERROR";
 								}
-								$stid = OCIParse($conn, 'SELECT * FROM Attractions_InsepectAndDeterminesStatus');
+								$stid = OCIParse($conn, 'SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity');
 								if (!$stid) {
 									echo "<br>Cannot parse this command: ". "<br>";
 									$e = OCI_Error($db_conn); 
@@ -91,7 +91,7 @@ $(function(){
 
 								$r = OCIExecute($stid, OCI_DEFAULT);
 								if (!$r) {
-									echo "<br>Cannot execute this command: " . $cmdstr . "<br>";
+									echo "<br>Cannot execute this command: " . "<br>";
 									$e = oci_error($statement); 
            // For OCIExecute errors, pass the statement handle.
 									echo htmlentities($e['message']);
@@ -106,7 +106,7 @@ $(function(){
 										<div class = "image contianer attElem row"> 
 
 											<div class='attimage'>
-												<img class= "attimg"src = "./server_files/images/<?php echo trim($row["ATTNAME"]);?>.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;" >
+												<img class= "attimg"src = "./server_files/images/<?php echo trim($row["ATT_NAME"]);?>.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;" >
 
 												<div style = "position: absolute; 
 												bottom: 6px;
@@ -116,7 +116,7 @@ $(function(){
 												padding-left: 10px;
 												padding-right: 10px;
 												border-radius:10px;">
-												<p style="color: #000"><?php echo trim( $row["ATTNAME"]); ?></p>
+												<p style="color: #000"><?php echo trim( $row["ATT_NAME"]); ?></p>
 											</div>
 										</div>
 										<div class="table-wrap">
@@ -127,9 +127,9 @@ $(function(){
 													<th class = "waitTimehead"> Expect Waiting Time </th>
 												</tr>
 												<tr>
-													<td class = "openTime"><?php echo trim( $row["OPENTIME"]); ?> </td>
-													<td class = "closeTime"><?php echo trim( $row["CLOSETIME"]); ?> </td>
-													<td class = "waitTime"><?php echo trim($row["EXPECTEDWAITINGTIME"]); ?>min </td>
+													<td class = "openTime"><?php echo trim( $row["OPEN_TIME"]); ?> </td>
+													<td class = "closeTime"><?php echo trim( $row["CLOSE_TIME"]); ?> </td>
+													<td class = "waitTime"><?php echo trim($row["EXPECTED_WAITING_TIME"]); ?>min </td>
 												</tr>
 											</table>
 										</div>
@@ -249,7 +249,7 @@ $(function(){
 			}else if(waitTime<40){
 				v.className += " tableisOk"
 			}else{
-				v.className += " tablenotOk"
+				v.className += " tableisnotOk"
 			}
 
 
