@@ -75,29 +75,9 @@ $(function(){
 						<div class = "contianer attractions attlist">
 							<div class = "column">
 								<?php 
-
-								$conn = OCILogon ("***REMOVED***", '***REMOVED***', "***REMOVED***");
-								if (!$conn) {
-									echo "ERROR";
-								}
-								$stid = OCIParse($conn, 'SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity');
-								if (!$stid) {
-									echo "<br>Cannot parse this command: ". "<br>";
-									$e = OCI_Error($db_conn); 
-           // For OCIParse errors, pass the connection handle.
-									echo htmlentities($e['message']);
-									$success = False;
-								}
-
-								$r = OCIExecute($stid, OCI_DEFAULT);
-								if (!$r) {
-									echo "<br>Cannot execute this command: " . "<br>";
-									$e = oci_error($statement); 
-           // For OCIExecute errors, pass the statement handle.
-									echo htmlentities($e['message']);
-									$success = False;
-								} else {
-								}
+									include 'database.php';
+									$stid = executeSQL('SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity');
+								
 
 
 								/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
