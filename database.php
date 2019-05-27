@@ -11,6 +11,7 @@
            // For OCIParse errors, pass the connection handle.
 									echo htmlentities($e['message']);
 									$success = False;
+									throw new Exception('Cannot parse this command');
 								}
 
 								$r = OCIExecute($stid, OCI_COMMIT_ON_SUCCESS);
@@ -20,6 +21,7 @@
            // For OCIExecute errors, pass the statement handle.
 									echo htmlentities($e['message']);
 									$success = False;
+									throw new Exception('Cannot execute this command');
 								} else {
 									#echo "<br>Command: success " .$command. "<br>";
 								}

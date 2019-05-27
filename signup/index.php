@@ -91,12 +91,15 @@ if($ispost) {
 	}
 
 
-	if(ifExist($name, 'GROUPID' , 'GROUPS') || !allresponsibleValid($resp,$adults) 
-		|| !noSameName($adults,$children) || !notNULL1($adults,$contactInfo,$children,$resp) ||! numberMatch($adults,$contactInfo,$children,$resp)){
-		echo !allresponsibleValid($resp,$adults);
-	}else{
-		echo "Successfully Create Group";
-		insertInto("'$name',$size,'$password'","groups");
+	//if(ifExist($name, 'GROUPID' , 'GROUPS') || !allresponsibleValid($resp,$adults) 
+	//	|| !noSameName($adults,$children) || !notNULL1($adults,$contactInfo,$children,$resp) ||! numberMatch($adults,$contactInfo,$children,$resp)){
+	//	echo !allresponsibleValid($resp,$adults);
+	//}else{
+	//	echo "Successfully Create Group";
+	
+	if(!ifExist($name, 'GROUPID' , 'GROUPS')){
+		try {insertInto("'$name',$size,'$password'","groups");
+		try{
 		for($i =0 ;$i < count($adults) ;$i++){
 			$adult = $adults[$i];
 			$cont  = $contactInfo[$i];
@@ -108,6 +111,13 @@ if($ispost) {
 			
 			insertInto("'$child', '$name', '$adult','$name'","YoungVisitor_include_isGuradedBy");
 		}
+		}catch (Exception $e){
+			 echo 'Caught exception: ',  $e->getMessage(), "\n";
+			 executeSQL("DELETE FROM groups WHERE groupID = $name");
+		}
+	}catch (Exception $e){
+		echo "Cannot Crete Group. Because the group name has been used.";
+	}
 	}
 }
 
