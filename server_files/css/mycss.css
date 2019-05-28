@@ -107,7 +107,7 @@ body{
 
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 790px) {
   #primary_nav, #primary_nav li, #primary_nav li a ,
   #primary_nav li > ul
   {float: none; position: relative;}
@@ -122,7 +122,7 @@ body{
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 790px) {
   .hiddenm li{
     display: none;
   }

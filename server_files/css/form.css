@@ -1,0 +1,116 @@
+  .formContainer{
+    position: relative;
+    margin: auto;
+  }
+  form{
+    width: 80vw;
+    margin: auto;
+  }
+  h1{
+    text-align: center;
+  }
+
+  input[type="text"], input[type="password"] {
+    width: 60%;
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px 0px 15px 8px;
+    border-radius: 5px;
+    box-shadow: inset 4px 6px 10px -4px rgba(0, 0, 0, 0.3), 0 1px 1px -1px rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    border: none;
+    border: 1px solid black;
+    color: #6E6E6E;
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    font-size: 24px;
+  }
+  input:focus{
+    box-shadow:inset 4px 6px 10px -4px rgba(0,0,0,0.7), 0 1px 1px -1px rgba(255,255,255,0.3);
+    background:rgba(255, 255, 255, 0.3);
+    @include easeme;
+  }
+
+
+
+  @mixin easeme{
+    -webkit-transition:1s ease;
+    -moz-transition:1s ease;
+    -o-transition:1s ease;
+    -ms-transition:1s ease;
+    transition:1s ease;
+  }
+  button{
+    background-color: #00adff;
+    border-radius: 10px;
+    color: white;
+  }
+  table{
+    width: 60%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  input[name = "responsible[]"],input[name = "contact[]"],input[name = "adults[]"], input[name = "children[]"]{
+    width: 100%;
+  }
+
+  td { border: solid 0px #000; }
+  tr:first-child td:first-child { border-top-left-radius: 5px; }
+  tr:first-child td:last-child { border-top-right-radius: 5px; }
+  tr:last-child td:first-child { border-bottom-left-radius: 5px; }
+  tr:last-child td:last-child { border-bottom-right-radius: 5px; }
+
+
+  table input:hover{
+    background-color: #ddd;
+  }
+
+  .name-help,.pass-help{
+  display:none;
+  padding:0px;
+  margin:0px 0px 15px 0px;
+  text-align: center;
+}
+
+
+input[type="submit"]{
+  background: #4d90fe;
+    border-color: #3079ed;
+    font-weight: bold;
+    margin: 10px 0 0 0;
+    color: #fff;
+    width: 60%;
+    border-radius: 5px;
+    padding: 8px 0px 8px 8px;
+    font-size: 3vw;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.oneRow{
+  position:relative;
+  margin-left: 20%;
+  margin-right: auto;
+}
+
+  @media screen and (max-width:1100px){
+    input[type = "text"], input[type = "password"],input[type="submit"]{
+      font-size: 3vw;
+      width: 98%;
+    }
+    table{
+      width: 98%;
+    }
+
+  }
