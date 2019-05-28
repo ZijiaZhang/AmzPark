@@ -18,7 +18,7 @@
 			print_r($_SESSION);
 			header("location: ../myaccount");
 		}else{
-			echo 'Cannot Login Chech username AND PASSWORD';#"SELECT * FROM groups WHERE groupID = '$username' AND password = '$password'";
+			echo 'Cannot Login Check username AND PASSWORD';#"SELECT * FROM groups WHERE groupID = '$username' AND password = '$password'";
 		}
 	}
 ?>
