@@ -1,7 +1,8 @@
 <?php
 	##print_r($_SESSION);
-	include('../login.php');
-	if(isset($_SESSION['login_user'])){
+	include_once ('../login.php');
+	include_once ('../session.php');
+	if(checkSession()){
 		header("location: ../myaccount");
 	}
 ?>
