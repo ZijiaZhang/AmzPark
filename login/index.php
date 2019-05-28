@@ -1,3 +1,11 @@
+<?php
+	##print_r($_SESSION);
+	include('../login.php');
+	if(isset($_SESSION['login_user'])){
+		header("location: ../myaccount");
+	}
+?>
+
 <html lang="en"><head>
 	<meta charset="UTF-8">
 	<title> Amz Park</title>
@@ -17,21 +25,16 @@ $(function(){
 });
 </script>
 
-<?php
-	if(!$_COOKIE['username'])
-
-
-?>
-
-
-
 
 </body>
 <div style="height: 100px"></div>
+
+
+
 <form action ="" method="post">
 	<label>UserName  :</label><input type = "text" name = "username" class = "box"/><br /><br />
                   <label>Password  :</label><input type = "password" name = "password" class = "box" /><br/><br />
-                  <input type = "submit" value = " Submit "/><br />
+                  <input name = "submit" type = "submit" value = "login "/><br />
 </form>
 
 
