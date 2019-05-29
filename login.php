@@ -1,9 +1,11 @@
 <?php
-	include ('database.php');
-	session_save_path('/home/g/***REMOVED***/sessions');
-	$ppp = session_start();
-	var_dump($ppp);
-	print_r($_SESSION);
+	include_once ('database.php');
+	include_once ('session.php');
+	#var_dump($ppp);
+	#print_r($_SESSION);
+	initializeSession();
+	$time = $_SERVER['REQUEST_TIME'];
+	$timeout = 1800;
 	#$ispost =($_SERVER["REQUEST_METHOD"] == "POST");
 	$ispost = isset($_POST['submit']);
 	//var_dump($_POST);
@@ -14,9 +16,12 @@
 		$result  = executeSQL("SELECT * FROM groups WHERE groupID = '$username' AND password = '$password'");
 		if($row = OCI_Fetch_Array($result, OCI_BOTH)){
 			echo "SUCCESS";
-			$_SESSION['login_user'] = $username;
+			createSession($username);
+
 			print_r($_SESSION);
 			header("location: ../myaccount");
+
+
 		}else{
 			echo 'Cannot Login Check username AND PASSWORD';#"SELECT * FROM groups WHERE groupID = '$username' AND password = '$password'";
 		}

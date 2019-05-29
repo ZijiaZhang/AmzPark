@@ -76,7 +76,7 @@ $(function(){
 							<div class = "column">
 								<?php 
 									include 'database.php';
-									$stid = executeSQL('SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity');
+									$stid = executeSQL('SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME, A.STATUS FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity');
 								
 
 
@@ -104,12 +104,12 @@ $(function(){
 												<tr>
 													<th class = "openTimehead"> Open Time </th>
 													<th class = "closeTimehead"> Close Time </th>
-													<th class = "waitTimehead"> Expect Waiting Time </th>
+													<th class = "waitTimehead"> Status </th>
 												</tr>
 												<tr>
 													<td class = "openTime"><?php echo trim( $row["OPEN_TIME"]); ?> </td>
 													<td class = "closeTime"><?php echo trim( $row["CLOSE_TIME"]); ?> </td>
-													<td class = "waitTime"><?php echo trim($row["EXPECTED_WAITING_TIME"]); ?>min </td>
+													<td class = "waitTime"><?php echo trim($row["STATUS"]); ?> </td>
 												</tr>
 											</table>
 										</div>
@@ -221,7 +221,7 @@ $(function(){
 
 
 
-			var waitTime = parseInt(x[t].getElementsByClassName("waitTime")[0].innerText.split("min")[0],10);
+			/*var waitTime = parseInt(x[t].getElementsByClassName("waitTime")[0].innerText.split("min")[0],10);
 			var v = x[t].getElementsByClassName("waitTimehead")[0];
 			if(waitTime <= 20){
 				
@@ -230,6 +230,14 @@ $(function(){
 				v.className += " tableisOk"
 			}else{
 				v.className += " tableisnotOk"
+			}*/
+
+			var Status = x[t].getElementsByClassName("waitTime")[0].innerText;
+			var v = x[t].getElementsByClassName("waitTimehead")[0];
+			if(Status == "OPEN"){
+				v.className = "waitTime tableisGood";
+			}else{
+				v.className = "waitTime tableisnotOk";
 			}
 
 
