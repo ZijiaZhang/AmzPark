@@ -39,7 +39,7 @@ function ifExist($id, $keyname, $database){
 
 function insertInto($item, $database){
 	$command = "INSERT INTO $database VALUES ($item)";
-	echo $command;
+	#echo $command;
 	$stid = executeSQL($command);
 }
 
