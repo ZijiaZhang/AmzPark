@@ -117,11 +117,6 @@ $(function(){
 								</a>
 
 							<?php } ?>
-							<?php
-
-							oci_close($conn);
-
-							?>
 						</div>
 					</div>
 				</div>
