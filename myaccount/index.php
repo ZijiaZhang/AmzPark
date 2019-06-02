@@ -25,7 +25,7 @@ if(isset($_POST['submit'])){
 		$Visitername = $_POST['ins_visitor'];
 		$Contact = $_POST['ins_contact'];
 		try{
-		insertInto("'$Visitername','$name','$Contact'","AdultVisitor_include");
+			insertInto("'$Visitername','$name','$Contact'","AdultVisitor_include");
 		}catch(Exception $e){
 			echo $e->getMessage();
 		}
@@ -43,21 +43,21 @@ if(isset($_POST['submit'])){
 <?php
 
 
-	$groupSize = 'ERROR';
-	$Adults = 'ERROR';
-	$Children = 'ERROR';
-	try{
-		$info = getMember($name);
-		var_dump($info);
-		$groupSize = $info['GS'];
-		$Adults = $info['AD'];
-		$Children = $info ['CH'];
-	}catch(EXception $e){
-		echo $e->getMessage();
-	}
+$groupSize = 'ERROR';
+$Adults = 'ERROR';
+$Children = 'ERROR';
+try{
+	$info = getMember($name);
+	var_dump($info);
+	$groupSize = $info['GS'];
+	$Adults = $info['AD'];
+	$Children = $info ['CH'];
+}catch(EXception $e){
+	echo $e->getMessage();
+}
 
 
-	echo "Your Username is $name";
+echo "Your Username is $name";
 
 
 ?>
@@ -109,57 +109,57 @@ if(isset($_POST['submit'])){
 			<form action="" class="form-container" method = "post">
 				<h1>ADD ADULT</h1>
 				<table>
-				<tr>
-					<td>
-				<label for="name"><b>Name</b></label>
-			</td>
-			<td>
-				<input type="text" placeholder="Enter Name" name="ins_visitor" required>
-			</td>
-			</tr>
-				<tr><td>
-				<label for="contact"><b>Contact</b></label></td><td>
-				<input type="text" placeholder="Enter Contact" name="ins_contact" required></td>
-			</tr>
-				</table>
-				<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
-				<button type="button" class="" onclick="closeForm()">Close</button>
-			</form>
-		</div>
-		
-
-		<table id = "adultInfo">
-			<tr><th>Name</th><th>Contact</th><th>delete</th></tr>
-			<?php foreach($Adults as $adult){ ?>
-				<form action = "" method = "post">
-					<tr><td><input type = "hidden" name = "del_visitor" value = <?php echo $adult['VISITORNAME'];?> > <?php echo $adult['VISITORNAME'];?></td>
-						<td> <?php echo $adult['CONTACT_INFO'];?></td>
-						<td><button type="submit" value = "delete_adult" name = "submit">Delete</button>
+					<tr>
+						<td>
+							<label for="name"><b>Name</b></label>
+						</td>
+						<td>
+							<input type="text" placeholder="Enter Name" name="ins_visitor" required>
+						</td>
+					</tr>
+					<tr><td>
+						<label for="contact"><b>Contact</b></label></td><td>
+							<input type="text" placeholder="Enter Contact" name="ins_contact" required></td>
 						</tr>
-					</form>
-				<?php } ?>
-			</table>
+					</table>
+					<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
+					<button type="button" class="" onclick="closeForm()">Close</button>
+				</form>
+			</div>
+			
 
-		</div>
-		<div id = "operationPannel">
-			<p>Hello</p>
-		</div>
-	</div>
-	<a href="../logout.php">Log Out</a>
+			<table id = "adultInfo">
+				<tr><th>Name</th><th>Contact</th><th>delete</th></tr>
+				<?php foreach($Adults as $adult){ ?>
+					<form action = "" method = "post">
+						<tr><td><input type = "hidden" name = "del_visitor" value = <?php echo $adult['VISITORNAME'];?> > <?php echo $adult['VISITORNAME'];?></td>
+							<td> <?php echo $adult['CONTACT_INFO'];?></td>
+							<td><button type="submit" value = "delete_adult" name = "submit">Delete</button>
+							</tr>
+						</form>
+					<?php } ?>
+				</table>
 
-	<script>
-		function ToggleForm() {
-			if(document.getElementById("adultAddform").style.display == "block"){
+			</div>
+			<div id = "operationPannel">
+				<p>Hello</p>
+			</div>
+		</div>
+		<a href="../logout.php">Log Out</a>
+
+		<script>
+			function ToggleForm() {
+				if(document.getElementById("adultAddform").style.display == "block"){
+					document.getElementById("adultAddform").style.display = "none";
+					document.getElementById("adultPanelButton").InnerHTML = "Create Adult";
+				}
+				else{
+					document.getElementById("adultAddform").style.display = "block";
+					document.getElementById("adultPanelButton").InnerHTML = "Close Window";
+				}
+			}
+
+			function closeForm() {
 				document.getElementById("adultAddform").style.display = "none";
-				document.getElementById("adultPanelButton").InnerHTML = "Create Adult";
 			}
-			else{
-				document.getElementById("adultAddform").style.display = "block";
-				document.getElementById("adultPanelButton").InnerHTML = "Close Window";
-			}
-		}
-
-		function closeForm() {
-			document.getElementById("adultAddform").style.display = "none";
-		}
-	</script>
+		</script>

@@ -76,15 +76,15 @@
   }
 
   .name-help,.pass-help{
-  display:none;
-  padding:0px;
-  margin:0px 0px 15px 0px;
-  text-align: center;
-}
+    display:none;
+    padding:0px;
+    margin:0px 0px 15px 0px;
+    text-align: center;
+  }
 
 
-input[type="submit"]{
-  background: #4d90fe;
+  input[type="submit"]{
+    background: #4d90fe;
     border-color: #3079ed;
     font-weight: bold;
     margin: 10px 0 0 0;
@@ -97,17 +97,30 @@ input[type="submit"]{
     margin-left: auto;
     margin-right: auto;
     display: block;
-}
+  }
 
-.oneRow{
-  position:relative;
-  margin-left: 20%;
-  margin-right: auto;
-}
+  .oneRow{
+    position:relative;
+    margin-left: 20%;
+    margin-right: auto;
+  }
 
-label{
-  font-size: 24px;    
-}
+  form div{
+    width: 60%;
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px 0px 15px 8px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    font-size: 24px;
+  }
+
+  label{
+    font-size: 24px;    
+  }
 
   @media screen and (max-width:1100px){
     input[type = "text"], input[type = "password"],input[type="submit"],button,label{

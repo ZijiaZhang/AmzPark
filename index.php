@@ -7,18 +7,21 @@
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
 <body style="margin: 0px;" onload="initialize()" onresize="initialize()">
 	<div class="slide-item" style="background-image:url(./server_files/images/park.jpg);background-repeat:no-repeat;background-position:left top;background-size:cover;height: 100%; position: fixed;float:all;width: 100%; opacity: 1;"></div>
 	<div id = "nav-placeholder">
-	
-</div>
-<script>
-$(function(){
-  $("#nav-placeholder").load("navbar.html");
-});
-</script>
+
+	</div>
+	<script>
+		AOS.init();
+		$(function(){
+			$("#nav-placeholder").load("navbar.html");
+		});
+	</script>
 
 
 	<section id = "Get Started">
@@ -27,7 +30,7 @@ $(function(){
 				<div id= "head-line-container">
 					<h1 id="head-line"> Welcome to My Inn</h1>
 					<div class="row">
-							<a id = "UserLogin" class= "generalButton" href = "./signup">SIGN UP</a>
+						<a id = "UserLogin" class= "generalButton" href = "./signup">SIGN UP</a>
 						<a href = "./login" id = "EmployeeLogin" class= "generalButton"> LOGIN
 						</a>
 					</div>
@@ -75,15 +78,16 @@ $(function(){
 						<div class = "contianer attractions attlist">
 							<div class = "column">
 								<?php 
-									include 'database.php';
-									$stid = executeSQL('SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME, A.STATUS FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity');
+								include 'database.php';
+								$stid = executeSQL('SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME, A.STATUS FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity');
 								
 
 
 								/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
 								while ($row = OCI_Fetch_Array($stid, OCI_BOTH)) { ?>
 									<a class = "attlink listanimation listitem" href = "<?php echo $row["Link"]?>">
-										<div class = "image contianer attElem row"> 
+										<div class = "image contianer attElem row" data-aos="fade-up"
+     data-aos-duration="500" data-aos-once="true"> 
 
 											<div class='attimage'>
 												<img class= "attimg"src = "./server_files/images/<?php echo trim($row["ATT_NAME"]);?>.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;" >
@@ -176,7 +180,7 @@ $(function(){
 				all[t].style.display = "none";
 
 		}
-
+		AOS.refresh();
 
 	}
 	function initialize(){
