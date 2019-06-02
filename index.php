@@ -1,6 +1,7 @@
 <html lang="en"><head>
 	<meta charset="UTF-8">
 	<title> Amz Park</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="stylesheet" type = "text/css" href="./server_files/css/mycss.css">
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
@@ -20,6 +21,7 @@
 		AOS.init();
 		$(function(){
 			$("#nav-placeholder").load("navbar.html");
+			$("#nav-placeholder").show();
 		});
 	</script>
 
@@ -87,7 +89,7 @@
 								while ($row = OCI_Fetch_Array($stid, OCI_BOTH)) { ?>
 									<a class = "attlink listanimation listitem" href = "<?php echo $row["Link"]?>">
 										<div class = "image contianer attElem row" data-aos="fade-up"
-     data-aos-duration="500" data-aos-once="true"> 
+     data-aos-duration="500" data-aos-once="false"> 
 
 											<div class='attimage'>
 												<img class= "attimg"src = "./server_files/images/<?php echo trim($row["ATT_NAME"]);?>.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;" >
@@ -99,7 +101,8 @@
 												color: white;
 												padding-left: 10px;
 												padding-right: 10px;
-												border-radius:10px;">
+												border-radius:10px;
+												font-size: 2vw;">
 												<p style="color: #000"><?php echo trim( $row["ATT_NAME"]); ?></p>
 											</div>
 										</div>
@@ -234,9 +237,9 @@
 			var Status = x[t].getElementsByClassName("waitTime")[0].innerText;
 			var v = x[t].getElementsByClassName("waitTimehead")[0];
 			if(Status == "OPEN"){
-				v.className = "waitTime tableisGood";
+				v.className = "waitTimehead tableisGood";
 			}else{
-				v.className = "waitTime tableisnotOk";
+				v.className = "waitTimehead tableisnotOk";
 			}
 
 
