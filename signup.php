@@ -95,6 +95,8 @@ if($ispost) {
 
 					insertInto("'$child', '$name', '$adult','$name'","YoungVisitor_include_isGuradedBy");
 				}
+				#Signup Successful
+				header('location: ../login?message=signup');
 			}catch (Exception $e){
 				echo 'Caught exception: ',  $e->getMessage(), "\n";
 				executeSQL("DELETE FROM groups WHERE groupID = '$name'");
