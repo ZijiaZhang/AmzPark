@@ -69,7 +69,7 @@ function getMember($GroupID){
 }
 
 function updateGroupSize($GroupID){
-	executeSQL("UPDATE groups SET GROUPSIZE = (SELECT count(*) FROM AdultVisitor_include WHERE  groupID = '$GroupID') WHERE groupID = '$GroupID'");
+	executeSQL("UPDATE groups SET GROUPSIZE = (SELECT count(*) FROM ((SELECT visitorName FROM AdultVisitor_include WHERE  groupID = '$GroupID') UNION (SELECT youngVisitorName FROM YoungVisitor_include_isGuradedBy WHERE  youngGroupID = '$GroupID')))");
 
 }
 
