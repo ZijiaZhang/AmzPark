@@ -40,11 +40,11 @@ include '../signup.php';
 	<h1>Register</h1>
 
 	<form action ="" method="post">
-		<input  type = "text" name = "username" class = "box name" placeholder="Name" value = <?php echo $name;?> >
+		<input  type = "text" name = "username" class = "box name" placeholder="Name" value = "<?php echo $name;?>" required>
 		<p class = "name-help"> Name should have 8 or less characters.</p>
-		<input type = "password" name = "password" class = "box pass" placeholder = "Password" >
+		<input type = "password" name = "password" class = "box pass" placeholder = "Password" required>
 		<p class = "pass-help"> Please make sure your password is secure.</p>
-
+		<hr>
 		<div class = "oneRow">
 			<label>Adults : </label>  
 		<button type = button id = "addAdult">ADD ADULT</button>
@@ -56,15 +56,16 @@ include '../signup.php';
 					$add = $_POST["adults"][$i];
 					$contect = $_POST["contact"][$i];
 					if(trim($add)!='' || trim($contect)!='')
-						echo "<tr><td><input type='text' name='adults[]' placeholder='Name of an adult' value = '$add'></td><td><input type='text' name='contact[]' placeholder='Contect Info' value = '$contect'></td><td> <button type = button class = 'delete'>DELETE</button></td></tr>";
+						echo "<tr><td><input type='text' name='adults[]' placeholder='Name of an adult' value = '$add' required></td><td><input type='text' name='contact[]' placeholder='Contect Info' value = '$contect' required></td><td> <button type = button class = 'delete'>DELETE</button></td></tr>";
 				}
 			}else{
-				echo "<tr><td><input type='text' name='adults[]' placeholder='Name of an adult' value = '$add'></td><td><input type='text' name='contact[]' placeholder='Contect Info' value = '$contect'></td><td> <button type = button class = 'delete'>DELETE</button></td></tr>";
+				echo "<tr><td><input type='text' name='adults[]' placeholder='Name of an adult' value = '' required></td><td><input type='text' name='contact[]' placeholder='Contect Info' value = '' required></td><td> <button type = button class = 'delete'>DELETE</button></td></tr>";
 			}
 
 			?>
 
 		</table>
+		<hr>
 		<div class="oneRow">
 		<label>Children: </label>
 		<button type = button id = "addChildren">ADD CHILDREN</button>
@@ -77,7 +78,7 @@ include '../signup.php';
 					$res = $_POST['responsible'][$i];
 					if($chd!='')
 						echo " <tr><td><input type='text' 
-					name='children[]' placeholder = 'Name Of the Children' value = '$chd'> </td><td> <input type='text' name = 'responsible[]' placeholder= 'Responsible Adult' value = '$res'></td><td> <button type = button class = 'delete'>DELETE</button></td></tr>";
+					name='children[]' placeholder = 'Name Of the Children' value = '$chd' required> </td><td> <input type='text' name = 'responsible[]' placeholder= 'Responsible Adult' value = '$res' required></td><td> <button type = button class = 'delete'>DELETE</button></td></tr>";
 				}
 			}
 
@@ -99,7 +100,7 @@ $('#addAdult').click(function(){
   // if input is empty, it won't add an empty row
     // new thing is added to end of table
     // change to prepend to add to the beginning of table
-    $thing_table.append("<tr><td><input type='text' name='adults[]' placeholder='Name of an adult' value = ''></td><td><input type='text' name='contact[]' placeholder='Contect Info' value = ''></td><td> <button type = button class = 'delete'>DELETE</button></td></tr>");
+    $thing_table.append("<tr><td><input type='text' name='adults[]' placeholder='Name of an adult' value = '' required></td><td><input type='text' name='contact[]' placeholder='Contect Info' value = '' required></td><td> <button type = button class = 'delete'>DELETE</button></td></tr>");
 
   // empties the input when sumbit is clicked
 
@@ -110,7 +111,7 @@ $('#addChildren').click(function(){
   // if input is empty, it won't add an empty row
     // new thing is added to end of table
     // change to prepend to add to the beginning of table
-    $thing_table.append("<tr><td><input type='text' name='children[]' placeholder = 'Name Of the Children' value = ''></td><td> <input type='text' name = 'responsible[]' placeholder= 'Responsible Adult' value = ''></td><td> <button type = button class = 'delete'>DELETE</button></td><tr>");
+    $thing_table.append("<tr><td><input type='text' name='children[]' placeholder = 'Name Of the Children' value = '' required></td><td> <input type='text' name = 'responsible[]' placeholder= 'Responsible Adult' value = '' required></td><td> <button type = button class = 'delete'>DELETE</button></td><tr>");
 
   // empties the input when sumbit is clicked
 
