@@ -10,6 +10,10 @@
 	$ispost = isset($_POST['submit']);
 	//var_dump($_POST);
 	//var_dump($ispost);
+	//var_dump($_GET);
+	if($_GET["message"] == "signup")
+		$message = "Signup Successful. Please Login";
+
 	if($ispost){
 		$username = $_POST['username'];
 		$password = md5($_POST['password']);
@@ -23,7 +27,7 @@
 
 
 		}else{
-			echo 'Cannot Login Check username AND PASSWORD';#"SELECT * FROM groups WHERE groupID = '$username' AND password = '$password'";
+			$message = 'Cannot Login, Check username AND PASSWORD';#"SELECT * FROM groups WHERE groupID = '$username' AND password = '$password'";
 		}
 	}
 ?>
