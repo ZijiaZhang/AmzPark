@@ -82,18 +82,18 @@ if($ispost) {
 	
 	if(!ifExist($name, 'GROUPID' , 'GROUPS')){
 		try {
-			insertInto("'$name',$size,'$password'","groups");
+			insertIntoGroups($name,$size,$password);
 			try{
 				for($i =0 ;$i < count($adults) ;$i++){
 					$adult = $adults[$i];
 					$cont  = $contactInfo[$i];
-					insertInto("'$adult','$name','$cont'","AdultVisitor_include");
+					insertIntoAdults($adult,$name,$cont);
 				}
 				for($i =0 ;$i < count($children) ;$i++){
 					$child = $children[$i];
 					$adult = $resp[$i];
 
-					insertInto("'$child', '$name', '$adult','$name'","YoungVisitor_include_isGuradedBy");
+					insertIntoChildren($child,$name,$adult);
 				}
 				#Signup Successful
 				header('location: ../login?message=signup');
