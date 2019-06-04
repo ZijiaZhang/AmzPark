@@ -17,7 +17,9 @@
 	if($ispost){
 		$username = $_POST['username'];
 		$password = md5($_POST['password']);
-		$result  = executeSQL("SELECT * FROM groups WHERE groupID = '$username' AND password = '$password'");
+		$list1 = array(":bind1"=>$username, "$bind2" => $password);
+
+		$result  = executeBoundSQL("SELECT * FROM groups WHERE groupID = :bind1 AND password = :bind2" , $list1);
 		if($row = OCI_Fetch_Array($result, OCI_BOTH)){
 			echo "SUCCESS";
 			createSession($username);

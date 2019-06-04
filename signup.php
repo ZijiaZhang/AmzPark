@@ -99,7 +99,8 @@ if($ispost) {
 				header('location: ../login?message=signup');
 			}catch (Exception $e){
 				echo 'Caught exception: ',  $e->getMessage(), "\n";
-				executeSQL("DELETE FROM groups WHERE groupID = '$name'");
+				$list1 = array(":bind1" => $name ); 
+				executeBoundSQL("DELETE FROM groups WHERE groupID = :bind1" , $list1);
 			}
 		}catch (Exception $e){
 			echo "Cannot Create Group. Because the group name exceeds maximum length.";
