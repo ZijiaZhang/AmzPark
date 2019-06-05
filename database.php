@@ -76,7 +76,7 @@ function executeBoundSQL($cmdstr, $list) {
 		if(!$success){
 			throw new Exception('Cannot execute this command'.$e['message']);
 		}
-		return $r;
+		return $statement;
 
 	}
 
@@ -118,7 +118,7 @@ function executeBoundSQL($cmdstr, $list) {
 		}
 
 		$Children = array();
-		$chd = executeSQL("SELECT * FROM AdultVisitor_include WHERE  groupID = '$GroupID'");
+		$chd = executeSQL("SELECT * FROM YoungVisitor_include_isGuradedBy WHERE  groupID = '$GroupID'");
 
 		while ($child =  oci_fetch_array($chd)) {
 			array_push($Children, $child);
