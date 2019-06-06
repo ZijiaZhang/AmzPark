@@ -151,7 +151,7 @@ body{
   from {right: -100%; opacity: 0}
   to {right: 0%; opacity: 1}
 }*/
-.attlist{
+.attlist, .showlist{
    width: 100%;
   overflow: hidden;
 
@@ -160,7 +160,7 @@ body{
   /*width:80vw;*/
   display: table;
 }
-.attElem{
+.attElem, .showElem{
   position: relative;
   overflow: auto;
   width: 90%;
@@ -306,7 +306,7 @@ div.footer>div.links{
   background: #fff;
 }
 
-#search-attr{
+#search-attr, #search-show{
   border: none;
   height: 25px;
   width: 100%;
@@ -314,6 +314,14 @@ div.footer>div.links{
   color: #1b1b1b;
   font-size: 15px;
   outline: none;
+}
+
+.showinfo tr th{
+  font-size: 2vw;
+}
+
+.showName, .PerformTime, .Location , .Status{
+  font-size: 2vw;
 }
 
 .input:not(:placeholder-shown) + .label {
@@ -385,6 +393,19 @@ div.footer>div.links{
 .attinfo{
   text-align: center;
   width: 52vw;
+}
+
+.showinfo{
+  text-align: center;
+  width: 100%;
+}
+
+.showinfo td[class = "showName"]{
+  width: 25%;
+}
+
+.showinfo td[class = "Location"]{
+  width: 35%;
 }
 
 
