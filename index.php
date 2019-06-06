@@ -257,13 +257,6 @@
 
 
 		}
-
-		document.addEventListener('keypress', keyfilter);
-		function keyfilter(e){
-			if(e.code == "Enter"){
-				filter();
-			}
-		}
 	}
 
 	$('input[name=onlyTodayShow]').change(function(){
@@ -309,9 +302,9 @@
 	$(window).load(function(){
 
 		document.getElementsByTagName('body')[0].style.display = 'block';
-		AOS.init();
 		initializeatt();
-		//setTimeout(initializeatt,1000);
+		AOS.init();
+		setInterval(initializeatt,100);
 	})
 </script>
 
