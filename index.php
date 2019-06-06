@@ -12,7 +12,7 @@
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
-<body style="margin: 0px;" onload="initialize()" onresize="initialize()">
+<body style="margin: 0px;" onload="initialize()" onresize="initializeatt()">
 	<div class="slide-item" style="background-image:url(./server_files/images/park.jpg);background-repeat:no-repeat;background-position:left top;background-size:cover;height: 100%; position: fixed;float:all;width: 100%; opacity: 1;"></div>
 	<div id = "nav-placeholder">
 
@@ -41,6 +41,56 @@
 		</div>
 
 	</section>
+
+
+	<section id = "shows">
+		<div class="component-wrapper " style="background-color: rgba(30,30,30,0.7)">
+			<div style="height: 100px; width: 100%; padding: 0px;"></div>
+			<div id = "attractions-background">
+				<div class="att-outer">
+					<h1 style="text-align: center;"> Shows </h1>
+
+					<div style="width: 100%">
+						<div class="Search">
+							<svg style="display: none">
+								<symbol id="magnify" viewBox="0 0 18 18" height="100%" width="100%">
+									<path d="M12.5 11h-.8l-.3-.3c1-1.1 1.6-2.6 1.6-4.2C13 2.9 10.1 0          6.5 0S0 2.9 0 6.5 2.9 13 6.5 13c1.6 0 3.1-.6 4.2-1.6l.3.3v.8l5 5          1.5-1.5-5-5zm-6 0C4 11 2 9 2 6.5S4 2 6.5 2 11 4 11 6.5 9 11 6.5            11z" fill="#fff" fill-rule="evenodd"/>
+								</symbol>
+							</svg>
+
+							<div class="search-bar">
+
+								<input type="text" id = "search-show" class="input" placeholder="&nbsp;">
+								<span class="label">Search</span>
+								<span class="highlight"></span>
+
+								<div class="search-btn">
+									<a id = "" href="javascript:void(0);" onclick="filtershows()">
+										<svg class="icon icon-18">
+											<use xlink:href="#magnify"></use>
+										</svg>
+									</a>
+								</div>
+
+							</div>
+							<div style="width: 100%">
+								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+									<input id = "showToday" type="checkbox" name = "onlyToday"checked>Only Show Today
+								</div>
+							</div>
+						</div>
+						<div id = "showSpace" class = "contianer attractions attlist">
+							<!--Space For Shows-->
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 
 
 	<section id = "attractions">
@@ -80,56 +130,56 @@
 						<div class = "contianer attractions attlist">
 							<div class = "column">
 								<?php 
-								include 'database.php';
+								include_once 'database.php';
 								$stid = executeSQL('SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME, A.STATUS FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity');
-								
+
 
 
 								/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
 								while ($row = OCI_Fetch_Array($stid, OCI_BOTH)) { ?>
 									<a class = "attlink listanimation listitem" href = "<?php echo $row["Link"]?>">
 										<div class = "image contianer attElem row" data-aos="fade-up"
-     data-aos-duration="500" data-aos-once="false"> 
+										data-aos-duration="500" data-aos-once="false"> 
 
-											<div class='attimage'>
-												<img class= "attimg"src = "./server_files/images/<?php echo trim($row["ATT_NAME"]);?>.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;" >
+										<div class='attimage'>
+											<img class= "attimg"src = "./server_files/images/<?php echo trim($row["ATT_NAME"]);?>.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;" >
 
-												<div style = "position: absolute; 
-												bottom: 6px;
-												right: 6px;
-												background-color: rgba(255,255,255,0.5);
-												color: white;
-												padding-left: 10px;
-												padding-right: 10px;
-												border-radius:10px;
-												font-size: 2vw;">
-												<p style="color: #000"><?php echo trim( $row["ATT_NAME"]); ?></p>
-											</div>
-										</div>
-										<div class="table-wrap">
-											<table class= "attinfo">
-												<tr>
-													<th class = "openTimehead"> Open Time </th>
-													<th class = "closeTimehead"> Close Time </th>
-													<th class = "waitTimehead"> Status </th>
-												</tr>
-												<tr>
-													<td class = "openTime"><?php echo trim( $row["OPEN_TIME"]); ?> </td>
-													<td class = "closeTime"><?php echo trim( $row["CLOSE_TIME"]); ?> </td>
-													<td class = "waitTime"><?php echo trim($row["STATUS"]); ?> </td>
-												</tr>
-											</table>
+											<div style = "position: absolute; 
+											bottom: 6px;
+											right: 6px;
+											background-color: rgba(255,255,255,0.5);
+											color: white;
+											padding-left: 10px;
+											padding-right: 10px;
+											border-radius:10px;
+											font-size: 2vw;">
+											<p style="color: #000"><?php echo trim( $row["ATT_NAME"]); ?></p>
 										</div>
 									</div>
-								</a>
+									<div class="table-wrap">
+										<table class= "attinfo">
+											<tr>
+												<th class = "openTimehead"> Open Time </th>
+												<th class = "closeTimehead"> Close Time </th>
+												<th class = "waitTimehead"> Status </th>
+											</tr>
+											<tr>
+												<td class = "openTime"><?php echo trim( $row["OPEN_TIME"]); ?> </td>
+												<td class = "closeTime"><?php echo trim( $row["CLOSE_TIME"]); ?> </td>
+												<td class = "waitTime"><?php echo trim($row["STATUS"]); ?> </td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</a>
 
-							<?php } ?>
-						</div>
+						<?php } ?>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 </section>
 <section id = "info" >
 	<div class="simple-chord--wrapper component-wrapper" style="background-color: rgba(100,100,100,0.7);">
@@ -186,7 +236,27 @@
 		AOS.refresh();
 
 	}
+
+	function filtershows(){
+		var x = document.getElementById("search-show");
+
+		var all = document.getElementsByClassName("oneshow");
+
+		for(var t =0; t< all.length;t++){
+			if(all[t].innerText.toUpperCase().includes(x.value.toUpperCase()))
+				all[t].style.display = "";
+			else
+				all[t].style.display = "none";
+
+		}
+		AOS.refresh();
+
+	}
+
+
+
 	function initialize(){
+		OnlyShowToday(true);
 		initializeatt();
 	}
 
@@ -251,6 +321,24 @@
 				filter();
 			}
 		}
+	}
+
+	$('input[name=onlyToday]').change(function(){
+		// if($(this).is(':checked')) {
+
+		// } else {
+
+		// }
+		OnlyShowToday($(this).is(':checked'));
+	});
+
+
+	function OnlyShowToday(today) {
+		$.post("./HomePagePhp/show.php", { today: today},
+			function(data) {
+				$('#showSpace').html(data);
+				AOS.refreshHard();
+			});
 	}
 
 </script>
