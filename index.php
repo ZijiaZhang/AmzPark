@@ -238,25 +238,14 @@
 	}
 
 	function filtershows(){
-		var x = document.getElementById("search-show");
-
-		var all = document.getElementsByClassName("oneshow");
-
-		for(var t =0; t< all.length;t++){
-			if(all[t].innerText.toUpperCase().includes(x.value.toUpperCase()))
-				all[t].style.display = "";
-			else
-				all[t].style.display = "none";
-
-		}
-		AOS.refresh();
+		getShows();
 
 	}
 
 
 
 	function initialize(){
-		OnlyShowToday(true);
+		getShows();
 		initializeatt();
 	}
 
@@ -324,22 +313,24 @@
 	}
 
 	$('input[name=onlyToday]').change(function(){
-		// if($(this).is(':checked')) {
-
-		// } else {
-
-		// }
-		OnlyShowToday($(this).is(':checked'));
+		getShows();
 	});
 
 
-	function OnlyShowToday(today) {
-		$.post("./HomePagePhp/show.php", { today: today},
+
+	function getShows() {
+		var today = $('input[name=onlyToday]').is(':checked');
+		var query = $('#search-show').val();
+		$.post("./HomePagePhp/show.php", { today: today, show: query},
 			function(data) {
 				$('#showSpace').html(data);
 				AOS.refreshHard();
 			});
 	}
+
+	$('#search-show').on('input',function(e){
+		getShows();
+	});
 
 </script>
 

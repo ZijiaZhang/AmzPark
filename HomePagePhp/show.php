@@ -3,7 +3,19 @@
 	$numberToMonth  = array(1=> "Jan", 2=>"Feb",  3=>"Mar" ,4=>"Apr", 5=>"May" , 6=> "Jun", 7=>"Jul" ,8 => "Aug" , 9=>"Sep" , 10 => "Oct", 11=>"Nov" , 12 =>"Dec");
 	include_once '../database.php';
 
-	$onlyToday = $_POST["today"];
+	$today = "";
+	if($_POST["today"] !='false'){
+		$date = date('Ymd');
+		$today = " and A.perform_time LIKE '%'||$date||'%'";
+	}
+	
+	$query = "";
+	if($_POST["show"] != ""){
+		$name = $_POST["show"];
+		$query = " and upper(A.name) LIKE upper('%$name%')";
+		#echo $query;
+	}
+
 	#var_dump(date("Ymd"));
 
 	?>	
@@ -21,13 +33,7 @@
 					</tr>
 					<?php 
 					
-					if($onlyToday == 'false'){
-					$stid = executeSQL('SELECT A.name,A.perform_time,A.status, B.location, B.duration, B.category FROM Entertainments_Determin_Status_And_Arrange_Times1 A, Entertainments_Determin_Status_And_Arrange_Times2 B WHERE A.name = B.name ORDER BY A.perform_time');
-				}else{
-					$date = date('Ymd');
-					$stid = executeSQL("SELECT A.name,A.perform_time,A.status, B.location, B.duration, B.category FROM Entertainments_Determin_Status_And_Arrange_Times1 A, Entertainments_Determin_Status_And_Arrange_Times2 B WHERE A.name = B.name and A.perform_time LIKE '%'||$date||'%' ORDER BY A.perform_time");
-
-				}
+					$stid = executeSQL("SELECT A.name,A.perform_time,A.status, B.location, B.duration, B.category FROM Entertainments_Determin_Status_And_Arrange_Times1 A, Entertainments_Determin_Status_And_Arrange_Times2 B WHERE A.name = B.name$today$query  ORDER BY A.perform_time");
 
 
 					/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
