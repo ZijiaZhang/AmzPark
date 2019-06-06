@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="../server_files/css/form.css">
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
+<?php include "../loader.php" ?>
 
 <body style="margin: 0px;">
 	<div id = "nav-placeholder">

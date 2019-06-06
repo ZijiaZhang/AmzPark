@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
-
+<?php include "../loader.php"; ?>
 <body style="margin: 0px;">
 	<div id = "nav-placeholder">
 	
