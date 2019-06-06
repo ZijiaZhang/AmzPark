@@ -10,15 +10,19 @@
 
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
 </head>
 
-<body style="margin: 0px;" onload="initialize()" onresize="initializeatt()">
+<?php include "loader.php";?>
+
+<body style="margin: 0px" onload="initialize()" onresize="initializeatt()">
+
 	<div class="slide-item" style="background-image:url(./server_files/images/park.jpg);background-repeat:no-repeat;background-position:left top;background-size:cover;height: 100%; position: fixed;float:all;width: 100%; opacity: 1;"></div>
 	<div id = "nav-placeholder">
 
 	</div>
 	<script>
-		AOS.init();
+		
 		$(function(){
 			$("#nav-placeholder").load("navbar.html");
 			$("#nav-placeholder").show();
@@ -75,7 +79,7 @@
 							</div>
 							<div style="width: 100%">
 								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
-									<input id = "showToday" type="checkbox" name = "onlyToday"checked>Only Show Today
+									<input id = "showToday" type="checkbox" name = "onlyTodayShow"checked>Only Show Today
 								</div>
 							</div>
 						</div>
@@ -126,159 +130,109 @@
 
 							</div>
 						</div>
-
-						<div class = "contianer attractions attlist">
-							<div class = "column">
-								<?php 
-								include_once 'database.php';
-								$stid = executeSQL('SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME, A.STATUS FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity');
-
-
-
-								/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
-								while ($row = OCI_Fetch_Array($stid, OCI_BOTH)) { ?>
-									<a class = "attlink listanimation listitem" href = "<?php echo $row["Link"]?>">
-										<div class = "image contianer attElem row" data-aos="fade-up"
-										data-aos-duration="500" data-aos-once="false"> 
-
-										<div class='attimage'>
-											<img class= "attimg"src = "./server_files/images/<?php echo trim($row["ATT_NAME"]);?>.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;" >
-
-											<div style = "position: absolute; 
-											bottom: 6px;
-											right: 6px;
-											background-color: rgba(255,255,255,0.5);
-											color: white;
-											padding-left: 10px;
-											padding-right: 10px;
-											border-radius:10px;
-											font-size: 2vw;">
-											<p style="color: #000"><?php echo trim( $row["ATT_NAME"]); ?></p>
-										</div>
-									</div>
-									<div class="table-wrap">
-										<table class= "attinfo">
-											<tr>
-												<th class = "openTimehead"> Open Time </th>
-												<th class = "closeTimehead"> Close Time </th>
-												<th class = "waitTimehead"> Status </th>
-											</tr>
-											<tr>
-												<td class = "openTime"><?php echo trim( $row["OPEN_TIME"]); ?> </td>
-												<td class = "closeTime"><?php echo trim( $row["CLOSE_TIME"]); ?> </td>
-												<td class = "waitTime"><?php echo trim($row["STATUS"]); ?> </td>
-											</tr>
-										</table>
-									</div>
+						<div style="width: 100%">
+								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+									<input id = "attrRP" type="checkbox" name = "noRPAttr"checked>Exclude Repairing
 								</div>
-							</a>
-
-						<?php } ?>
+							</div>
+						<div id = "attrSpace"  class = "contianer attractions attlist">
+							<!--Reserve For Attractions-->
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-</section>
-<section id = "info" >
-	<div class="simple-chord--wrapper component-wrapper" style="background-color: rgba(100,100,100,0.7);">
-		<div class="simple-chord--inner" style="opacity: 1; color: white">
-			<div class="h-font h2">Contact Us</div>
-			<div class="simple-chord--text body-text">
-				<div> 
-					<div>E-mail: &nbsp;<a class= "emaillink" href="mailto:abcd@gmail.com">&nbsp;&nbsp; abcd@gmail.com</a>
+	</section>
+	<section id = "info" >
+		<div class="simple-chord--wrapper component-wrapper" style="background-color: rgba(100,100,100,0.7);">
+			<div class="simple-chord--inner" style="opacity: 1; color: white">
+				<div class="h-font h2">Contact Us</div>
+				<div class="simple-chord--text body-text">
+					<div> 
+						<div>E-mail: &nbsp;<a class= "emaillink" href="mailto:abcd@gmail.com">&nbsp;&nbsp; abcd@gmail.com</a>
+						</div>
+						<div> Phone: &nbsp;&nbsp; (123)456-7890</div>
+						<div><br></div>2205 Lower Mall<br>
+						<div> Vancouver, BC, Canada</div>
+						<div>V6T1Z4<br></div> 
 					</div>
-					<div> Phone: &nbsp;&nbsp; (123)456-7890</div>
-					<div><br></div>2205 Lower Mall<br>
-					<div> Vancouver, BC, Canada</div>
-					<div>V6T1Z4<br></div> 
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	<div class="component-wrapper">
+		<div style="background-color: rgba(0,0,0,1);width: 100%">
+
+			<div class="footer">
+
+				<div>
+					<div style="text-align: center; color: white;">
+					</div>
+				</div>
+				<div class="links">
+					<a  href="https://github.com/ZijiaZhang99">
+						<img src = "./server_files/icons/github-circle.png" >
+					</a>
 				</div>
 			</div>
 		</div>
 	</div>
 
-</section>
-
-<div class="component-wrapper">
-	<div style="background-color: rgba(0,0,0,1);width: 100%">
-
-		<div class="footer">
-
-			<div>
-				<div style="text-align: center; color: white;">
-				</div>
-			</div>
-			<div class="links">
-				<a  href="https://github.com/ZijiaZhang99">
-					<img src = "./server_files/icons/github-circle.png" >
-				</a>
-			</div>
-		</div>
-	</div>
-</div>
 
 
-
-<script>
-	function filter(){
-		var x = document.getElementById("search-attr");
-
-		var all = document.getElementsByClassName("attlink");
-
-		for(var t =0; t< all.length;t++){
-			if(all[t].innerText.toUpperCase().includes(x.value.toUpperCase()))
-				all[t].style.display = "";
-			else
-				all[t].style.display = "none";
+	<script>
+		function filter(){
+			getAttractions();
+			AOS.refresh();
 
 		}
-		AOS.refresh();
 
-	}
+		function filtershows(){
+			getShows();
 
-	function filtershows(){
-		getShows();
-
-	}
+		}
 
 
 
-	function initialize(){
-		getShows();
-		initializeatt();
-	}
+		function initialize(){
+			getShows();
+			getAttractions();
+			initializeatt();
 
-	function initializeatt(){
-		var x = document.getElementsByClassName("attelem");
-		for(var t = 0; t< x.length;t++){
-			var p = x[t].getElementsByTagName("tr");
-			for(var i = 0 ; i<p.length ; i++ ){
-				var m = x[t].clientheight;
-				p[i].style.height = x[t].getElementsByClassName("attimg")[0].clientHeight/2 +"px";
-			}	
+		}
 
-			var date = new Date();
+		function initializeatt(){
+			var x = document.getElementsByClassName("attelem");
+			for(var t = 0; t< x.length;t++){
+				var p = x[t].getElementsByTagName("tr");
+				for(var i = 0 ; i<p.length ; i++ ){
+					var m = x[t].clientheight;
+					p[i].style.height = x[t].getElementsByClassName("attimg")[0].clientHeight/2 +"px";
+				}	
 
-			var seconds = date.getSeconds();
-			var minutes = date.getMinutes();
-			var hour = date.getHours();
+				var date = new Date();
 
-			var opentime = parseInt(x[t].getElementsByClassName("openTime")[0].innerText.split(":")[0],10)*100 + parseInt(x[t].getElementsByClassName("openTime")[0].innerText.split(":")[1],10);
-			var closetime = parseInt(x[t].getElementsByClassName("closeTime")[0].innerText.split(":")[0],10)*100 + parseInt(x[t].getElementsByClassName("closeTime")[0].innerText.split(":")[1],10);
+				var seconds = date.getSeconds();
+				var minutes = date.getMinutes();
+				var hour = date.getHours();
+
+				var opentime = parseInt(x[t].getElementsByClassName("openTime")[0].innerText.split(":")[0],10)*100 + parseInt(x[t].getElementsByClassName("openTime")[0].innerText.split(":")[1],10);
+				var closetime = parseInt(x[t].getElementsByClassName("closeTime")[0].innerText.split(":")[0],10)*100 + parseInt(x[t].getElementsByClassName("closeTime")[0].innerText.split(":")[1],10);
 
 
 
-			if( opentime <= hour*100+minutes && hour*100+minutes <= closetime-100 ){
-				x[t].getElementsByClassName("openTimehead")[0].className = "openTimehead tableisGood";
-				x[t].getElementsByClassName("closeTimehead")[0].className = "closeTimehead tableisGood";
-			}else if( opentime <= hour*100+minutes && hour*100+minutes <= closetime){
-				x[t].getElementsByClassName("openTimehead")[0].className = "openTimehead tableisOk";
-				x[t].getElementsByClassName("closeTimehead")[0].className = "closeTimehead tableisOk";
-			}else {
-				x[t].getElementsByClassName("openTimehead")[0].className = "openTimehead tableisnotOk";
-				x[t].getElementsByClassName("closeTimehead")[0].className = "closeTimehead tableisnotOk";
-			}
+				if( opentime <= hour*100+minutes && hour*100+minutes <= closetime-100 ){
+					x[t].getElementsByClassName("openTimehead")[0].className = "openTimehead tableisGood";
+					x[t].getElementsByClassName("closeTimehead")[0].className = "closeTimehead tableisGood";
+				}else if( opentime <= hour*100+minutes && hour*100+minutes <= closetime){
+					x[t].getElementsByClassName("openTimehead")[0].className = "openTimehead tableisOk";
+					x[t].getElementsByClassName("closeTimehead")[0].className = "closeTimehead tableisOk";
+				}else {
+					x[t].getElementsByClassName("openTimehead")[0].className = "openTimehead tableisnotOk";
+					x[t].getElementsByClassName("closeTimehead")[0].className = "closeTimehead tableisnotOk";
+				}
 
 
 
@@ -312,14 +266,14 @@
 		}
 	}
 
-	$('input[name=onlyToday]').change(function(){
+	$('input[name=onlyTodayShow]').change(function(){
 		getShows();
 	});
 
 
 
 	function getShows() {
-		var today = $('input[name=onlyToday]').is(':checked');
+		var today = $('input[name=onlyTodayShow]').is(':checked');
 		var query = $('#search-show').val();
 		$.post("./HomePagePhp/show.php", { today: today, show: query},
 			function(data) {
@@ -328,10 +282,37 @@
 			});
 	}
 
+	$('#attrRP').change(function(){
+		getAttractions();
+	});
+
+	$('#search-attr').on('input',function(e){
+		getAttractions();
+	});
+
+	function getAttractions() {
+		var today = $('input[name=noRPAttr]').is(':checked');
+		var query = $('#search-attr').val();
+		$.post("./HomePagePhp/attractions.php", { today: today, attr: query},
+			function(data) {
+				$('#attrSpace').html(data);
+				initializeatt();
+				AOS.refreshHard();
+			});
+	}
+
+
 	$('#search-show').on('input',function(e){
 		getShows();
 	});
 
+	$(window).load(function(){
+
+		document.getElementsByTagName('body')[0].style.display = 'block';
+		AOS.init();
+		initializeatt();
+		//setTimeout(initializeatt,1000);
+	})
 </script>
 
 </body>
