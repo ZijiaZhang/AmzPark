@@ -118,13 +118,13 @@ function executeBoundSQL($cmdstr, $list) {
 		}
 
 		$Children = array();
-		$chd = executeSQL("SELECT * FROM YoungVisitor_include_isGuradedBy WHERE  groupID = '$GroupID'");
+		$chd = executeSQL("SELECT * FROM YoungVisitor_include_isGuradedBy WHERE  younggroupID = '$GroupID'");
 
 		while ($child =  oci_fetch_array($chd)) {
 			array_push($Children, $child);
 		}
 
-		$Children = oci_fetch_array(executeSQL("SELECT * FROM YoungVisitor_include_isGuradedBy WHERE  younggroupID = '$GroupID'"));
+		//$Children = oci_fetch_array(executeSQL("SELECT * FROM YoungVisitor_include_isGuradedBy WHERE  younggroupID = '$GroupID'"));
 
 		return array('GS'=>$groupSize,'AD'=>$adults,'CH'=>$Children);
 	}
