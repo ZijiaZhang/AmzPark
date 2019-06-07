@@ -83,14 +83,14 @@ function executeBoundSQL($cmdstr, $list) {
 
 	function ifExist($id, $keyname, $database){
 		$list1 = array (
-			":bind2" => $keyname,
-			":bind3" => $id);
+			":bind1" => $id);
 
-		$command = "SELECT * FROM $database WHERE :bind2 = :bind3 ";
+		$command = "SELECT * FROM $database WHERE $keyname = :bind1 ";
 		try{
 			$stid = executeBoundSQL($command, $list1);
 		}catch(Exception $e){
 			echo $e.getMessage();
+			echo "ERROR";
 			return false;
 		}
 		return ($t = oci_fetch($stid));
