@@ -1,31 +1,64 @@
+<html>
+<style>
+    table {
+        width: 20%;
+        border: 1px solid black;
+    }
+
+    th {
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1em;
+        font-weight: bold;
+        background: #666;
+        color: #FFF;
+        padding: 4px 12px;
+        border-collapse: separate;
+        border: 1px solid #000;
+    }
+
+    td {
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: .7em;
+        border: 1px solid #DDD;
+        color: black;
+    }
+</style>
+</html>
 <?php
-function executeSQL($command){
-	$conn = OCILogon ("***REMOVED***", '***REMOVED***', "***REMOVED***");
-	if (!$conn) {
-		throw new Exception('Cannot Connect to db');
-	}
-	$stid = OCIParse($conn, $command);
-	if (!$stid) {
-		#echo "<br>Cannot parse this command: ". "<br>";
-		$e = OCI_Error($conn); 
+
+$success = True;
+$db_conn = OCILogon("ora_yuxinch", "a14635700",
+                    "***REMOVED***");
+
+function executePlainSQL($cmdstr) {
+     // Take a plain (no bound variables) SQL command and execute it.
+	//echo "<br>running ".$cmdstr."<br>";
+	global $db_conn, $success;
+	$statement = OCIParse($db_conn, $cmdstr);
+     // There is a set of comments at the end of the file that
+     // describes some of the OCI specific functions and how they work.
+
+	if (!$statement) {
+		echo "<br>Cannot parse this command: " . $cmdstr . "<br>";
+		$e = OCI_Error($db_conn);
            // For OCIParse errors, pass the connection handle.
-		#echo htmlentities($e['message']);
-		#$success = False;
-		throw new Exception('Cannot parse this command'. $e['message']);
+		echo htmlentities($e['message']);
+		$success = False;
 	}
 
-	$r = OCIExecute($stid, OCI_COMMIT_ON_SUCCESS);
+	$r = OCIExecute($statement, OCI_DEFAULT);
 	if (!$r) {
-		#echo "<br>Cannot execute this command: " .$command. "<br>";
-		$e = oci_error($statement); 
+		echo "<br>Cannot execute this command: " . $cmdstr . "<br>";
+		$e = oci_error($statement);
            // For OCIExecute errors, pass the statement handle.
-		#echo htmlentities();
-		#$success = False;
-		throw new Exception('Cannot execute this command'.$command.$e['message']);
+		echo htmlentities($e['message']);
+		$success = False;
 	} else {
-									#echo "<br>Command: success " .$command. "<br>";
+
 	}
-	return $stid;
+	return $statement;
 
 }
 
@@ -39,28 +72,25 @@ function executeBoundSQL($cmdstr, $list) {
         This is also very useful in protecting against SQL injection
         attacks.  See the sample code below for how this function is
         used. */
-        $success = true;
-        $db_conn = OCILogon ("***REMOVED***", '***REMOVED***', "***REMOVED***");
+        global $db_conn, $success;
+
         if (!$db_conn) {
         	throw new Exception('Cannot Connect to db');
         }
-
         $statement = OCIParse($db_conn, $cmdstr);
-
         if (!$statement) {
         	echo "<br>Cannot parse this command: " . $cmdstr . "<br>";
         	$e = OCI_Error($db_conn);
         	echo htmlentities($e['message']);
         	$success = False;
         }
-
         foreach ($list as $bind => $val) {
 			//echo $val;
 			//echo "<br>".$bind."<br>";
         	OCIBindByName($statement, $bind, $val);
 			unset ($val); // Make sure you do not remove this.
-                              // Otherwise, $val will remain in an 
-                              // array object wrapper which will not 
+                              // Otherwise, $val will remain in an
+                              // array object wrapper which will not
                               // be recognized by Oracle as a proper
                               // datatype.
 		}
@@ -77,83 +107,34 @@ function executeBoundSQL($cmdstr, $list) {
 			throw new Exception('Cannot execute this command'.$e['message']);
 		}
 		return $statement;
-
 	}
 
+  function printTable($resultFromSQL, $namesOfColumnsArray)
+  {
+      echo "<table>";
+      echo "<tr>";
+      // iterate through the array and print the string contents
+      foreach ($namesOfColumnsArray as $name) {
+          echo "<th>$name</th>";
+      }
+      echo "</tr>";
 
-	function ifExist($id, $keyname, $database){
-		$list1 = array (
-			":bind1" => $id);
+      while ($row = OCI_Fetch_Array($resultFromSQL, OCI_BOTH)) {
+          echo "<tr>";
+          $string = "";
 
-		$command = "SELECT * FROM $database WHERE $keyname = :bind1 ";
-		try{
-			$stid = executeBoundSQL($command, $list1);
-		}catch(Exception $e){
-			echo $e.getMessage();
-			echo "ERROR";
-			return false;
-		}
-		return ($t = oci_fetch($stid));
-
-	}
-
-
-	function insertInto($item, $database){
-		$command = "INSERT INTO $database VALUES ($item)";
-	#echo $command;
-		$stid = executeSQL($command);
-	}
-
-	function getMember($GroupID){
-		$result = executeSQL("SELECT * FROM groups WHERE GROUPID = '$GroupID'");
-		$row = oci_fetch_array($result);
-		$groupSize = $row['GROUPSIZE'];
-	#var_dump($groupSize);
-
-		$adults = array();
-		$adt = executeSQL("SELECT * FROM AdultVisitor_include WHERE  groupID = '$GroupID'");
-
-		while ($adult =  oci_fetch_array($adt)) {
-			array_push($adults, $adult);
-		}
-
-		$Children = array();
-		$chd = executeSQL("SELECT * FROM YoungVisitor_include_isGuradedBy WHERE  younggroupID = '$GroupID'");
-
-		while ($child =  oci_fetch_array($chd)) {
-			array_push($Children, $child);
-		}
-
-		//$Children = oci_fetch_array(executeSQL("SELECT * FROM YoungVisitor_include_isGuradedBy WHERE  younggroupID = '$GroupID'"));
-
-		return array('GS'=>$groupSize,'AD'=>$adults,'CH'=>$Children);
-	}
-
-	function updateGroupSize($GroupID){
-		executeSQL("UPDATE groups SET GROUPSIZE = (SELECT count(*) FROM ((SELECT visitorName FROM AdultVisitor_include WHERE  groupID = '$GroupID') UNION (SELECT youngVisitorName FROM YoungVisitor_include_isGuradedBy WHERE  youngGroupID = '$GroupID')))");
-
-	}
+          // iterates through the results returned from SQL query and
+          // creates the contents of the table
+          for ($i = 0; $i < sizeof($namesOfColumnsArray); $i++) {
+              $string .= "<td>" . $row["$i"] . "</td>";
+          }
+          echo $string;
+          echo "</tr>";
+      }
+      echo "</table>";
+  }
 
 
-	function insertIntoGroups($name,$size,$password){
-		$list1 = array (":bind1" => $name,
-							":bind2" => $size,
-							":bind3" => $password);
-		executeBoundSQL("INSERT INTO groups VALUES ( :bind1 , :bind2, :bind3)", $list1);
-	}
 
-	function insertIntoAdults($adult,$groupID,$cont){
-		$list1 = array (":bind1" => $adult,
-							":bind2" => $groupID,
-							":bind3" => $cont);
-		executeBoundSQL("INSERT INTO AdultVisitor_include VALUES ( :bind1 , :bind2, :bind3)", $list1);
-	}
 
-	function insertIntoChildren($child,$groupID,$adult){
-		$list1 = array (":bind1" => $child,
-							":bind2" => $groupID,
-							":bind3" => $adult);
-		executeBoundSQL("INSERT INTO YoungVisitor_include_isGuradedBy VALUES ( :bind1 , :bind2, :bind3, :bind2 )", $list1);
-	}
-
-	?>
+ ?>
