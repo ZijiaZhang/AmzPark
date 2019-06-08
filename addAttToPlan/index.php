@@ -56,7 +56,10 @@
 						</div>
 						<div style="width: 100%">
 								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
-									<input id = "attrRP" type="checkbox" name = "noRPAttr"checked>Exclude Repairing
+									<input id = "attrRP" type="checkbox" name = "noRPAttr">Exclude Repairing
+								</div>
+								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+									<input id = "attrWait" type="checkbox" name = "ShortWait">Exclude Long Waiting Time
 								</div>
 							</div>
 						<div id = "attrSpace"  class = "contianer attractions attlist">
@@ -148,14 +151,23 @@
 		getAttractions();
 	});
 
+
+
+	$('#attrWait').change(function(){
+		getAttractions();
+	});
+
+	
+
 	$('#search-attr').on('input',function(e){
 		getAttractions();
 	});
 
 	function getAttractions() {
 		var today = $('input[name=noRPAttr]').is(':checked');
+		var wait = $('input[name=ShortWait]').is(':checked');
 		var query = $('#search-attr').val();
-		$.post("../addAttToPlan/attractions.php", { today: today, attr: query},
+		$.post("../addAttToPlan/attractions.php", { today: today, wait: wait, attr: query},
 			function(data) {
 				$('#attrSpace').html(data);
 				initializeatt();
