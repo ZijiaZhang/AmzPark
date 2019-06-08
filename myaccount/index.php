@@ -117,9 +117,13 @@ echo "Your Username is $name";
 							<input type="text" placeholder="Enter Name" name="ins_visitor" required>
 						</td>
 					</tr>
-					<tr><td>
-						<label for="contact"><b>Contact</b></label></td><td>
-							<input type="text" placeholder="Enter Contact" name="ins_contact" required></td>
+					<tr>
+						<td>
+						<label for="contact"><b>Contact</b></label>
+					    </td>
+						<td>
+							<input type="text" placeholder="Enter Contact" name="ins_contact" required>
+						</td>
 						</tr>
 					</table>
 					<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
@@ -142,7 +146,43 @@ echo "Your Username is $name";
 
 			</div>
 			<div id = "operationPannel">
-				<p>Hello</p>
+				<div class="dropdown">
+                <button class="dropbtn">Attractions</button>
+                <div class="dropdown-content">
+
+                  <!-- <form action = "../makePlan_exisiting" method="post"> -->
+				  <!-- <input type = "hidden" name = "groupID" value = "<?php echo $name;?>" /> -->
+                  <a href="../makePlan_homepage">Make Plans about my tour</a>
+                  <!-- </form> -->
+
+
+
+                  <!-- <form action = "...??????????????" method="post"> -->
+				  <!-- <input type = "hidden" name = "groupID" value = "$name" /> -->
+                  <a href="../makePlan_mine">See My Plans</a>
+                  <!-- </form> -->
+
+
+
+                </div>
+                </div>
+
+                <!-- <div class="dropdown">
+                <button class="dropbtn">Entertainments</button>
+                <div class="dropdown-content">
+
+                  <form action = "..??????/" method="post">
+				  <input type = "hidden" name = "groupID" value = "$name" />
+                  <a href="../">Make Reservations</a>
+                  </form>
+
+                  <form action = "...??????????????" method="post">
+				  <input type = "hidden" name = "groupID" value = "$name" />
+                  <a href="../">See My Reservations</a>
+                  </form>
+
+                </div>
+                </div> -->
 			</div>
 		</div>
 		<a href="../logout.php">Log Out</a>
