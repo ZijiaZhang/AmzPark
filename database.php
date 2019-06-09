@@ -1,6 +1,6 @@
 <?php
 function executeSQL($command){
-	$conn = OCILogon ("ora_lyr98", 'a54572441', "dbhost.students.cs.ubc.ca:1522/stu");
+	$conn = OCILogon ("ora_gary1999", 'a42252965', "dbhost.students.cs.ubc.ca:1522/stu");
 	if (!$conn) {
 		throw new Exception('Cannot Connect to db');
 	}
@@ -40,7 +40,7 @@ function executeBoundSQL($cmdstr, $list) {
         attacks.  See the sample code below for how this function is
         used. */
         $success = true;
-        $db_conn = OCILogon ("ora_lyr98", 'a54572441', "dbhost.students.cs.ubc.ca:1522/stu");
+        $db_conn = OCILogon ("ora_gary1999", 'a42252965', "dbhost.students.cs.ubc.ca:1522/stu");
         if (!$db_conn) {
         	throw new Exception('Cannot Connect to db');
         }
@@ -76,7 +76,7 @@ function executeBoundSQL($cmdstr, $list) {
 		if(!$success){
 			throw new Exception('Cannot execute this command'.$e['message']);
 		}
-		return $r;
+		return $statement;
 
 	}
 
