@@ -22,54 +22,46 @@ initializeSession();
 
 if(checkSession()){
 		//header('location: ./account');
-	echo "Your Session ID: ";
-	var_dump(session_id());
 	$name = $_SESSION['login_user'];
 }else{
 	header('location: ../login');
 }
 ?>
 
+
+
 <body style="margin: 0px" onload="initialize()" onresize="initializeatt()">
 
-	<section id = "Get Started">
-		<div class = "component-wrapper">
-			<div class = "small-fullscreen" style="background-color: rgba(255,255,255,0.7)">
-				<div id= "small-head-line-container">
-					<h1 id="small-head-line"> Welcome to Hello World</h1>
-				
-					<table>
-					<tr>
-						<td>
-							<a href = #attractions>View All the Attractions</a>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a href = "../makePlan_exisiting"> Choose From Existing Plans</a>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							 <a href = "../makePlan_customized" > Make A Customized Plan</a>
-						</td>
-					</tr>
-				
-					</table>
-				</div>
-			</div>
-		</div>
+	<div id = "nav-placeholder">
 
+	</div>
+	<script>
+		
+		$(function(){
+			$("#nav-placeholder").load("../navbar.html");
+			$("#nav-placeholder").show();
+		});
+	</script>
+
+<div style="height: 100px; width: 100%; padding: 0px;"></div>
+	<section id = "Get Started">
+		<h1 class = "title"> Welcome to Hello World</h1>
+
+
+		<div class="row">
+			<a href = "../makePlan_exisiting" class="generalButton"> From Existing Plans</a>
+			<a href = "../makePlan_customized" class="generalButton"> Customized Plan</a>
+		</div>
 	</section>
 
 
-<?php include "../loader.php";?>
+	<?php include "../loader.php";?>
 
 
 
 	<section id = "attractions">
-		<div class="component-wrapper " style="background-color: rgba(30,30,30,0.7)">
-			<div style="height: 100px; width: 100%; padding: 0px;"></div>
+		<div class="component-wrapper ">
+			
 			<div id = "attractions-background">
 				<div class="att-outer">
 
@@ -101,10 +93,10 @@ if(checkSession()){
 							</div>
 						</div>
 						<div style="width: 100%">
-								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
-									<input id = "attrRP" type="checkbox" name = "noRPAttr">Exclude Repairing
-								</div>
+							<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+								<input id = "attrRP" type="checkbox" name = "noRPAttr">Exclude Repairing
 							</div>
+						</div>
 						<div id = "attrSpace"  class = "contianer attractions attlist">
 							<!--Reserve For Attractions-->
 						</div>
