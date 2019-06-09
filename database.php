@@ -76,7 +76,7 @@ function executeBoundSQL($cmdstr, $list) {
 		if(!$success){
 			throw new Exception('Cannot execute this command'.$e['message']);
 		}
-		return $r;
+		return $statement;
 
 	}
 
