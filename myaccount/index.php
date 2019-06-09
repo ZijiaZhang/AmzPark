@@ -156,22 +156,7 @@ echo "Your Username is $name";
 				<button type="button" class="" onclick="closeForm()">Close</button>
 			</form>
 		</div>
-		
 
-		<table id = "adultInfo">
-			<tr><th>Name</th><th>Contact</th><th>delete</th></tr>
-			<?php foreach($Adults as $adult){ ?>
-				<form action = "" method = "post">
-					<tr><td><input type = "hidden" name = "del_visitor" value = <?php echo $adult['VISITORNAME'];?> > <?php echo $adult['VISITORNAME'];?></td>
-						<td> <?php echo $adult['CONTACT_INFO'];?></td>
-						<td><button type="submit" value = "delete_adult" name = "submit">Delete</button>
-						</tr>
-					</form>
-				<?php } ?>
-			</table>
-
-
-			</div>
 			<div id = "operationPannel">
 				<div class="dropdown">
                 <button class="dropbtn">Attractions</button>
