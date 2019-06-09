@@ -67,25 +67,31 @@ echo "Your Username is $name";
 
 ?>
 
-
-<style>
-#mainContainer{
-	width: 100%;
-	height: 100%;
-	display: flex;
-}
-#operationPannel{
+<html>
+<head>
+	<title>My Account</title>
+	<link rel="stylesheet" type="text/css" href="../server_files/css/myaccount.css">
+	<link rel="stylesheet" type="text/css" href="../server_files/css/mycss.css">
+</head>
+<body>
+	<style>
+	#mainContainer{
+		width: 100%;
+		height: 100%;
+		display: flex;
+	}
+	#operationPannel{
 /*	background-color: blue;
 */	width: 70%;
-	overflow: auto;
-	display: block;
+overflow: auto;
+display: block;
 }
 #info{
 	overflow: auto;
 /*	background-color: green;
 */	width :30%;
-	position: relative;
-	display: block;
+position: relative;
+display: block;
 }
 #info p a{
 	color: blue;
@@ -127,96 +133,82 @@ echo "Your Username is $name";
 					<tr>
 						<td>
 
-						<label for="contact"><b>Contact</b></label>
-					    </td>
+							<label for="contact"><b>Contact</b></label>
+						</td>
 						<td>
 							<input type="text" placeholder="Enter Contact" name="ins_contact" required>
 						</td>
-						</tr>
-					</table>
-					<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
-					<button type="button" class="" onclick="closeForm()">Close</button>
-				</form>
-			</div>
-			
-
-			<table id = "adultInfo">
-				<tr><th>Name</th><th>Contact</th><th>delete</th></tr>
-				<?php foreach($Adults as $adult){ ?>
-					<form action = "" method = "post">
-						<tr><td><input type = "hidden" name = "del_visitor" value = <?php echo $adult['VISITORNAME'];?> > <?php echo $adult['VISITORNAME'];?></td>
-							<td> <?php echo $adult['CONTACT_INFO'];?></td>
-							<td><button type="submit" value = "delete_adult" name = "submit">Delete</button>
-							</tr>
-						</form>
-					<?php } ?>
-
+					</tr>
 				</table>
 				<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
 				<button type="button" class="" onclick="closeForm()">Close</button>
 			</form>
 		</div>
 
-			<div id = "operationPannel">
-				<div class="dropdown">
-                <button class="dropbtn">Attractions</button>
-                <div class="dropdown-content">
 
-                  <!-- <form action = "../makePlan_exisiting" method="post"> -->
-				  <!-- <input type = "hidden" name = "groupID" value = "<?php echo $name;?>" /> -->
-                  <a href="../makePlan_homepage">Make Plans about my tour</a>
-                  <!-- </form> -->
+		<table id = "adultInfo">
+			<tr>
+				<th>
+					Name
+				</th>
+				<th>
+					Contact
+				</th>
+				<th>
+					delete
+				</th>
+			</tr>
+			<?php foreach($Adults as $adult){ ?>
+				<form action = "" method = "post">
+					<tr>
+						<td>
+							<input type = "hidden" name = "del_visitor" value = <?php echo $adult['VISITORNAME'];?> > <?php echo $adult['VISITORNAME'];?>
+						</td>
+						<td> 
+							<?php echo $adult['CONTACT_INFO'];?>
+						</td>
+						<td>
+							<button type="submit" value = "delete_adult" name = "submit">Delete</button>
+						</td>
+					</tr>
+				</form>
+			<?php } ?>
 
+		</table>
+		<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
+		<button type="button" class="" onclick="closeForm()">Close</button>
+	</form>
+</div>
 
-
-                  <!-- <form action = "...??????????????" method="post"> -->
-				  <!-- <input type = "hidden" name = "groupID" value = "$name" /> -->
-                  <a href="../makePlan_mine">See My Plans</a>
-                  <!-- </form> -->
-
-
-
-                </div>
-                </div>
-
-                <!-- <div class="dropdown">
-                <button class="dropbtn">Entertainments</button>
-                <div class="dropdown-content">
-
-                  <form action = "..??????/" method="post">
-				  <input type = "hidden" name = "groupID" value = "$name" />
-                  <a href="../">Make Reservations</a>
-                  </form>
-
-                  <form action = "...??????????????" method="post">
-				  <input type = "hidden" name = "groupID" value = "$name" />
-                  <a href="../">See My Reservations</a>
-                  </form>
-
-                </div>
-                </div> -->
-			</div>
-
-		</div>
-		<div id = "operationPannel">
-			<p>Hello</p>
-		</div>
+<div id = "operationPannel">
+	<h1 class="subTitle">Attractions</h1>
+	<div class="row">
+		<a href="../makePlan_homepage" class = "generalButton" style = "background-color: green"> Make Plans</a>
+		<a href="../makePlan_mine" class = "generalButton" style = "background-color: blue">See My Plans</a>
 	</div>
-	<a href="../logout.php">Log Out</a>
+</div>
 
-	<script>
-		function ToggleForm() {
-			if(document.getElementById("adultAddform").style.display == "block"){
-				document.getElementById("adultAddform").style.display = "none";
-				document.getElementById("adultPanelButton").InnerHTML = "Create Adult";
-			}
-			else{
-				document.getElementById("adultAddform").style.display = "block";
-				document.getElementById("adultPanelButton").InnerHTML = "Close Window";
-			}
-		}
+</div>
 
-		function closeForm() {
+</div>
+<a href="../logout.php">Log Out</a>
+
+<script>
+	function ToggleForm() {
+		if(document.getElementById("adultAddform").style.display == "block"){
 			document.getElementById("adultAddform").style.display = "none";
+			document.getElementById("adultPanelButton").InnerHTML = "Create Adult";
 		}
-	<
+		else{
+			document.getElementById("adultAddform").style.display = "block";
+			document.getElementById("adultPanelButton").InnerHTML = "Close Window";
+		}
+	}
+
+	function closeForm() {
+		document.getElementById("adultAddform").style.display = "none";
+	}
+</script>
+</body>
+</html>
+
