@@ -126,16 +126,31 @@ echo "Your Username is $name";
 					</tr>
 					<tr>
 						<td>
-							<label for="contact">
-								<b>
-									Contact
-								</b>
-							</label>
-						</td>
+
+						<label for="contact"><b>Contact</b></label>
+					    </td>
 						<td>
 							<input type="text" placeholder="Enter Contact" name="ins_contact" required>
 						</td>
-					</tr>
+						</tr>
+					</table>
+					<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
+					<button type="button" class="" onclick="closeForm()">Close</button>
+				</form>
+			</div>
+			
+
+			<table id = "adultInfo">
+				<tr><th>Name</th><th>Contact</th><th>delete</th></tr>
+				<?php foreach($Adults as $adult){ ?>
+					<form action = "" method = "post">
+						<tr><td><input type = "hidden" name = "del_visitor" value = <?php echo $adult['VISITORNAME'];?> > <?php echo $adult['VISITORNAME'];?></td>
+							<td> <?php echo $adult['CONTACT_INFO'];?></td>
+							<td><button type="submit" value = "delete_adult" name = "submit">Delete</button>
+							</tr>
+						</form>
+					<?php } ?>
+
 				</table>
 				<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
 				<button type="button" class="" onclick="closeForm()">Close</button>
@@ -154,6 +169,48 @@ echo "Your Username is $name";
 					</form>
 				<?php } ?>
 			</table>
+
+
+			</div>
+			<div id = "operationPannel">
+				<div class="dropdown">
+                <button class="dropbtn">Attractions</button>
+                <div class="dropdown-content">
+
+                  <!-- <form action = "../makePlan_exisiting" method="post"> -->
+				  <!-- <input type = "hidden" name = "groupID" value = "<?php echo $name;?>" /> -->
+                  <a href="../makePlan_homepage">Make Plans about my tour</a>
+                  <!-- </form> -->
+
+
+
+                  <!-- <form action = "...??????????????" method="post"> -->
+				  <!-- <input type = "hidden" name = "groupID" value = "$name" /> -->
+                  <a href="../makePlan_mine">See My Plans</a>
+                  <!-- </form> -->
+
+
+
+                </div>
+                </div>
+
+                <!-- <div class="dropdown">
+                <button class="dropbtn">Entertainments</button>
+                <div class="dropdown-content">
+
+                  <form action = "..??????/" method="post">
+				  <input type = "hidden" name = "groupID" value = "$name" />
+                  <a href="../">Make Reservations</a>
+                  </form>
+
+                  <form action = "...??????????????" method="post">
+				  <input type = "hidden" name = "groupID" value = "$name" />
+                  <a href="../">See My Reservations</a>
+                  </form>
+
+                </div>
+                </div> -->
+			</div>
 
 		</div>
 		<div id = "operationPannel">
