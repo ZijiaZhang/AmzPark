@@ -2,6 +2,7 @@
 	<meta charset="UTF-8">
 	<title> Amz Park</title>
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/mycss.css">
+	<link rel="stylesheet" type = "text/css" href="../server_files/css/plan.css">
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -18,54 +19,61 @@ initializeSession();
 
 if(checkSession()){
 		//header('location: ./account');
-	echo "Your Session ID: ";
-	var_dump(session_id());
 	$name = $_SESSION['login_user'];
 }else{
 	header('location: ../login');
 }
 ?>
+<body>
+	<div id = "nav-placeholder">
+
+	</div>
+	<script>
+		
+		$(function(){
+			$("#nav-placeholder").load("../navbar.html");
+			$("#nav-placeholder").show();
+		});
+	</script>
 
 
+	<section id = "Existing" >
+		<div class="component-wrapper " style="background-color: rgba(30,30,30,0.7)">
+			<div style="height: 100px; width: 100%; padding: 0px;"></div>
+			<div id = "attractions-background">
+				<div class="att-outer">
 
 
-<section id = "Existing" >
-	<div class="component-wrapper " style="background-color: rgba(30,30,30,0.7)">
-		<div style="height: 100px; width: 100%; padding: 0px;"></div>
-		<div id = "attractions-background">
-			<div class="att-outer">
+					<h1 style="text-align: center;"> Existing Plans </h6>
 
+					<div style="width: 100%">
+						<div class="Search">
+							<svg style="display: none">
+								<symbol id="magnify" viewBox="0 0 18 18" height="100%" width="100%">
+									<path d="M12.5 11h-.8l-.3-.3c1-1.1 1.6-2.6 1.6-4.2C13 2.9 10.1 0          6.5 0S0 2.9 0 6.5 2.9 13 6.5 13c1.6 0 3.1-.6 4.2-1.6l.3.3v.8l5 5          1.5-1.5-5-5zm-6 0C4 11 2 9 2 6.5S4 2 6.5 2 11 4 11 6.5 9 11 6.5            11z" fill="#fff" fill-rule="evenodd"/>
+								</symbol>
+							</svg>
 
-				<h6 style="text-align: center;"> Existing Plans </h6>
+							<div class="search-bar">
 
-				<div style="width: 100%">
-					<div class="Search">
-						<svg style="display: none">
-							<symbol id="magnify" viewBox="0 0 18 18" height="100%" width="100%">
-								<path d="M12.5 11h-.8l-.3-.3c1-1.1 1.6-2.6 1.6-4.2C13 2.9 10.1 0          6.5 0S0 2.9 0 6.5 2.9 13 6.5 13c1.6 0 3.1-.6 4.2-1.6l.3.3v.8l5 5          1.5-1.5-5-5zm-6 0C4 11 2 9 2 6.5S4 2 6.5 2 11 4 11 6.5 9 11 6.5            11z" fill="#fff" fill-rule="evenodd"/>
-							</symbol>
-						</svg>
+								<input type="text" id = "search-attr" class="input" placeholder="&nbsp;">
+								<span class="label">Search</span>
+								<span class="highlight"></span>
 
-						<div class="search-bar">
+								<div class="search-btn">
+									<a id = "" href="javascript:void(0);" onclick="filter()">
+										<svg class="icon icon-18">
+											<use xlink:href="#magnify"></use>
+										</svg>
+									</a>
+								</div>
 
-							<input type="text" id = "search-attr" class="input" placeholder="&nbsp;">
-							<span class="label">Search</span>
-							<span class="highlight"></span>
-
-							<div class="search-btn">
-								<a id = "" href="javascript:void(0);" onclick="filter()">
-									<svg class="icon icon-18">
-										<use xlink:href="#magnify"></use>
-									</svg>
-								</a>
 							</div>
-
 						</div>
-					</div>
 
-					<div class = "contianer attractions attlist">
-						<div class = "column">
-							<?php
+						<div class = "contianer attractions attlist">
+							<div class = "column">
+								<?php
 
 							// include '../database.php';
 
@@ -80,31 +88,31 @@ if(checkSession()){
 								
 								/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
 								while ($row = OCI_Fetch_Array($stid, OCI_BOTH)) { ?>
-									<a class = "attlink listanimation listitem" href = "<?php echo $row["Link"]?>">
+									<div class = "listitem">
 										<div class = "image contianer attElem row" data-aos="fade-up"
-										data-aos-duration="500" data-aos-once="false"> 
+										data-aos-duration="500"> 
 
 										<div class="table-wrap">
-											<table class= "attinfo">
+											<table class= "planinfo">
 												<tr>
-													<th class = "openTimehead"> Plan Name </th>
-													<th class = "closeTimehead"> Attractions in this plan </th>
+													<th class = ""> Plan Name </th>
+													<th class = ""> Attractions in this plan </th>
+													<th>Action</th>
 												</tr>
 												<tr>
-													<td class = "openTime"><?php echo trim( $row["PLANNUMBER"]); ?> </td>
-													<td class = "closeTime"><?php echo trim( $row["LISTAGG(ATTNAME,',')WITHINGROUP(ORDERBYATTNAME)"]); ?> </td>
-												</tr>
-												<tr>
-													<form action = "../addPlanToMine.php" method="post">
-														<input type = "hidden" name = "planName" value = "<?php echo trim( $row["PLANNUMBER"]); ?>" />
-														<!-- <input type = "hidden" name = "groupID" value = "<?php echo $groupID; ?>" /> -->
-														<input type="submit" value = "Add this plan to Mine" />
-													</form>
+													<td class = ""><?php echo trim( $row["PLANNUMBER"]); ?> </td>
+													<td class = ""><?php echo trim( $row["LISTAGG(ATTNAME,',')WITHINGROUP(ORDERBYATTNAME)"]); ?> </td>
+													<td>
+														<form action = "../addPlanToMine.php" method="post">
+															<input type = "hidden" name = "planName" value = "<?php echo trim( $row["PLANNUMBER"]); ?>" />
+															<input type="submit" value = "Add this plan to Mine" />
+														</form>
+													</td>
 												</tr>
 											</table>
 										</div>
 									</div>
-								</a>
+								</div>
 
 
 							<?php } ?>
