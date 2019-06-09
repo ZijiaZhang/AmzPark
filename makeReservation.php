@@ -22,14 +22,14 @@ if ($ispost){
 	if (array_key_exists('insertsubmit', $_POST)) {
 	$enterName = $_POST['enterName'];
 	$time = $_POST['time'];
-	$groupID = $_POST['groupID'];
+	$group = $_POST['groupID'];
 	if (!ifExist('enterName','name', 'Entertainments_Determin_Status_And_Arrange_Times1')) {
 		echo "Error: The entertainment does not exit!";
 	}
 	else if (!fExist('time','perform_time', 'Entertainments_Determin_Status_And_Arrange_Times1')) {
 		echo "Error: The selected perform time does not exit!";
 	}
-	else if (!fExist('groupID','groupID', 'Groups')) {
+	else if (!fExist('group','groupID', 'Groups')) {
 		echo "Error: Your group does not exit!";
 	}
 	else {
