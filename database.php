@@ -76,7 +76,7 @@ function executeBoundSQL($cmdstr, $list) {
 		if(!$success){
 			throw new Exception('Cannot execute this command'.$e['message']);
 		}
-		return $statement;
+		return $r;
 
 	}
 
@@ -155,5 +155,15 @@ function executeBoundSQL($cmdstr, $list) {
 							":bind3" => $adult);
 		executeBoundSQL("INSERT INTO YoungVisitor_include_isGuradedBy VALUES ( :bind1 , :bind2, :bind3, :bind2 )", $list1);
 	}
+    
+    function insertIntoPlan($name){
+		$list1 = array (":bind1" => $name);
+		executeBoundSQL("INSERT INTO plan VALUES ( :bind1  )", $list1);
+	}
 
+	function insertIntoMadeBy($groupId, $pname){
+		$list1 = array (":bind1" => $groupId,
+							":bind2" => $pname,);
+		executeBoundSQL("INSERT INTO MadeBy VALUES ( :bind1, :bind2  )", $list1);
+	}
 	?>
