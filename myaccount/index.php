@@ -7,8 +7,8 @@ initializeSession();
 
 if(checkSession()){
 		//header('location: ./account');
-	echo "Your Session ID: ";
-	var_dump(session_id());
+	//echo "Your Session ID: ";
+	//var_dump(session_id());
 	$name = $_SESSION['login_user'];
 }else{
 	header('location: ../login');
@@ -20,12 +20,17 @@ var_dump($_POST);
 if(isset($_POST['submit'])){
 	if($_POST['submit']== 'delete_adult'){
 		$Visitername = $_POST['del_visitor'];
-		executeSQL("DELETE FROM AdultVisitor_include where groupID = '$name' and visitorname = '$Visitername'");
+		try{
+			$list1 = array(":bind1" => $name, ":bind2" => $Visitername);
+			executeBoundSQL("DELETE FROM AdultVisitor_include where groupID = :bind1 and visitorname = :bind2",$list1);
+		}catch (Exception $e){
+
+		}
 	}else if($_POST['submit'] == 'insert_adult'){
 		$Visitername = $_POST['ins_visitor'];
 		$Contact = $_POST['ins_contact'];
 		try{
-			insertInto("'$Visitername','$name','$Contact'","AdultVisitor_include");
+			insertIntoAdults($Visitername,$name,$Contact);
 		}catch(Exception $e){
 			echo $e->getMessage();
 		}
@@ -100,6 +105,8 @@ echo "Your Username is $name";
 	background-color: white;
 }
 </style>
+
+
 <div id = "mainContainer">
 	<div id = "info">
 		<p>Your Group Name is <a><?php echo $name ?> </a></p>
@@ -119,6 +126,7 @@ echo "Your Username is $name";
 					</tr>
 					<tr>
 						<td>
+
 						<label for="contact"><b>Contact</b></label>
 					    </td>
 						<td>
@@ -142,7 +150,26 @@ echo "Your Username is $name";
 							</tr>
 						</form>
 					<?php } ?>
+
 				</table>
+				<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
+				<button type="button" class="" onclick="closeForm()">Close</button>
+			</form>
+		</div>
+		
+
+		<table id = "adultInfo">
+			<tr><th>Name</th><th>Contact</th><th>delete</th></tr>
+			<?php foreach($Adults as $adult){ ?>
+				<form action = "" method = "post">
+					<tr><td><input type = "hidden" name = "del_visitor" value = <?php echo $adult['VISITORNAME'];?> > <?php echo $adult['VISITORNAME'];?></td>
+						<td> <?php echo $adult['CONTACT_INFO'];?></td>
+						<td><button type="submit" value = "delete_adult" name = "submit">Delete</button>
+						</tr>
+					</form>
+				<?php } ?>
+			</table>
+
 
 			</div>
 			<div id = "operationPannel">
@@ -184,22 +211,27 @@ echo "Your Username is $name";
                 </div>
                 </div> -->
 			</div>
+
 		</div>
-		<a href="../logout.php">Log Out</a>
+		<div id = "operationPannel">
+			<p>Hello</p>
+		</div>
+	</div>
+	<a href="../logout.php">Log Out</a>
 
-		<script>
-			function ToggleForm() {
-				if(document.getElementById("adultAddform").style.display == "block"){
-					document.getElementById("adultAddform").style.display = "none";
-					document.getElementById("adultPanelButton").InnerHTML = "Create Adult";
-				}
-				else{
-					document.getElementById("adultAddform").style.display = "block";
-					document.getElementById("adultPanelButton").InnerHTML = "Close Window";
-				}
-			}
-
-			function closeForm() {
+	<script>
+		function ToggleForm() {
+			if(document.getElementById("adultAddform").style.display == "block"){
 				document.getElementById("adultAddform").style.display = "none";
+				document.getElementById("adultPanelButton").InnerHTML = "Create Adult";
 			}
-		</script>
+			else{
+				document.getElementById("adultAddform").style.display = "block";
+				document.getElementById("adultPanelButton").InnerHTML = "Close Window";
+			}
+		}
+
+		function closeForm() {
+			document.getElementById("adultAddform").style.display = "none";
+		}
+	</script>

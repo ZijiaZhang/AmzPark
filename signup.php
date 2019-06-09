@@ -79,7 +79,6 @@ if($ispost) {
 	//	echo !allresponsibleValid($resp,$adults);
 	//}else{
 	//	echo "Successfully Create Group";
-	
 	if(!ifExist($name, 'GROUPID' , 'GROUPS')){
 		try {
 			insertIntoGroups($name,$size,$password);
