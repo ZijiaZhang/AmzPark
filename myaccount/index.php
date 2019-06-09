@@ -75,15 +75,15 @@ echo "Your Username is $name";
 	display: flex;
 }
 #operationPannel{
-	background-color: blue;
-	width: 70%;
+/*	background-color: blue;
+*/	width: 70%;
 	overflow: auto;
 	display: block;
 }
 #info{
 	overflow: auto;
-	background-color: green;
-	width :30%;
+/*	background-color: green;
+*/	width :30%;
 	position: relative;
 	display: block;
 }
@@ -219,4 +219,4 @@ echo "Your Username is $name";
 		function closeForm() {
 			document.getElementById("adultAddform").style.display = "none";
 		}
-	</script>
+	<
