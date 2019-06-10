@@ -1,6 +1,6 @@
 <?php
 function executeSQL($command){
-	$conn = OCILogon ("ora_lyr98", 'a54572441', "dbhost.students.cs.ubc.ca:1522/stu");
+	$conn = OCILogon ("ora_gary1999", 'a42252965', "dbhost.students.cs.ubc.ca:1522/stu");
 	if (!$conn) {
 		throw new Exception('Cannot Connect to db');
 	}
@@ -40,7 +40,7 @@ function executeBoundSQL($cmdstr, $list) {
         attacks.  See the sample code below for how this function is
         used. */
         $success = true;
-        $db_conn = OCILogon ("ora_lyr98", 'a54572441', "dbhost.students.cs.ubc.ca:1522/stu");
+        $db_conn = OCILogon ("ora_gary1999", 'a42252965', "dbhost.students.cs.ubc.ca:1522/stu");
         if (!$db_conn) {
         	throw new Exception('Cannot Connect to db');
         }
@@ -76,21 +76,21 @@ function executeBoundSQL($cmdstr, $list) {
 		if(!$success){
 			throw new Exception('Cannot execute this command'.$e['message']);
 		}
-		return $r;
+		return $statement;
 
 	}
 
 
 	function ifExist($id, $keyname, $database){
 		$list1 = array (
-			":bind2" => $keyname,
-			":bind3" => $id);
+			":bind1" => $id);
 
-		$command = "SELECT * FROM $database WHERE :bind2 = :bind3 ";
+		$command = "SELECT * FROM $database WHERE $keyname = :bind1 ";
 		try{
 			$stid = executeBoundSQL($command, $list1);
 		}catch(Exception $e){
 			echo $e.getMessage();
+			echo "ERROR";
 			return false;
 		}
 		return ($t = oci_fetch($stid));
@@ -118,13 +118,13 @@ function executeBoundSQL($cmdstr, $list) {
 		}
 
 		$Children = array();
-		$chd = executeSQL("SELECT * FROM AdultVisitor_include WHERE  groupID = '$GroupID'");
+		$chd = executeSQL("SELECT * FROM YoungVisitor_include_isGuradedBy WHERE  younggroupID = '$GroupID'");
 
 		while ($child =  oci_fetch_array($chd)) {
 			array_push($Children, $child);
 		}
 
-		$Children = oci_fetch_array(executeSQL("SELECT * FROM YoungVisitor_include_isGuradedBy WHERE  younggroupID = '$GroupID'"));
+		//$Children = oci_fetch_array(executeSQL("SELECT * FROM YoungVisitor_include_isGuradedBy WHERE  younggroupID = '$GroupID'"));
 
 		return array('GS'=>$groupSize,'AD'=>$adults,'CH'=>$Children);
 	}

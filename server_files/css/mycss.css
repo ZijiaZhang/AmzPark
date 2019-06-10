@@ -157,8 +157,10 @@ body{
 
 }
 .row{
-  /*width:80vw;*/
   display: table;
+  position: relative;
+  width: 100%;
+  height: 10%
 }
 .attElem, .showElem{
   position: relative;
@@ -472,12 +474,12 @@ div.footer>div.links{
 
 .generalButton{
     position: absolute;
-    width: 20vw;
-    height: 10vh;
+    width: 20%;
+    /*height: 10%;*/
     display: block;
     text-align: center;
     line-height: 10vh;
-    font-size: 3vw;
+    /*font-size: 3vw;*/
     font-family: 'Open Sans', sans-serif;
     font-weight: bolder;
 }
@@ -487,14 +489,18 @@ div.footer>div.links{
   color: white;
 }
 
-#UserLogin{
+.generalButton:first-child{
   background-color: #4CAF50;
-  left: 25vw;
+  left: 25%;
 }
 
-#EmployeeLogin{
+.generalButton:last-child{
   background-color: rgb(64, 97, 173);
-  left: 55vw;
+  left: 55%;
 
+}
+.title{
+  width: 100%;
+  text-align: center;
 }
 
