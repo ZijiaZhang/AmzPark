@@ -123,9 +123,6 @@ display: block;
 }
 </style>
 
-<<<<<<< HEAD
-
-=======
 <div id = "nav-placeholder">
 
 </div>
@@ -135,7 +132,6 @@ display: block;
 	});
 </script>
 <div style="height: 100px"></div>
->>>>>>> master
 <div id = "mainContainer">
 	
 	<div id = "accinfo">
@@ -164,61 +160,6 @@ display: block;
 						</td>
 					</tr>
 				</table>
-<<<<<<< HEAD
-				<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
-				<button type="button" class="" onclick="closeForm()">Close</button>
-			</form>
-		</div>
-
-
-		<table id = "adultInfo">
-			<tr>
-				<th>
-					Name
-				</th>
-				<th>
-					Contact
-				</th>
-				<th>
-					delete
-				</th>
-			</tr>
-			<?php foreach($Adults as $adult){ ?>
-				<form action = "" method = "post">
-					<tr>
-						<td>
-							<input type = "hidden" name = "del_visitor" value = <?php echo $adult['VISITORNAME'];?> > <?php echo $adult['VISITORNAME'];?>
-						</td>
-						<td> 
-							<?php echo $adult['CONTACT_INFO'];?>
-						</td>
-						<td>
-							<button type="submit" value = "delete_adult" name = "submit">Delete</button>
-						</td>
-					</tr>
-				</form>
-			<?php } ?>
-
-		</table>
-		<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
-		<button type="button" class="" onclick="closeForm()">Close</button>
-	</form>
-</div>
-
-<div id = "operationPannel">
-	<h1 class="subTitle">Attractions</h1>
-	<div class="row">
-		<a href="../makePlan_homepage" class = "generalButton" style = "background-color: green"> Make Plans</a>
-		<a href="../makePlan_mine" class = "generalButton" style = "background-color: blue">See My Plans</a>
-	</div>
-</div>
-
-</div>
-
-</div>
-<a href="../logout.php">Log Out</a>
-
-=======
 				<div class = "row">
 					<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
 					<button type="button" class="" onclick="closeForm()">Close</button>
@@ -271,25 +212,15 @@ display: block;
 
 </div>
 <a href="../logout.php">Log Out</a>
-
->>>>>>> master
 <script>
 	function ToggleForm() {
 		if(document.getElementById("adultAddform").style.display == "block"){
 			document.getElementById("adultAddform").style.display = "none";
-<<<<<<< HEAD
-			document.getElementById("adultPanelButton").InnerHTML = "Create Adult";
-		}
-		else{
-			document.getElementById("adultAddform").style.display = "block";
-			document.getElementById("adultPanelButton").InnerHTML = "Close Window";
-=======
 			document.getElementById("adultPanelButton").innerHTML = "Create Adult";
 		}
 		else{
 			document.getElementById("adultAddform").style.display = "block";
 			document.getElementById("adultPanelButton").innerHTML = "Close Window";
->>>>>>> master
 		}
 	}
 
