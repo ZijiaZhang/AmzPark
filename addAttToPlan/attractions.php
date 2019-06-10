@@ -8,6 +8,10 @@
 		$ShortWait = $_POST["wait"];
 		$Att = $_POST["attr"];
 		$pname = $_POST["pname"];
+
+
+         echo "$pname";
+
 	//var_dump($_POST);
 		$query = "";
 		if($Att!=""){

@@ -84,7 +84,7 @@ include '../makeCustomizedPlan.php';
 	
 </div>
 	
-
+<a href="../makePlan_homepage"><button>GO BACK To Previous Page</button> </a>
 
 	<?php if(isset($_GET['Error'])){?>
 		<p>
