@@ -18,6 +18,11 @@ if(checkSession()){
 }
 
 
+if(isset($_GET['Message'])){
+    echo $_GET['Message'];
+}
+
+
 if($ispost) {
       // username and password sent from form 
 	var_dump($_POST);
@@ -29,7 +34,8 @@ if($ispost) {
 	if(!ifExist2($name, $pname, 'GROUPID', 'PLANNUMBER' , 'MadeBy')){
 		try {
 			insertIntoMadeBy($name, $pname);
-			header('location: ./makePlan_exisiting/index.php#Choices');
+			$Message = urlencode("Plan added successfully");
+			header('location: ./makePlan_exisiting/index.php?Message='.$Message);
 		}catch (Exception $e){
 			echo "Cannot Create Plan";
 		}
