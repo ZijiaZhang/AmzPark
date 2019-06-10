@@ -33,7 +33,7 @@
 	}?>
 
 
-<?php 
+	<?php 
 	include "../database.php";
 	include "../session.php";
 	$ispost =($_SERVER["REQUEST_METHOD"] == "POST");
@@ -66,6 +66,8 @@
 			}
 			else{
 				echo "Cannot Create Plan. Because the Plan name has been used. Please use a new plan name";
+				$Error = urlencode("This plan name is used in an existing plan. Either choose it from existing or use a new name");
+				header('location: ../makePlan_homePage/index.php?Message='.$Error);
 			}
 
 
@@ -80,12 +82,14 @@
 			}
 			else{
 				echo "There is already a plan with the same name in your plans. Please use a new name.";
+				$Error = urlencode("There is already a plan with the same name in your plans. Please use a new name.");
+				header('location: ../makePlan_customized/index.php?Message='.$Error);
 			}
 
 		}
 	}
 
-		?>
+	?>
 
 
 	<section id = "attractions">
