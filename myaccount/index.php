@@ -67,6 +67,20 @@ try{
 
 ?>
 
+
+<?php
+try{
+	$myplans = getPlan($name);
+//	var_dump($myplan);
+}catch(EXception $e){
+	echo $e->getMessage();
+}
+
+
+
+
+?>
+
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -199,6 +213,27 @@ display: block;
 		</table>
 		
 	</div>
+
+
+
+	<div style="position: relative;margin-left: 0px; width:fit-content;">
+				<pre> For full information, please use the operation panel on the right</pre>
+			</div>
+			<a class = generalButton href = "../makePlan_homepage">Add Plan </a>
+			<a class = generalButton href = "../makePlan_mine">Modify Plan </a>
+			<table id = "planInfo">
+				<tr><th>plan</th><th>delete</th></tr>
+				<?php foreach($myplans as $plan){ ?>
+					<form action = "" method = "post">
+						<tr><td><input type = "hidden" name = "del_plan" value = <?php echo $plan;?> > <?php echo $plan;?></td>
+							<td><button type="submit" value = "delete_plan" name = "submit">Delete</button></td>
+						</tr>
+					</form>
+				<?php } ?>
+			</table>
+
+
+			
 
 	<div id = "operationPannel">
 		<h1 class="subTitle">Attractions</h1>
