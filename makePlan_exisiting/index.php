@@ -126,7 +126,29 @@ if(checkSession()){
 	</div>
 </section>
 
+<section id = "Choices">
+	
+	<table>
+		<tr>
+			<td>
+				<a href = #Existing>Continue choosing from exisiting plans</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href = "../makePlan_customized"> Make a customized plan</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href = "../myaccount" > Go back to my account page</a>
+			</td>
+		</tr>
+		
+	</table>
+	
 
+</section>
 
 
 
