@@ -267,6 +267,7 @@ display: block;
 				</form>
 			<?php } ?>
 		</table>
+		<pre> For further modifications, please click on "See My Plans" </pre>
 	</div>
 
 </div>

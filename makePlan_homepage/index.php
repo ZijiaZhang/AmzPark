@@ -113,7 +113,7 @@ if(checkSession()){
 		</div>
 	</section>
 
-
+<a href="../myaccount"><button>GO BACK To Previous Page</button> </a>
 
 
 	<script>

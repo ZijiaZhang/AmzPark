@@ -1,6 +1,6 @@
 <?php
 	function initializeSession(){
-	session_save_path('/home/g/***REMOVED***/sessions');
+	session_save_path('/home/l/lyr98/sessions');
 	session_start();
 	}
 

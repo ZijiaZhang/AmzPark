@@ -145,7 +145,8 @@
 		</div>
 	</section>
 
-
+<a href="../makePlan_customized"><button>GO BACK To Previous Page</button> </a>
+<a href="../makePlan_homepage"><button>GO BACK To make plan homepage</button> </a>
 
 
 	<script>
