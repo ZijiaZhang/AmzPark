@@ -26,29 +26,10 @@ if($ispost) {
 	$pname = $_POST['planName'];
 	#echo $name;
 	
-
-    function ifExist2($gid, $pn, $keyname1, $keyname2, $database){
-		$list1 = array (
-			//":bind1" => $gid,
-			":bind1" => $gid,
-			//":bind3" => $pn,
-			":bind2" => $pn);
-
-		$command = "SELECT * FROM $database WHERE $keyname1 = :bind1 AND $keyname2 = :bind2";
-		try{
-			$stid = executeBoundSQL($command, $list1);
-		}catch(Exception $e){
-			echo $e.getMessage();
-			return false;
-		}
-		return ($t = oci_fetch($stid));
-
-	}
-	
 	if(!ifExist2($name, $pname, 'GROUPID', 'PLANNUMBER' , 'MadeBy')){
 		try {
 			insertIntoMadeBy($name, $pname);
-			header('location: ./myaccount');
+			header('location: ./makePlan_exisiting/index.php#Choices');
 		}catch (Exception $e){
 			echo "Cannot Create Plan";
 		}
