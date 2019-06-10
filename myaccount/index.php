@@ -16,7 +16,7 @@ if(checkSession()){
 ?>
 
 <?php
-var_dump($_POST);
+#var_dump($_POST);
 if(isset($_POST['submit'])){
 	if($_POST['submit']== 'delete_adult'){
 		$Visitername = $_POST['del_visitor'];
@@ -53,7 +53,7 @@ $Adults = 'ERROR';
 $Children = 'ERROR';
 try{
 	$info = getMember($name);
-	var_dump($info);
+#	var_dump($info);
 	$groupSize = $info['GS'];
 	$Adults = $info['AD'];
 	$Children = $info ['CH'];
@@ -62,22 +62,29 @@ try{
 }
 
 
-echo "Your Username is $name";
+#echo "Your Username is $name";
 
 
 ?>
 
 <html>
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<title>My Account</title>
 	<link rel="stylesheet" type="text/css" href="../server_files/css/myaccount.css">
 	<link rel="stylesheet" type="text/css" href="../server_files/css/mycss.css">
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
+	<link rel="stylesheet" type="text/css" href="../server_files/css/plan.css">
 </head>
-<body>
+<?php include "../loader.php" ?>
+<body style="margin: 0px;">
 	<style>
 	#mainContainer{
-		width: 100%;
-		height: 100%;
+		width: 100vw;
+		height: 100vh;
 		display: flex;
 	}
 	#operationPannel{
@@ -86,14 +93,14 @@ echo "Your Username is $name";
 overflow: auto;
 display: block;
 }
-#info{
+#accinfo{
 	overflow: auto;
 /*	background-color: green;
 */	width :30%;
 position: relative;
 display: block;
 }
-#info p a{
+#accinfo p a{
 	color: blue;
 }
 #adultInfo tr td, #adultInfo tr th{
@@ -106,15 +113,28 @@ display: block;
 
 .popup {
 	display:none;
-	position: fixed;
+	position: absolute;
 	z-index: 9;
 	background-color: white;
+	border-style: solid;
+	border-color: red;
+	width: 90%;
+	left: 5%;
 }
 </style>
 
+<div id = "nav-placeholder">
 
+</div>
+<script>
+	$(function(){
+		$("#nav-placeholder").load("../navbar.html");
+	});
+</script>
+<div style="height: 100px"></div>
 <div id = "mainContainer">
-	<div id = "info">
+	
+	<div id = "accinfo">
 		<p>Your Group Name is <a><?php echo $name ?> </a></p>
 		<p>Your Group Size is <a> <?php echo $groupSize;?> </a></p>
 		<button id="adultPanelButton" onclick="ToggleForm()">Create Adult</button>
@@ -140,28 +160,30 @@ display: block;
 						</td>
 					</tr>
 				</table>
-				<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
-				<button type="button" class="" onclick="closeForm()">Close</button>
+				<div class = "row">
+					<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
+					<button type="button" class="" onclick="closeForm()">Close</button>
+				</div>
 			</form>
 		</div>
 
 
 		<table id = "adultInfo">
 			<tr>
-				<th>
+				<th width="30%">
 					Name
 				</th>
-				<th>
+				<th width="40%">
 					Contact
 				</th>
-				<th>
+				<th width="30%">
 					delete
 				</th>
 			</tr>
 			<?php foreach($Adults as $adult){ ?>
 				<form action = "" method = "post">
 					<tr>
-						<td>
+						<td >
 							<input type = "hidden" name = "del_visitor" value = <?php echo $adult['VISITORNAME'];?> > <?php echo $adult['VISITORNAME'];?>
 						</td>
 						<td> 
@@ -175,18 +197,16 @@ display: block;
 			<?php } ?>
 
 		</table>
-		<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
-		<button type="button" class="" onclick="closeForm()">Close</button>
-	</form>
-</div>
-
-<div id = "operationPannel">
-	<h1 class="subTitle">Attractions</h1>
-	<div class="row">
-		<a href="../makePlan_homepage" class = "generalButton" style = "background-color: green"> Make Plans</a>
-		<a href="../makePlan_mine" class = "generalButton" style = "background-color: blue">See My Plans</a>
+		
 	</div>
-</div>
+
+	<div id = "operationPannel">
+		<h1 class="subTitle">Attractions</h1>
+		<div class="row">
+			<a href="../makePlan_homepage" class = "generalButton" style = "background-color: green"> Make Plans</a>
+			<a href="../makePlan_mine" class = "generalButton" style = "background-color: blue">See My Plans</a>
+		</div>
+	</div>
 
 </div>
 
@@ -197,11 +217,11 @@ display: block;
 	function ToggleForm() {
 		if(document.getElementById("adultAddform").style.display == "block"){
 			document.getElementById("adultAddform").style.display = "none";
-			document.getElementById("adultPanelButton").InnerHTML = "Create Adult";
+			document.getElementById("adultPanelButton").innerHTML = "Create Adult";
 		}
 		else{
 			document.getElementById("adultAddform").style.display = "block";
-			document.getElementById("adultPanelButton").InnerHTML = "Close Window";
+			document.getElementById("adultPanelButton").innerHTML = "Close Window";
 		}
 	}
 
