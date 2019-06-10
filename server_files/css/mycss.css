@@ -157,7 +157,7 @@ body{
 
 }
 .row{
-  display: table;
+  display: flex;
   position: relative;
   width: 100%;
   height: 10%
@@ -394,7 +394,7 @@ div.footer>div.links{
 
 .attinfo{
   text-align: center;
-  width: 52vw;
+  width: 100%;
 }
 
 .showinfo{
@@ -414,6 +414,7 @@ div.footer>div.links{
 .table-wrap{
   border-radius: 20px;
   overflow: auto;
+  width: 100%;
 }
 
 .attinfo th{
@@ -479,8 +480,8 @@ div.footer>div.links{
     display: block;
     text-align: center;
     line-height: 10vh;
-    /*font-size: 3vw;*/
-    font-family: 'Open Sans', sans-serif;
+/*    font-size: 3%;
+*/    font-family: 'Open Sans', sans-serif;
     font-weight: bolder;
 }
 

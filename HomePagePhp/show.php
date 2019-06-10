@@ -5,6 +5,8 @@
 
 	$today = "";
 	if($_POST["today"] !='false'){
+
+		date_default_timezone_set('America/Vancouver');
 		$date = date('Ymd');
 		$today = " and A.perform_time LIKE '%'||$date||'%'";
 	}
@@ -15,6 +17,7 @@
 		$query = " and upper(A.name) LIKE upper('%$name%')";
 		#echo $query;
 	}
+
 
 	#var_dump(date("Ymd"));
 
