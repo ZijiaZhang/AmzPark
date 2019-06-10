@@ -61,7 +61,7 @@ $(function(){
 
 
 <?php
-include '../makePlan.php';
+include '../makeCustomizedPlan.php';
 
 ?>
 
@@ -70,9 +70,9 @@ include '../makePlan.php';
     	<div style="height: 130px; width: 100%; padding: 0px;"></div>
    <div class = "formContainer">
 	
-	<form action ="../makePlan.php" method="post">
+	<form action ="../makeCustomizedPlan.php" method="post">
 		<label> Create a plan: </label>  
-		<input  type = "text" name = "planName" class = "box name" placeholder="Name of the plan" value = "<?php echo $name;?>" required>
+		<input  type = "text" name = "planName" class = "box name" placeholder="Name of the plan" value = "<?php echo $pname;?>" required>
 		<p class = "name-help"> Name should be no more than 20 characters including the space.</p>
 
 	<input type = "submit" value = " Create " name="createPlan" /><br />
