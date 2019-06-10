@@ -1,4 +1,5 @@
 <html lang="en"><head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<meta charset="UTF-8">
 	<title> Amz Park</title>
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/mycss.css">
@@ -6,6 +7,7 @@
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="../server_files/js/jquery.fittext.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
 </head>
@@ -84,7 +86,7 @@ if(checkSession()){
 							// }
 
 
-								$stid = executeSQL("SELECT PLANNUMBER, LISTAGG(ATTNAME, ',') WITHIN GROUP (ORDER BY ATTNAME) FROM ofVisiting GROUP BY PLANNUMBER");
+								$stid = executeSQL("SELECT PLANNUMBER, LISTAGG(ATTNAME, ', ') WITHIN GROUP (ORDER BY ATTNAME) FROM ofVisiting GROUP BY PLANNUMBER");
 								
 								/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
 								while ($row = OCI_Fetch_Array($stid, OCI_BOTH)) { ?>
@@ -95,13 +97,13 @@ if(checkSession()){
 										<div class="table-wrap">
 											<table class= "planinfo">
 												<tr>
-													<th class = ""> Plan Name </th>
-													<th class = ""> Attractions in this plan </th>
-													<th>Action</th>
+													<th width = "30%" class = ""> Plan Name </th>
+													<th width = "40%" class = ""> Attractions in this plan </th>
+													<th width = "30%">Action</th>
 												</tr>
 												<tr>
-													<td class = ""><?php echo trim( $row["PLANNUMBER"]); ?> </td>
-													<td class = ""><?php echo trim( $row["LISTAGG(ATTNAME,',')WITHINGROUP(ORDERBYATTNAME)"]); ?> </td>
+													<td class = ""><?php echo trim( $row["PLANNUMBER"]); ?></td>
+													<td class = ""><?php echo trim( $row[1]); ?> </td>
 													<td>
 														<form action = "../addPlanToMine.php" method="post">
 															<input type = "hidden" name = "planName" value = "<?php echo trim( $row["PLANNUMBER"]); ?>" />
@@ -211,7 +213,7 @@ if(checkSession()){
 			}
 		}
 	}
-
+//jQuery(".nm").fitText();
 </script>
 
 </body>
