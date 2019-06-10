@@ -68,6 +68,8 @@ if(checkSession()){
 
 					<h1 style="text-align: center;"> Attractions </h1>
 
+					<a href="../myaccount"><button>GO BACK To Previous Page</button> </a>
+
 					<?php if(isset($_GET['Error'])){?>
 						<p>
 							<?php	echo $_GET['Error'];?>
@@ -113,7 +115,7 @@ if(checkSession()){
 		</div>
 	</section>
 
-<a href="../myaccount"><button>GO BACK To Previous Page</button> </a>
+
 
 
 	<script>
