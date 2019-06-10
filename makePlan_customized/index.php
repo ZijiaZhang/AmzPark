@@ -70,7 +70,7 @@ include '../makeCustomizedPlan.php';
     	<div style="height: 130px; width: 100%; padding: 0px;"></div>
    <div class = "formContainer">
 	
-	<form action ="../makeCustomizedPlan.php" method="post">
+	<form action ="../addAttToPlan/index.php" method="post">
 		<label> Create a plan: </label>  
 		<input  type = "text" name = "planName" class = "box name" placeholder="Name of the plan" value = "<?php echo $pname;?>" required>
 		<p class = "name-help"> Name should be no more than 20 characters including the space.</p>
