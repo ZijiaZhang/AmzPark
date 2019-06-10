@@ -1,6 +1,7 @@
 .planinfo{
   text-align: center;
   width: 100%;
+  table-layout: fixed;
 }
 
 .listitem{
@@ -12,7 +13,53 @@ tr th:first-child{
 }
 
 tr th:last-child{
-	width: 30%;
+	max-width: 30%;
+}
+
+tr th:last-child{
+	max-width: 30%;
+}
+
+tr td:first-child{
+	max-width: 30%;
+}
+
+tr td:last-child{
+	max-width: 30%;
+}
+
+tr th:nth-child(2){
+	max-width: 40%;
+}
+
+
+tr td:nth-child(2){
+	max-width: 40%;
+}
+
+tr td{
+	text-align: center;
+}
+
+form{
+  margin-block-end: 0;
+}
+
+td input[type="submit"], td button{
+	background: #4d90fe;
+    border-color: #3079ed;
+    font-weight: bold;
+    margin: 0 0 0 0;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    padding: 8px 0px 8px 8px;
+/*    font-size: 3%;
+*/    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 .planinfo tr{
