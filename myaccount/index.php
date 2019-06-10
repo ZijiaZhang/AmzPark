@@ -216,21 +216,6 @@ display: block;
 
 
 
-	<div style="position: relative;margin-left: 0px; width:fit-content;">
-				<pre> For full information, please use the operation panel on the right</pre>
-			</div>
-			<a class = generalButton href = "../makePlan_homepage">Add Plan </a>
-			<a class = generalButton href = "../makePlan_mine">Modify Plan </a>
-			<table id = "planInfo">
-				<tr><th>plan</th><th>delete</th></tr>
-				<?php foreach($myplans as $plan){ ?>
-					<form action = "" method = "post">
-						<tr><td><input type = "hidden" name = "del_plan" value = <?php echo $plan;?> > <?php echo $plan;?></td>
-							<td><button type="submit" value = "delete_plan" name = "submit">Delete</button></td>
-						</tr>
-					</form>
-				<?php } ?>
-			</table>
 
 
 			
@@ -241,6 +226,16 @@ display: block;
 			<a href="../makePlan_homepage" class = "generalButton" style = "background-color: green"> Make Plans</a>
 			<a href="../makePlan_mine" class = "generalButton" style = "background-color: blue">See My Plans</a>
 		</div>
+			<table id = "planInfo">
+				<tr><th>plan</th><th>delete</th></tr>
+				<?php foreach($myplans as $plan){ ?>
+					<form action = "" method = "post">
+						<tr><td><input type = "hidden" name = "del_plan" value = <?php echo $plan;?> > <?php echo $plan;?></td>
+							<td><button type="submit" value = "delete_plan" name = "submit">Delete</button></td>
+						</tr>
+					</form>
+				<?php } ?>
+			</table>
 	</div>
 
 </div>
