@@ -1,0 +1,20 @@
+.planinfo{
+  text-align: center;
+  width: 100%;
+}
+
+.listitem{
+	width: 100%;
+	padding: 1em;
+}
+tr th:first-child{
+	width: 30%;
+}
+
+tr th:last-child{
+	width: 30%;
+}
+
+.planinfo tr{
+  background-color: rgb(255,255,255);
+}

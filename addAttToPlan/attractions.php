@@ -3,25 +3,19 @@
 	include_once '../database.php';
 
 	$NoRepair = $_POST["today"];
-	$ShortWait = $_POST["wait"];
 	$Att = $_POST["attr"];
-	//var_dump($_POST);
+
 	$query = "";
 	if($Att!=""){
 		$query = "and upper(A.ATT_NAME) LIKE upper('%$Att%')";
 	}
-
-    $WaitTime = "";
-    if($ShortWait == "true"){
-    	$WaitTime = "and CAST(B.EXPECTED_WAITING_TIME AS INT) < 35 ";
-    }
 
 	$Repir = "";
 	if($NoRepair == "true"){
 		$Repir = "and A.STATUS = 'OPEN'";
 	}
 
-	$stid = executeSQL("SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME, A.STATUS FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity $query $Repir $WaitTime");
+	$stid = executeSQL("SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME, A.STATUS FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity $query $Repir");
 
 
 
