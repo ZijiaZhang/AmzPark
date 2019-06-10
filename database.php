@@ -203,10 +203,14 @@ function executeBoundSQL($cmdstr, $list) {
 	}
 
 function getPlan($GroupID){
-		$result = executeSQL("SELECT PLANNUMBER FROM madeBy WHERE GROUPID = '$GroupID'");
-		$row = oci_fetch_array($result);
+	$myplan = array();
+	$pl = executeSQL("SELECT PLANNUMBER FROM madeBy WHERE GROUPID = '$GroupID'");
+    
+    while($p = oci_fetch_array($pl)){
+    	array_push($myplan, $p);
+    }
 
-		return $row;
+    return $myplan;
 	}
 
 
