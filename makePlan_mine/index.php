@@ -158,6 +158,26 @@ if(isset($_POST['submit'])){
                         <?php
                     }
                     ?>
+                    <?php
+                    try{
+                        $results = executeSQL("SELECT PLANNUMBER FROM madeBy WHERE GROUPID = '$name' MINUS SELECT B.PLANNUMBER FROM ofVisiting B, madeby A WHERE A.PLANNUMBER = B.PLANNUMBER AND A.groupID='$name' GROUP BY B.PLANNUMBER" );
+                    }catch ( Exception $e){
+                        echo $e->getMessage();
+                    }
+         //   echo "OK";
+                    while($row =  OCI_Fetch_Array($results)) {
+                        ?>
+                        <form action = "" method = "post">
+                            <tr>
+                                <td><input type = "hidden" name = "del_plan" value = <?php echo "'".$row['PLANNUMBER']."'";?> > <?php echo $row['PLANNUMBER'];?></td>
+                                <td><?php echo $row[1];?></td>
+                                <td><button type="submit" value = "delete_plan" name = "submit">Delete</button></td>
+                            </tr>
+                        </form>
+
+                        <?php
+                    }
+                    ?>
                 </tbody>
             </table>
         </body>
