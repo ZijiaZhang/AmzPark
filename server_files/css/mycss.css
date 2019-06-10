@@ -394,7 +394,7 @@ div.footer>div.links{
 
 .attinfo{
   text-align: center;
-  width: 52vw;
+  width: 100%;
 }
 
 .showinfo{
@@ -414,6 +414,7 @@ div.footer>div.links{
 .table-wrap{
   border-radius: 20px;
   overflow: auto;
+  width: 100%;
 }
 
 .attinfo th{
