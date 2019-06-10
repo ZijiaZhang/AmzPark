@@ -67,7 +67,7 @@
 			else{
 				echo "Cannot Create Plan. Because the Plan name has been used. Please use a new plan name";
 				$Error = urlencode("This plan name is used in an existing plan. Either choose it from existing or use a new name");
-				header('location: ../makePlan_homePage/index.php?Message='.$Error);
+				header('location: ../makePlan_homepage/index.php?Message='.$Error);
 			}
 
 
