@@ -9,6 +9,10 @@
 	padding: 1em;
 }
 tr th:first-child{
+	width: 30%;
+}
+
+tr th:last-child{
 	max-width: 30%;
 }
 

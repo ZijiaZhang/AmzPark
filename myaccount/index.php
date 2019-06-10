@@ -212,7 +212,6 @@ display: block;
 
 </div>
 <a href="../logout.php">Log Out</a>
-
 <script>
 	function ToggleForm() {
 		if(document.getElementById("adultAddform").style.display == "block"){
