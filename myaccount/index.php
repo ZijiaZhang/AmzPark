@@ -230,7 +230,7 @@ display: block;
 				<tr><th>plan</th><th>delete</th></tr>
 				<?php foreach($myplans as $plan){ ?>
 					<form action = "" method = "post">
-						<tr><td><input type = "hidden" name = "del_plan" value = <?php echo $plan;?> > <?php echo $plan;?></td>
+						<tr><td><input type = "hidden" name = "del_plan" value = <?php echo $plan[0];?> > <?php echo $plan[0];?></td>
 							<td><button type="submit" value = "delete_plan" name = "submit">Delete</button></td>
 						</tr>
 					</form>
