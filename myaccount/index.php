@@ -208,7 +208,7 @@ display: block;
 		</div>
 
 
-		<table id = "adultInfo">
+		<table id = "adultInfo" class = "fullWidth">
 			<tr>
 				<th width="30%">
 					Name
@@ -252,8 +252,8 @@ display: block;
 			<a href="../makePlan_homepage" class = "generalButton" style = "background-color: green"> Make Plans</a>
 			<a href="../makePlan_mine" class = "generalButton" style = "background-color: blue">See My Plans</a>
 		</div>
-		<table id = "planInfo">
-			<tr><th>plan</th><th>delete</th></tr>
+		<table id = "planInfo" class = "halfWidth">
+			<tr><th>Plan</th><th>Delete</th></tr>
 			<?php foreach($myplans as $plan){ ?>
 				<form action = "" method = "post">
 					<tr>
