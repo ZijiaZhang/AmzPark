@@ -137,37 +137,96 @@ function executeBoundSQL($cmdstr, $list) {
 
 	function insertIntoGroups($name,$size,$password){
 		$list1 = array (":bind1" => $name,
-							":bind2" => $size,
-							":bind3" => $password);
+			":bind2" => $size,
+			":bind3" => $password);
 		executeBoundSQL("INSERT INTO groups VALUES ( :bind1 , :bind2, :bind3)", $list1);
 	}
 
 	function insertIntoAdults($adult,$groupID,$cont){
 		$list1 = array (":bind1" => $adult,
-							":bind2" => $groupID,
-							":bind3" => $cont);
+			":bind2" => $groupID,
+			":bind3" => $cont);
 		executeBoundSQL("INSERT INTO AdultVisitor_include VALUES ( :bind1 , :bind2, :bind3)", $list1);
 	}
 
 	function insertIntoChildren($child,$groupID,$adult){
 		$list1 = array (":bind1" => $child,
-							":bind2" => $groupID,
-							":bind3" => $adult);
+			":bind2" => $groupID,
+			":bind3" => $adult);
 		executeBoundSQL("INSERT INTO YoungVisitor_include_isGuradedBy VALUES ( :bind1 , :bind2, :bind3, :bind2 )", $list1);
 	}
-    
-    function insertIntoPlan($name){
+	
+	function insertIntoPlan($name){
 		$list1 = array (":bind1" => $name);
 		executeBoundSQL("INSERT INTO plan VALUES ( :bind1  )", $list1);
 	}
 
 	function insertIntoMadeBy($groupId, $pname){
 		$list1 = array (":bind1" => $groupId,
-							":bind2" => $pname,);
+			":bind2" => $pname,);
 		executeBoundSQL("INSERT INTO MadeBy VALUES ( :bind1, :bind2  )", $list1);
 	}
 
 	function insertIntoReservation($conNo,$groupID,$enterName,$time){
+		$list1 = array (
+			":bind1" => $conNo,
+			":bind2" => $groupID,
+			":bind3" => $enterName,
+			":bind4" => $time,
+		);
+		executeBoundSQL("INSERT INTO Reservation_linkedTo_ManagedBy VALUES (:bind1, :bind2, bind3, bind4)", $list1);
+	}
+
+	function insertIntoOfVisiting($pname, $aname){
+		$list1 = array (":bind1" => $pname,
+			":bind2" => $aname,);
+		executeBoundSQL("INSERT INTO ofVisiting VALUES ( :bind1, :bind2  )", $list1);
+	}
+
+
+	function ifExist2($v1, $v2, $keyname1, $keyname2, $database){
+		$list1 = array (
+			//":bind1" => $gid,
+			":bind1" => $v1,
+			//":bind3" => $pn,
+			":bind2" => $v2);
+
+		$command = "SELECT * FROM $database WHERE $keyname1 = :bind1 AND $keyname2 = :bind2";
+		try{
+			$stid = executeBoundSQL($command, $list1);
+		}catch(Exception $e){
+			echo $e.getMessage();
+			return false;
+		}
+		return ($t = oci_fetch($stid));
+
+	}
+
+	function getPlan($GroupID){
+		$myplan = array();
+		$pl = executeSQL("SELECT PLANNUMBER FROM madeBy WHERE GROUPID = '$GroupID'");
+
+		while($p = oci_fetch_array($pl)){
+			array_push($myplan, $p);
+		}
+
+		return $myplan;
+	}
+
+
+
+
+	function copyAtt($pname1, $pname2){
+		$r = executeSQL("SELECT ATTNAME FROM ofVisiting WHERE PLANNUMBER = '$pname1'");
+
+		insertIntoPlan($pname2);
+  
+        $array = oci_fetch_array($r);
+		foreach($array as $a){
+			insertIntoOfVisiting($pname2, $a);
+		}
+	}
+function insertIntoReservation($conNo,$groupID,$enterName,$time){
 		$list1 = array (
 			":bind1" => $conNo,
 			":bind2" => $groupID,

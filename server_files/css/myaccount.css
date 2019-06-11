@@ -22,7 +22,13 @@ table{
 	table-layout: fixed;
 }
 
-#adultinfo{
+.fullWidth{
 	width: 100%;
->>>>>>> master
+}
+
+.halfWidth{
+    width:50%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -45,6 +45,32 @@ if(isset($_POST['submit'])){
 }
 
 ?>
+
+
+<?php
+
+//var_dump($_POST);
+
+if(isset($_POST['submit'])){
+	if($_POST['submit']== 'delete_plan'){
+		$planname = $_POST['del_plan'];
+		try{
+			$list1 = array(":bind1" => $name, ":bind2" => $planname);
+			executeBoundSQL("DELETE FROM madeBy where groupID = :bind1 and PLANNUMBER = :bind2",$list1);
+		}catch (Exception $e){
+			echo $e->getMessage();
+		}
+	}
+}
+
+?>
+
+
+
+
+
+
+
 <?php
 
 
@@ -67,6 +93,20 @@ try{
 
 ?>
 
+
+<?php
+try{
+	$myplans = getPlan($name);
+//	var_dump($myplan);
+}catch(EXception $e){
+	echo $e->getMessage();
+}
+
+
+
+
+?>
+
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -82,12 +122,13 @@ try{
 <?php include "../loader.php" ?>
 <body style="margin: 0px;">
 	<style>
-	#mainContainer{
-		width: 100vw;
-		height: 100vh;
-		display: flex;
-	}
-	#operationPannel{
+
+		#mainContainer{
+			width: 100vw;
+			height: 100vh;
+			display: flex;
+		}
+		#operationPannel{
 /*	background-color: blue;
 */	width: 70%;
 overflow: auto;
@@ -168,7 +209,7 @@ display: block;
 		</div>
 
 
-		<table id = "adultInfo">
+		<table id = "adultInfo" class = "fullWidth">
 			<tr>
 				<th width="30%">
 					Name
@@ -184,7 +225,7 @@ display: block;
 				<form action = "" method = "post">
 					<tr>
 						<td >
-							<input type = "hidden" name = "del_visitor" value = <?php echo $adult['VISITORNAME'];?> > <?php echo $adult['VISITORNAME'];?>
+							<input type = "hidden" name = "del_visitor" value = <?php echo "'".$adult['VISITORNAME']."'";?> > <?php echo $adult['VISITORNAME'];?>
 						</td>
 						<td> 
 							<?php echo $adult['CONTACT_INFO'];?>
@@ -206,6 +247,22 @@ display: block;
 			<a href="../makePlan_homepage" class = "generalButton" style = "background-color: green"> Make Plans</a>
 			<a href="../makePlan_mine" class = "generalButton" style = "background-color: blue">See My Plans</a>
 		</div>
+		<table id = "planInfo" class = "halfWidth">
+			<tr><th>Plan</th><th>Delete</th></tr>
+			<?php foreach($myplans as $plan){ ?>
+				<form action = "" method = "post">
+					<tr>
+						<td>
+							<input type = "hidden" name = "del_plan" value = <?php echo "'".$plan[0]."'";?> > <?php echo $plan[0];?>
+						</td>
+						<td>
+							<button type="submit" value = "delete_plan" name = "submit">Delete</button>
+						</td>
+					</tr>
+				</form>
+			<?php } ?>
+		</table>
+		<pre> For further modifications, please click on "See My Plans" </pre>
 	</div>
 
 </div>
