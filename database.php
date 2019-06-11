@@ -202,17 +202,29 @@ function executeBoundSQL($cmdstr, $list) {
 
 	}
 
-function getPlan($GroupID){
-	$myplan = array();
-	$pl = executeSQL("SELECT PLANNUMBER FROM madeBy WHERE GROUPID = '$GroupID'");
-    
-    while($p = oci_fetch_array($pl)){
-    	array_push($myplan, $p);
-    }
+	function getPlan($GroupID){
+		$myplan = array();
+		$pl = executeSQL("SELECT PLANNUMBER FROM madeBy WHERE GROUPID = '$GroupID'");
 
-    return $myplan;
+		while($p = oci_fetch_array($pl)){
+			array_push($myplan, $p);
+		}
+
+		return $myplan;
 	}
 
 
-	
+
+
+	function copyAtt($pname1, $pname2){
+		$r = executeSQL("SELECT ATTNAME FROM ofVisiting WHERE PLANNUMBER = '$pname1'");
+
+		insertIntoPlan($pname2);
+  
+        $array = oci_fetch_array($r);
+		foreach($array as $a){
+			insertIntoOfVisiting($pname2, $a);
+		}
+	}
+
 	?>
