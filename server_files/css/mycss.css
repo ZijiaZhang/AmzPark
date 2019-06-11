@@ -162,6 +162,11 @@ body{
   width: 100%;
   height: 10%
 }
+.oneRow{
+  display: flex;
+  position: relative;
+  width: 100%;
+}
 .attElem, .showElem{
   position: relative;
   overflow: auto;
