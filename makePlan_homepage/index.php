@@ -43,7 +43,7 @@ if(checkSession()){
 		});
 	</script>
 
-<div style="height: 100px; width: 100%; padding: 0px;"></div>
+	<div style="height: 100px; width: 100%; padding: 0px;"></div>
 	<section id = "Get Started">
 		<h1 class = "title"> Welcome to Hello World</h1>
 
@@ -67,6 +67,15 @@ if(checkSession()){
 
 
 					<h1 style="text-align: center;"> Attractions </h1>
+
+					<a href="../myaccount"><button>GO BACK To Previous Page</button> </a>
+
+					<?php if(isset($_GET['Error'])){?>
+						<p>
+							<?php	echo $_GET['Error'];?>
+						</p>
+						<?php
+					}?>
 
 					<div style="width: 100%">
 						<div class="Search">

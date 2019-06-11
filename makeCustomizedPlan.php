@@ -23,33 +23,18 @@ if($ispost) {
 	$pname = $_POST['planName'];
 	$aname = $_POST['attName'];
 
-	if (array_key_exists('createPlan', $_POST)) {
-		
-		if(!ifExist("'".$pname."'", 'PLANNUMBER' , 'PLAN')){
-			try {
-		//	insertInto("'".$pname."'",'PLAN');
-				insertIntoPlan($pname);
-			}catch (Exception $e){
-				echo $e->getMessage();
-				echo "Cannot Create Plan. Because the plan name exceeds maximum length.";
-			}
+if (array_key_exists('addAtt', $_POST)){
+	if(!ifExist2($pname, $aname, 'PLANNUMBER' , 'ATTNAME', 'ofVisiting')){
+		try {
+			insertIntoOfVisiting($pname,$aname);
+			$Success = urlencode("Attraction added successfully");
+		    header('location: ./addAttToPlan/index.php?Message='.$Success);
+		}catch (Exception $e){
+			echo "Error. Cannot add it to the plan.";
 		}
-		else{
-			echo "Cannot Create Plan. Because the Plan name has been used. Please use a new plan name";
-		}
-
-
-		if(!ifExist2($gname, $pname, 'GROUPID', 'PLANNUMBER' , 'MadeBy')){
-			try {
-				insertIntoMadeBy($gname, $pname);
-				header('location: ./addAttToPlan?message=1');
-			}catch (Exception $e){
-				echo "Cannot Create Plan";
-			}
-		}
-		else{
-			echo "There is already a plan with the same name in your plans. Please use a new name.";
-		}
+	}
+	else{
+		echo "This attraction is already in this plan";
 	}
 
 
@@ -70,6 +55,7 @@ if($ispost) {
 
 
 	}
+
 }
 
 

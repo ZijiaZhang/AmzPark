@@ -66,11 +66,14 @@ include '../makeCustomizedPlan.php';
 ?>
 
 
+
  <div class="component-wrapper " style="background-color: #eee">
     	<div style="height: 130px; width: 100%; padding: 0px;"></div>
    <div class = "formContainer">
-	
-	<form action ="../makeCustomizedPlan.php" method="post">
+
+
+
+	<form action ="../addAttToPlan/index.php" method="post">
 		<label> Create a plan: </label>  
 		<input  type = "text" name = "planName" class = "box name" placeholder="Name of the plan" value = "<?php echo $pname;?>" required>
 		<p class = "name-help"> Name should be no more than 20 characters including the space.</p>
@@ -81,9 +84,14 @@ include '../makeCustomizedPlan.php';
 	
 </div>
 	
+<a href="../makePlan_homepage"><button>GO BACK To Previous Page</button> </a>
 
-
-
+	<?php if(isset($_GET['Error'])){?>
+		<p>
+			<?php echo $_GET['Error'];?>
+		</p>
+		<?php
+	}?>
 
 	
 
