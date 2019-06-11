@@ -59,7 +59,7 @@ if($ispost) {
 		if(!ifExist2($pname, $aname, 'PLANNUMBER' , 'ATTNAME', 'ofVisiting')){
 			try {
 				insertIntoOfVisiting($pname,$aname);
-				header('location: ./addAttToPlan?success=1');
+				//header('location: ./addAttToPlan?success=1');
 			}catch (Exception $e){
 				echo "Error. Cannot add it to the plan.";
 			}
