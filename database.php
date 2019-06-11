@@ -226,13 +226,4 @@ function executeBoundSQL($cmdstr, $list) {
 			insertIntoOfVisiting($pname2, $a);
 		}
 	}
-function insertIntoReservation($conNo,$groupID,$enterName,$time){
-		$list1 = array (
-			":bind1" => $conNo,
-			":bind2" => $groupID,
-			":bind3" => $enterName,
-			":bind4" => $time,
-		);
-		executeBoundSQL("INSERT INTO Reservation_linkedTo_ManagedBy VALUES (:bind1, :bind2, bind3, bind4)", $list1);
-	}
 	?>
