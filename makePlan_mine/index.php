@@ -62,7 +62,7 @@ if(isset($_POST['submit'])){
 
 
 <div id = "modify_add">
-    <button id="adultPanelButton" onclick="ToggleForm()">Add Attraction To A Plan</button>
+    <button id="attPanelButton" onclick="ToggleForm()">Add Attraction To A Plan</button>
     <div class="popup" id="AddAttform">
         <form action="" class="form-container" method = "post">
             <h1>ADD Attraction</h1>
@@ -91,7 +91,7 @@ if(isset($_POST['submit'])){
 </div>
 
 <div id = "modify_delete">
-    <button id="adultPanelButton" onclick="ToggleForm2()">Delete Attraction From A Plan</button>
+    <button id="att2PanelButton" onclick="ToggleForm2()">Delete Attraction From A Plan</button>
     <div class="popup" id="DeleteAttform">
         <form action="" class="form-container" method = "post">
             <h1>Delete Attraction</h1>
@@ -114,7 +114,7 @@ if(isset($_POST['submit'])){
                 </tr>
             </table>
             <button type="submit" class="" name = "submit" value = 'delFromPlan'>Delete</button>
-            <button type="button" class="" onclick="closeForm()">Close</button>
+            <button type="button" class="" onclick="closeForm2()">Close</button>
         </form>
     </div>
 </div>
@@ -190,31 +190,35 @@ if(isset($_POST['submit'])){
 
 <script>
     function ToggleForm() {
-        if(document.getElementById("adultAddform").style.display == "block"){
-            document.getElementById("adultAddform").style.display = "none";
-            document.getElementById("adultPanelButton").InnerHTML = "Add attraction to a Plan";
+        if(document.getElementById("AddAttform").style.display == "block"){
+            document.getElementById("AddAttform").style.display = "none";
+            document.getElementById("attPanelButton").InnerHTML = "Add attraction to a Plan";
         }
         else{
-            document.getElementById("adultAddform").style.display = "block";
-            document.getElementById("adultPanelButton").InnerHTML = "Close Window";
+            document.getElementById("AddAttform").style.display = "block";
+            document.getElementById("attPanelButton").InnerHTML = "Close Window";
         }
     }
 
     function ToggleForm2() {
-        if(document.getElementById("adultAddform").style.display == "block"){
-            document.getElementById("adultAddform").style.display = "none";
-            document.getElementById("adultPanelButton").InnerHTML = "Delete attraction from a plan";
+        if(document.getElementById("DeleteAttform").style.display == "block"){
+            document.getElementById("DeleteAttform").style.display = "none";
+            document.getElementById("att2PanelButton").InnerHTML = "Delete attraction from a plan";
         }
         else{
-            document.getElementById("adultAddform").style.display = "block";
-            document.getElementById("adultPanelButton").InnerHTML = "Close Window";
+            document.getElementById("DeleteAttform").style.display = "block";
+            document.getElementById("att2PanelButton").InnerHTML = "Close Window";
         }
     }
 
 
 
     function closeForm() {
-        document.getElementById("adultAddform").style.display = "none";
+        document.getElementById("AddAttform").style.display = "none";
+    }
+
+     function closeForm2() {
+        document.getElementById("DeleteAttform").style.display = "none";
     }
 </script>
 
