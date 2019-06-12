@@ -39,6 +39,9 @@ $(function(){
 	<input type = "text" name = "username" class = "box" placeholder="Username" /><br /><br />
     <input type = "password" name = "password" class = "box" placeholder="Password" /><br/><br />
     <input name = "submit" type = "submit" value = "LOGIN "/><br />
+    <a pos="inform" href="../recoverAccount">Forget Password</a>
+    <br>
+    <a pos = "inform" href="../administrator">Employee Login</a>
 </form>
 </div>
 
