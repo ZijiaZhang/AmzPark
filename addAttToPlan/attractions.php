@@ -49,7 +49,7 @@
 					padding-right: 10px;
 					border-radius:10px;
 					font-size: 2vw;">
-					<p style="color: #000"><?php echo trim( $row["ATT_NAME"]); ?></p>
+					<p style="color: #000;font-size: 50%"><?php echo trim( $row["ATT_NAME"]); ?></p>
 				</div>
 			</div>
 			<div class="table-wrap">
