@@ -195,7 +195,7 @@ if(checkSession()){
 
 
 	$(window).load(function(){
-
+		initialize();
 		document.getElementsByTagName('body')[0].style.display = 'block';
 		initializeatt();
 		AOS.init();
