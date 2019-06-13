@@ -112,12 +112,18 @@ body{
 
 }
 
+#primary_nav .right{
+  float: right;
+}
 @media screen and (max-width: 790px) {
   #primary_nav, #primary_nav li, #primary_nav li a ,
   #primary_nav li > ul
   {float: none; position: relative;}
   #primary_nav li > ul li{
     width: 100%;
+  }
+  #primary_nav .right{
+    float: none;
   }
   #menu_control{
     margin-right: 0px;
