@@ -118,7 +118,16 @@ body{
 @media screen and (max-width: 790px) {
   #primary_nav, #primary_nav li, #primary_nav li a ,
   #primary_nav li > ul
-  {float: none; position: relative;}
+  {float: none;
+   position: relative;
+ }
+
+ #primary_nav li a{
+  padding: 10px 5px;
+ }
+ #primary_nav #menu_control{
+  padding: 30px 20px;
+ }
   #primary_nav li > ul li{
     width: 100%;
   }
