@@ -174,7 +174,7 @@ function executeBoundSQL($cmdstr, $list) {
 			":bind3" => $enterName,
 			":bind4" => $time,
 		);
-		executeBoundSQL("INSERT INTO Reservation_linkedTo_ManagedBy VALUES (:bind1, :bind2, bind3, bind4)", $list1);
+		executeBoundSQL("INSERT INTO Reservation_linkedTo_ManagedBy VALUES (:bind1, :bind2, :bind3, :bind4)", $list1);
 	}
 
 	function insertIntoOfVisiting($pname, $aname){
@@ -202,28 +202,17 @@ function executeBoundSQL($cmdstr, $list) {
 
 	}
 
-	function getPlan($GroupID){
-		$myplan = array();
-		$pl = executeSQL("SELECT PLANNUMBER FROM madeBy WHERE GROUPID = '$GroupID'");
+function getPlan($GroupID){
+	$myplan = array();
+	$pl = executeSQL("SELECT PLANNUMBER FROM madeBy WHERE GROUPID = '$GroupID'");
+    
+    while($p = oci_fetch_array($pl)){
+    	array_push($myplan, $p);
+    }
 
-		while($p = oci_fetch_array($pl)){
-			array_push($myplan, $p);
-		}
-
-		return $myplan;
+    return $myplan;
 	}
 
 
-
-
-	function copyAtt($pname1, $pname2){
-		$r = executeSQL("SELECT ATTNAME FROM ofVisiting WHERE PLANNUMBER = '$pname1'");
-
-		insertIntoPlan($pname2);
-  
-        $array = oci_fetch_array($r);
-		foreach($array as $a){
-			insertIntoOfVisiting($pname2, $a);
-		}
-	}
+	
 	?>
