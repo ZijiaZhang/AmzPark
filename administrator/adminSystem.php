@@ -136,11 +136,23 @@
       </font>
     </p>
     <form method="POST" action="adminSystem.php">
-      <p><input type="text" name="repairFacility" size="20"></input>
+      <p><select name="selected_f" class="form-control form-control-sm">
+                                <option selected>1st Service Handyman</option>
+                                <option>All Pro Fix It</option>
+                                <option>Big Crew Maintenance </option>
+                                <option>Call me Handyman</option>
+                                <option>Credible repair</option>
+                            </select>
+        <!-- <input type="text" name="repairFacility" size="20"></input> -->
         <input type="text" name="repairAttraction" size="18"></input>
         <input type="text" name="repairDate" size="15"></input>
         <input type="submit" value="Submit" name="submitRepair"></input></p>
     </form>
+    <p>Attractions have been repaired by all maintenance facilities (replacement is needed):</p>
+    <form method='POST' action="adminSystem.php">
+      <p><input type="submit" value="Display" name="displayReplacementNeeded"></p>
+    </form>
+    <!-- todo division part -->
   </div>
 </body>
 
@@ -170,6 +182,7 @@ if ($db_conn) {
     $columnNames = array("Visitor Name", "Contact Info");
   } else if (array_key_exists('updateAttraction', $_POST)) {
     executePlainSQL("update attraction set status='".$_POST['attractionStatus']."' where att_name='".$_POST['attractionName']."'");
+    OCICommit($db_conn);
     $columnNames = array("Name","Location","Capacity","Status","Open Time", "Close Time","Admin ID");
     $result = executePlainSQL("select * from attraction");
   } else if (array_key_exists('displayAttr', $_POST)) {
@@ -182,18 +195,33 @@ if ($db_conn) {
     $columnNames = array("Name", "Perform Time", "Status");
     executePlainSQL("update entertainment set status='".$_POST['entertainmentStatus']."'
     where name='".$_POST['entertainmentName']."' and perform_time='".$_POST['performTime']."'");
+    OCICommit($db_conn);
     $result = executePlainSQL("select * from entertainment");
   } else if (array_key_exists('displayRepairs', $_POST)) {
     $columnNames = array("Maintenance Facility Name", "Attraction Name", "Date");
     $result = executePlainSQL("select * from repair");
   } else if (array_key_exists('submitRepair', $_POST)) {
     $columnNames = array("Maintenance Facility Name", "Attraction Name", "Date");
-    executePlainSQL("insert into repair values('".$_POST['repairFacility']."','".$_POST['repairAttraction']."',to_date('".$_POST['repairDate']."','YYYY-MM-DD'))");
+    $facility = $_POST['selected_f'];
+    $rAttr = $_POST['repairAttraction'];
+    $latestRDate = $_POST['repairDate'];
+
+    $exist = ifExist2($facility, $rAttr, 'mf_name','att_name','repair');
+    if ($exist) {
+      executePlainSQL("update repair set rdate=to_date('$latestRDate','YYYY-MM-DD') where mf_name = '$facility' and att_name = '$rAttr'");
+      echo "Updated successfully";
+      OCICommit($db_conn);
+    } else {
+      executePlainSQL("insert into repair values('$facility','$rAttr',to_date('$latestRDate','YYYY-MM-DD'))");
+      echo "Inserted successfully";
+      OCICommit($db_conn);
+    }
+
     $result = executePlainSQL("select * from repair");
+  } else if (array_key_exists('displayReplacementNeeded', $_POST)) {
+
   }
       printTable($result, $columnNames);
-
-
   OCILogoff($db_conn);
 } else {
   echo "cannot connect";
