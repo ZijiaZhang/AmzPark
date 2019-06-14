@@ -111,19 +111,21 @@
       </font>
     </p>
     <form method="POST" action="adminSystem.php">
-      <p><select name="entertainmentName" class="form-contral form-control-sm">
+      <p><select name="entertainmentName" class="form-contral form-control-sm" action="entertainmentName">
         <?php
         $resultSelection = executePlainSQL("select distinct name from entertainment");
         while ($rs = OCI_Fetch_Assoc($resultSelection)) {
           foreach ($rs as $option) {
-            echo "<option>$option</option>";
+            echo "<option value='$option'>$option</option>";
           }
         } ?>
       </select>
 
         <input type="text" name="performTime" size="18"></input>
         <input type="text" name="entertainmentStatus" size="18"></input>
-        <input type="submit" value="Update Status" name="updateEntertainment"></input></p>
+        <input type="submit" value="Update Status" name="updateEntertainment"></input>
+        <input type="submit" value="Display" name="displayEntertainment"></input>
+      </p>
     </form>
     <!-- todo -->
   </div>
@@ -235,6 +237,9 @@ if ($db_conn) {
     executePlainSQL("update entertainment set status='".$_POST['entertainmentStatus']."'
     where name='".$_POST['entertainmentName']."' and perform_time='".$_POST['performTime']."'");
     OCICommit($db_conn);
+    $result = executePlainSQL("select * from entertainment");
+  } else if (array_key_exists('displayEntertainment', $_POST)){
+    $columnNames = array("Name", "Perform Time", "Status");
     $result = executePlainSQL("select * from entertainment");
   } else if (array_key_exists('displayRepairs', $_POST)) {
     $columnNames = array("Maintenance Facility Name", "Attraction Name", "Date");
