@@ -1,3 +1,4 @@
+<?php include "database.php" ?>
 <html lang="en">
 
 <head>
@@ -110,7 +111,16 @@
       </font>
     </p>
     <form method="POST" action="adminSystem.php">
-      <p><input type="text" name="entertainmentName" size="18"></input>
+      <p><select name="entertainmentName" class="form-contral form-control-sm">
+        <?php
+        $resultSelection = executePlainSQL("select distinct name from entertainment");
+        while ($rs = OCI_Fetch_Assoc($resultSelection)) {
+          foreach ($rs as $option) {
+            echo "<option>$option</option>";
+          }
+        } ?>
+      </select>
+
         <input type="text" name="performTime" size="18"></input>
         <input type="text" name="entertainmentStatus" size="18"></input>
         <input type="submit" value="Update Status" name="updateEntertainment"></input></p>
@@ -136,15 +146,48 @@
       </font>
     </p>
     <form method="POST" action="adminSystem.php">
-      <p><select name="selected_f" class="form-control form-control-sm">
-                                <option selected>1st Service Handyman</option>
-                                <option>All Pro Fix It</option>
-                                <option>Big Crew Maintenance </option>
-                                <option>Call me Handyman</option>
-                                <option>Credible repair</option>
-                            </select>
+      <p><select name="repairFacility" class="form-control form-control-sm">
+        <?php
+        $resultSelection = executePlainSQL("select name from facility");
+        while ($rs = OCI_Fetch_Assoc($resultSelection)) {
+          foreach ($rs as $option) {
+            echo "<option>$option</option>";
+          }
+        } ?>
+
+
+          <!-- <option selected>1st Service Handyman</option>
+          <option>All Pro Fix It</option>
+          <option>Big Crew Maintenance </option>
+          <option>Call me Handyman</option>
+          <option>Credible repair</option> -->
+        </select>
+        <select name="repairAttraction" class="form-contral form-control-sm">
+          <?php
+          $resultSelection = executePlainSQL("select att_name from attraction");
+          while ($rs = OCI_Fetch_Assoc($resultSelection)) {
+            foreach ($rs as $option) {
+              echo "<option>$option</option>";
+            }
+          } ?>
+          <!-- <option selected>Ferris Wheel</option>
+          <option>Sky Diver</option>
+          <option>Free Fall</option>
+          <option>Frisbee </option>
+          <option>Carousel</option>
+          <option>Bumper</option>
+          <option>DiskO</option>
+          <option>Booster</option>
+          <option>Screamin Swing</option>
+          <option>Enterprise</option>
+          <option>Roller Coaster</option>
+          <option>Space Shot</option>
+          <option>Condor</option>
+          <option>Pirate Ship</option>
+          <option>Shoot the Chute</option> -->
+        </select>
         <!-- <input type="text" name="repairFacility" size="20"></input> -->
-        <input type="text" name="repairAttraction" size="18"></input>
+        <!-- <input type="text" name="repairAttraction" size="18"></input> -->
         <input type="text" name="repairDate" size="15"></input>
         <input type="submit" value="Submit" name="submitRepair"></input></p>
     </form>
@@ -157,13 +200,9 @@
 </body>
 
 </html>
+
 <?php
-include "database.php";
 if ($db_conn) {
-  // if (array_key_exists('displayadmininfo', $_POST)) {
-  //   executePlainSQL("select * from administrator2");
-  //   OCICommit($db_conn);
-  // }
   if (array_key_exists('displayadmininfo', $_GET)) {
     $result = executePlainSQL("select * from administrator2");
     $columnNames = array("Duty Area", "Contact Info");
@@ -190,7 +229,7 @@ if ($db_conn) {
     $result = executePlainSQL("select * from attraction");
   } else if (array_key_exists('displayReservation', $_POST)) {
     $columnNames = array("Name","Perform Time", "#Reservation");
-    $result = executePlainSQL("select entertainmentname, count(*), perform_time from reservation group by entertainmentname, perform_time");
+    $result = executePlainSQL("select entertainmentname, perform_time, count(*) from reservation group by entertainmentname, perform_time");
   } else if (array_key_exists('updateEntertainment', $_POST)) {
     $columnNames = array("Name", "Perform Time", "Status");
     executePlainSQL("update entertainment set status='".$_POST['entertainmentStatus']."'
@@ -202,7 +241,7 @@ if ($db_conn) {
     $result = executePlainSQL("select * from repair");
   } else if (array_key_exists('submitRepair', $_POST)) {
     $columnNames = array("Maintenance Facility Name", "Attraction Name", "Date");
-    $facility = $_POST['selected_f'];
+    $facility = $_POST['repairFacility'];
     $rAttr = $_POST['repairAttraction'];
     $latestRDate = $_POST['repairDate'];
 
@@ -219,9 +258,17 @@ if ($db_conn) {
 
     $result = executePlainSQL("select * from repair");
   } else if (array_key_exists('displayReplacementNeeded', $_POST)) {
-
+    $columnNames = array("Attraction Name");
+    $result = executePlainSQL("select distinct r.att_name
+    from repair r
+    where not exists
+    (select * from facility f
+    where not exists
+    (select r2.mf_name from repair r2
+    where r.att_name = r2.att_name and f.name = r2.mf_name))
+    group by r.att_name");
   }
-      printTable($result, $columnNames);
+  printTable($result, $columnNames);
   OCILogoff($db_conn);
 } else {
   echo "cannot connect";
