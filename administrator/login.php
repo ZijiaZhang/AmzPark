@@ -1,12 +1,3 @@
-<?php
-	##print_r($_SESSION);
-	include_once ('../login.php');
-	include_once ('../session.php');
-	if(checkSession()){
-		header("location: ../myaccount");
-	}
-?>
-
 <html lang="en"><head>
 	<meta charset="UTF-8">
 	<title> Amz Park</title>
@@ -20,7 +11,7 @@
 <?php include "../loader.php"; ?>
 <body style="margin: 0px;">
 	<div id = "nav-placeholder">
-	
+
 </div>
 <script>
 $(function(){
@@ -47,3 +38,19 @@ $(function(){
 
 
 </html>
+
+<?php
+include 'database.php';
+$ispost = isset($_POST['submit']);
+
+if ($ispost) {
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	$result = executePlainSQL("SELECT * FROM administrator1 WHERE name = '$username' AND password = '$password'");
+	if ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+		header("location: ../administrator/adminSystem.php");
+	} else {
+		echo "Cannot login! Please check your username and password";
+	}
+}
+ ?>

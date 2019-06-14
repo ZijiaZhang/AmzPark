@@ -172,7 +172,7 @@
 					</div>
 				</div>
 				<div class="links">
-					<a  href="https://github.com/ZijiaZhang99">
+					<a  href="https://github.com/ZijiaZhang">
 						<img src = "./server_files/icons/github-circle.png" >
 					</a>
 				</div>
