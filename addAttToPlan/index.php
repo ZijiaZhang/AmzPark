@@ -18,7 +18,78 @@
 <body style="margin: 0px" onload="initialize()" onresize="initializeatt()">
 
 
+	<?php if(isset($_GET['Message'])){?>
+		<p>
+			<?php	echo $_GET['Message'];?>
+		</p>
+		<?php
+	}?>
 
+	<?php if(isset($_GET['Success'])){?>
+		<p>
+			<?php	echo $_GET['Success'];?>
+		</p>
+		<?php
+	}?>
+
+
+	<?php 
+	include "../database.php";
+	include "../session.php";
+	$ispost =($_SERVER["REQUEST_METHOD"] == "POST");
+
+	initializeSession();
+
+
+	if(checkSession()){
+		var_dump(session_id());
+		$gname = $_SESSION['login_user'];
+	}else{
+		header('location: ../login');
+	}
+
+	if($ispost) {
+
+		var_dump($_POST);
+
+		if (array_key_exists('createPlan', $_POST)){
+
+			$pname = $_POST['planName'];
+
+			if(!ifExist("'".$pname."'", 'PLANNUMBER' , 'PLAN')){
+				try {
+					insertIntoPlan($pname);
+				}catch (Exception $e){
+					echo $e->getMessage();
+					echo "Cannot Create Plan. Cannot insert into Plan table";
+				}
+			}
+			else{
+				echo "Cannot Create Plan. Because the Plan name has been used. Please use a new plan name";
+				$Error = urlencode("This plan name is used in an existing plan. Either choose it from existing or use a new name");
+				header('location: ../makePlan_homepage/index.php?Message='.$Error);
+			}
+
+
+			if(!ifExist2($gname, $pname, 'GROUPID', 'PLANNUMBER' , 'MadeBy')){
+				try {
+					insertIntoMadeBy($gname, $pname);
+					$Message = urlencode("Plan created successfully");
+					header('location: ./index.php?Message='.$Message);
+				}catch (Exception $e){
+					echo "Cannot Create Plan. Cannot insert into MadeBy table";
+				}
+			}
+			else{
+				echo "There is already a plan with the same name in your plans. Please use a new name.";
+				$Error = urlencode("There is already a plan with the same name in your plans. Please use a new name.");
+				header('location: ../makePlan_customized/index.php?Message='.$Error);
+			}
+
+		}
+	}
+
+	?>
 
 
 	<section id = "attractions">
@@ -26,10 +97,12 @@
 			<div style="height: 100px; width: 100%; padding: 0px;"></div>
 			<div id = "attractions-background">
 				<div class="att-outer">
-
+					<input id = "planName" type = "hidden" value ="<?php echo $pname;?>" >
 
 					<h1 style="text-align: center;"> Attractions </h1>
 
+					<a href="../makePlan_customized"><button>GO BACK To Previous Page</button> </a>
+					<a href="../makePlan_homepage"><button>GO BACK To make plan homepage</button> </a>
 					<div style="width: 100%">
 						<div class="Search">
 							<svg style="display: none">
@@ -55,10 +128,16 @@
 							</div>
 						</div>
 						<div style="width: 100%">
-								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
-									<input id = "attrRP" type="checkbox" name = "noRPAttr"checked>Exclude Repairing
-								</div>
+							<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+								<input id = "attrRP" type="checkbox" name = "noRPAttr">Exclude Repairing
 							</div>
+							<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+								<input id = "attrWait" type="checkbox" name = "ShortWait">Exclude Long Waiting Time
+							</div>
+							<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+								<pre> Click on the image to see full information about this attraction</pre>
+							</div>
+						</div>
 						<div id = "attrSpace"  class = "contianer attractions attlist">
 							<!--Reserve For Attractions-->
 						</div>
@@ -67,10 +146,6 @@
 			</div>
 		</div>
 	</section>
-
-
-
-
 
 	<script>
 		function filter(){
@@ -148,14 +223,24 @@
 		getAttractions();
 	});
 
+
+
+	$('#attrWait').change(function(){
+		getAttractions();
+	});
+
+	
+
 	$('#search-attr').on('input',function(e){
 		getAttractions();
 	});
 
 	function getAttractions() {
 		var today = $('input[name=noRPAttr]').is(':checked');
+		var wait = $('input[name=ShortWait]').is(':checked');
 		var query = $('#search-attr').val();
-		$.post("../addAttToPlan/attractions.php", { today: today, attr: query},
+		var pname = $('#planName').val();
+		$.post("../addAttToPlan/attractions.php", { today: today, wait: wait, attr: query, pname: pname},
 			function(data) {
 				$('#attrSpace').html(data);
 				initializeatt();

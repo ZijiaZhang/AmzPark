@@ -1,31 +1,4 @@
-<html>
-<style>
-    table {
-        width: 20%;
-        border: 1px solid black;
-    }
 
-    th {
-
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 1em;
-        font-weight: bold;
-        background: #666;
-        color: #FFF;
-        padding: 4px 12px;
-        border-collapse: separate;
-        border: 1px solid #000;
-    }
-
-    td {
-
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: .7em;
-        border: 1px solid #DDD;
-        color: black;
-    }
-</style>
-</html>
 <?php
 
 $success = True;
