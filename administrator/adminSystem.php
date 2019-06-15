@@ -1,4 +1,10 @@
-<?php include "database.php" ?>
+<?php
+include "database.php";
+
+
+
+?>
+
 <html lang="en">
 
 <head>
@@ -50,7 +56,16 @@
     </p>
     <form method="POST" action="adminSystem.php">
 
-      <p><input type="text" name="groupID" size="18"></input>
+      <p><select name="groupID" class="form-contral form-control-sm">
+        <?php
+        $resultSelection = executePlainSQL("select groupid from groups");
+        while ($rs = OCI_Fetch_Assoc($resultSelection)) {
+          foreach ($rs as $option) {
+            echo "<option value='$option'>$option</option>\n";
+          }
+        } ?>
+      </select>
+
         <input type="text" name="visitorName" size="18"></input></p>
 
       <p><input type="submit" value="Young Visitor" name="findGuardian"></input>
@@ -66,7 +81,16 @@
       <font size="2"> Facility Name</font>
     </p>
     <form method="GET" action="adminSystem.php">
-      <p><input type="text" name="facilityName" size="30">
+      <p><select name="facilityName" class="form-contral form-control-sm">
+        <?php
+        $resultSelection = executePlainSQL("select name from facility");
+        while ($rs = OCI_Fetch_Assoc($resultSelection)) {
+          foreach ($rs as $option) {
+            echo "<option value='$option'>$option</option>\n";
+          }
+        } ?>
+      </select>
+
         <input type="submit" value="Submit" name="findFacility"></p>
     </form>
 
@@ -75,7 +99,7 @@
   <div id="attractionManagement" class="content-wrap">
     <p>Update the status of the attractions:</p>
     <p>
-      <font size="2">Attraction NAME
+      <font size="2">Attraction Name
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;
         Updated Status
@@ -83,7 +107,16 @@
     </p>
     <!-- todo -->
     <form method="POST" action="adminSystem.php">
-      <p><input type="text" name="attractionName" size="20"></input>
+      <p><select name="attractionName" class="form-contral form-control-sm">
+        <?php
+        $resultSelection = executePlainSQL("select att_name from attraction");
+        while ($rs = OCI_Fetch_Assoc($resultSelection)) {
+          foreach ($rs as $option) {
+            echo "<option value='$option'>$option</option>\n";
+          }
+        } ?>
+      </select>
+
         <input type="text" name="attractionStatus" size="15"></input>
         <input type="submit" value="Update Status" name="updateAttraction"></input></p>
     </form>
@@ -111,12 +144,12 @@
       </font>
     </p>
     <form method="POST" action="adminSystem.php">
-      <p><select name="entertainmentName" class="form-contral form-control-sm" action="entertainmentName">
+      <p><select name="entertainmentName" class="form-contral form-control-sm">
         <?php
         $resultSelection = executePlainSQL("select distinct name from entertainment");
         while ($rs = OCI_Fetch_Assoc($resultSelection)) {
           foreach ($rs as $option) {
-            echo "<option value='$option'>$option</option>";
+            echo "<option value='$option'>$option</option>\n";
           }
         } ?>
       </select>
@@ -153,43 +186,23 @@
         $resultSelection = executePlainSQL("select name from facility");
         while ($rs = OCI_Fetch_Assoc($resultSelection)) {
           foreach ($rs as $option) {
-            echo "<option>$option</option>";
+            echo "<option>$option</option>\n";
           }
         } ?>
 
 
-          <!-- <option selected>1st Service Handyman</option>
-          <option>All Pro Fix It</option>
-          <option>Big Crew Maintenance </option>
-          <option>Call me Handyman</option>
-          <option>Credible repair</option> -->
         </select>
         <select name="repairAttraction" class="form-contral form-control-sm">
           <?php
           $resultSelection = executePlainSQL("select att_name from attraction");
           while ($rs = OCI_Fetch_Assoc($resultSelection)) {
             foreach ($rs as $option) {
-              echo "<option>$option</option>";
+              echo "<option>$option</option>\n\n";
             }
           } ?>
-          <!-- <option selected>Ferris Wheel</option>
-          <option>Sky Diver</option>
-          <option>Free Fall</option>
-          <option>Frisbee </option>
-          <option>Carousel</option>
-          <option>Bumper</option>
-          <option>DiskO</option>
-          <option>Booster</option>
-          <option>Screamin Swing</option>
-          <option>Enterprise</option>
-          <option>Roller Coaster</option>
-          <option>Space Shot</option>
-          <option>Condor</option>
-          <option>Pirate Ship</option>
-          <option>Shoot the Chute</option> -->
+
         </select>
-        <!-- <input type="text" name="repairFacility" size="20"></input> -->
-        <!-- <input type="text" name="repairAttraction" size="18"></input> -->
+
         <input type="text" name="repairDate" size="15"></input>
         <input type="submit" value="Submit" name="submitRepair"></input></p>
     </form>
@@ -209,47 +222,97 @@ if ($db_conn) {
     $result = executePlainSQL("select * from administrator2");
     $columnNames = array("Duty Area", "Contact Info");
 
-  } else if (array_key_exists('findFacility', $_GET)) {
-    $result = executePlainSQL("select * from facility where name='".$_GET['facilityName']."'");
+  }
+
+  else if (array_key_exists('findFacility', $_GET)) {
+    $facility = $_GET['facilityName'];
+    $result = executePlainSQL("select * from facility where name='$facility'");
     $columnNames = array("Name", "Contact Info");
 
-  } else if (array_key_exists('findGuardian',$_POST)) {
-    $result = executePlainSQL("select young.yname, contact_info from adult inner join young on
-    adult.aname=young.aname
-    where young.ygid='".$_POST['groupID']."' and young.yname='".$_POST['visitorName']."'");
-    $columnNames = array("Visitor Name", "Guardian Contact Info");
-  } else if (array_key_exists('findContactInfo', $_POST)) {
-    $result = executePlainSQL("select aname, contact_info from adult where gid='".$_POST['groupID']."' and aname='".$_POST['visitorName']."'");
-    $columnNames = array("Visitor Name", "Contact Info");
-  } else if (array_key_exists('updateAttraction', $_POST)) {
-    executePlainSQL("update attraction set status='".$_POST['attractionStatus']."' where att_name='".$_POST['attractionName']."'");
+  }
+
+  else if (array_key_exists('findGuardian',$_POST)) {
+    $gid = $_POST['groupID'];
+    $name = $_POST['visitorName'];
+    $exist = ifExist($name, 'yname', 'young');
+    if ($exist) {
+      $result = executePlainSQL("select young.yname, contact_info from adult inner join young on
+      adult.aname=young.aname
+      where young.ygid='$gid' and young.yname='$name'");
+      $columnNames = array("Visitor Name", "Guardian Contact Info");
+    } else {
+      echo "Cannot find the record of this visitor!";
+    }
+
+  }
+
+  else if (array_key_exists('findContactInfo', $_POST)) {
+    $gid = $_POST['groupID'];
+    $name = $_POST['visitorName'];
+    $exist = ifExist($name, 'aname', 'adult');
+    if ($exist) {
+      $result = executePlainSQL("select aname, contact_info from adult where gid='$gid' and aname='$name'");
+      $columnNames = array("Visitor Name", "Contact Info");
+    } else {
+      echo "Cannot find the record of this visitor!";
+    }
+
+  }
+
+  else if (array_key_exists('updateAttraction', $_POST)) {
+    $attStatus = $_POST['attractionStatus'];
+    $attName = $_POST['attractionName'];
+    executePlainSQL("update attraction set status='$attStatus' where att_name='$attName'");
     OCICommit($db_conn);
+    echo "Updated successfully";
     $columnNames = array("Name","Location","Capacity","Status","Open Time", "Close Time","Admin ID");
     $result = executePlainSQL("select * from attraction");
-  } else if (array_key_exists('displayAttr', $_POST)) {
+  }
+
+  else if (array_key_exists('displayAttr', $_POST)) {
     $columnNames = array("Name","Location","Capacity","Status","Open Time", "Close Time","Admin ID");
     $result = executePlainSQL("select * from attraction");
-  } else if (array_key_exists('displayReservation', $_POST)) {
+  }
+
+  else if (array_key_exists('displayReservation', $_POST)) {
     $columnNames = array("Name","Perform Time", "#Reservation");
     $result = executePlainSQL("select entertainmentname, perform_time, count(*) from reservation group by entertainmentname, perform_time");
-  } else if (array_key_exists('updateEntertainment', $_POST)) {
+  }
+
+  else if (array_key_exists('updateEntertainment', $_POST)) {
+    $entStatus = $_POST['entertainmentStatus'];
+    $entName = $_POST['entertainmentName'];
+    $performTime = $_POST['performTime'];
+    $exist = ifExist2($entName, $performTime, 'name', 'perform_time','entertainment');
+    if ($exist) {
+      $columnNames = array("Name", "Perform Time", "Status");
+      executePlainSQL("update entertainment set status='$entStatus'
+      where name='$entName' and perform_time='$performTime'");
+      OCICommit($db_conn);
+      echo "Updated successfully";
+      $result = executePlainSQL("select * from entertainment");
+    } else {
+      echo "Cannot find the record";
+    }
+
+
+  }
+
+  else if (array_key_exists('displayEntertainment', $_POST)){
     $columnNames = array("Name", "Perform Time", "Status");
-    executePlainSQL("update entertainment set status='".$_POST['entertainmentStatus']."'
-    where name='".$_POST['entertainmentName']."' and perform_time='".$_POST['performTime']."'");
-    OCICommit($db_conn);
     $result = executePlainSQL("select * from entertainment");
-  } else if (array_key_exists('displayEntertainment', $_POST)){
-    $columnNames = array("Name", "Perform Time", "Status");
-    $result = executePlainSQL("select * from entertainment");
-  } else if (array_key_exists('displayRepairs', $_POST)) {
+  }
+
+  else if (array_key_exists('displayRepairs', $_POST)) {
     $columnNames = array("Maintenance Facility Name", "Attraction Name", "Date");
     $result = executePlainSQL("select * from repair");
-  } else if (array_key_exists('submitRepair', $_POST)) {
+  }
+
+  else if (array_key_exists('submitRepair', $_POST)) {
     $columnNames = array("Maintenance Facility Name", "Attraction Name", "Date");
     $facility = $_POST['repairFacility'];
     $rAttr = $_POST['repairAttraction'];
     $latestRDate = $_POST['repairDate'];
-
     $exist = ifExist2($facility, $rAttr, 'mf_name','att_name','repair');
     if ($exist) {
       executePlainSQL("update repair set rdate=to_date('$latestRDate','YYYY-MM-DD') where mf_name = '$facility' and att_name = '$rAttr'");
@@ -262,8 +325,9 @@ if ($db_conn) {
     }
 
     $result = executePlainSQL("select * from repair");
-  } else if (array_key_exists('displayReplacementNeeded', $_POST)) {
-    $columnNames = array("Attraction Name");
+  }
+
+  else if (array_key_exists('displayReplacementNeeded', $_POST)) {
     $result = executePlainSQL("select distinct r.att_name
     from repair r
     where not exists
@@ -272,6 +336,21 @@ if ($db_conn) {
     (select r2.mf_name from repair r2
     where r.att_name = r2.att_name and f.name = r2.mf_name))
     group by r.att_name");
+    if (OCI_Fetch_Assoc($result)) {
+      $columnNames = array("Attraction Name");
+      echo "Find attraction need replacement!";
+      $result = executePlainSQL("select distinct r.att_name
+      from repair r
+      where not exists
+      (select * from facility f
+      where not exists
+      (select r2.mf_name from repair r2
+      where r.att_name = r2.att_name and f.name = r2.mf_name))
+      group by r.att_name");
+    } else {
+      echo "Have no attraction need replacement";
+    }
+
   }
   printTable($result, $columnNames);
   OCILogoff($db_conn);
