@@ -248,6 +248,12 @@ Insert into Repair
   values('Credible repair', 'Ferris Wheel', to_date('2017-12-01','YYYY-MM-DD'));
 Insert into Repair
   values('Credible repair', 'Bumper Cars', to_date('2017-05-23','YYYY-MM-DD'));
+Insert into Repair
+  values('1st Service Handyman', 'Bumper Cars', to_date('2018-05-23','YYYY-MM-DD'));
+Insert into Repair
+  values('All Pro Fix It', 'Bumper Cars', to_date('2015-05-23','YYYY-MM-DD'));
+
+
 
 
 Insert into entertainment
