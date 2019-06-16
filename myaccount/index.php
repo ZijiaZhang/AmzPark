@@ -233,7 +233,7 @@ margin: 1%;
 <div id = "mainContainer">
 	
 	<div id = "accinfo">
-		<a href="../logout.php" style="float: right; display: block; background-color: red; color: white; text-decoration-style: none; text-decoration-line: none; padding: 1em; border-radius: 16px;">Log Out</a>
+		<a href="../logout.php" style="float: right; display: block; background-color: red; color: white; text-decoration-style: none; text-decoration-line: none; padding: 1em; border-radius: 16px; font-weight:bolder;">Log Out</a>
 		<p>Your Group Name is <a><?php echo $name ?> </a></p>
 		<p>Your Group Size is <a> <?php echo $groupSize;?> </a></p>
 <div class="row" style="height: auto;">
@@ -390,7 +390,7 @@ margin: 1%;
 					</form>
 				<?php } ?>
 			</table>
-			<pre> For further modifications, please click on "See My Plans" </pre>
+			<p style="width: 100%;text-align: center;color : blue;"> ***For further modifications, please click on "See My Plans"*** </p>
 		</section>
 		<section id = "reservations">
 			<h1 class="subTitle">Reservations</h1>
