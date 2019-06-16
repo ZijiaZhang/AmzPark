@@ -46,7 +46,7 @@ include '../signup.php';
 
 <div class = "formContainer">
 	<h1>Register</h1>
-
+	<div class="fullWidth" style="text-align: center; color: red;"><?php if(isset($Message)) echo $Message; ?></div>
 	<form action ="" method="post">
 		<input  type = "text" name = "username" class = "box name" placeholder="Name" value = "<?php echo $name;?>" required>
 		<p class = "name-help"> Name should have 8 or less characters.</p>
