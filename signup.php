@@ -97,7 +97,7 @@ if($ispost) {
 				#Signup Successful
 				header('location: ../login?message=signup');
 			}catch (Exception $e){
-				echo 'Caught exception: ',  $e->getMessage(), "\n";
+				$Message = "Illigal inputs, Please Check the information provided.";//echo 'Caught exception: ',  $e->getMessage(), "\n";
 				$list1 = array(":bind1" => $name ); 
 				executeBoundSQL("DELETE FROM groups WHERE groupID = :bind1" , $list1);
 			}
