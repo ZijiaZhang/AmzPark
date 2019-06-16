@@ -28,7 +28,23 @@ if(checkSession()){
 }
 ?>
 
+<body style="margin: 0px;">
 
+	<style>
+
+#planInfo tr td, #planInfo tr th{
+	border-style: solid;
+	border-width: 2px
+}
+#planInfo{
+	border-collapse: collapse;
+}
+
+</style>
+
+
+
+<a href="../myaccount"><button>GO BACK To Previous Page</button> </a>
 <div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
 	<pre style="color:red"> <b> Note: if you want to add or delete attraction to or from a plan. <br> You will need to provide a new name for the changed plan so that other people using the original plan won't be affected.</b></pre>
 </div>
@@ -193,7 +209,7 @@ if(isset($_POST['submit'])){
 
 
 <section id = "Mine" >
-	<div class="simple-chord--wrapper component-wrapper" style="background-color: rgba(100,100,100,0.3);">
+	<!-- <div class="simple-chord--wrapper component-wrapper" style="background-color: rgba(100,100,100,0.3);">
 		<head>
 			<title>My Plans</title>
 		</head>
@@ -204,7 +220,20 @@ if(isset($_POST['submit'])){
 						<td>Plan Name</td>
 						<td>Attractions in this plan</td>
 					</tr>
-				</thead>
+				</thead> -->
+				<h1 class="fullWidth"> My Plans </h1>
+		<table id = "planInfo" class = "fullWidth">
+			<tr>
+				<th width="30%">
+					Plan Name
+				</th>
+				<th width="50%">
+					Attractions in this plan
+				</th>
+				<th width="20%">
+					delete
+				</th>
+			</tr>
 				<tbody>
 					<?php
 					try{
@@ -248,12 +277,12 @@ if(isset($_POST['submit'])){
 					?>
 				</tbody>
 			</table>
-		</body>
-	</div>
+	<!-- 	</body>
+	</div> -->
 
 </section>
 
-<a href="../myaccount"><button>GO BACK To Previous Page</button> </a>
+
 
 
 <script>
@@ -290,6 +319,6 @@ if(isset($_POST['submit'])){
 	}
 </script>
 
-
+</body>
 
 </html>
