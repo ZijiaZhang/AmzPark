@@ -10,7 +10,14 @@
 	<link rel="stylesheet" href="../server_files/css/form.css">
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
-<?php include "../loader.php" ?>
+<?php include "../loader.php" ;
+	include_once ('../session.php');
+	initializeSession();
+	if(checkSession()){
+		header("location: ../myaccount");
+	}
+
+?>
 
 <body style="margin: 0px;">
 	<div id = "nav-placeholder">
