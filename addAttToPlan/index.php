@@ -18,26 +18,13 @@
 <body style="margin: 0px" onload="initialize()" onresize="initializeatt()">
 
 
-	<?php if(isset($_GET['Message'])){?>
-		<p>
-			<?php	echo $_GET['Message'];?>
-		</p>
-		<?php
-	}?>
-
-	<?php if(isset($_GET['Success'])){?>
-		<p>
-			<?php	echo $_GET['Success'];?>
-		</p>
-		<?php
-	}?>
 
 
 	<?php 
 	include "../database.php";
 	include "../session.php";
 	$ispost =($_SERVER["REQUEST_METHOD"] == "POST");
-
+	var_dump($_POST);
 	initializeSession();
 
 
@@ -74,8 +61,8 @@
 			if(!ifExist2($gname, $pname, 'GROUPID', 'PLANNUMBER' , 'MadeBy')){
 				try {
 					insertIntoMadeBy($gname, $pname);
-					$Message = urlencode("Plan created successfully");
-					header('location: ./index.php?Message='.$Message);
+					$Message = "Plan created successfully";
+				//	header('location: ./index.php?Message='.$Message);
 				}catch (Exception $e){
 					echo "Cannot Create Plan. Cannot insert into MadeBy table";
 				}
@@ -90,7 +77,12 @@
 	}
 
 	?>
+	<?php if(isset($_GET['Message'])){
+		$Message = $_GET['Message'];
+	}
 
+	?>
+	<p><?php echo $Message;?></p>
 
 	<section id = "attractions">
 		<div class="component-wrapper " style="background-color: rgba(30,30,30,0.7)">
