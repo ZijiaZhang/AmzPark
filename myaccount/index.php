@@ -396,7 +396,7 @@ margin: 1%;
 		<section id = "reservations">
 			<h1 class="subTitle">Reservations</h1>
 			<div class="row">
-				<a href="../makeReservation.php" class = "generalButton" style = "background-color: green"> Make Reservation</a>
+				<a href="../makeReservation" class = "generalButton" style = "background-color: green"> Make Reservation</a>
 				<a href="" class = "generalButton" style = "background-color: blue">My Reservations</a>
 			</div>
 		</section>
