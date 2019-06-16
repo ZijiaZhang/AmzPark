@@ -1,8 +1,8 @@
 <html lang="en"><head>
 	<meta charset="UTF-8">
-	<title> My Plans</title>
+	<title> Amz Park</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
-	<link rel="stylesheet" type = "text/css" href="../server_files/css/plan.css">
+	<link rel="stylesheet" type = "text/css" href="../server_files/css/mycss.css">
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -13,8 +13,8 @@
 
 <?php
 //include_once '../login.php';
-include_once '../session.php';
-include_once '../database.php';
+include '../session.php';
+include '../database.php';
 initializeSession();
 #print_r($_SESSION);
 
@@ -115,7 +115,7 @@ if(isset($_POST['submit'])){
 
 <div id = "modify_add">
 	<button id="attPanelButton" onclick="ToggleForm()">Add Attraction To A Plan</button>
-	<div class="popup" id="AddAttform">
+	<div class="popup" id="AddAttform" style="display: none;">
 		<form action="" class="form-container" method = "post">
 			<h1>ADD Attraction</h1>
 			<table>
@@ -152,7 +152,7 @@ if(isset($_POST['submit'])){
 
 <div id = "modify_delete">
 	<button id="att2PanelButton" onclick="ToggleForm2()">Delete Attraction From A Plan</button>
-	<div class="popup" id="DeleteAttform">
+	<div class="popup" id="DeleteAttform" style="display: none;">
 		<form action="" class="form-container" method = "post">
 			<h1>Delete Attraction</h1>
 			<table>
