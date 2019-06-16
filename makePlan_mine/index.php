@@ -49,49 +49,62 @@ if(isset($_POST['submit'])){
 		$pname = $_POST['add_to_plan'];
 		$pnameNew = $_POST['add_to_plan_new'];
 		$aname = $_POST['addedAtt'];
-		try{
-			copyAtt($pname, $pnameNew);
-		}catch(Exception $e){
+		if (ifExist2($name, $pname, 'GROUPID', 'PLANNUMBER' , 'MadeBy')) {
+			try{
+				copyAtt($pname, $pnameNew);
+			}catch(Exception $e){
 		//	echo $e->getMessage();
-		}
-		try{
-			insertIntoOfVisiting($pnameNew, $aname);
-		}catch(Exception $e){
+			}
+			try{
+				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pname'");
+			}catch(Exception $e){
 		//	echo $e->getMessage();
-		}
-		try{
-			executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pname'");
-		}catch(Exception $e){
+			}
+			try{
+				insertIntoMadeBy($name, $pnameNew);		
+			}catch(Exception $e){
 		//	echo $e->getMessage();
+			}
+			try{
+				insertIntoOfVisiting($pnameNew, $aname);
+			}catch(Exception $e){
+				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pnameNew'");
+				insertIntoMadeBy($name, $pname);
+			}
+		}else{
+			echo "You have not added this plan to your own plan list yet. Please only modify a plan in your own list.";
 		}
-		try{
-			insertIntoMadeBy($name, $pnameNew);
-		}catch(Exception $e){
-		//	echo $e->getMessage();
-		}
-	}else if($_POST['submit'] == 'delFromPlan'){
+	}
+
+
+	else if($_POST['submit'] == 'delFromPlan'){
 		$pname = $_POST['del_from_plan'];
 		$pnameNew = $_POST['del_from_plan_new'];
 		$aname = $_POST['delAtt'];
-		try{
-			copyAtt($pname, $pnameNew);
-		}catch(Exception $e){
+		if (ifExist2($name, $pname, 'GROUPID', 'PLANNUMBER' , 'MadeBy')) {
+			try{
+				copyAtt($pname, $pnameNew);
+			}catch(Exception $e){
 		//	echo $e->getMessage();
-		}
-		try{
-			executeSQL("DELETE FROM ofVisiting where PLANNUMBER = '$pname' and ATTNAME = '$aname'");
-		}catch(Exception $e){
+			}
+			try{
+				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pname'");
+			}catch(Exception $e){
 		//	echo $e->getMessage();
-		}
-		try{
-			executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pname'");
-		}catch(Exception $e){
+			}
+			try{
+				insertIntoMadeBy($name, $pnameNew);
+			}catch(Exception $e){
 		//	echo $e->getMessage();
-		}
-		try{
-			insertIntoMadeBy($name, $pnameNew);
-		}catch(Exception $e){
-		//	echo $e->getMessage();
+			}
+			try{
+				executeSQL("DELETE FROM ofVisiting where PLANNUMBER = '$pname' and ATTNAME = '$aname'");
+			}catch(Exception $e){
+				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pnameNew'");
+				insertIntoMadeBy($name, $pname);
+			}
+		}else{
+			echo "You have not added this plan to your own plan list yet. Please only modify a plan in your own list.";
 		}
 
 	}
