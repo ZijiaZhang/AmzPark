@@ -43,34 +43,18 @@
 
 			$pname = $_POST['planName'];
 
-			if(!ifExist("'".$pname."'", 'PLANNUMBER' , 'PLAN')){
+			if(ifExist($pname, 'PLANNUMBER' , 'PLAN')){
+				$Message = "This plan name is used in an existing plan. Either choose it from existing or use a new name";
+				header('location: ../makePlan_homepage/index.php?Message='.$Message);
+			} else{
 				try {
 					insertIntoPlan($pname);
-				}catch (Exception $e){
-					echo $e->getMessage();
-					echo "Cannot Create Plan. Cannot insert into Plan table";
-				}
-			}
-			else{
-				echo "Cannot Create Plan. Because the Plan name has been used. Please use a new plan name";
-				$Error = urlencode("This plan name is used in an existing plan. Either choose it from existing or use a new name");
-				header('location: ../makePlan_homepage/index.php?Message='.$Error);
-			}
-
-
-			if(!ifExist2($gname, $pname, 'GROUPID', 'PLANNUMBER' , 'MadeBy')){
-				try {
 					insertIntoMadeBy($gname, $pname);
 					$Message = "Plan created successfully";
 				//	header('location: ./index.php?Message='.$Message);
 				}catch (Exception $e){
-					echo "Cannot Create Plan. Cannot insert into MadeBy table";
+		//			echo "Cannot Create Plan. Cannot insert into MadeBy table";
 				}
-			}
-			else{
-				echo "There is already a plan with the same name in your plans. Please use a new name.";
-				$Error = urlencode("There is already a plan with the same name in your plans. Please use a new name.");
-				header('location: ../makePlan_customized/index.php?Message='.$Error);
 			}
 
 		}

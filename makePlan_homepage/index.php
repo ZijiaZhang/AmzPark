@@ -70,9 +70,9 @@ if(checkSession()){
 
 					<a href="../myaccount"><button>GO BACK To Previous Page</button> </a>
 
-					<?php if(isset($_GET['Error'])){?>
+					<?php if(isset($_GET['Message'])){?>
 						<p>
-							<?php	echo $_GET['Error'];?>
+							<?php	echo $_GET['Message'];?>
 						</p>
 						<?php
 					}?>
