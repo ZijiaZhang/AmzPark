@@ -12,7 +12,7 @@
 
 
 
-<body>
+<body style = "background-color:white">
 	<div id = "nav-placeholder">
 
 	</div>
@@ -21,51 +21,17 @@
 
 <div style="margin-top:60px"></div>
 
-<div style="text-align: center">
-  <img src="live.jpg">
-</div>
-
-<form action="makeReservation.php" method = "POST">
-  <p> <font size = "5">
-	<div style="margin-top:150px"></div>
-	
-	<div>
-	   <label class = "center">Entertainment</label>
-	   <input type="text" style="font-size:16pt;" name="enterName" size="15">
-	</div>
-
-	<div style="margin-top:20px"></div>
-
-	<div>
-     <label  class = "center">Perform Time</label>
-     <input type="text" style="font-size:16pt;" name="time" placeholder="eg:20190701 14:00"size="15">
-	</div>
-
-	<div style="margin-top:20px"></div>
-
-	<div>
-	   <label  class = "center">Group ID</label>
-		 <input type="text" style="font-size:16pt;" name="groupID" size="10">
-	</div>
-
-	<div style="margin-top:20px"></div>
-
-	<div>
-	 <input type="submit" value="Make reservation" name="insertsubmit"></p>
-	</div>
-</form>
-
-
-<div style="margin-top:150px"></div>
-
-
 <?php
 include "../database.php";
 include "../session.php";
 $ispost =($_SERVER["REQUEST_METHOD"] == "POST");
 
 initializeSession();
-
+if(checkSession()){
+	$name = $_SESSION['login_user'];
+}else{
+	header('location: ../login');
+}
 
 
 $conNo = (string) rand(10000000,99999999);
@@ -100,44 +66,39 @@ if ($ispost){
 ?>
 
 
-<section id = "info" >
-	<div class="simple-chord--wrapper component-wrapper" style="background-color: rgba(100,100,100,0.7);">
-		<div class="simple-chord--inner" style="opacity: 1; color: white">
-			<div class="h-font h2">Contact Us</div>
-			<div class="simple-chord--text body-text">
-				<div> 
-					<div>E-mail: &nbsp;<a class= "emaillink" href="mailto:abcd@gmail.com">&nbsp;&nbsp; abcd@gmail.com</a>
-					</div>
-					<div> Phone: &nbsp;&nbsp; (123)456-7890</div>
-					<div><br></div>2205 Lower Mall<br>
-					<div> Vancouver, BC, Canada</div>
-					<div>V6T1Z4<br></div> 
-				</div>
-			</div>
-		</div>
-	</div>
-
-</section>
-
-
-
-<div class="component-wrapper">
-	<div style="background-color: rgba(0,0,0,1);width: 100%">
-
-		<div class="footer">
-
-			<div>
-				<div style="text-align: center; color: white;">
-				</div>
-			</div>
-			<div class="links">
-				<a  href="https://github.com/ZijiaZhang99">
-					<img src = "../server_files/icons/github-circle.png" >
-				</a>
-			</div>
-		</div>
-	</div>
+<div style="text-align: center">
+  <img src="live.jpg">
 </div>
+
+<form action="makeReservation.php" method = "POST">
+  <p> <font size = "5">
+	
+	<div>
+	   <label class = "center">Entertainment</label>
+	   <input type="text" style="font-size:16pt;" name="enterName" size="15">
+	</div>
+
+	<div style=""></div>
+
+	<div>
+     <label  class = "center">Perform Time</label>
+     <input type="text" style="font-size:16pt;" name="time" placeholder="eg:20190701 14:00"size="15">
+	</div>
+
+	<div style="margin-top:20px"></div>
+
+	<div>
+	   <label  class = "center">Your Group ID</label>
+		 <input type="text" style="font-size:16pt;" name="groupID" size="10" value = '<?php echo$name;?>'disabled>
+	</div>
+
+	<div style="margin-top:20px"></div>
+
+	<div>
+	 <input type="submit" value="Make reservation" name="insertsubmit"></p>
+	</div>
+</form>
+
 
 <script>
 $(function(){
