@@ -83,7 +83,7 @@ if(checkSession()){
 									<input id = "planAdded" type="checkbox" name = "alreadyIn">Exclude those already added in Mine
 								</div>
 								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
-									<pre> Note: Empty plans (plans with no attractions in it) will not appear here</pre>
+									<pre> <b> Note: Empty plans (plans with no attractions in it) will not appear here </b></pre>
 								</div>
 							</div>
 							<div id = "attrSpace"  class = "contianer attractions attlist">
