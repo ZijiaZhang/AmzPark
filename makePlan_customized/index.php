@@ -67,7 +67,18 @@ include '../makeCustomizedPlan.php';
 
 
  <div class="component-wrapper " style="background-color: #eee">
-    	<div style="height: 130px; width: 100%; padding: 0px;"></div>
+ 	<div style="height: 100px; width: 100%; padding: 0px;"></div>
+    	
+    	<div style="height: 130px; width: 100%; padding: 0px;">
+    	<a href="../makePlan_homepage"><button>GO BACK To Previous Page</button> </a>
+	
+	<?php if(isset($_GET['Message'])){?>
+		<p>
+			<?php echo $_GET['Message'];?>
+		</p>
+		<?php
+	}?>
+    	</div>
    <div class = "formContainer">
 
 
@@ -83,14 +94,6 @@ include '../makeCustomizedPlan.php';
 	
 </div>
 	
-<a href="../makePlan_homepage"><button>GO BACK To Previous Page</button> </a>
-
-	<?php if(isset($_GET['Error'])){?>
-		<p>
-			<?php echo $_GET['Error'];?>
-		</p>
-		<?php
-	}?>
 
 	
 
