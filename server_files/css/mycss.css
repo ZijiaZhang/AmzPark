@@ -97,7 +97,6 @@ body{
   content: "\f107";
   font-family: FontAwesome;
   right: 5px;
-  bottom: 30px;
 }
 #primary_nav ul li.have-child > a::after {
   position: absolute;
@@ -510,6 +509,12 @@ div.footer>div.links{
   background-color: rgb(64, 97, 173);
   left: 55%;
 
+}
+}
+
+@media screen and (max-width: 790px) {
+.nvbarSpliter{
+   display:none;
 }
 }
 

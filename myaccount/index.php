@@ -140,11 +140,12 @@ try{
 	<link rel="stylesheet" type="text/css" href="../server_files/css/plan.css">
 </head>
 <?php include "../loader.php" ?>
-<body style="margin: 0px;">
+<body style="margin: 0px; ">
 	<style>
 	body{
 		height: 100vh;
 		margin: 0px;
+background-color : white;
 	}
 	#mainContainer{
 		width: 100vw;
@@ -225,7 +226,7 @@ margin: 1%;
 		$("#nav-placeholder").load("../navbar.html");
 	});
 </script>
-<div style="height: 100px"></div>
+<div class = "nvbarSpliter" style="height: 100px"></div>
 <div id = "groupName">
 	Welcome, Group <?php echo $name;?>
 </div>

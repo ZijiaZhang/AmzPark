@@ -30,7 +30,7 @@ if(checkSession()){
 
 
 
-<body style="margin: 0px" onload="initialize()" onresize="initializeatt()">
+<body style="margin: 0px;background-color : white;" onload="initialize()" onresize="initializeatt()">
 
 	<div id = "nav-placeholder">
 
