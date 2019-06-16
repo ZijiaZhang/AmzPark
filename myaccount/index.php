@@ -179,6 +179,14 @@ margin: 1%;
 	border-collapse: collapse;
 }
 
+#planInfo tr td, #planInfo tr th{
+	border-style: solid;
+	border-width: 2px
+}
+#planInfo{
+	border-collapse: collapse;
+}
+
 .popup {
 	display:none;
 	position: absolute;
@@ -348,8 +356,17 @@ margin: 1%;
 				<a href="../makePlan_homepage" class = "generalButton" style = "background-color: green"> Make Plans</a>
 				<a href="../makePlan_mine" class = "generalButton" style = "background-color: blue">See My Plans</a>
 			</div>
+			<pre> For further modifications, please click on "See My Plans" </pre>
 			<table id = "planInfo" class = "halfWidth">
-				<tr><th>Plan</th><th>Delete</th></tr>
+				<!-- <tr><th>Plan</th><th>Delete</th></tr> -->
+				<tr>
+				<th width="70%">
+					Plan
+				</th>
+				<th width="30%">
+					delete
+				</th>
+			</tr>
 				<?php foreach($myplans as $plan){ ?>
 					<form action = "" method = "post">
 						<tr>
@@ -363,7 +380,6 @@ margin: 1%;
 					</form>
 				<?php } ?>
 			</table>
-			<pre> For further modifications, please click on "See My Plans" </pre>
 		</section>
 		<section id = "reservations">
 			<h1 class="subTitle">Reservations</h1>

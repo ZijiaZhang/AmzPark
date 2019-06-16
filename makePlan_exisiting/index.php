@@ -122,27 +122,27 @@ if(checkSession()){
 						p[i].style.height = x[t].getElementsByClassName("attimg")[0].clientHeight/2 +"px";
 					}	
 
-					var date = new Date();
+					// var date = new Date();
 
-					var seconds = date.getSeconds();
-					var minutes = date.getMinutes();
-					var hour = date.getHours();
+					// var seconds = date.getSeconds();
+					// var minutes = date.getMinutes();
+					// var hour = date.getHours();
 
-					var opentime = parseInt(x[t].getElementsByClassName("openTime")[0].innerText.split(":")[0],10)*100 + parseInt(x[t].getElementsByClassName("openTime")[0].innerText.split(":")[1],10);
-					var closetime = parseInt(x[t].getElementsByClassName("closeTime")[0].innerText.split(":")[0],10)*100 + parseInt(x[t].getElementsByClassName("closeTime")[0].innerText.split(":")[1],10);
+					// var opentime = parseInt(x[t].getElementsByClassName("openTime")[0].innerText.split(":")[0],10)*100 + parseInt(x[t].getElementsByClassName("openTime")[0].innerText.split(":")[1],10);
+					// var closetime = parseInt(x[t].getElementsByClassName("closeTime")[0].innerText.split(":")[0],10)*100 + parseInt(x[t].getElementsByClassName("closeTime")[0].innerText.split(":")[1],10);
 
 
 
-					if( opentime <= hour*100+minutes && hour*100+minutes <= closetime-100 ){
-						x[t].getElementsByClassName("openTimehead")[0].className = "openTimehead tableisGood";
-						x[t].getElementsByClassName("closeTimehead")[0].className = "closeTimehead tableisGood";
-					}else if( opentime <= hour*100+minutes && hour*100+minutes <= closetime){
-						x[t].getElementsByClassName("openTimehead")[0].className = "openTimehead tableisOk";
-						x[t].getElementsByClassName("closeTimehead")[0].className = "closeTimehead tableisOk";
-					}else {
-						x[t].getElementsByClassName("openTimehead")[0].className = "openTimehead tableisnotOk";
-						x[t].getElementsByClassName("closeTimehead")[0].className = "closeTimehead tableisnotOk";
-					}
+					// if( opentime <= hour*100+minutes && hour*100+minutes <= closetime-100 ){
+					// 	x[t].getElementsByClassName("openTimehead")[0].className = "openTimehead tableisGood";
+					// 	x[t].getElementsByClassName("closeTimehead")[0].className = "closeTimehead tableisGood";
+					// }else if( opentime <= hour*100+minutes && hour*100+minutes <= closetime){
+					// 	x[t].getElementsByClassName("openTimehead")[0].className = "openTimehead tableisOk";
+					// 	x[t].getElementsByClassName("closeTimehead")[0].className = "closeTimehead tableisOk";
+					// }else {
+					// 	x[t].getElementsByClassName("openTimehead")[0].className = "openTimehead tableisnotOk";
+					// 	x[t].getElementsByClassName("closeTimehead")[0].className = "closeTimehead tableisnotOk";
+					// }
 
 
 
@@ -157,13 +157,13 @@ if(checkSession()){
 				v.className += " tableisnotOk"
 			}*/
 
-			var Status = x[t].getElementsByClassName("waitTime")[0].innerText;
-			var v = x[t].getElementsByClassName("waitTimehead")[0];
-			if(Status == "OPEN"){
-				v.className = "waitTimehead tableisGood";
-			}else{
-				v.className = "waitTimehead tableisnotOk";
-			}
+			// var Status = x[t].getElementsByClassName("waitTime")[0].innerText;
+			// var v = x[t].getElementsByClassName("waitTimehead")[0];
+			// if(Status == "OPEN"){
+			// 	v.className = "waitTimehead tableisGood";
+			// }else{
+			// 	v.className = "waitTimehead tableisnotOk";
+			// }
 
 
 		}
