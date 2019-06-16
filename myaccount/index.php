@@ -215,6 +215,7 @@ margin: 1%;
 <div id = "mainContainer">
 	
 	<div id = "accinfo">
+		<a href="../logout.php" style="float: right; display: block; background-color: red; color: white; text-decoration-style: none; text-decoration-line: none; padding: 1em; border-radius: 16px;">Log Out</a>
 		<p>Your Group Name is <a><?php echo $name ?> </a></p>
 		<p>Your Group Size is <a> <?php echo $groupSize;?> </a></p>
 		
@@ -381,7 +382,7 @@ margin: 1%;
 </div>
 
 </div>
-<a href="../logout.php">Log Out</a>
+
 <script>
 	function ToggleForm() {
 		if(document.getElementById("adultAddform").style.display == "block"){
