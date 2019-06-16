@@ -32,7 +32,7 @@ $(function(){
     <input name = "submit" type = "submit" value = "LOGIN "/><br />
     <a pos="inform" href="../recoverAccount">Forget Password</a>
     <br>
-    <a pos = "inform" href="../administrator">Employee Login</a>
+
 </form>
 </div>
 
@@ -42,11 +42,10 @@ $(function(){
 <?php
 include 'database.php';
 $ispost = isset($_POST['submit']);
-
 if ($ispost) {
 	$username = $_POST['username'];
 	$password = $_POST['password'];
-	$result = executePlainSQL("SELECT * FROM administrator1 WHERE name = '$username' AND password = '$password'");
+	$result = executeSQL("SELECT * FROM administrator1 WHERE name = '$username' AND password = '$password'");
 	if ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
 		header("location: ../administrator/adminSystem.php");
 	} else {
