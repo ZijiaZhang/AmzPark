@@ -2,7 +2,6 @@
 include "database.php";
 
 
-
 ?>
 
 <html lang="en">
@@ -58,7 +57,7 @@ include "database.php";
 
       <p><select name="groupID" class="form-contral form-control-sm">
         <?php
-        $resultSelection = executePlainSQL("select groupid from groups");
+        $resultSelection = executeSQL("select groupid from groups");
         while ($rs = OCI_Fetch_Assoc($resultSelection)) {
           foreach ($rs as $option) {
             echo "<option value='$option'>$option</option>\n";
@@ -83,7 +82,7 @@ include "database.php";
     <form method="GET" action="adminSystem.php">
       <p><select name="facilityName" class="form-contral form-control-sm">
         <?php
-        $resultSelection = executePlainSQL("select name from facility");
+        $resultSelection = executeSQL("select name from MAINTENANCEFACILITY");
         while ($rs = OCI_Fetch_Assoc($resultSelection)) {
           foreach ($rs as $option) {
             echo "<option value='$option'>$option</option>\n";
@@ -109,7 +108,7 @@ include "database.php";
     <form method="POST" action="adminSystem.php">
       <p><select name="attractionName" class="form-contral form-control-sm">
         <?php
-        $resultSelection = executePlainSQL("select att_name from attraction");
+        $resultSelection = executeSQL("select att_name from ATTRACTIONS_INSEPECT_AND_DETERMINES_STATUS1");
         while ($rs = OCI_Fetch_Assoc($resultSelection)) {
           foreach ($rs as $option) {
             echo "<option value='$option'>$option</option>\n";
@@ -146,7 +145,7 @@ include "database.php";
     <form method="POST" action="adminSystem.php">
       <p><select name="entertainmentName" class="form-contral form-control-sm">
         <?php
-        $resultSelection = executePlainSQL("select distinct name from entertainment");
+        $resultSelection = executeSQL("select distinct name from ENTERTAINMENTS_DETERMIN_STATUS_AND_ARRANGE_TIMES1");
         while ($rs = OCI_Fetch_Assoc($resultSelection)) {
           foreach ($rs as $option) {
             echo "<option value='$option'>$option</option>\n";
@@ -183,7 +182,7 @@ include "database.php";
     <form method="POST" action="adminSystem.php">
       <p><select name="repairFacility" class="form-control form-control-sm">
         <?php
-        $resultSelection = executePlainSQL("select name from facility");
+        $resultSelection = executeSQL("select name from MAINTENANCEFACILITY");
         while ($rs = OCI_Fetch_Assoc($resultSelection)) {
           foreach ($rs as $option) {
             echo "<option>$option</option>\n";
@@ -194,7 +193,7 @@ include "database.php";
         </select>
         <select name="repairAttraction" class="form-contral form-control-sm">
           <?php
-          $resultSelection = executePlainSQL("select att_name from attraction");
+          $resultSelection = executeSQL("select att_name from ATTRACTIONS_INSEPECT_AND_DETERMINES_STATUS1");
           while ($rs = OCI_Fetch_Assoc($resultSelection)) {
             foreach ($rs as $option) {
               echo "<option>$option</option>\n\n";
@@ -217,16 +216,16 @@ include "database.php";
 </html>
 
 <?php
-if ($db_conn) {
+
   if (array_key_exists('displayadmininfo', $_GET)) {
-    $result = executePlainSQL("select * from administrator2");
+    $result = executeSQL("select * from administrator2");
     $columnNames = array("Duty Area", "Contact Info");
 
   }
 
   else if (array_key_exists('findFacility', $_GET)) {
     $facility = $_GET['facilityName'];
-    $result = executePlainSQL("select * from facility where name='$facility'");
+    $result = executeSQL("select * from MAINTENANCEFACILITY where name='$facility'");
     $columnNames = array("Name", "Contact Info");
 
   }
@@ -236,9 +235,11 @@ if ($db_conn) {
     $name = $_POST['visitorName'];
     $exist = ifExist($name, 'yname', 'young');
     if ($exist) {
-      $result = executePlainSQL("select young.yname, contact_info from adult inner join young on
-      adult.aname=young.aname
-      where young.ygid='$gid' and young.yname='$name'");
+      $result = executeSQL("select YOUNGVISITOR_INCLUDE_ISGURADEDBY.YOUNGVISITORNAME, contact_info
+      from ADULTVISITOR_INCLUDE inner join YOUNGVISITOR_INCLUDE_ISGURADEDBY on
+      ADULTVISITOR_INCLUDE.VISITORNAME=YOUNGVISITOR_INCLUDE_ISGURADEDBY.ADULTVISITORNAME
+      where YOUNGVISITOR_INCLUDE_ISGURADEDBY.YOUNGGROUPID='$gid'
+      and YOUNGVISITOR_INCLUDE_ISGURADEDBY.YOUNGVISITORNAME='$name'");
       $columnNames = array("Visitor Name", "Guardian Contact Info");
     } else {
       echo "Cannot find the record of this visitor!";
@@ -251,7 +252,7 @@ if ($db_conn) {
     $name = $_POST['visitorName'];
     $exist = ifExist($name, 'aname', 'adult');
     if ($exist) {
-      $result = executePlainSQL("select aname, contact_info from adult where gid='$gid' and aname='$name'");
+      $result = executeSQL("select VISITORNAME, contact_info from ADULTVISITOR_INCLUDE where GROUPID='$gid' and VISITORNAME='$name'");
       $columnNames = array("Visitor Name", "Contact Info");
     } else {
       echo "Cannot find the record of this visitor!";
@@ -262,35 +263,35 @@ if ($db_conn) {
   else if (array_key_exists('updateAttraction', $_POST)) {
     $attStatus = $_POST['attractionStatus'];
     $attName = $_POST['attractionName'];
-    executePlainSQL("update attraction set status='$attStatus' where att_name='$attName'");
+    executeSQL("update ATTRACTIONS_INSEPECT_AND_DETERMINES_STATUS1 set status='$attStatus' where att_name='$attName'");
     OCICommit($db_conn);
     echo "Updated successfully";
     $columnNames = array("Name","Location","Capacity","Status","Open Time", "Close Time","Admin ID");
-    $result = executePlainSQL("select * from attraction");
+    $result = executeSQL("select * from ATTRACTIONS_INSEPECT_AND_DETERMINES_STATUS1");
   }
 
   else if (array_key_exists('displayAttr', $_POST)) {
     $columnNames = array("Name","Location","Capacity","Status","Open Time", "Close Time","Admin ID");
-    $result = executePlainSQL("select * from attraction");
+    $result = executeSQL("select * from ATTRACTIONS_INSEPECT_AND_DETERMINES_STATUS1");
   }
 
   else if (array_key_exists('displayReservation', $_POST)) {
     $columnNames = array("Name","Perform Time", "#Reservation");
-    $result = executePlainSQL("select entertainmentname, perform_time, count(*) from reservation group by entertainmentname, perform_time");
+    $result = executeSQL("select ENTERTAINMENTNAME, perform_time, count(*) from RESERVATION_LINKEDTO_MANAGEDBY group by ENTERTAINMENTNAME, perform_time");
   }
 
   else if (array_key_exists('updateEntertainment', $_POST)) {
     $entStatus = $_POST['entertainmentStatus'];
     $entName = $_POST['entertainmentName'];
     $performTime = $_POST['performTime'];
-    $exist = ifExist2($entName, $performTime, 'name', 'perform_time','entertainment');
+    $exist = ifExist2($entName, $performTime, 'name', 'perform_time','ENTERTAINMENTS_DETERMIN_STATUS_AND_ARRANGE_TIMES1');
     if ($exist) {
       $columnNames = array("Name", "Perform Time", "Status");
-      executePlainSQL("update entertainment set status='$entStatus'
+      executeSQL("update ENTERTAINMENTS_DETERMIN_STATUS_AND_ARRANGE_TIMES1 set status='$entStatus'
       where name='$entName' and perform_time='$performTime'");
       OCICommit($db_conn);
       echo "Updated successfully";
-      $result = executePlainSQL("select * from entertainment");
+      $result = executeSQL("select * from ENTERTAINMENTS_DETERMIN_STATUS_AND_ARRANGE_TIMES1");
     } else {
       echo "Cannot find the record";
     }
@@ -300,12 +301,12 @@ if ($db_conn) {
 
   else if (array_key_exists('displayEntertainment', $_POST)){
     $columnNames = array("Name", "Perform Time", "Status");
-    $result = executePlainSQL("select * from entertainment");
+    $result = executeSQL("select * from ENTERTAINMENTS_DETERMIN_STATUS_AND_ARRANGE_TIMES1");
   }
 
   else if (array_key_exists('displayRepairs', $_POST)) {
     $columnNames = array("Maintenance Facility Name", "Attraction Name", "Date");
-    $result = executePlainSQL("select * from repair");
+    $result = executeSQL("select * from repair");
   }
 
   else if (array_key_exists('submitRepair', $_POST)) {
@@ -315,23 +316,23 @@ if ($db_conn) {
     $latestRDate = $_POST['repairDate'];
     $exist = ifExist2($facility, $rAttr, 'mf_name','att_name','repair');
     if ($exist) {
-      executePlainSQL("update repair set rdate=to_date('$latestRDate','YYYY-MM-DD') where mf_name = '$facility' and att_name = '$rAttr'");
+      executeSQL("update repair set REPAIRE_DATE=to_date('$latestRDate','YYYY-MM-DD') where mf_name = '$facility' and att_name = '$rAttr'");
       echo "Updated successfully";
       OCICommit($db_conn);
     } else {
-      executePlainSQL("insert into repair values('$facility','$rAttr',to_date('$latestRDate','YYYY-MM-DD'))");
+      executeSQL("insert into repair values('$facility','$rAttr',to_date('$latestRDate','YYYY-MM-DD'))");
       echo "Inserted successfully";
       OCICommit($db_conn);
     }
 
-    $result = executePlainSQL("select * from repair");
+    $result = executeSQL("select * from repair");
   }
 
   else if (array_key_exists('displayReplacementNeeded', $_POST)) {
-    $result = executePlainSQL("select distinct r.att_name
+    $result = executeSQL("select distinct r.att_name
     from repair r
     where not exists
-    (select * from facility f
+    (select * from MAINTENANCEFACILITY f
     where not exists
     (select r2.mf_name from repair r2
     where r.att_name = r2.att_name and f.name = r2.mf_name))
@@ -339,10 +340,10 @@ if ($db_conn) {
     if (OCI_Fetch_Assoc($result)) {
       $columnNames = array("Attraction Name");
       echo "Find attraction need replacement!";
-      $result = executePlainSQL("select distinct r.att_name
+      $result = executeSQL("select distinct r.att_name
       from repair r
       where not exists
-      (select * from facility f
+      (select * from MAINTENANCEFACILITY f
       where not exists
       (select r2.mf_name from repair r2
       where r.att_name = r2.att_name and f.name = r2.mf_name))
@@ -354,10 +355,6 @@ if ($db_conn) {
   }
   printTable($result, $columnNames);
   OCILogoff($db_conn);
-} else {
-  echo "cannot connect";
-  $e = OCI_Error();
-  echo htmlentites($e['message']);
-}
+
 
 ?>

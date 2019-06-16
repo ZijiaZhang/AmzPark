@@ -18,7 +18,7 @@ if($ispost) {
 		#var_dump($arr);
 		return $arr;
 	}
-	#print_r($_POST);
+	//print_r($_POST);
 	$name = $_POST['username'];
 	#echo $name;
 	$password = md5($_POST['password']);
@@ -43,7 +43,7 @@ if($ispost) {
 
 	#print_r($children);
 	$resp = $_POST['responsible'];
-	processArray($resp); 
+	//processArray($resp); 
 	#echo "respon:";
 	#print_r($resp);
 
