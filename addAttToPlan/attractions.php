@@ -1,6 +1,4 @@
 <div class = "column">
-
-	
 		<?php 
 		include_once '../database.php';
 
@@ -31,12 +29,11 @@
 		$stid = executeSQL("SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME, A.STATUS FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity $query $Repir $WaitTime");
 
 
-
-		/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
-		while ($row = OCI_Fetch_Array($stid, OCI_BOTH)) { ?>
-			<a class = "attlink listanimation listitem">
-				<div class = "image contianer attElem row" data-aos="fade-up"
-				data-aos-duration="500" data-aos-once="false" data-aos-offset="-50"> 
+	/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
+	while ($row = OCI_Fetch_Array($stid, OCI_BOTH)) { ?>
+		<a class = "attlink listanimation listitem">
+			<div class = "image contianer attElem oneRow" data-aos="fade-up"
+			data-aos-duration="500" data-aos-once="false" data-aos-offset="-50"> 
 
 				<div class='attimage'>
 					<a href = "../ATT/?attname=<?php echo $row["ATT_NAME"]?>" >
@@ -52,7 +49,7 @@
 					padding-right: 10px;
 					border-radius:10px;
 					font-size: 2vw;">
-					<p style="color: #000"><?php echo trim( $row["ATT_NAME"]); ?></p>
+					<p style="color: #000;font-size: 50%"><?php echo trim( $row["ATT_NAME"]); ?></p>
 				</div>
 			</div>
 			<div class="table-wrap">

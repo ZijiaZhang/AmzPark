@@ -34,6 +34,22 @@ if(isset($_POST['submit'])){
 		}catch(Exception $e){
 			echo $e->getMessage();
 		}
+	}elseif($_POST['submit'] == 'delete_Children'){
+		try{
+			$vname = $_POST["del_Children"];
+			$list1 = array(":bind1" => $name, ":bind2" => $vname);
+			executeBoundSQL("DELETE FROM YoungVisitor_include_isGuradedBy where youngGroupID = :bind1 and youngVisitorName = :bind2",$list1);
+		}catch (Exception $e){
+			echo $e->getMessage();
+		}
+	}else if($_POST['submit'] == 'insert_child'){
+		$Visitername = $_POST['ins_child'];
+		$Contact = $_POST['ins_radult'];
+		try{
+			insertIntoChildren($Visitername,$name,$Contact);
+		}catch(Exception $e){
+			echo $e->getMessage();
+		}
 	}
 
 	try{
@@ -45,6 +61,8 @@ if(isset($_POST['submit'])){
 }
 
 ?>
+
+
 
 
 <?php
@@ -122,12 +140,13 @@ try{
 <?php include "../loader.php" ?>
 <body style="margin: 0px;">
 	<style>
-		#mainContainer{
-			width: 100vw;
-			height: 100vh;
-			display: flex;
-		}
-		#operationPannel{
+
+	#mainContainer{
+		width: 100vw;
+		height: 100vh;
+		display: flex;
+	}
+	#operationPannel{
 /*	background-color: blue;
 */	width: 70%;
 overflow: auto;
@@ -139,6 +158,7 @@ display: block;
 */	width :30%;
 position: relative;
 display: block;
+margin: 1%;
 }
 #accinfo p a{
 	color: blue;
@@ -148,6 +168,14 @@ display: block;
 	border-width: 2px
 }
 #adultInfo{
+	border-collapse: collapse;
+}
+
+#childInfo tr td, #childInfo tr th{
+	border-style: solid;
+	border-width: 2px
+}
+#childInfo{
 	border-collapse: collapse;
 }
 
@@ -161,6 +189,12 @@ display: block;
 	width: 90%;
 	left: 5%;
 }
+
+#groupName{
+	width: 100%;
+	text-align: center;
+	font-size: 5vw;
+}
 </style>
 
 <div id = "nav-placeholder">
@@ -172,6 +206,9 @@ display: block;
 	});
 </script>
 <div style="height: 100px"></div>
+<div id = "groupName">
+	Welcome, Group <?php echo $name;?>
+</div>
 <div id = "mainContainer">
 	
 	<div id = "accinfo">
@@ -180,7 +217,7 @@ display: block;
 		<button id="adultPanelButton" onclick="ToggleForm()">Create Adult</button>
 		<div class="popup" id="adultAddform">
 			<form action="" class="form-container" method = "post">
-				<h1>ADD ADULT</h1>
+				<h1>ADD ADULTS</h1>
 				<table>
 					<tr>
 						<td>
@@ -207,8 +244,8 @@ display: block;
 			</form>
 		</div>
 
-
-		<table id = "adultInfo">
+<h1 class="fullWidth"> Adults </h1>
+		<table id = "adultInfo" class = "fullWidth">
 			<tr>
 				<th width="30%">
 					Name
@@ -238,36 +275,103 @@ display: block;
 
 		</table>
 		
-	</div>
+<h1 class="fullWidth"> Children </h1>
 
-
-
-
-
-
-
-	<div id = "operationPannel">
-		<h1 class="subTitle">Attractions</h1>
-		<div class="row">
-			<a href="../makePlan_homepage" class = "generalButton" style = "background-color: green"> Make Plans</a>
-			<a href="../makePlan_mine" class = "generalButton" style = "background-color: blue">See My Plans</a>
-		</div>
-		<table id = "planInfo">
-			<tr><th>plan</th><th>delete</th></tr>
-			<?php foreach($myplans as $plan){ ?>
-				<form action = "" method = "post">
+		<button id="childPanelButton" onclick="ToggleChildForm()">Create Children</button>
+		<div class="popup" id="childAddform">
+			<form action="" class="form-container" method = "post">
+				<h1>ADD Child</h1>
+				<table>
 					<tr>
 						<td>
-							<input type = "hidden" name = "del_plan" value = <?php echo "'".$plan[0]."'";?> > <?php echo $plan[0];?>
+							<label for="name"><b>Name</b></label>
 						</td>
 						<td>
-							<button type="submit" value = "delete_plan" name = "submit">Delete</button>
+							<input type="text" placeholder="Enter Name" name="ins_child" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+
+							<label for="contact"><b>Responsible Adult</b></label>
+						</td>
+						<td>
+							<input type="text" placeholder="Enter Name of the Adult" name="ins_radult" required>
+						</td>
+					</tr>
+				</table>
+				<div class = "row">
+					<button type="submit" class="" name = "submit" value = 'insert_child'>Create</button>
+					<button type="button" class="" onclick="closeChildForm()">Close</button>
+				</div>
+			</form>
+		</div>
+
+			<table id = "childInfo" class = "fullWidth">
+			<tr>
+				<th width="30%">
+					Name
+				</th>
+				<th width="40%">
+					Parent
+				</th>
+				<th width="30%">
+					delete
+				</th>
+			</tr>
+			<?php 
+			//var_dump($Children);
+			foreach($Children as $child){ ?>
+				<form action = "" method = "post">					
+					<tr>
+						<td >
+							<input type = "hidden" name = "del_Children" value = <?php echo "'".$child['YOUNGVISITORNAME']."'";?> > <?php echo $child['YOUNGVISITORNAME'];?>
+						</td>
+						<td> 
+							<?php echo $child['ADULTVISITORNAME'];?>
+						</td>
+						<td>
+							<button type="submit" value = "delete_Children" name = "submit">Delete</button>
 						</td>
 					</tr>
 				</form>
 			<?php } ?>
+
 		</table>
-		<pre> For further modifications, please click on "See My Plans" </pre>
+		
+	</div>
+
+	<div id = "operationPannel" style="border-width: 0 0 0 3px; border-style: solid;">
+		<section id = "plans">
+			<h1 class="subTitle">Plans</h1>
+			<div class="row">
+				<a href="../makePlan_homepage" class = "generalButton" style = "background-color: green"> Make Plans</a>
+				<a href="../makePlan_mine" class = "generalButton" style = "background-color: blue">See My Plans</a>
+			</div>
+			<table id = "planInfo" class = "halfWidth">
+				<tr><th>Plan</th><th>Delete</th></tr>
+				<?php foreach($myplans as $plan){ ?>
+					<form action = "" method = "post">
+						<tr>
+							<td>
+								<input type = "hidden" name = "del_plan" value = <?php echo "'".$plan[0]."'";?> > <?php echo $plan[0];?>
+							</td>
+							<td>
+								<button type="submit" value = "delete_plan" name = "submit">Delete</button>
+							</td>
+						</tr>
+					</form>
+				<?php } ?>
+			</table>
+			<pre> For further modifications, please click on "See My Plans" </pre>
+		</section>
+		<section id = "reservations">
+			<h1 class="subTitle">Reservations</h1>
+			<div class="row">
+				<a href="../makeReservation.php" class = "generalButton" style = "background-color: green"> Make Reservation</a>
+				<a href="" class = "generalButton" style = "background-color: blue">My Reservations</a>
+			</div>
+		</section>
 	</div>
 
 </div>
@@ -288,6 +392,21 @@ display: block;
 
 	function closeForm() {
 		document.getElementById("adultAddform").style.display = "none";
+	}
+
+	function ToggleChildForm() {
+		if(document.getElementById("childAddform").style.display == "block"){
+			document.getElementById("childAddform").style.display = "none";
+			document.getElementById("childPanelButton").innerHTML = "Create Child";
+		}
+		else{
+			document.getElementById("childAddform").style.display = "block";
+			document.getElementById("childPanelButton").innerHTML = "Close Window";
+		}
+	}
+
+	function closeChildForm() {
+		document.getElementById("childAddform").style.display = "none";
 	}
 </script>
 </body>

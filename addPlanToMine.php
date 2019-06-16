@@ -22,7 +22,6 @@ if(isset($_GET['Message'])){
     echo $_GET['Message'];
 }
 
-
 if($ispost) {
       // username and password sent from form 
 	var_dump($_POST);
