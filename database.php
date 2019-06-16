@@ -147,6 +147,11 @@ function executeBoundSQL($cmdstr, $list) {
 			":bind2" => $groupID,
 			":bind3" => $cont);
 		executeBoundSQL("INSERT INTO AdultVisitor_include VALUES ( :bind1 , :bind2, :bind3)", $list1);
+			try{
+		updateGroupSize($groupID);
+	}catch(Exception $e){
+		echo $e->getMessage();
+	}
 	}
 
 	function insertIntoChildren($child,$groupID,$adult){
@@ -154,6 +159,11 @@ function executeBoundSQL($cmdstr, $list) {
 			":bind2" => $groupID,
 			":bind3" => $adult);
 		executeBoundSQL("INSERT INTO YoungVisitor_include_isGuradedBy VALUES ( :bind1 , :bind2, :bind3, :bind2 )", $list1);
+			try{
+		updateGroupSize($groupID);
+	}catch(Exception $e){
+		echo $e->getMessage();
+	}
 	}
 	
 	function insertIntoPlan($name){
