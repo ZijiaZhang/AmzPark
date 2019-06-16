@@ -32,7 +32,8 @@ if(isset($_POST['submit'])){
 		try{
 			insertIntoAdults($Visitername,$name,$Contact);
 		}catch(Exception $e){
-			echo $e->getMessage();
+			//echo $e->getMessage();
+			$message = "Cannot Inset Adult Please Check Information You Provided";
 		}
 	}elseif($_POST['submit'] == 'delete_Children'){
 		try{
@@ -40,7 +41,7 @@ if(isset($_POST['submit'])){
 			$list1 = array(":bind1" => $name, ":bind2" => $vname);
 			executeBoundSQL("DELETE FROM YoungVisitor_include_isGuradedBy where youngGroupID = :bind1 and youngVisitorName = :bind2",$list1);
 		}catch (Exception $e){
-			echo $e->getMessage();
+			//echo $e->getMessage();
 		}
 	}else if($_POST['submit'] == 'insert_child'){
 		$Visitername = $_POST['ins_child'];
@@ -48,7 +49,8 @@ if(isset($_POST['submit'])){
 		try{
 			insertIntoChildren($Visitername,$name,$Contact);
 		}catch(Exception $e){
-			echo $e->getMessage();
+			//echo $e->getMessage();
+			$message = "Cannot Inset Child Please Check Information You Provided";
 		}
 	}
 
@@ -209,12 +211,15 @@ margin: 1%;
 <div id = "groupName">
 	Welcome, Group <?php echo $name;?>
 </div>
+<div class="fullWidth" style="text-align: center; color: red;"><?php echo $message; ?></div>
 <div id = "mainContainer">
 	
 	<div id = "accinfo">
 		<p>Your Group Name is <a><?php echo $name ?> </a></p>
 		<p>Your Group Size is <a> <?php echo $groupSize;?> </a></p>
-		<button id="adultPanelButton" onclick="ToggleForm()">Create Adult</button>
+		
+<h1 class="fullWidth"> Adults </h1>
+<button id="adultPanelButton" onclick="ToggleForm()">Create Adult</button>
 		<div class="popup" id="adultAddform">
 			<form action="" class="form-container" method = "post">
 				<h1>ADD ADULTS</h1>
@@ -244,7 +249,6 @@ margin: 1%;
 			</form>
 		</div>
 
-<h1 class="fullWidth"> Adults </h1>
 		<table id = "adultInfo" class = "fullWidth">
 			<tr>
 				<th width="30%">

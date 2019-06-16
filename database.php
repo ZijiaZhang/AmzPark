@@ -48,9 +48,9 @@ function executeBoundSQL($cmdstr, $list) {
         $statement = OCIParse($db_conn, $cmdstr);
 
         if (!$statement) {
-        	echo "<br>Cannot parse this command: " . $cmdstr . "<br>";
-        	$e = OCI_Error($db_conn);
-        	echo htmlentities($e['message']);
+        	// echo "<br>Cannot parse this command: " . $cmdstr . "<br>";
+        	// $e = OCI_Error($db_conn);
+        	// echo htmlentities($e['message']);
         	$success = False;
         }
 
@@ -143,6 +143,22 @@ function executeBoundSQL($cmdstr, $list) {
 	}
 
 	function insertIntoAdults($adult,$groupID,$cont){
+		$list1 = array (":bind1" => $groupID);
+		$result = executeBoundSQL("SELECT youngVisitorName from YoungVisitor_include_isGuradedBy where youngGroupID = :bind1",$list1);
+		$Children = array();
+		$temp = array();
+		while ($child1 =  oci_fetch_array($result)) {
+			array_push($Children, $child1[0]);
+			array_push($temp, $child1[0]);
+		}
+
+		array_push($Children, $adult);
+		if(count(array_unique($Children)) == count($temp)){
+			echo "iuhiuyiy";
+			throw new Exception('Same Name With Child');
+		}
+
+
 		$list1 = array (":bind1" => $adult,
 			":bind2" => $groupID,
 			":bind3" => $cont);
@@ -155,11 +171,27 @@ function executeBoundSQL($cmdstr, $list) {
 	}
 
 	function insertIntoChildren($child,$groupID,$adult){
+
+
+		$list1 = array (":bind1" => $groupID);
+		$result = executeBoundSQL("SELECT VisitorName from AdultVisitor_include where groupID = :bind1",$list1);
+		$children = array();
+		$temp = array();
+		while ($child1 =  oci_fetch_array($result)) {
+			array_push($children, $child1[0]);
+			array_push($temp, $child1[0]);
+		}
+
+		array_push($children, $child);
+		if(count(array_unique($children)) == count($temp)){
+			throw new Exception('Same Name With Adult');
+		}
+
 		$list1 = array (":bind1" => $child,
 			":bind2" => $groupID,
 			":bind3" => $adult);
 		executeBoundSQL("INSERT INTO YoungVisitor_include_isGuradedBy VALUES ( :bind1 , :bind2, :bind3, :bind2 )", $list1);
-			try{
+	try{
 		updateGroupSize($groupID);
 	}catch(Exception $e){
 		echo $e->getMessage();
