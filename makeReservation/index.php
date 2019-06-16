@@ -1,6 +1,7 @@
-<!-- <html lang="en">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<title> Amz Park</title>
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
@@ -9,44 +10,14 @@
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
-<body style="margin: 0px;" onload="initialize()" onresize="initialize()">
-	<div class="slide-item" style="background-image:url(../server_files/images/park.jpg);background-repeat:no-repeat;background-position:left top;background-size:cover;height: 100%; position: fixed;float:all;width: 100%; opacity: 1;"></div>
+
+
+<body>
 	<div id = "nav-placeholder">
-	
-    <ul id="primary_nav" class = "hiddenm"> 
 
-		<li class="active interactive">
-			<a id = "menu_control" href="javascript:void(0);" onclick="expand()">
-				<i class="fa fa-bars"></i>
-			</a>
-		</li>
+	</div>
 
-		<li class="current-menu-item">
-			<a href="#">Home</a>
-		</li>
-		<li class="active">
-			<a href="#shows">Shows</a>
-		</li>
-		<li class="active">
-			<a href="#attractions">Attractions</a>
-		</li>
-		<li class="active">
-			<a href="#info">Contact US</a>
-		</li>
-
-	</ul>
-
-
-</div>
-<script>
-$(function(){
-  $("#nav-placeholder").load("navbar.html");
-});
-</script> -->
-
-
-
-<p> <font size = "6"> <p style="text-align:center;">Entertainment Reservation System <p>
+<p style="text-align:center;"> <font size = "6"> Entertainment Reservation System </font></p>
 
 <div style="margin-top:60px"></div>
 
@@ -59,21 +30,21 @@ $(function(){
 	<div style="margin-top:150px"></div>
 	
 	<div>
-	   <label>Entertainment</label>
+	   <label class = "center">Entertainment</label>
 	   <input type="text" style="font-size:16pt;" name="enterName" size="15">
 	</div>
 
 	<div style="margin-top:20px"></div>
 
 	<div>
-     <label>Perform Time</label>
+     <label  class = "center">Perform Time</label>
      <input type="text" style="font-size:16pt;" name="time" placeholder="eg:20190701 14:00"size="15">
 	</div>
 
 	<div style="margin-top:20px"></div>
 
 	<div>
-	   <label>Group ID</label>
+	   <label  class = "center">Group ID</label>
 		 <input type="text" style="font-size:16pt;" name="groupID" size="10">
 	</div>
 
@@ -89,11 +60,13 @@ $(function(){
 
 
 <?php
-include "database.php";
-include "session.php";
+include "../database.php";
+include "../session.php";
 $ispost =($_SERVER["REQUEST_METHOD"] == "POST");
 
 initializeSession();
+
+
 
 $conNo = (string) rand(10000000,99999999);
 if ($ispost){
@@ -166,7 +139,13 @@ if ($ispost){
 	</div>
 </div>
 
+<script>
+$(function(){
+  $("#nav-placeholder").load("../navbar.html");
+});
+</script>
 
 </body>
+
 
 </html>
