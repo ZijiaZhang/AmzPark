@@ -3,6 +3,8 @@
 	<title> My Plans</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/plan.css">
+	<link rel="stylesheet" type = "text/css" href="../server_files/css/mycss.css">
+	<link rel="stylesheet" type = "text/css" href="../server_files/css/form.css">
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -27,7 +29,17 @@ if(checkSession()){
 	header('location: ../login');
 }
 ?>
+<body style="margin:0; backgroung-color:white;">
+<div id = "nav-placeholder">
 
+</div>
+<script>
+	$(function(){
+		$("#nav-placeholder").load("../navbar.html");
+	});
+</script>
+
+<div class = "nvbarSpliter" style="height: 100px"></div>
 
 <div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
 	<pre style="color:red"> <b> Note: if you want to add or delete attraction to or from a plan. <br> You will need to provide a new name for the changed plan so that other people using the original plan won't be affected.</b></pre>
@@ -99,11 +111,23 @@ if(isset($_POST['submit'])){
 
 ?>
 
-
-<div id = "modify_add">
-	<button id="attPanelButton" onclick="ToggleForm()">Add Attraction To A Plan</button>
-	<div class="popup" id="AddAttform">
+<style>
+#myPlans tr td, #myPlans tr th{
+	border-style: solid;
+	border-width: 2px;
+	border-color:black;
+	color:black;
+}
+#myPlans{
+	border-collapse: collapse;
+}
+</style>
+<div style="display:flex">
+<div id = "modify_add" >
+	<button id="attPanelButton" onclick="ToggleForm()" >Add Attraction To A Plan</button>
+	<div class="popup" id="AddAttform" style="display:none; position:absolute; background-color:white;z-index:9;">
 		<form action="" class="form-container" method = "post">
+		
 			<h1>ADD Attraction</h1>
 			<table>
 				<tr>
@@ -131,15 +155,17 @@ if(isset($_POST['submit'])){
 					</td>
 				</tr>
 			</table>
+			<div class ="row center" style = "width: auto;padding: 0 0 0 0;">
 			<button type="submit" class="" name = "submit" value = 'addToPlan'>Add</button>
 			<button type="button" class="" onclick="closeForm()">Close</button>
+			</div>
 		</form>
 	</div>
 </div>
 
 <div id = "modify_delete">
 	<button id="att2PanelButton" onclick="ToggleForm2()">Delete Attraction From A Plan</button>
-	<div class="popup" id="DeleteAttform">
+	<div class="popup" id="DeleteAttform" style="display:none; position:absolute; background-color:white;z-index:9;">
 		<form action="" class="form-container" method = "post">
 			<h1>Delete Attraction</h1>
 			<table>
@@ -168,12 +194,14 @@ if(isset($_POST['submit'])){
 					</td>
 				</tr>
 			</table>
+			<div class ="row center" style = "width: auto;padding: 0 0 0 0;">
 			<button type="submit" class="" name = "submit" value = 'delFromPlan'>Delete</button>
 			<button type="button" class="" onclick="closeForm2()">Close</button>
+			</div>
 		</form>
 	</div>
 </div>
-
+</div>
 
 
 
@@ -185,14 +213,12 @@ if(isset($_POST['submit'])){
 			<title>My Plans</title>
 		</head>
 		<body>
-			<table>
-				<thead>
+			<table id = "myPlans">
 					<tr>
-						<td>Plan Name</td>
-						<td>Attractions in this plan</td>
+						<th>Plan Name</th>
+						<th>Attractions in this plan</th>
+						<th>Action</th>
 					</tr>
-				</thead>
-				<tbody>
 					<?php
 					try{
 						$results = executeSQL("SELECT B.PLANNUMBER, LISTAGG(B.ATTNAME, ',') WITHIN GROUP (ORDER BY B.ATTNAME) FROM ofVisiting B, madeby A WHERE A.PLANNUMBER = B.PLANNUMBER AND A.groupID='$name' GROUP BY B.PLANNUMBER" );
@@ -233,7 +259,6 @@ if(isset($_POST['submit'])){
 						<?php
 					}
 					?>
-				</tbody>
 			</table>
 		</body>
 	</div>
@@ -278,5 +303,5 @@ if(isset($_POST['submit'])){
 </script>
 
 
-
+</body>
 </html>
