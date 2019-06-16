@@ -142,10 +142,13 @@ try{
 <?php include "../loader.php" ?>
 <body style="margin: 0px;">
 	<style>
-
+	body{
+		height: 100vh;
+		margin: 0px;
+	}
 	#mainContainer{
 		width: 100vw;
-		height: 100vh;
+		height: 100%;
 		display: flex;
 	}
 	#operationPannel{
@@ -153,6 +156,7 @@ try{
 */	width: 70%;
 overflow: auto;
 display: block;
+border-width: 0 0 0 3px; border-style: solid;
 }
 #accinfo{
 	overflow: auto;
@@ -197,6 +201,20 @@ margin: 1%;
 	text-align: center;
 	font-size: 5vw;
 }
+
+@media screen and (max-width: 790px) {
+  #mainContainer{
+  	display: block;
+  }
+  #accinfo{
+  	width: 98%;
+  }
+  #operationPannel{
+  	width: 100%;
+  	border-style: none;
+  }
+}
+
 </style>
 
 <div id = "nav-placeholder">
@@ -218,19 +236,20 @@ margin: 1%;
 		<a href="../logout.php" style="float: right; display: block; background-color: red; color: white; text-decoration-style: none; text-decoration-line: none; padding: 1em; border-radius: 16px;">Log Out</a>
 		<p>Your Group Name is <a><?php echo $name ?> </a></p>
 		<p>Your Group Size is <a> <?php echo $groupSize;?> </a></p>
-		
+<div class="row" style="height: auto;">
 <h1 class="fullWidth"> Adults </h1>
-<button id="adultPanelButton" onclick="ToggleForm()">Create Adult</button>
+<button id="adultPanelButton" onclick="ToggleForm()" style="margin: 1em;">Create Adult</button>
+</div>
 		<div class="popup" id="adultAddform">
 			<form action="" class="form-container" method = "post">
 				<h1>ADD ADULTS</h1>
-				<table>
+				<table class="halfWidth">
 					<tr>
 						<td>
 							<label for="name"><b>Name</b></label>
 						</td>
 						<td>
-							<input type="text" placeholder="Enter Name" name="ins_visitor" required>
+							<input type="text" placeholder="Enter Name" name="ins_visitor" required style="border-width: 2px; border-style: solid;">
 						</td>
 					</tr>
 					<tr>
@@ -239,7 +258,7 @@ margin: 1%;
 							<label for="contact"><b>Contact</b></label>
 						</td>
 						<td>
-							<input type="text" placeholder="Enter Contact" name="ins_contact" required>
+							<input type="text" placeholder="Enter Contact" name="ins_contact" required style="border-width: 2px; border-style: solid;">
 						</td>
 					</tr>
 				</table>
@@ -279,20 +298,23 @@ margin: 1%;
 			<?php } ?>
 
 		</table>
-		
+		<hr>
+<div class="row" style="height: auto;">		
 <h1 class="fullWidth"> Children </h1>
 
-		<button id="childPanelButton" onclick="ToggleChildForm()">Create Children</button>
+		<button id="childPanelButton" onclick="ToggleChildForm()" style="margin: 1em;">Create Children</button>
+	</div>
+
 		<div class="popup" id="childAddform">
 			<form action="" class="form-container" method = "post">
 				<h1>ADD Child</h1>
-				<table>
+				<table class="halfWidth">
 					<tr>
 						<td>
 							<label for="name"><b>Name</b></label>
 						</td>
 						<td>
-							<input type="text" placeholder="Enter Name" name="ins_child" required>
+							<input type="text" placeholder="Enter Name" name="ins_child" style="border-width: 2px; border-style: solid;" required>
 						</td>
 					</tr>
 					<tr>
@@ -301,7 +323,7 @@ margin: 1%;
 							<label for="contact"><b>Responsible Adult</b></label>
 						</td>
 						<td>
-							<input type="text" placeholder="Enter Name of the Adult" name="ins_radult" required>
+							<input type="text" placeholder="Enter Name of the Adult" name="ins_radult" style="border-width: 2px; border-style: solid;" required>
 						</td>
 					</tr>
 				</table>
@@ -346,7 +368,7 @@ margin: 1%;
 		
 	</div>
 
-	<div id = "operationPannel" style="border-width: 0 0 0 3px; border-style: solid;">
+	<div id = "operationPannel" style="">
 		<section id = "plans">
 			<h1 class="subTitle">Plans</h1>
 			<div class="row">
