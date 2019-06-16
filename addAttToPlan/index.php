@@ -103,7 +103,6 @@
 
 					<a href="../makePlan_customized"><button>GO BACK To Previous Page</button> </a>
 					<a href="../makePlan_homepage"><button>GO BACK To make plan homepage</button> </a>
-
 					<div style="width: 100%">
 						<div class="Search">
 							<svg style="display: none">
@@ -147,9 +146,6 @@
 			</div>
 		</div>
 	</section>
-
-
-
 
 	<script>
 		function filter(){

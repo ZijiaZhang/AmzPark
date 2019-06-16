@@ -26,8 +26,6 @@ if(checkSession()){
 	header('location: ../login');
 }
 ?>
-
-
 <body>
 	<div id = "nav-placeholder">
 
@@ -39,10 +37,6 @@ if(checkSession()){
 			$("#nav-placeholder").show();
 		});
 	</script>
-
-
-
-
 
 	<section id = "Existing" >
 		<div class="component-wrapper " style="background-color: rgba(30,30,30,0.7)">
@@ -60,7 +54,6 @@ if(checkSession()){
 
 
 					<h1 style="text-align: center;"> Existing Plans </h6>
-
 						<div style="width: 100%">
 							<div class="Search">
 								<svg style="display: none">
@@ -96,14 +89,11 @@ if(checkSession()){
 							<div id = "attrSpace"  class = "contianer attractions attlist">
 								<!--Reserve For Attractions-->
 							</div>
-							
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
-
-
 
 
 
@@ -205,7 +195,7 @@ if(checkSession()){
 
 
 	$(window).load(function(){
-
+		initialize();
 		document.getElementsByTagName('body')[0].style.display = 'block';
 		initializeatt();
 		AOS.init();

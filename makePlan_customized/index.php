@@ -66,7 +66,6 @@ include '../makeCustomizedPlan.php';
 ?>
 
 
-
  <div class="component-wrapper " style="background-color: #eee">
     	<div style="height: 130px; width: 100%; padding: 0px;"></div>
    <div class = "formContainer">

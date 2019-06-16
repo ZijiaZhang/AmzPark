@@ -23,7 +23,7 @@
 
 	?>	
 		<div class = "column">
-			<div class = "image contianer showElem row" data-aos="fade-up" style="margin-top: 1em; margin-bottom: 1em; " 
+			<div class = "image contianer showElem oneRow" data-aos="fade-up" style="margin-top: 1em; margin-bottom: 1em; " 
 			data-aos-duration="500" data-aos-once="false"> 
 
 			<div class="table-wrap">

@@ -40,7 +40,7 @@
 	/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
 	while ($row = OCI_Fetch_Array($stid, OCI_BOTH)) { ?>
 		<a class = "attlink listanimation listitem">
-			<div class = "image contianer attElem row" data-aos="fade-up"
+			<div class = "image contianer attElem oneRow" data-aos="fade-up"
 			data-aos-duration="500" data-aos-once="false" data-aos-offset="-50"> 
 
 			<div class='attimage'>
@@ -55,7 +55,7 @@
 				padding-right: 10px;
 				border-radius:10px;
 				font-size: 2vw;">
-				<p style="color: #000"><?php echo trim( $row["ATT_NAME"]); ?></p>
+				<p style="color: #000;font-size: 50%"><?php echo trim( $row["ATT_NAME"]); ?></p>
 			</div>
 		</div>
 		<div class="table-wrap">

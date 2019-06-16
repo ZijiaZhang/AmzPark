@@ -18,6 +18,23 @@
 		<li class="active">
 			<a id = "Info" href="#info">Contact US</a>
 		</li>
+		<li class="have-child right">
+			<a id = "MyAccount" href="#info"> &nbsp;&nbsp;&nbsp;&nbsp;My Account&nbsp;&nbsp;&nbsp;&nbsp; </a>
+			<ul>
+				<li>
+					<a id ="makeReservation" href="./makeReservation.php">Make Reservation</a>
+				</li>
+				<li>
+					<a id ="myReservation" href="./">My Reservation</a>
+				</li>
+				<li>
+					<a id ="makePlan" href="./makePlan_homepage">Make Plan</a>
+				</li>
+				<li>
+					<a id ="myPlan" href="./makePlan_mine">My Plans</a>
+				</li>
+			</ul>
+		</li>
 
 	</ul>
 
@@ -29,12 +46,22 @@
 			document.getElementById("Shows").href = "#shows";
 			document.getElementById("Attractions").href = "#attractions";
 			document.getElementById("Info").href = "#info";
+			document.getElementById("MyAccount").href = "./myaccount";
+			document.getElementById("makeReservation").href="./makeReservation.php";
+			document.getElementById("myReservation").href = "./";
+			document.getElementById("makePlan").href = "./makePlan_homepage";
+			document.getElementById("myPlan").href = "./makePlan_mine";
 		} else{
 
-			document.getElementById("Home").href = "../index.php";
-			document.getElementById("Shows").href = "../index.php#shows";
+			document.getElementById("Home").href = "../";
+			document.getElementById("Shows").href = "..#shows";
 			document.getElementById("Attractions").href = "../index.php#attractions";
-			document.getElementById("Info").href = "../index.php#info";
+			document.getElementById("Info").href = "..#info";
+			document.getElementById("MyAccount").href = "../myaccount";
+			document.getElementById("makeReservation").href="../makeReservation.php";
+			document.getElementById("myReservation").href = "../";
+			document.getElementById("makePlan").href = "../makePlan_homepage";
+			document.getElementById("myPlan").href = "../makePlan_mine";
 		}
 
 	function expand() {

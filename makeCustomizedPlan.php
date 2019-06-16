@@ -38,7 +38,24 @@ if (array_key_exists('addAtt', $_POST)){
 	}
 
 
-}
+	if (array_key_exists('addAtt', $_POST)){
+	//	$aname = $_POST['attName'];
+
+		if(!ifExist2($pname, $aname, 'PLANNUMBER' , 'ATTNAME', 'ofVisiting')){
+			try {
+				insertIntoOfVisiting($pname,$aname);
+				//header('location: ./addAttToPlan?success=1');
+			}catch (Exception $e){
+				echo "Error. Cannot add it to the plan.";
+			}
+		}
+		else{
+			echo "This attraction is already in this plan";
+		}
+
+
+	}
+
 }
 
 

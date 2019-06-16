@@ -18,7 +18,7 @@ if($ispost) {
 		#var_dump($arr);
 		return $arr;
 	}
-	//print_r($_POST);
+	#print_r($_POST);
 	$name = $_POST['username'];
 	#echo $name;
 	$password = md5($_POST['password']);
@@ -43,7 +43,7 @@ if($ispost) {
 
 	#print_r($children);
 	$resp = $_POST['responsible'];
-	//processArray($resp); 
+	processArray($resp); 
 	#echo "respon:";
 	#print_r($resp);
 
@@ -79,27 +79,25 @@ if($ispost) {
 	//	echo !allresponsibleValid($resp,$adults);
 	//}else{
 	//	echo "Successfully Create Group";
+	
 	if(!ifExist($name, 'GROUPID' , 'GROUPS')){
 		try {
-			insertIntoGroups($name,$size,$password);
+			insertInto("'$name',$size,'$password'","groups");
 			try{
 				for($i =0 ;$i < count($adults) ;$i++){
 					$adult = $adults[$i];
 					$cont  = $contactInfo[$i];
-					insertIntoAdults($adult,$name,$cont);
+					insertInto("'$adult','$name','$cont'","AdultVisitor_include");
 				}
 				for($i =0 ;$i < count($children) ;$i++){
 					$child = $children[$i];
 					$adult = $resp[$i];
 
-					insertIntoChildren($child,$name,$adult);
+					insertInto("'$child', '$name', '$adult','$name'","YoungVisitor_include_isGuradedBy");
 				}
-				#Signup Successful
-				header('location: ../login?message=signup');
 			}catch (Exception $e){
 				echo 'Caught exception: ',  $e->getMessage(), "\n";
-				$list1 = array(":bind1" => $name ); 
-				executeBoundSQL("DELETE FROM groups WHERE groupID = :bind1" , $list1);
+				executeSQL("DELETE FROM groups WHERE groupID = '$name'");
 			}
 		}catch (Exception $e){
 			echo "Cannot Create Group. Because the group name exceeds maximum length.";
