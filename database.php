@@ -230,14 +230,15 @@ function executeBoundSQL($cmdstr, $list) {
 
 
 
-	function copyAtt($pname1, $pname2){
-		$r = executeSQL("SELECT ATTNAME FROM ofVisiting WHERE PLANNUMBER = '$pname1'");
+	function getAtt($pname1){
+		$myAtt = array();
+		$att = executeSQL("SELECT ATTNAME FROM ofVisiting WHERE PLANNUMBER = '$pname1'");
 
-		insertIntoPlan($pname2);
-  
-        $array = oci_fetch_array($r);
-		foreach($array as $a){
-			insertIntoOfVisiting($pname2, $a);
+		while($a = oci_fetch_array($att)){
+			array_push($myAtt, $a);
 		}
+
+		return $myAtt;
+
 	}
 	?>
