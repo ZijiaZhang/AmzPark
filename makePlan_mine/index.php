@@ -32,7 +32,7 @@ if(checkSession()){
 <body style="margin:0; backgroung-color:white;">
 <div id = "nav-placeholder">
 
-<<<<<<< HEAD
+
 </div>
 <script>
 	$(function(){
@@ -41,9 +41,6 @@ if(checkSession()){
 </script>
 
 <div class = "nvbarSpliter" style="height: 100px"></div>
-=======
-<body style="margin: 0px;">
->>>>>>> lyr
 
 	<style>
 
