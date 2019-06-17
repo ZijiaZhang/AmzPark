@@ -59,7 +59,7 @@ if(isset($_POST['submit'])){
 		try{
 			executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$planname'");
 		}catch(Exception $e){
-			echo $e->getMessage();
+			echo "There is some error when deleting this plan";
 		}
 	}else if($_POST['submit'] == 'addToPlan'){
 		$pname = $_POST['add_to_plan'];
@@ -69,36 +69,44 @@ if(isset($_POST['submit'])){
 			try{
 				$Att = getAtt($pname);
 			}catch(Exception $e){
-		//	echo $e->getMessage();
+		         echo  "Error when retriving all attractions in the original plan.";
 			}
 			try{
 				insertIntoPlan($pnameNew);
 			}catch(Exception $e){
-		//	echo $e->getMessage();
+				echo "<b>"."Cannot create this new plan, possibly because there is an existing plan with the same name. Try a new name"."</b>";
+				return;
+		       // exit("Cannot create this new plan, possibly because there is an existing plan with the same name. Try a new name");
 			}
 
 			foreach($Att as $a){
-				insertIntoOfVisiting($pnameNew,$a[0]);
+				try{
+					insertIntoOfVisiting($pnameNew,$a[0]);
+				} catch(Exception $e){
+					echo "Error when adding all attractions in original plan to new plan";
+				}
+				
 			}
 
 			try{
 				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pname'");
 			}catch(Exception $e){
-		//	echo $e->getMessage();
+		        echo "Error when removing the old plan from your plan list";
 			}
 			try{
 				insertIntoMadeBy($name, $pnameNew);		
 			}catch(Exception $e){
-		//	echo $e->getMessage();
+		       echo "Error when adding the new plan to your plan list";
 			}
 			try{
 				insertIntoOfVisiting($pnameNew, $aname);
 			}catch(Exception $e){
 				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pnameNew'");
 				insertIntoMadeBy($name, $pname);
+				echo "<b>"."Error when adding the new attraction, possibly because of the attraction name. So no change to your original plan."."</b>";
 			}
 		}else{
-			echo "You have not added this plan to your own plan list yet. Please only modify a plan in your own list.";
+			echo "<b>"."You have not added this plan to your own plan list yet. Please only modify a plan in your own list."."</b>";
 		}
 	}
 
@@ -111,42 +119,49 @@ if(isset($_POST['submit'])){
 			try{
 				$Att = getAtt($pname);
 			}catch(Exception $e){
-		//	echo $e->getMessage();
+		echo "Error when retriving all attractions in the original plan.";
 			}
 			try{
 				insertIntoPlan($pnameNew);
 			}catch(Exception $e){
-		//	echo $e->getMessage();
+		echo "<b>"."Cannot create this new plan, possibly because there is an existing plan with the same name. Try a new name."."</b>";
+		 return;
 			}
 
-			foreach($Att as $a){
-				insertIntoOfVisiting($pnameNew,$a[0]);
-			}
+			try{
+					insertIntoOfVisiting($pnameNew,$a[0]);
+				} catch(Exception $e){
+					echo"Error when adding all attractions in original plan to new plan";
+				}
 
 			try{
 				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pname'");
 			}catch(Exception $e){
-		//	echo $e->getMessage();
+		echo "Error when removing the old plan from your plan list";
 			}
+			
 			try{
 				insertIntoMadeBy($name, $pnameNew);
 			}catch(Exception $e){
-		//	echo $e->getMessage();
+		echo "Error when adding the new plan to your plan list";
 			}
 			try{
 				executeSQL("DELETE FROM ofVisiting where PLANNUMBER = '$pnameNew' and ATTNAME = '$aname'");
 			}catch(Exception $e){
 				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pnameNew'");
 				insertIntoMadeBy($name, $pname);
+				echo "<b>"."Error when adding the new attraction, possibly because a non-existing attraction name. So no change to your original plan."."</b>";
 			}
 		}else{
-			echo "You have not added this plan to your own plan list yet. Please only modify a plan in your own list.";
+			echo "<b>"."You have not added this plan to your own plan list yet. Please only modify a plan in your own list."."</b>";
 		}
 
 	}
 }
 
 ?>
+
+
 
 
 <div id = "modify_add">

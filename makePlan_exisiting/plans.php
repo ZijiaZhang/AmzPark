@@ -5,7 +5,7 @@
 	include_once '../session.php';
 	include_once '../database.php';
 	initializeSession();
-print_r($_SESSION);
+//print_r($_SESSION);
 
 	if(checkSession()){
 		//header('location: ./account');
