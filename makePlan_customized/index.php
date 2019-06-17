@@ -60,10 +60,6 @@
 	</script>
 
 
-	<?php
-	include '../makeCustomizedPlan.php';
-
-	?>
 
 
 	<div class="component-wrapper " style="background-color: #eee">
