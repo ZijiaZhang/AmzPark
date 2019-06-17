@@ -57,7 +57,7 @@ if (array_key_exists('addAtt', $_POST)){
 	}
 
 }
-
+}
 
 
 
