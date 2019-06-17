@@ -14,16 +14,14 @@
 </head>
 
 
-<?php if(isset($_GET['Message'])){
+<!-- <?php if(isset($_GET['Message'])){
 $Message = $_GET['Message'];
 }
 
 ?>
-<p><?php echo $Message;?></p>
-
-
+<p><?php echo $Message;?></p> -->
 <?php
-$pname = $_GET['planName'];
+$pname = $_POST["pname"];
 ?>
 
 <form action = "../addAttToPlan/index.php" method="post">
