@@ -191,13 +191,13 @@ function executeBoundSQL($cmdstr, $list) {
 			":bind2" => $groupID,
 			":bind3" => $adult);
 		executeBoundSQL("INSERT INTO YoungVisitor_include_isGuradedBy VALUES ( :bind1 , :bind2, :bind3, :bind2 )", $list1);
-	try{
+			try{
 		updateGroupSize($groupID);
 	}catch(Exception $e){
 		echo $e->getMessage();
 	}
 	}
-	
+
 	function insertIntoPlan($name){
 		$list1 = array (":bind1" => $name);
 		executeBoundSQL("INSERT INTO plan VALUES ( :bind1  )", $list1);
@@ -244,17 +244,29 @@ function executeBoundSQL($cmdstr, $list) {
 
 	}
 
-function getPlan($GroupID){
-	$myplan = array();
-	$pl = executeSQL("SELECT PLANNUMBER FROM madeBy WHERE GROUPID = '$GroupID'");
-    
-    while($p = oci_fetch_array($pl)){
-    	array_push($myplan, $p);
-    }
 
-    return $myplan;
+	function getPlan($GroupID){
+		$myplan = array();
+		$pl = executeSQL("SELECT PLANNUMBER FROM madeBy WHERE GROUPID = '$GroupID'");
+
+		while($p = oci_fetch_array($pl)){
+			array_push($myplan, $p);
+		}
+
+		return $myplan;
 	}
 
 
-	
+
+
+	function copyAtt($pname1, $pname2){
+		$r = executeSQL("SELECT ATTNAME FROM ofVisiting WHERE PLANNUMBER = '$pname1'");
+
+		insertIntoPlan($pname2);
+  
+        $array = oci_fetch_array($r);
+		foreach($array as $a){
+			insertIntoOfVisiting($pname2, $a);
+		}
+	}
 	?>
