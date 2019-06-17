@@ -197,8 +197,8 @@
 
 
 		function initialize(){
-			getShows();
-			getAttractions();
+			// getShows();
+			// getAttractions();
 			initializeatt();
 
 		}
@@ -300,7 +300,8 @@
 	});
 
 	$(window).load(function(){
-
+		getShows();
+		getAttractions();
 		document.getElementsByTagName('body')[0].style.display = 'block';
 		initializeatt();
 		AOS.init();
