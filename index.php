@@ -34,7 +34,7 @@
 		<div class = "component-wrapper">
 			<div class = "fullscreen" style="background-color: rgba(255,255,255,0.7)">
 				<div id= "head-line-container">
-					<h1 id="head-line"> Welcome to My Inn</h1>
+					<h1 id="head-line"> WELCOME TO AMZ PARK</h1>
 					<div class="row">
 						<a id = "UserLogin" class= "generalButton" href = "./signup">SIGN UP</a>
 						<a href = "./login" id = "EmployeeLogin" class= "generalButton"> LOGIN
