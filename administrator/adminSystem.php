@@ -44,6 +44,7 @@ include "database.php";
     width: 40%;
     overflow-y: scroll;
     height: 100%;
+    padding: 0 1% 1% 1%;
   }
   .table-Display{
     width: 50%;
@@ -92,6 +93,14 @@ include "database.php";
     text-decoration: none;
     text-decoration-style: none;
     color: blue;
+  }
+  body{
+    font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+    margin: 0 auto;
+    letter-spacing: .4px;
+    color: #0d242c;
+    background: #ebf4ee;
   }
 </style>
 <div class = "mainContainer"> 
@@ -176,7 +185,7 @@ include "database.php";
              Action
            </th>
          </tr>
-          <tr>
+         <tr>
           <form method="GET" action="adminSystem.php">
             <td>
               <select name="facilityName" class="form-contral form-control-sm">
@@ -194,10 +203,10 @@ include "database.php";
               <input type="submit" value="Submit" name="findFacility">
             </td>
           </form>
-         </tr>
-        </table>
-      </div>
+        </tr>
+      </table>
     </div>
+  </div>
   <hr>
   <!-- attractions management -->
   <div id="attractionManagement" class="content-wrap">
