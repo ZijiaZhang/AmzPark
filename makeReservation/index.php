@@ -60,6 +60,9 @@ select {
 	pointer-events: none;
 
 }
+td{
+	text-align: center;
+}
 </style>
 
 <body style = "background-color:white">
@@ -123,13 +126,13 @@ select {
 			echo "Here is the your reservations:";
 			echo "<table>";
 			echo "<tr>";
-			foreach ($columNames as $name){
-				echo "<th>$name</th>";
+			foreach ($columNames as $oooname){
+				echo "<th>$oooname</th>";
 			}
 			echo "</tr>";
 
 			while ($row = OCI_Fetch_Array($result, OCI_BOTH)){
-				echo "<tr><td>" . $row['entertainmentName'] . "</td><td>" . $row['perform_time'] . "</td></tr>";
+				echo "<tr><td>" . $row['ENTERTAINMENTNAME'] . "</td><td>" . $row['PERFORM_TIME'] . "</td></tr>";
 			}
 
 			echo "</table>";	
