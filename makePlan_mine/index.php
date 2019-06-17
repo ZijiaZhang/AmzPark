@@ -67,10 +67,20 @@ if(isset($_POST['submit'])){
 		$aname = $_POST['addedAtt'];
 		if (ifExist2($name, $pname, 'GROUPID', 'PLANNUMBER' , 'MadeBy')) {
 			try{
-				copyAtt($pname, $pnameNew);
+				$Att = getAtt($pname);
 			}catch(Exception $e){
 		//	echo $e->getMessage();
 			}
+			try{
+				insertIntoPlan($pnameNew);
+			}catch(Exception $e){
+		//	echo $e->getMessage();
+			}
+
+			foreach($Att as $a){
+				insertIntoOfVisiting($pnameNew,$a[0]);
+			}
+
 			try{
 				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pname'");
 			}catch(Exception $e){
@@ -99,10 +109,20 @@ if(isset($_POST['submit'])){
 		$aname = $_POST['delAtt'];
 		if (ifExist2($name, $pname, 'GROUPID', 'PLANNUMBER' , 'MadeBy')) {
 			try{
-				copyAtt($pname, $pnameNew);
+				$Att = getAtt($pname);
 			}catch(Exception $e){
 		//	echo $e->getMessage();
 			}
+			try{
+				insertIntoPlan($pnameNew);
+			}catch(Exception $e){
+		//	echo $e->getMessage();
+			}
+
+			foreach($Att as $a){
+				insertIntoOfVisiting($pnameNew,$a[0]);
+			}
+
 			try{
 				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pname'");
 			}catch(Exception $e){
@@ -114,7 +134,7 @@ if(isset($_POST['submit'])){
 		//	echo $e->getMessage();
 			}
 			try{
-				executeSQL("DELETE FROM ofVisiting where PLANNUMBER = '$pname' and ATTNAME = '$aname'");
+				executeSQL("DELETE FROM ofVisiting where PLANNUMBER = '$pnameNew' and ATTNAME = '$aname'");
 			}catch(Exception $e){
 				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pnameNew'");
 				insertIntoMadeBy($name, $pname);

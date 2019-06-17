@@ -36,8 +36,9 @@
 	}
 
 	if($ispost) {
+		//echo $gname;
 
-	//	var_dump($_POST);
+		var_dump($_POST);
 
 		if (array_key_exists('createPlan', $_POST)){
 
@@ -53,12 +54,39 @@
 					$Message = "Plan created successfully";
 				//	header('location: ./index.php?Message='.$Message);
 				}catch (Exception $e){
-		//			echo "Cannot Create Plan. Cannot insert into MadeBy table";
+					echo "Cannot Create Plan. Cannot insert into MadeBy table";
 				}
 			}
 
 		}
 	}
+
+
+
+if($ispost) {
+	$pname = $_POST['planName'];
+	$aname = $_POST['attName'];
+
+	if (array_key_exists('addAtt', $_POST)){
+		if(!ifExist2($pname, $aname, 'PLANNUMBER' , 'ATTNAME', 'ofVisiting')){
+			try {
+				insertIntoOfVisiting($pname,$aname);
+				
+				//header('location: ../addAttToPlan/index.php');
+				$Message = "Attraction added successfully";
+				
+			}catch (Exception $e){
+				$Message = "Error. Cannot add it to the plan.";
+			}
+		}
+		else{
+			$Message =  "This attraction is already in this plan";
+		}
+
+
+	}
+}
+
 
 	?>
 	<?php if(isset($_GET['Message'])){
