@@ -392,9 +392,9 @@ include "database.php";
     else if (array_key_exists('findGuardian',$_POST)) {
       $gid = $_POST['groupID'];
       $name = $_POST['visitorName'];
-      $exist = ifExist($name, 'yname', 'young');
+      $exist = ifExist($name, 'YOUNGVISITORNAME', 'YOUNGVISITOR_INCLUDE_ISGURADEDBY');
       if ($exist) {
-        $result = executeSQL("select YOUNGVISITOR_INCLUDE_ISGURADEDBY.YOUNGVISITORNAME, contact_info
+        $result = executeSQL("SELECT YOUNGVISITOR_INCLUDE_ISGURADEDBY.YOUNGVISITORNAME, contact_info
           from ADULTVISITOR_INCLUDE inner join YOUNGVISITOR_INCLUDE_ISGURADEDBY on
           ADULTVISITOR_INCLUDE.VISITORNAME=YOUNGVISITOR_INCLUDE_ISGURADEDBY.ADULTVISITORNAME
           where YOUNGVISITOR_INCLUDE_ISGURADEDBY.YOUNGGROUPID='$gid'
@@ -409,7 +409,7 @@ include "database.php";
     else if (array_key_exists('findContactInfo', $_POST)) {
       $gid = $_POST['groupID'];
       $name = $_POST['visitorName'];
-      $exist = ifExist($name, 'aname', 'adult');
+      $exist = ifExist($name, 'VISITORNAME', 'ADULTVISITOR_INCLUDE');
       if ($exist) {
         $result = executeSQL("select VISITORNAME, contact_info from ADULTVISITOR_INCLUDE where GROUPID='$gid' and VISITORNAME='$name'");
         $columnNames = array("Visitor Name", "Contact Info");
