@@ -18,9 +18,9 @@ if(checkSession()){
 }
 
 
-if(isset($_GET['Message'])){
-    echo $_GET['Message'];
-}
+// if(isset($_GET['Message'])){
+//     echo $_GET['Message'];
+// }
 
 if($ispost) {
       // username and password sent from form 

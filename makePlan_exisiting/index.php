@@ -50,8 +50,7 @@ if(checkSession()){
 						</p>
 						<?php
 					}?>
-					<!-- TODO-LIST: Go back to Myaccount Page will be added to navigation bar -->
-
+				
 
 					<h1 style="text-align: center;"> Existing Plans </h6>
 						<div style="width: 100%">
