@@ -10,7 +10,7 @@
 
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
+		<link href="https://fonts.googleapis.com/css?family=Muli:400,700|Overpass+Mono" rel="stylesheet">
 </head>
 
 <?php
@@ -27,10 +27,19 @@ if(checkSession()){
 	header('location: ../login');
 }
 ?>
+<style>
+  body{
+    font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+    margin: 0 auto;
+    letter-spacing: .4px;
+    color: #0d242c;
+    background: #ebf4ee;
+  }
+</style>
 
 
-
-<body style="margin: 0px;background-color : white;" onload="initialize()" onresize="initializeatt()">
+<body style="" onload="initialize()" onresize="initializeatt()">
 
 	<div id = "nav-placeholder">
 
@@ -44,8 +53,8 @@ if(checkSession()){
 	</script>
 
 	<div style="height: 100px; width: 100%; padding: 0px;"></div>
-	<section id = "Get Started">
-		<h1 class = "title">Start Making your Plan Here</h1>
+	<section id = "Get Started" style = "padding-top: 10%; padding-bottom: 10%;">
+		<h1 class = "title" style="padding-top:5%;padding-bottom: 5%; font-size: 32;font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;">Start Making your Plan Here</h1>
 
 		<div class="row">
 			<a href = "../makePlan_exisiting" class="generalButton"> From Existing Plans</a>
@@ -62,7 +71,7 @@ if(checkSession()){
 		<div class="component-wrapper ">
 			<div id = "attractions-background">
 				<a href="../myaccount" style="display: flex;display: block;">
-					<button style="font-size: 24px;line-height: 1em;background-color: red;color: white;font-weight: bolder; 24px;line-height: 1em;border-radius: 10px;">GO BACK To My Account</button> </a>
+					<button style="font-size: 24px;line-height: 1em;background-color: #f99500;color: white;font-weight: bolder; 24px;line-height: 1em;border-radius: 10px;">GO BACK To My Account</button> </a>
 				<div class="att-outer">
 
 
