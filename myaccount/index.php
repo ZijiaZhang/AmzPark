@@ -138,6 +138,7 @@ try{
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
 	<link rel="stylesheet" type="text/css" href="../server_files/css/plan.css">
+	<link href="https://fonts.googleapis.com/css?family=Muli:400,700|Overpass+Mono" rel="stylesheet">
 </head>
 <?php include "../loader.php" ?>
 <body style="margin: 0px; ">
@@ -216,6 +217,20 @@ margin: 1%;
   }
 }
 
+h1{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #f99500;
+    font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  body{
+    font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+    margin: 0 auto;
+    letter-spacing: .4px;
+    color: #0d242c;
+    background: #ebf4ee;
+  }
 </style>
 
 <div id = "nav-placeholder">
