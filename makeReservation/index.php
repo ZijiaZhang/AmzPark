@@ -86,28 +86,28 @@ select {
 
 	$conNo = (string) rand(10000000,99999999);
 	if ($ispost){
-		echo "Your request has been submitted.";
+		//echo "Your request has been submitted.";
 		$enterName = $_POST['enterName'];
 		$time = $_POST['time'];
 		$group = $_POST['groupID'];
 		if (array_key_exists('insertsubmit', $_POST)) {
 			if (!ifExist($enterName,'name', 'ENTERTAINMENTS_DETERMIN_STATUS_AND_ARRANGE_TIMES1')) {
-				echo '<div style="font-size:1.25em;color:red">Error: The seleted entertainment does not exit! </div>';
+				$Message = '<div style="font-size:1.25em;color:red; text-align:center">Error: The seleted entertainment does not exit! </div>';
 			}
 			if (!ifExist($time,'perform_time', 'ENTERTAINMENTS_DETERMIN_STATUS_AND_ARRANGE_TIMES1')) {
-				echo '<div style="font-size:1.25em;color:red">Error: The selected perform time does not exit! </div>';
+				$Message = '<div style="font-size:1.25em;color:red; text-align:center">Error: The selected perform time does not exit! </div>';
 			}
 			if (!ifExist($group,'groupID', 'Groups')) {
-				echo '<div style="font-size:1.25em;color:red">Error: Your group does not exit! </div>';
+				$Message = '<div style="font-size:1.25em;color:red; text-align:center">Error: Your group does not exit! </div>';
 			}
 			else{
 				try {
 					insertIntoReservation($conNo,$group,$enterName,$time);
-					echo '<div style="font-size:1.25em;color:red">Error: Reservation has been made successfully! </div>';
-					$Success = urlencode("Reservation has been made successfully");
-					header('location: makeReservation.php?Message='.$Success);
+					$Message = '<div style="font-size:1.25em;color:red; text-align:center">Reservation has been made successfully! </div>';
+					// urlencode("Reservation has been made successfully");
+					//header('location: ./?Message='.$Success);
 				} catch (Exception $e) {
-					echo '<div style="font-size:1.25em;color:red">Error: ERROR!!!! </div>';
+					$Message = '<div style="font-size:1.25em;color:red; text-align:center">Error: ERROR!!!! You have already signed up for this Show. </div>';
 				}
 			}
 		}
@@ -120,7 +120,8 @@ select {
 		<img src="live.jpg">
 	</div>
 
-	<form action="makeReservation.php" method = "POST">
+	<?php echo $Message;?>
+	<form action="" method = "POST">
 		<div>
 			<label class = "center">Entertainment</label>
 			<div class = "selectWrap">
@@ -151,6 +152,7 @@ select {
 
 		<div>
 			<label  class = "center">Your Group ID</label>
+			<input type="hidden" name="groupID" value="<?php echo$name;?>" />
 			<input type="text" style="font-size:16pt; background-color: rgba(100,100,100,0.5);" name="groupID" size="10" value = '<?php echo$name;?>'disabled>
 		</div>
 
