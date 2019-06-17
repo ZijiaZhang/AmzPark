@@ -45,9 +45,9 @@ if(checkSession()){
 				<div class="att-outer">
 					<a href="../makePlan_homepage"><button>GO BACK To Previous Page</button> </a>
 					<?php if(isset($_GET['Message'])){?>
-						<p>
+						<p><b>
 							<?php	echo $_GET['Message'];?>
-						</p>
+						</b></p>
 						<?php
 					}?>
 				

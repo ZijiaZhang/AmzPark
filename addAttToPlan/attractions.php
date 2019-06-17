@@ -8,7 +8,7 @@
 		$pname = $_POST["pname"];
 
 
-        var_dump($_POST);
+      //  var_dump($_POST);
 ?>
 
 <?php if(isset($_GET['Message'])){

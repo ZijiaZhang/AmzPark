@@ -12,31 +12,10 @@
 </head>
 
 <body style="margin: 0px;" onload="initialize()" onresize="initialize()">
-	<div class="slide-item" style="background-image:url(../server_files/images/park.jpg);background-repeat:no-repeat;background-position:left top;background-size:cover;height: 100%; position: fixed;float:all;width: 100%; opacity: 1;"></div>
-	<div id = "nav-placeholder">
+<!-- 	<div class="slide-item" style="background-image:url(../server_files/images/park.jpg);background-repeat:no-repeat;background-position:left top;background-size:cover;height: 100%; position: fixed;float:all;width: 100%; opacity: 1;"></div>
+	<div id = "nav-placeholder"> -->
 	
-<ul id="primary_nav" class = "hiddenm"> 
 
-		<li class="active interactive">
-			<a id = "menu_control" href="javascript:void(0);" onclick="expand()">
-				<i class="fa fa-bars"></i>
-			</a>
-		</li>
-
-		<li class="current-menu-item">
-			<a href="#">Home</a>
-		</li>
-		<li class="active">
-			<a href="#shows">Shows</a>
-		</li>
-		<li class="active">
-			<a href="#attractions">Attractions</a>
-		</li>
-		<li class="active">
-			<a href="#info">Contact US</a>
-		</li>
-
-	</ul>
 
 
 </div>
@@ -51,11 +30,11 @@ $(function(){
 
 
 
-<section id = "Mine" >
-	<div class="simple-chord--wrapper component-wrapper" style="background-color: rgba(100,100,100,0.3);">
-		<head>
+<section id = "Mine" style="margin: 30px" >
+	<!-- <div class="simple-chord--wrapper component-wrapper" style="background-color: rgba(100,100,100,0.7);"> -->
+		<!-- <head>
         <title>Information about Booster</title>
-    </head>
+    </head> -->
     <body>
         <table>
         <?php
@@ -68,7 +47,7 @@ $(function(){
             try{
             $results = executeBoundSQL("SELECT A.ATT_NAME, A.LOCATION, A.CAPACITY, A.STATUS, A.OPEN_TIME, A.CLOSE_TIME, B.EXPECTED_WAITING_TIME, C.NAME, D.CONTACT_INFO  FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B, Administrator1 C, Administrator2 D WHERE A.ATT_NAME = :bind1 AND  A.CAPACITY = B.CAPACITY AND A.ADM_ID = C.ADM_ID AND C.DUTYAREA = D.DUTYAREA",$list1);
         }catch (Exception $e){
-        	echo $e.getMessage();
+        	echo "There is some error in getting the information about this attraction.";
         }
             $row = OCI_Fetch_Array($results, OCI_BOTH); ?>
                 <tr>
@@ -109,9 +88,12 @@ $(function(){
                 </tr>
             </table>
     </body>
-	</div>
+	<!-- </div> -->
+
+	<a href="../addAttToPlan/index.php"><button>GO BACK To Previous Page</button> </a>
 
 </section>
+
 
 
 <section id = "info" >
@@ -129,7 +111,7 @@ $(function(){
 				</div>
 			</div>
 		</div>
-	</div>
+	<!-- </div> -->
 
 </section>
 
