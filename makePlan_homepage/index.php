@@ -45,8 +45,7 @@ if(checkSession()){
 
 	<div style="height: 100px; width: 100%; padding: 0px;"></div>
 	<section id = "Get Started">
-		<h1 class = "title"> Welcome to Hello World</h1>
-
+		<h1 class = "title">Start Making your Plan Here</h1>
 
 		<div class="row">
 			<a href = "../makePlan_exisiting" class="generalButton"> From Existing Plans</a>
@@ -61,14 +60,15 @@ if(checkSession()){
 
 	<section id = "attractions">
 		<div class="component-wrapper ">
-			
 			<div id = "attractions-background">
+				<a href="../myaccount" style="display: flex;display: block;">
+					<button style="font-size: 24px;line-height: 1em;background-color: red;color: white;font-weight: bolder; 24px;line-height: 1em;border-radius: 10px;">GO BACK To My Account</button> </a>
 				<div class="att-outer">
 
 
 					<h1 style="text-align: center;"> Attractions </h1>
 
-					<a href="../myaccount"><button>GO BACK To Previous Page</button> </a>
+					
 
 					<?php if(isset($_GET['Message'])){?>
 						<p><b>

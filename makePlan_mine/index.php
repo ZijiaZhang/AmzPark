@@ -56,7 +56,7 @@ if(checkSession()){
 
 
 
-<a href="../myaccount"><button>GO BACK To Previous Page</button> </a>
+<a href="../myaccount"><button>GO BACK To My Account</button> </a>
 <div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
 	<pre style="color:red"> <b> Note: if you want to add or delete attraction to or from a plan. <br> You will need to provide a new name for the changed plan so that other people using the original plan won't be affected.</b></pre>
 </div>
