@@ -30,7 +30,7 @@ $(function(){
 
 
 </body>
-<div style="height: 100px"></div>
+<div class= "nvbarSpliter"style="height: 100px"></div>
 
 
 <div class = "formContainer">
@@ -41,7 +41,7 @@ $(function(){
     <input name = "submit" type = "submit" value = "LOGIN "/><br />
     <a pos="inform" href="../recoverAccount">Forget Password</a>
     <br>
-    <a pos = "inform" href="../administrator">Employee Login</a>
+    <a pos = "inform" href="../administrator/login.php">Employee Login</a>
 </form>
 </div>
 
