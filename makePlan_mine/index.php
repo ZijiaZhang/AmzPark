@@ -173,14 +173,6 @@ if(isset($_POST['submit'])){
 
 ?>
 
-<<<<<<< HEAD
-
-
-
-<div id = "modify_add">
-	<button id="attPanelButton" onclick="ToggleForm()">Add Attraction To A Plan</button>
-	<div class="popup" id="AddAttform" style="display: none;">
-=======
 <style>
 #myPlans tr td, #myPlans tr th{
 	border-style: solid;
@@ -196,8 +188,7 @@ if(isset($_POST['submit'])){
 <div id = "modify_add" >
 	<button id="attPanelButton" onclick="ToggleForm()" >Add Attraction To A Plan</button>
 	<div class="popup" id="AddAttform" style="display:none; position:absolute; background-color:white;z-index:9;">
->>>>>>> master
-		<form action="" class="form-container" method = "post">
+			<form action="" class="form-container" method = "post">
 		
 			<h1>ADD Attraction</h1>
 			<table>
