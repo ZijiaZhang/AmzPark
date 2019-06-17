@@ -1,6 +1,6 @@
 <html lang="en"><head>
 	<meta charset="UTF-8">
-	<title> My Plans</title>
+	<title> Amz Park</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/plan.css">
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/mycss.css">
@@ -15,8 +15,8 @@
 
 <?php
 //include_once '../login.php';
-include_once '../session.php';
-include_once '../database.php';
+include '../session.php';
+include '../database.php';
 initializeSession();
 #print_r($_SESSION);
 
@@ -32,6 +32,7 @@ if(checkSession()){
 <body style="margin:0; backgroung-color:white;">
 <div id = "nav-placeholder">
 
+
 </div>
 <script>
 	$(function(){
@@ -41,6 +42,21 @@ if(checkSession()){
 
 <div class = "nvbarSpliter" style="height: 100px"></div>
 
+	<style>
+
+#planInfo tr td, #planInfo tr th{
+	border-style: solid;
+	border-width: 2px
+}
+#planInfo{
+	border-collapse: collapse;
+}
+
+</style>
+
+
+
+<a href="../myaccount"><button>GO BACK To Previous Page</button> </a>
 <div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
 	<pre style="color:red"> <b> Note: if you want to add or delete attraction to or from a plan. <br> You will need to provide a new name for the changed plan so that other people using the original plan won't be affected.</b></pre>
 </div>
@@ -61,49 +77,62 @@ if(isset($_POST['submit'])){
 		$pname = $_POST['add_to_plan'];
 		$pnameNew = $_POST['add_to_plan_new'];
 		$aname = $_POST['addedAtt'];
-		try{
-			copyAtt($pname, $pnameNew);
-		}catch(Exception $e){
+		if (ifExist2($name, $pname, 'GROUPID', 'PLANNUMBER' , 'MadeBy')) {
+			try{
+				copyAtt($pname, $pnameNew);
+			}catch(Exception $e){
 		//	echo $e->getMessage();
-		}
-		try{
-			insertIntoOfVisiting($pnameNew, $aname);
-		}catch(Exception $e){
+			}
+			try{
+				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pname'");
+			}catch(Exception $e){
 		//	echo $e->getMessage();
-		}
-		try{
-			executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pname'");
-		}catch(Exception $e){
+			}
+			try{
+				insertIntoMadeBy($name, $pnameNew);		
+			}catch(Exception $e){
 		//	echo $e->getMessage();
+			}
+			try{
+				insertIntoOfVisiting($pnameNew, $aname);
+			}catch(Exception $e){
+				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pnameNew'");
+				insertIntoMadeBy($name, $pname);
+			}
+		}else{
+			echo "You have not added this plan to your own plan list yet. Please only modify a plan in your own list.";
 		}
-		try{
-			insertIntoMadeBy($name, $pnameNew);
-		}catch(Exception $e){
-		//	echo $e->getMessage();
-		}
-	}else if($_POST['submit'] == 'delFromPlan'){
+	}
+
+
+	else if($_POST['submit'] == 'delFromPlan'){
 		$pname = $_POST['del_from_plan'];
 		$pnameNew = $_POST['del_from_plan_new'];
 		$aname = $_POST['delAtt'];
-		try{
-			copyAtt($pname, $pnameNew);
-		}catch(Exception $e){
+		if (ifExist2($name, $pname, 'GROUPID', 'PLANNUMBER' , 'MadeBy')) {
+			try{
+				copyAtt($pname, $pnameNew);
+			}catch(Exception $e){
 		//	echo $e->getMessage();
-		}
-		try{
-			executeSQL("DELETE FROM ofVisiting where PLANNUMBER = '$pname' and ATTNAME = '$aname'");
-		}catch(Exception $e){
+			}
+			try{
+				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pname'");
+			}catch(Exception $e){
 		//	echo $e->getMessage();
-		}
-		try{
-			executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pname'");
-		}catch(Exception $e){
+			}
+			try{
+				insertIntoMadeBy($name, $pnameNew);
+			}catch(Exception $e){
 		//	echo $e->getMessage();
-		}
-		try{
-			insertIntoMadeBy($name, $pnameNew);
-		}catch(Exception $e){
-		//	echo $e->getMessage();
+			}
+			try{
+				executeSQL("DELETE FROM ofVisiting where PLANNUMBER = '$pname' and ATTNAME = '$aname'");
+			}catch(Exception $e){
+				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pnameNew'");
+				insertIntoMadeBy($name, $pname);
+			}
+		}else{
+			echo "You have not added this plan to your own plan list yet. Please only modify a plan in your own list.";
 		}
 
 	}
@@ -208,7 +237,7 @@ if(isset($_POST['submit'])){
 
 
 <section id = "Mine" >
-	<div class="simple-chord--wrapper component-wrapper" style="background-color: rgba(100,100,100,0.3);">
+	<!-- <div class="simple-chord--wrapper component-wrapper" style="background-color: rgba(100,100,100,0.3);">
 		<head>
 			<title>My Plans</title>
 		</head>
@@ -219,6 +248,20 @@ if(isset($_POST['submit'])){
 						<th>Attractions in this plan</th>
 						<th>Action</th>
 					</tr>
+				</thead> -->
+				<h1 class="fullWidth"> My Plans </h1>
+		<table id = "planInfo" class = "fullWidth">
+			<tr>
+				<th width="30%">
+					Plan Name
+				</th>
+				<th width="50%">
+					Attractions in this plan
+				</th>
+				<th width="20%">
+					delete
+				</th>
+			</tr>
 					<?php
 					try{
 						$results = executeSQL("SELECT B.PLANNUMBER, LISTAGG(B.ATTNAME, ',') WITHIN GROUP (ORDER BY B.ATTNAME) FROM ofVisiting B, madeby A WHERE A.PLANNUMBER = B.PLANNUMBER AND A.groupID='$name' GROUP BY B.PLANNUMBER" );
@@ -260,12 +303,12 @@ if(isset($_POST['submit'])){
 					}
 					?>
 			</table>
-		</body>
-	</div>
+	<!-- 	</body>
+	</div> -->
 
 </section>
 
-<a href="../myaccount"><button>GO BACK To Previous Page</button> </a>
+
 
 
 <script>
@@ -302,6 +345,7 @@ if(isset($_POST['submit'])){
 	}
 </script>
 
+</body>
 
 </body>
 </html>
