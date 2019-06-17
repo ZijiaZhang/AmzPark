@@ -24,12 +24,12 @@
 	include "../database.php";
 	include "../session.php";
 	$ispost =($_SERVER["REQUEST_METHOD"] == "POST");
-	var_dump($_POST);
+//	var_dump($_POST);
 	initializeSession();
 
 
 	if(checkSession()){
-		var_dump(session_id());
+//		var_dump(session_id());
 		$gname = $_SESSION['login_user'];
 	}else{
 		header('location: ../login');
@@ -37,7 +37,7 @@
 
 	if($ispost) {
 
-		var_dump($_POST);
+	//	var_dump($_POST);
 
 		if (array_key_exists('createPlan', $_POST)){
 

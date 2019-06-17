@@ -23,22 +23,33 @@ if($ispost) {
 	$pname = $_POST['planName'];
 	$aname = $_POST['attName'];
 
-if (array_key_exists('addAtt', $_POST)){
-	if(!ifExist2($pname, $aname, 'PLANNUMBER' , 'ATTNAME', 'ofVisiting')){
-		try {
-			insertIntoOfVisiting($pname,$aname);
-			$Success = urlencode("Attraction added successfully");
-		//    header('location: ./addAttToPlan/index.php?Message='.$Success);
-		}catch (Exception $e){
-			echo "Error. Cannot add it to the plan.";
+	if (array_key_exists('addAtt', $_POST)){
+		if(!ifExist2($pname, $aname, 'PLANNUMBER' , 'ATTNAME', 'ofVisiting')){
+			try {
+				insertIntoOfVisiting($pname,$aname);
+				?>
+
+
+				<form method="get" action="./addAttToPlan/success.php">
+					<input type="hidden" name="planName" value="<?php echo $pname; ?>">
+					<input type="submit">
+				</form>
+
+
+				<?php
+				//header('location: ./addAttToPlan/success.php');
+				$Message = "Attraction added successfully";
+				header('location: ./addAttToPlan/success.php?Message='.$Message);
+			}catch (Exception $e){
+				echo "Error. Cannot add it to the plan.";
+			}
 		}
-	}
-	else{
-		echo "This attraction is already in this plan";
-	}
+		else{
+			echo "This attraction is already in this plan";
+		}
 
 
-}
+	}
 }
 
 

@@ -8,7 +8,7 @@
 		$pname = $_POST["pname"];
 
 
-         var_dump($_POST);
+        var_dump($_POST);
 
 	//var_dump($_POST);
 		$query = "";
@@ -65,8 +65,8 @@
 					</tr>
 					<tr>
 						<td>
-							<form action = "" method="post">
-								<!-- <input type = "hidden" name = "planName" value = "<?php echo $pname; ?>" /> -->
+							<form action = "../makeCustomizedPlan.php" method="post">
+								<input type = "hidden" name = "planName" value = "<?php echo $pname; ?>" />
 								<input type = "hidden" name = "attName" value = "<?php echo trim( $row["ATT_NAME"]); ?>" />
 								<input type="submit" name = "addAtt" value = "Add it to this Plan" />
 							</form>
@@ -79,38 +79,6 @@
 <?php } ?>
 
 
-<?php 
-include "database.php";
-include "session.php";
-$ispost =($_SERVER["REQUEST_METHOD"] == "POST");
-
-var_dump($_POST);
-
-if($ispost) {
-	// $pname = $_POST['planName'];
-	$aname = $_POST['attName'];
-
-if (array_key_exists('addAtt', $_POST)){
-	if(!ifExist2($pname, $aname, 'PLANNUMBER' , 'ATTNAME', 'ofVisiting')){
-		try {
-			insertIntoOfVisiting($pname,$aname);
-			$Message = urlencode("Attraction added successfully");
-		//    header('location: ./addAttToPlan/index.php?Message='.$Success);
-		}catch (Exception $e){
-			echo "Error. Cannot add it to the plan.";
-		}
-	}
-	else{
-		echo "This attraction is already in this plan";
-	}
-
-}
-}
-
-
-
-
-?>
 
 
 </div>
