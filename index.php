@@ -78,7 +78,7 @@
 
 							</div>
 							<div style="width: 100%">
-								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content; width:-moz-fit-content;">
 									<input id = "showToday" type="checkbox" name = "onlyTodayShow"checked>Only Show Today
 								</div>
 							</div>
@@ -131,7 +131,7 @@
 							</div>
 						</div>
 						<div style="width: 100%">
-								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;width:-moz-fit-content;	">
 									<input id = "attrRP" type="checkbox" name = "noRPAttr"checked>Exclude Repairing
 								</div>
 							</div>
@@ -197,8 +197,8 @@
 
 
 		function initialize(){
-			getShows();
-			getAttractions();
+			// getShows();
+			// getAttractions();
 			initializeatt();
 
 		}
@@ -300,7 +300,8 @@
 	});
 
 	$(window).load(function(){
-
+		getShows();
+		getAttractions();
 		document.getElementsByTagName('body')[0].style.display = 'block';
 		initializeatt();
 		AOS.init();
