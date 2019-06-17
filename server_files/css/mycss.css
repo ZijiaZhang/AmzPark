@@ -3,6 +3,13 @@ html, body {
     overflow-x: hidden;
 }
 
+td{
+  text-align: center;
+}
+
+th{
+  text-align: center;
+}
 /*html *
 {
    font-size: 1em !important;
