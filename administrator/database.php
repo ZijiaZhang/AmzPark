@@ -1,68 +1,32 @@
-<html>
-<style>
-    table {
-        width: 20%;
-        border: 1px solid black;
-    }
 
-    th {
-
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 1em;
-        font-weight: bold;
-        background: #666;
-        color: #FFF;
-        padding: 4px 12px;
-        border-collapse: separate;
-        border: 1px solid #000;
-    }
-
-    td {
-
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: .7em;
-        border: 1px solid #DDD;
-        color: black;
-    }
-</style>
-</html>
 <?php
-
-$success = True;
-$db_conn = OCILogon("ora_yuxinch", "a14635700",
-                    "***REMOVED***");
-
-function executePlainSQL($cmdstr) {
-     // Take a plain (no bound variables) SQL command and execute it.
-	//echo "<br>running ".$cmdstr."<br>";
-	global $db_conn, $success;
-	$statement = OCIParse($db_conn, $cmdstr);
-     // There is a set of comments at the end of the file that
-     // describes some of the OCI specific functions and how they work.
-
-	if (!$statement) {
-		echo "<br>Cannot parse this command: " . $cmdstr . "<br>";
-		$e = OCI_Error($db_conn);
-           // For OCIParse errors, pass the connection handle.
-		echo htmlentities($e['message']);
-		$success = False;
+function executeSQL($command){
+	$conn = OCILogon ("***REMOVED***", '***REMOVED***', "***REMOVED***");
+	if (!$conn) {
+		throw new Exception('Cannot Connect to db');
 	}
-
-	$r = OCIExecute($statement, OCI_DEFAULT);
+	$stid = OCIParse($conn, $command);
+	if (!$stid) {
+		#echo "<br>Cannot parse this command: ". "<br>";
+		$e = OCI_Error($conn);
+           // For OCIParse errors, pass the connection handle.
+		#echo htmlentities($e['message']);
+		#$success = False;
+		throw new Exception('Cannot parse this command'. $e['message']);
+	}
+	$r = OCIExecute($stid, OCI_COMMIT_ON_SUCCESS);
 	if (!$r) {
-		echo "<br>Cannot execute this command: " . $cmdstr . "<br>";
+		#echo "<br>Cannot execute this command: " .$command. "<br>";
 		$e = oci_error($statement);
            // For OCIExecute errors, pass the statement handle.
-		echo htmlentities($e['message']);
-		$success = False;
+		#echo htmlentities();
+		#$success = False;
+		throw new Exception('Cannot execute this command'.$command.$e['message']);
 	} else {
-
+									#echo "<br>Command: success " .$command. "<br>";
 	}
-	return $statement;
-
+	return $stid;
 }
-
-
 function executeBoundSQL($cmdstr, $list) {
 	/* Sometimes the same statement will be executed several times.
         Only the value of variables need to be changed.
@@ -72,8 +36,8 @@ function executeBoundSQL($cmdstr, $list) {
         This is also very useful in protecting against SQL injection
         attacks.  See the sample code below for how this function is
         used. */
-        global $db_conn, $success;
-
+        $success = true;
+        $db_conn = OCILogon ("***REMOVED***", '***REMOVED***', "***REMOVED***");
         if (!$db_conn) {
         	throw new Exception('Cannot Connect to db');
         }
@@ -96,11 +60,11 @@ function executeBoundSQL($cmdstr, $list) {
 		}
 		$r = OCIExecute($statement, OCI_COMMIT_ON_SUCCESS);
 		if (!$r) {
-			echo "<br>Cannot execute this command: " . $cmdstr . "<br>";
-			$e = OCI_Error($statement);
-                // For OCIExecute errors pass the statement handle
-			echo htmlentities($e['message']);
-			echo "<br>";
+			// echo "<br>Cannot execute this command: " . $cmdstr . "<br>";
+			// $e = OCI_Error($statement);
+   //              // For OCIExecute errors pass the statement handle
+			// echo htmlentities($e['message']);
+			// echo "<br>";
 			$success = False;
 		}
 		if(!$success){
@@ -133,6 +97,38 @@ function executeBoundSQL($cmdstr, $list) {
       }
       echo "</table>";
   }
+
+  function ifExist($id, $keyname, $database){
+		$list1 = array (
+			":bind1" => $id);
+		$command = "SELECT * FROM $database WHERE $keyname = :bind1 ";
+		try{
+			$stid = executeBoundSQL($command, $list1);
+		}catch(Exception $e){
+			echo $e.getMessage();
+			echo "ERROR";
+			return false;
+		}
+		return ($t = oci_fetch($stid));
+	}
+
+  function ifExist2($v1, $v2, $keyname1, $keyname2, $database){
+		$list1 = array (
+			//":bind1" => $gid,
+			":bind1" => $v1,
+			//":bind3" => $pn,
+			":bind2" => $v2);
+		$command = "SELECT * FROM $database WHERE $keyname1 = :bind1 AND $keyname2 = :bind2";
+		try{
+			$stid = executeBoundSQL($command, $list1);
+		}catch(Exception $e){
+			echo $e.getMessage();
+			return false;
+		}
+		return ($t = oci_fetch($stid));
+	}
+
+
 
 
 

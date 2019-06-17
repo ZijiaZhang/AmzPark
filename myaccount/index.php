@@ -32,7 +32,8 @@ if(isset($_POST['submit'])){
 		try{
 			insertIntoAdults($Visitername,$name,$Contact);
 		}catch(Exception $e){
-			echo $e->getMessage();
+			//echo $e->getMessage();
+			$message = "Cannot Inset Adult Please Check Information You Provided";
 		}
 	}elseif($_POST['submit'] == 'delete_Children'){
 		try{
@@ -40,7 +41,7 @@ if(isset($_POST['submit'])){
 			$list1 = array(":bind1" => $name, ":bind2" => $vname);
 			executeBoundSQL("DELETE FROM YoungVisitor_include_isGuradedBy where youngGroupID = :bind1 and youngVisitorName = :bind2",$list1);
 		}catch (Exception $e){
-			echo $e->getMessage();
+			//echo $e->getMessage();
 		}
 	}else if($_POST['submit'] == 'insert_child'){
 		$Visitername = $_POST['ins_child'];
@@ -48,7 +49,8 @@ if(isset($_POST['submit'])){
 		try{
 			insertIntoChildren($Visitername,$name,$Contact);
 		}catch(Exception $e){
-			echo $e->getMessage();
+			//echo $e->getMessage();
+			$message = "Cannot Inset Child Please Check Information You Provided";
 		}
 	}
 
@@ -138,12 +140,16 @@ try{
 	<link rel="stylesheet" type="text/css" href="../server_files/css/plan.css">
 </head>
 <?php include "../loader.php" ?>
-<body style="margin: 0px;">
+<body style="margin: 0px; ">
 	<style>
-
+	body{
+		height: 100vh;
+		margin: 0px;
+background-color : white;
+	}
 	#mainContainer{
 		width: 100vw;
-		height: 100vh;
+		height: 100%;
 		display: flex;
 	}
 	#operationPannel{
@@ -151,6 +157,7 @@ try{
 */	width: 70%;
 overflow: auto;
 display: block;
+border-width: 0 0 0 3px; border-style: solid;
 }
 #accinfo{
 	overflow: auto;
@@ -179,14 +186,6 @@ margin: 1%;
 	border-collapse: collapse;
 }
 
-#planInfo tr td, #planInfo tr th{
-	border-style: solid;
-	border-width: 2px
-}
-#planInfo{
-	border-collapse: collapse;
-}
-
 .popup {
 	display:none;
 	position: absolute;
@@ -203,6 +202,20 @@ margin: 1%;
 	text-align: center;
 	font-size: 5vw;
 }
+
+@media screen and (max-width: 790px) {
+  #mainContainer{
+  	display: block;
+  }
+  #accinfo{
+  	width: 98%;
+  }
+  #operationPannel{
+  	width: 100%;
+  	border-style: none;
+  }
+}
+
 </style>
 
 <div id = "nav-placeholder">
@@ -213,26 +226,31 @@ margin: 1%;
 		$("#nav-placeholder").load("../navbar.html");
 	});
 </script>
-<div style="height: 100px"></div>
+<div class = "nvbarSpliter" style="height: 100px"></div>
 <div id = "groupName">
 	Welcome, Group <?php echo $name;?>
 </div>
+<div class="fullWidth" style="text-align: center; color: red;"><?php echo $message; ?></div>
 <div id = "mainContainer">
 	
 	<div id = "accinfo">
+		<a href="../logout.php" style="float: right; display: block; background-color: red; color: white; text-decoration-style: none; text-decoration-line: none; padding: 1em; border-radius: 16px; font-weight:bolder;">Log Out</a>
 		<p>Your Group Name is <a><?php echo $name ?> </a></p>
 		<p>Your Group Size is <a> <?php echo $groupSize;?> </a></p>
-		<button id="adultPanelButton" onclick="ToggleForm()">Create Adult</button>
+<div class="row" style="height: auto;">
+<h1 class="fullWidth"> Adults </h1>
+<button id="adultPanelButton" onclick="ToggleForm()" style="margin: 1em;">Create Adult</button>
+</div>
 		<div class="popup" id="adultAddform">
 			<form action="" class="form-container" method = "post">
 				<h1>ADD ADULTS</h1>
-				<table>
+				<table class="halfWidth">
 					<tr>
 						<td>
 							<label for="name"><b>Name</b></label>
 						</td>
 						<td>
-							<input type="text" placeholder="Enter Name" name="ins_visitor" required>
+							<input type="text" placeholder="Enter Name" name="ins_visitor" required style="border-width: 2px; border-style: solid;">
 						</td>
 					</tr>
 					<tr>
@@ -241,7 +259,7 @@ margin: 1%;
 							<label for="contact"><b>Contact</b></label>
 						</td>
 						<td>
-							<input type="text" placeholder="Enter Contact" name="ins_contact" required>
+							<input type="text" placeholder="Enter Contact" name="ins_contact" required style="border-width: 2px; border-style: solid;">
 						</td>
 					</tr>
 				</table>
@@ -252,7 +270,6 @@ margin: 1%;
 			</form>
 		</div>
 
-<h1 class="fullWidth"> Adults </h1>
 		<table id = "adultInfo" class = "fullWidth">
 			<tr>
 				<th width="30%">
@@ -282,20 +299,23 @@ margin: 1%;
 			<?php } ?>
 
 		</table>
-		
+		<hr>
+<div class="row" style="height: auto;">		
 <h1 class="fullWidth"> Children </h1>
 
-		<button id="childPanelButton" onclick="ToggleChildForm()">Create Children</button>
+		<button id="childPanelButton" onclick="ToggleChildForm()" style="margin: 1em;">Create Children</button>
+	</div>
+
 		<div class="popup" id="childAddform">
 			<form action="" class="form-container" method = "post">
 				<h1>ADD Child</h1>
-				<table>
+				<table class="halfWidth">
 					<tr>
 						<td>
 							<label for="name"><b>Name</b></label>
 						</td>
 						<td>
-							<input type="text" placeholder="Enter Name" name="ins_child" required>
+							<input type="text" placeholder="Enter Name" name="ins_child" style="border-width: 2px; border-style: solid;" required>
 						</td>
 					</tr>
 					<tr>
@@ -304,7 +324,7 @@ margin: 1%;
 							<label for="contact"><b>Responsible Adult</b></label>
 						</td>
 						<td>
-							<input type="text" placeholder="Enter Name of the Adult" name="ins_radult" required>
+							<input type="text" placeholder="Enter Name of the Adult" name="ins_radult" style="border-width: 2px; border-style: solid;" required>
 						</td>
 					</tr>
 				</table>
@@ -349,24 +369,15 @@ margin: 1%;
 		
 	</div>
 
-	<div id = "operationPannel" style="border-width: 0 0 0 3px; border-style: solid;">
+	<div id = "operationPannel" style="">
 		<section id = "plans">
 			<h1 class="subTitle">Plans</h1>
 			<div class="row">
 				<a href="../makePlan_homepage" class = "generalButton" style = "background-color: green"> Make Plans</a>
 				<a href="../makePlan_mine" class = "generalButton" style = "background-color: blue">See My Plans</a>
 			</div>
-			<pre> For further modifications, please click on "See My Plans" </pre>
 			<table id = "planInfo" class = "halfWidth">
-				<!-- <tr><th>Plan</th><th>Delete</th></tr> -->
-				<tr>
-				<th width="70%">
-					Plan
-				</th>
-				<th width="30%">
-					delete
-				</th>
-			</tr>
+				<tr><th>Plan</th><th>Delete</th></tr>
 				<?php foreach($myplans as $plan){ ?>
 					<form action = "" method = "post">
 						<tr>
@@ -380,11 +391,12 @@ margin: 1%;
 					</form>
 				<?php } ?>
 			</table>
+			<p style="width: 100%;text-align: center;color : blue;"> ***For further modifications, please click on "See My Plans"*** </p>
 		</section>
 		<section id = "reservations">
 			<h1 class="subTitle">Reservations</h1>
 			<div class="row">
-				<a href="../makeReservation.php" class = "generalButton" style = "background-color: green"> Make Reservation</a>
+				<a href="../makeReservation" class = "generalButton" style = "background-color: green"> Make Reservation</a>
 				<a href="" class = "generalButton" style = "background-color: blue">My Reservations</a>
 			</div>
 		</section>
@@ -393,7 +405,7 @@ margin: 1%;
 </div>
 
 </div>
-<a href="../logout.php">Log Out</a>
+
 <script>
 	function ToggleForm() {
 		if(document.getElementById("adultAddform").style.display == "block"){
