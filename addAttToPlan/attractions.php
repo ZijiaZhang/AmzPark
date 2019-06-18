@@ -1,5 +1,6 @@
 <div class = "column">
 		<?php 
+		$Message = "";
 		include_once '../database.php';
 
 		$NoRepair = $_POST["today"];
