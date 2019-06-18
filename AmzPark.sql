@@ -241,7 +241,7 @@ insert into Administrator1
 
 
 insert into Administrator2
-  values( 'Tomorrowland','778-9999-0000');
+  values( 'Tomorrow Land','778-9999-0000');
 insert into Administrator2
   values( 'Fantasy Town','888-2233-5566');
 insert into Administrator2
