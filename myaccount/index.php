@@ -232,17 +232,17 @@ h1{
     background: #ebf4ee;
   }
 
-  .halfWidth{
+  .bd{
   	border-collapse: collapse;
   	margin-top: 2em;
   }
-  .halfWidth tr td{
+  .bd tr td{
   	border-color: black;
   	border-style: solid;
   	border-width: 2px;
   }
 
-  .halfWidth tr th{
+  .bd tr th{
   	border-color: black;
   	border-style: solid;
   	border-width: 2px;
@@ -407,7 +407,7 @@ h1{
 				<a href="../makePlan_homepage" class = "generalButton" style = "background-color: green"> Make Plans</a>
 				<a href="../makePlan_mine" class = "generalButton" style = "background-color: blue">See My Plans</a>
 			</div>
-			<table id = "planInfo" class = "halfWidth">
+			<table id = "planInfo" class = "halfWidth bd">
 				<tr><th>Plan</th><th>Delete</th></tr>
 				<?php foreach($myplans as $plan){ ?>
 					<form action = "" method = "post">
@@ -434,7 +434,7 @@ h1{
 			$result = executeSQL("SELECT entertainmentName, perform_time FROM Reservation_linkedTo_ManagedBy
 							 WHERE groupID = '$name'");
 			$columNames = array("Entertainment Name", "Reserved Time");
-			echo "<table class = 'halfWidth'>";
+			echo "<table class = 'halfWidth bd'>";
 			echo "<tr>";
 			foreach ($columNames as $oooname){
 				echo "<th>$oooname</th>";
