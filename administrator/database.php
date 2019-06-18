@@ -1,7 +1,7 @@
 
 <?php
 function executeSQL($command){
-	$conn = OCILogon ("ora_gary1999", 'a42252965', "dbhost.students.cs.ubc.ca:1522/stu");
+	$conn = OCILogon ("SYSTEM", 'gary1999', "localhost:1521/xe");
 	if (!$conn) {
 		throw new Exception('Cannot Connect to db');
 	}
