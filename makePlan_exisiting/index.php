@@ -9,7 +9,6 @@
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="../server_files/js/jquery.fittext.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-
 </head>
 
 <?php
@@ -26,6 +25,14 @@ if(checkSession()){
 	header('location: ../login');
 }
 ?>
+<style>
+button{
+    background-color: #00dcff;
+    border-radius: 10px;
+    color: white;
+    font-size: 24px;
+}
+</style>
 <body>
 	<div id = "nav-placeholder">
 
@@ -43,15 +50,14 @@ if(checkSession()){
 			<div style="height: 100px; width: 100%; padding: 0px;"></div>
 			<div id = "attractions-background">
 				<div class="att-outer">
-					<a href="../makePlan_homepage"><button>GO BACK To Previous Page</button> </a>
+					<a href="../makePlan_homepage"><button>Go Back to Make Plan Home Page</button> </a>
 					<?php if(isset($_GET['Message'])){?>
-						<p>
+						<p><b>
 							<?php	echo $_GET['Message'];?>
-						</p>
+						</b></p>
 						<?php
 					}?>
-					<!-- TODO-LIST: Go back to Myaccount Page will be added to navigation bar -->
-
+				
 
 					<h1 style="text-align: center;"> Existing Plans </h6>
 						<div style="width: 100%">
@@ -83,7 +89,7 @@ if(checkSession()){
 									<input id = "planAdded" type="checkbox" name = "alreadyIn">Exclude those already added in Mine
 								</div>
 								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
-									<pre> Note: Empty plans (plans with no attractions in it) will not appear here</pre>
+									<pre> <b> Note: Empty plans (plans with no attractions in it) will not appear here </b></pre>
 								</div>
 							</div>
 							<div id = "attrSpace"  class = "contianer attractions attlist">
@@ -101,72 +107,24 @@ if(checkSession()){
 		<script>
 			function filter(){
 				getPlans();
-				AOS.refresh();
-
 			}
 
 
 
 			function initialize(){
 				getPlans();
-				initializeatt();
-
 			}
 
 			function initializeatt(){
-				var x = document.getElementsByClassName("attelem");
-				for(var t = 0; t< x.length;t++){
-					var p = x[t].getElementsByTagName("tr");
-					for(var i = 0 ; i<p.length ; i++ ){
-						var m = x[t].clientheight;
-						p[i].style.height = x[t].getElementsByClassName("attimg")[0].clientHeight/2 +"px";
-					}	
+		// 		var x = document.getElementsByClassName("attelem");
+		// 		for(var t = 0; t< x.length;t++){
+		// 			var p = x[t].getElementsByTagName("tr");
+		// 			for(var i = 0 ; i<p.length ; i++ ){
+		// 				var m = x[t].clientheight;
+		// 				p[i].style.height = x[t].getElementsByClassName("attimg")[0].clientHeight/2 +"px";
+		// 			}	
 
-					var date = new Date();
-
-					var seconds = date.getSeconds();
-					var minutes = date.getMinutes();
-					var hour = date.getHours();
-
-					var opentime = parseInt(x[t].getElementsByClassName("openTime")[0].innerText.split(":")[0],10)*100 + parseInt(x[t].getElementsByClassName("openTime")[0].innerText.split(":")[1],10);
-					var closetime = parseInt(x[t].getElementsByClassName("closeTime")[0].innerText.split(":")[0],10)*100 + parseInt(x[t].getElementsByClassName("closeTime")[0].innerText.split(":")[1],10);
-
-
-
-					if( opentime <= hour*100+minutes && hour*100+minutes <= closetime-100 ){
-						x[t].getElementsByClassName("openTimehead")[0].className = "openTimehead tableisGood";
-						x[t].getElementsByClassName("closeTimehead")[0].className = "closeTimehead tableisGood";
-					}else if( opentime <= hour*100+minutes && hour*100+minutes <= closetime){
-						x[t].getElementsByClassName("openTimehead")[0].className = "openTimehead tableisOk";
-						x[t].getElementsByClassName("closeTimehead")[0].className = "closeTimehead tableisOk";
-					}else {
-						x[t].getElementsByClassName("openTimehead")[0].className = "openTimehead tableisnotOk";
-						x[t].getElementsByClassName("closeTimehead")[0].className = "closeTimehead tableisnotOk";
-					}
-
-
-
-			/*var waitTime = parseInt(x[t].getElementsByClassName("waitTime")[0].innerText.split("min")[0],10);
-			var v = x[t].getElementsByClassName("waitTimehead")[0];
-			if(waitTime <= 20){
-				
-				v.className += " tableisGood";
-			}else if(waitTime<40){
-				v.className += " tableisOk"
-			}else{
-				v.className += " tableisnotOk"
-			}*/
-
-			var Status = x[t].getElementsByClassName("waitTime")[0].innerText;
-			var v = x[t].getElementsByClassName("waitTimehead")[0];
-			if(Status == "OPEN"){
-				v.className = "waitTimehead tableisGood";
-			}else{
-				v.className = "waitTimehead tableisnotOk";
-			}
-
-
-		}
+		// }
 	}
 
 
@@ -188,7 +146,6 @@ if(checkSession()){
 			function(data) {
 				$('#attrSpace').html(data);
 				initializeatt();
-				AOS.refreshHard();
 			});
 	}
 
@@ -198,7 +155,6 @@ if(checkSession()){
 		initialize();
 		document.getElementsByTagName('body')[0].style.display = 'block';
 		initializeatt();
-		AOS.init();
 		setInterval(initializeatt,100);
 	})
 </script>

@@ -60,6 +60,9 @@ select {
 	pointer-events: none;
 
 }
+td{
+	text-align: center;
+}
 </style>
 
 <body style = "background-color:white">
@@ -124,8 +127,8 @@ select {
 			echo "Here is the your reservations:";
 			echo "<table>";
 			echo "<tr>";
-			foreach ($columNames as $ooooname){
-				echo "<th>$ooooname</th>";
+			foreach ($columNames as $oooname){
+				echo "<th>$oooname</th>";
 			}
 			echo "</tr>";
 

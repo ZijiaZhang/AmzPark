@@ -139,6 +139,7 @@ try{
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
 	<link rel="stylesheet" type="text/css" href="../server_files/css/plan.css">
+	<link href="https://fonts.googleapis.com/css?family=Muli:400,700|Overpass+Mono" rel="stylesheet">
 </head>
 <?php include "../loader.php" ?>
 <body style="margin: 0px; ">
@@ -217,6 +218,36 @@ margin: 1%;
   }
 }
 
+h1{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #f99500;
+    font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  body{
+    font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+    margin: 0 auto;
+    letter-spacing: .4px;
+    color: #0d242c;
+    background: #ebf4ee;
+  }
+
+  .halfWidth{
+  	border-collapse: collapse;
+  	margin-top: 2em;
+  }
+  .halfWidth tr td{
+  	border-color: black;
+  	border-style: solid;
+  	border-width: 2px;
+  }
+
+  .halfWidth tr th{
+  	border-color: black;
+  	border-style: solid;
+  	border-width: 2px;
+  }
 </style>
 
 <div id = "nav-placeholder">
@@ -401,6 +432,23 @@ margin: 1%;
 				<a href="../makeReservation" class = "generalButton" style = "background-color: green"> Make Reservation</a>
 				<a href="" class = "generalButton" style = "background-color: blue">My Reservations</a>
 			</div>
+			<?php
+			$result = executeSQL("SELECT entertainmentName, perform_time FROM Reservation_linkedTo_ManagedBy
+							 WHERE groupID = '$name'");
+			$columNames = array("Entertainment Name", "Reserved Time");
+			echo "<table class = 'halfWidth'>";
+			echo "<tr>";
+			foreach ($columNames as $oooname){
+				echo "<th>$oooname</th>";
+			}
+			echo "</tr>";
+
+			while ($row = OCI_Fetch_Array($result, OCI_BOTH)){
+				echo "<tr><td>" . $row['ENTERTAINMENTNAME'] . "</td><td>" . $row['PERFORM_TIME'] . "</td></tr>";
+			}
+
+			echo "</table>";?>
+
 		</section>
 	</div>
 
