@@ -10,6 +10,16 @@
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
+	<body style="margin: 0px;">
+	<div id = "nav-placeholder">
+	
+</div>
+<script>
+$(function(){
+  $("#nav-placeholder").load("../navbar.html");
+});
+</script>
+<div class= "nvbarSpliter"style="height: 100px"></div>
 
 	<?php 
 	if(!isset($_POST["submit"])){

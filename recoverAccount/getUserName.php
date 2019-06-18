@@ -1,15 +1,15 @@
 <style type="text/css">
-	div{
+	.main{
 		position: relative;
 		height:20vh;
-		margin-top:40vh;
+		margin-top:30vh;
 	}
 	h2{
 		color:#f99500;;
 		text-align: center;
 	}
 </style>
-<div style="width: 100%"; >
+<div class = "main" style="width: 100%"; >
 	
 	<h2><?php if(isset($_GET["message"])) {
 		if($_GET["message"]=='fail')
