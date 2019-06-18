@@ -143,9 +143,22 @@
 				}
 
 				?>
-				<p><b><?php echo $Message;?></b></p>
+				<?php if(isset($Message)){?>
+						<p style="text-align: center; color: #f99500;"><b><?php echo $Message;?></b></p>
+						<?php
+					}?>
+				<p style="text-align: center;border-style: solid;border-color: black;">Current Att in plan:
+				<?php
+				try{
+					$list1 = array(":bind1" => $pname);
+					$r = executeBoundSQL("SELECT LISTAGG(ATTNAME, ', ') WITHIN GROUP (ORDER BY ATTNAME) FROM ofVisiting WHERE PLANNUMBER = :bind1 GROUP BY PLANNUMBER",$list1);
+					echo oci_fetch_array($r)[0];
+				}catch(Exception $e){
+					
+				}
+				?>
 
-
+				</p>
 
 				<div style="width: 100%">
 					<div class="Search">
