@@ -117,30 +117,6 @@ td{
 		}
 		
 	}
-
-	if ($ispost) {
-		if (array_key_exists('checksubmit', $_POST)) {
-			$group_ID = $_POST['groupID'];
-			$result = executeSQL("SELECT entertainmentName, perform_time FROM Reservation_linkedTo_ManagedBy
-							 WHERE groupID = '$group_ID'");
-			$columNames = array("Entertainment Name", "Reserved Time");
-			echo "Here is the your reservations:";
-			echo "<table>";
-			echo "<tr>";
-			foreach ($columNames as $oooname){
-				echo "<th>$oooname</th>";
-			}
-			echo "</tr>";
-
-			while ($row = OCI_Fetch_Array($result, OCI_BOTH)){
-				echo "<tr><td>" . $row['ENTERTAINMENTNAME'] . "</td><td>" . $row['PERFORM_TIME'] . "</td></tr>";
-			}
-
-			echo "</table>";	
-			$count = excuteSQL("SELECT count(*) FROM Reservation_linkedTo_ManagedBy WHERE groupID = '$group_ID' ");
-			echo "The total number of reservation of group $group_ID is $count";
-		}
-	}
 	?>
 
 
