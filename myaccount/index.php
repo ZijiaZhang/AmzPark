@@ -3,6 +3,7 @@
 $message = "";
 include_once '../session.php';
 include_once '../database.php';
+include_once '../showutil.php';
 initializeSession();
 #print_r($_SESSION);
 
@@ -426,13 +427,18 @@ h1{
 			</table>
 			<p style="width: 100%;text-align: center;color : blue;"> ***For further modifications, please click on "See My Plans"*** </p>
 		</section>
+		<hr style="width: 90%;">
 		<section id = "reservations">
 			<h1 class="subTitle">Reservations</h1>
 			<div class="row">
 				<a href="../makeReservation" class = "generalButton" style = "background-color: green"> Make Reservation</a>
-				<a href="" class = "generalButton" style = "background-color: blue">My Reservations</a>
+				<a href="../myReservation" class = "generalButton" style = "background-color: blue">My Reservations</a>
 			</div>
 			<?php
+			$count = executeSQL("SELECT count(*) FROM Reservation_linkedTo_ManagedBy WHERE groupID = '$name' Group by groupID");
+			$c = oci_fetch_array($count);
+			echo "<p style = 'text-align:center'>You have $c[0] reservations:</p>";
+
 			$result = executeSQL("SELECT entertainmentName, perform_time FROM Reservation_linkedTo_ManagedBy
 							 WHERE groupID = '$name'");
 			$columNames = array("Entertainment Name", "Reserved Time");
@@ -444,10 +450,13 @@ h1{
 			echo "</tr>";
 
 			while ($row = OCI_Fetch_Array($result, OCI_BOTH)){
-				echo "<tr><td>" . $row['ENTERTAINMENTNAME'] . "</td><td>" . $row['PERFORM_TIME'] . "</td></tr>";
+				$timeResult = handleTime($row["PERFORM_TIME"]);
+				$ptime =  $numberToMonth[(int)$timeResult["month"]]." ".$timeResult["day"]." ".$timeResult["hourmin"];
+				echo "<tr><td>" . $row['ENTERTAINMENTNAME'] . "</td><td>" . $ptime . "</td></tr>";
 			}
 
-			echo "</table>";?>
+			echo "</table>";
+			?>
 
 		</section>
 	</div>
