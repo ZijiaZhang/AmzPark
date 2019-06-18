@@ -77,7 +77,7 @@
 
 			<form action ="../addAttToPlan/index.php" method="post">
 				<label> Create a plan: </label>  
-				<input  type = "text" name = "planName" class = "box name" placeholder="Name of the plan" value = "<?php echo $pname;?>" required>
+				<input  type = "text" name = "planName" class = "box name" placeholder="Name of the plan" value = "" required>
 				<p class = "name-help"> Name should be no more than 20 characters including the space.</p>
 
 				<input type = "submit" value = " Create " name="createPlan" /><br />
