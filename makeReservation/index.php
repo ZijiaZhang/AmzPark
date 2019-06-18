@@ -136,6 +136,8 @@ td{
 			}
 
 			echo "</table>";	
+			$count = excuteSQL("SELECT count(*) FROM Reservation_linkedTo_ManagedBy WHERE groupID = '$group_ID' ");
+			echo "The total number of reservation of group $group_ID is $count";
 		}
 	}
 	?>
