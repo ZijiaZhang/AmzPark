@@ -105,6 +105,12 @@ if(checkSession()){
 							<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
 								<input id = "attrRP" type="checkbox" name = "noRPAttr">Exclude Repairing
 							</div>
+							<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+								<input id = "min" type="checkbox" name = "minWait">See which one has minimum waiting time
+							</div>
+							<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+								<input id = "max" type="checkbox" name = "maxWait">See which one has maximum waiting time
+							</div>
 						</div>
 						<div id = "attrSpace"  class = "contianer attractions attlist">
 							<!--Reserve For Attractions-->
@@ -194,14 +200,26 @@ if(checkSession()){
 		getAttractions();
 	});
 
+	$('#min').change(function(){
+		getAttractions();
+	});
+
+	$('#max').change(function(){
+		getAttractions();
+	});
+
 	$('#search-attr').on('input',function(e){
 		getAttractions();
 	});
 
+	
+
 	function getAttractions() {
 		var today = $('input[name=noRPAttr]').is(':checked');
+		var shortWait = $('input[name=minWait]').is(':checked');
+		var longWait = $('input[name=maxWait]').is(':checked');
 		var query = $('#search-attr').val();
-		$.post("./attractions.php", { today: today, attr: query},
+		$.post("./attractions.php", { today: today, shortWait: shortWait, longWait: longWait, attr: query},
 			function(data) {
 				$('#attrSpace').html(data);
 				initializeatt();
@@ -226,5 +244,3 @@ if(checkSession()){
 
 
 </html>
-
-
