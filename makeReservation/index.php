@@ -196,9 +196,6 @@ td{
 			<input type="text" style="font-size:16pt; background-color: rgba(100,100,100,0.5);" name="groupID" size="10" value = '<?php echo$name;?>'disabled>
 		</div> -->
 		
-		<div>
-		    <input type="submit" value="Check reservation" name="checksubmit"></p>
-		</div>
 	</form>
 
 
