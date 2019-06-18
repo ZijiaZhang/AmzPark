@@ -54,9 +54,14 @@ if(checkSession()){
 
 	<div style="height: 100px; width: 100%; padding: 0px;"></div>
 	<section id = "Get Started" style = "padding-top: 10%; padding-bottom: 10%;">
-		<h1 class = "title" style="padding-top:5%;padding-bottom: 5%; font-size: 32;font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;">Start Making your Plan Here</h1>
-
-		<div class="row">
+		<h1 class = "title" style="padding-top:5%; font-size: 32;font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;">Start Making your Plan Here</h1>
+					<?php if(isset($_GET['Message'])){?>
+						<p style="text-align: center; color: #f99500;"><b>
+							<?php	echo $_GET['Message'];?>
+						</b></p>
+						<?php
+					}?>
+		<div class="row" style = "padding-top: 5%;">
 			<a href = "../makePlan_exisiting" class="generalButton"> From Existing Plans</a>
 			<a href = "../makePlan_customized" class="generalButton"> Customized Plan</a>
 		</div>
@@ -77,14 +82,6 @@ if(checkSession()){
 
 					<h1 style="text-align: center;"> Attractions </h1>
 
-					
-
-					<?php if(isset($_GET['Message'])){?>
-						<p><b>
-							<?php	echo $_GET['Message'];?>
-						</b></p>
-						<?php
-					}?>
 
 					<div style="width: 100%">
 						<div class="Search">
