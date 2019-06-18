@@ -494,6 +494,7 @@ div.footer>div.links{
 /*    font-size: 3%;
 */    font-family: 'Open Sans', sans-serif;
     font-weight: bolder;
+    border-radius: 10px;
 }
 
 .generalButton:link, .generalButton:visited {
