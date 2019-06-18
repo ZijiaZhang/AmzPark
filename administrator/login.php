@@ -26,11 +26,11 @@ $(function(){
 
 <div class = "formContainer">
 <form action ="" method="post">
+	<h1 class = "title">Employee Login</h1>
 	<div id="message box"> <?php  if (isset($message)) echo $message; ?></div>
 	<input type = "text" name = "username" class = "box" placeholder="Username" /><br /><br />
     <input type = "password" name = "password" class = "box" placeholder="Password" /><br/><br />
-    <input name = "submit" type = "submit" value = "LOGIN "/><br />
-    <a pos="inform" href="../recoverAccount">Forget Password</a>
+    <input name = "submit" type = "submit" value = "LOGIN "/>
     <br>
 
 </form>

@@ -8,8 +8,21 @@
 		$pname = $_POST["pname"];
 
 
-         echo "$pname";
+      //  var_dump($_POST);
+?>
 
+<?php if(isset($_GET['Message'])){
+		$Message = $_GET['Message'];
+	}
+
+	?>
+	<p><?php echo $Message;?></p>
+
+
+ 
+
+	
+<?php
 	//var_dump($_POST);
 		$query = "";
 		if($Att!=""){
@@ -31,7 +44,6 @@
 
 	/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
 	while ($row = OCI_Fetch_Array($stid, OCI_BOTH)) { ?>
-		<a class = "attlink listanimation listitem">
 			<div class = "image contianer attElem oneRow" data-aos="fade-up"
 			data-aos-duration="500" data-aos-once="false" data-aos-offset="-50"> 
 
@@ -66,7 +78,7 @@
 					</tr>
 					<tr>
 						<td>
-							<form action = "../makeCustomizedPlan.php" method="post">
+							<form action = "" method="post">
 								<input type = "hidden" name = "planName" value = "<?php echo $pname; ?>" />
 								<input type = "hidden" name = "attName" value = "<?php echo trim( $row["ATT_NAME"]); ?>" />
 								<input type="submit" name = "addAtt" value = "Add it to this Plan" />
@@ -76,7 +88,9 @@
 				</table>
 			</div>
 		</div>
-	</a>
 
 <?php } ?>
+
+
+
 </div>

@@ -90,12 +90,32 @@ function executeBoundSQL($cmdstr, $list) {
 			$stid = executeBoundSQL($command, $list1);
 		}catch(Exception $e){
 			echo $e.getMessage();
-			echo "ERROR";
+	//		echo "ERROR";
 			return false;
 		}
 		return ($t = oci_fetch($stid));
 
 	}
+
+
+	function ifExist2($v1, $v2, $keyname1, $keyname2, $database){
+		$list1 = array (
+			//":bind1" => $gid,
+			":bind1" => $v1,
+			//":bind3" => $pn,
+			":bind2" => $v2);
+
+		$command = "SELECT * FROM $database WHERE $keyname1 = :bind1 AND $keyname2 = :bind2";
+		try{
+			$stid = executeBoundSQL($command, $list1);
+		}catch(Exception $e){
+			echo $e.getMessage();
+			return false;
+		}
+		return ($t = oci_fetch($stid));
+
+	}
+
 
 
 	function insertInto($item, $database){
@@ -226,23 +246,7 @@ function executeBoundSQL($cmdstr, $list) {
 	}
 
 
-	function ifExist2($v1, $v2, $keyname1, $keyname2, $database){
-		$list1 = array (
-			//":bind1" => $gid,
-			":bind1" => $v1,
-			//":bind3" => $pn,
-			":bind2" => $v2);
 
-		$command = "SELECT * FROM $database WHERE $keyname1 = :bind1 AND $keyname2 = :bind2";
-		try{
-			$stid = executeBoundSQL($command, $list1);
-		}catch(Exception $e){
-			echo $e.getMessage();
-			return false;
-		}
-		return ($t = oci_fetch($stid));
-
-	}
 
 
 	function getPlan($GroupID){
@@ -259,14 +263,15 @@ function executeBoundSQL($cmdstr, $list) {
 
 
 
-	function copyAtt($pname1, $pname2){
-		$r = executeSQL("SELECT ATTNAME FROM ofVisiting WHERE PLANNUMBER = '$pname1'");
+	function getAtt($pname1){
+		$myAtt = array();
+		$att = executeSQL("SELECT ATTNAME FROM ofVisiting WHERE PLANNUMBER = '$pname1'");
 
-		insertIntoPlan($pname2);
-  
-        $array = oci_fetch_array($r);
-		foreach($array as $a){
-			insertIntoOfVisiting($pname2, $a);
+		while($a = oci_fetch_array($att)){
+			array_push($myAtt, $a);
 		}
+
+		return $myAtt;
+
 	}
 	?>

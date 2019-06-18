@@ -18,79 +18,97 @@
 <body style="margin: 0px" onload="initialize()" onresize="initializeatt()">
 
 
-	<?php if(isset($_GET['Message'])){?>
-		<p>
-			<?php	echo $_GET['Message'];?>
-		</p>
-		<?php
-	}?>
-
-	<?php if(isset($_GET['Success'])){?>
-		<p>
-			<?php	echo $_GET['Success'];?>
-		</p>
-		<?php
-	}?>
 
 
 	<?php 
 	include "../database.php";
 	include "../session.php";
 	$ispost =($_SERVER["REQUEST_METHOD"] == "POST");
-
+//	var_dump($_POST);
 	initializeSession();
 
 
 	if(checkSession()){
-		var_dump(session_id());
+//		var_dump(session_id());
 		$gname = $_SESSION['login_user'];
 	}else{
 		header('location: ../login');
 	}
 
 	if($ispost) {
+		//echo $gname;
 
-		var_dump($_POST);
+	//	var_dump($_POST);
+
+	// 	if (array_key_exists('createPlan', $_POST)){
+
+	// 		$pname = $_POST['planName'];
+
+	// 		if(ifExist($pname, 'PLANNUMBER' , 'PLAN')){
+	// 			$Message = "This plan name is used in an existing plan. Either choose it from existing or use a new name";
+	// 			header('location: ../makePlan_homepage/index.php?Message='.$Message);
+	// 		} else{
+	// 			try {
+	// 				insertIntoPlan($pname);
+	// 				insertIntoMadeBy($gname, $pname);
+	// 				$Message = "Plan created successfully";
+	// 			//	header('location: ./index.php?Message='.$Message);
+	// 			}catch (Exception $e){
+	// 				$Message = "Cannot Create Plan. Cannot insert into MadeBy table";
+	// 			}
+	// 		}
+
+	// 	}
+	// }
 
 		if (array_key_exists('createPlan', $_POST)){
 
 			$pname = $_POST['planName'];
 
-			if(!ifExist("'".$pname."'", 'PLANNUMBER' , 'PLAN')){
+			if(!ifExist($pname, 'PLANNUMBER' , 'PLAN')){
 				try {
 					insertIntoPlan($pname);
-				}catch (Exception $e){
-					echo $e->getMessage();
-					echo "Cannot Create Plan. Cannot insert into Plan table";
-				}
-			}
-			else{
-				echo "Cannot Create Plan. Because the Plan name has been used. Please use a new plan name";
-				$Error = urlencode("This plan name is used in an existing plan. Either choose it from existing or use a new name");
-				header('location: ../makePlan_homepage/index.php?Message='.$Error);
-			}
-
-
-			if(!ifExist2($gname, $pname, 'GROUPID', 'PLANNUMBER' , 'MadeBy')){
-				try {
 					insertIntoMadeBy($gname, $pname);
-					$Message = urlencode("Plan created successfully");
-					header('location: ./index.php?Message='.$Message);
+					$Message = "Plan created successfully";
+				//	header('location: ./index.php?Message='.$Message);
 				}catch (Exception $e){
-					echo "Cannot Create Plan. Cannot insert into MadeBy table";
+					$Message = "Cannot Create Plan. Cannot insert into MadeBy table";
 				}
-			}
-			else{
-				echo "There is already a plan with the same name in your plans. Please use a new name.";
-				$Error = urlencode("There is already a plan with the same name in your plans. Please use a new name.");
-				header('location: ../makePlan_customized/index.php?Message='.$Error);
+			} else{
+				$Message = "This plan name is used in an existing plan. Either choose it from existing or use a new name";
+				header('location: ../makePlan_homepage/index.php?Message='.$Message);
 			}
 
 		}
 	}
 
-	?>
+	if($ispost) {
+		$pname = $_POST['planName'];
+		$aname = $_POST['attName'];
 
+		if (array_key_exists('addAtt', $_POST)){
+			if(!ifExist2($pname, $aname, 'PLANNUMBER' , 'ATTNAME', 'ofVisiting')){
+				try {
+					insertIntoOfVisiting($pname,$aname);
+					
+				//header('location: ../addAttToPlan/index.php');
+					$Message = "Attraction added successfully";
+					
+				}catch (Exception $e){
+					$Message = "Error. Cannot add it to the plan.";
+				}
+			}
+			else{
+				$Message =  "This attraction is already in this plan";
+			}
+
+
+		}
+	}
+
+
+	?>
+	
 
 	<section id = "attractions">
 		<div class="component-wrapper " style="background-color: rgba(30,30,30,0.7)">
@@ -103,6 +121,18 @@
 
 					<a href="../makePlan_customized"><button>GO BACK To Previous Page</button> </a>
 					<a href="../makePlan_homepage"><button>GO BACK To make plan homepage</button> </a>
+
+
+
+					<?php if(isset($_GET['Message'])){
+						$Message = $_GET['Message'];
+					}
+
+					?>
+					<p><b><?php echo $Message;?></b></p>
+
+
+					
 					<div style="width: 100%">
 						<div class="Search">
 							<svg style="display: none">
