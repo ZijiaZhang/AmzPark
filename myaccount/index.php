@@ -447,7 +447,12 @@ h1{
 				echo "<tr><td>" . $row['ENTERTAINMENTNAME'] . "</td><td>" . $row['PERFORM_TIME'] . "</td></tr>";
 			}
 
-			echo "</table>";?>
+			echo "</table>";
+
+			$count = executeSQL("SELECT count(*) FROM Reservation_linkedTo_ManagedBy WHERE groupID = '$name' Group by groupID");
+			$c = oci_fetch_array($count);
+			echo "<p style = 'text-align:center'>The total number of reservation of group $name is $c[0]</p>";
+			?>
 
 		</section>
 	</div>
