@@ -1,6 +1,6 @@
 <?php
 	function initializeSession(){
-	session_save_path('/home/g/gary1999/sessions');
+	//session_save_path('/sessions/');
 	session_start();
 	}
 

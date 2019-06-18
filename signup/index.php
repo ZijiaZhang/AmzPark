@@ -89,8 +89,10 @@ select {
 
 
 <?php
+$name = "";
 include '../signup.php';
 $allAdult = array();
+
 ?>
 
 
