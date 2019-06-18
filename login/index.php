@@ -28,8 +28,6 @@ $(function(){
 });
 </script>
 
-
-</body>
 <div class= "nvbarSpliter"style="height: 100px"></div>
 
 
