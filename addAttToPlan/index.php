@@ -165,6 +165,12 @@
 								<input id = "attrWait" type="checkbox" name = "ShortWait">Exclude Long Waiting Time
 							</div>
 							<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+								<input id = "min" type="checkbox" name = "minWait">See which one has minimum waiting time
+							</div>
+							<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+								<input id = "max" type="checkbox" name = "maxWait">See which one has maximum waiting time
+							</div>
+							<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
 								<pre> Click on the image to see full information about this attraction</pre>
 							</div>
 						</div>
@@ -259,6 +265,14 @@
 		getAttractions();
 	});
 
+	$('#min').change(function(){
+		getAttractions();
+	});
+
+	$('#max').change(function(){
+		getAttractions();
+	});
+
 	
 
 	$('#search-attr').on('input',function(e){
@@ -268,9 +282,11 @@
 	function getAttractions() {
 		var today = $('input[name=noRPAttr]').is(':checked');
 		var wait = $('input[name=ShortWait]').is(':checked');
+		var shortWait = $('input[name=minWait]').is(':checked');
+		var longWait = $('input[name=maxWait]').is(':checked');
 		var query = $('#search-attr').val();
 		var pname = $('#planName').val();
-		$.post("../addAttToPlan/attractions.php", { today: today, wait: wait, attr: query, pname: pname},
+		$.post("../addAttToPlan/attractions.php", { today: today, wait: wait, shortWait: shortWait, longWait: longWait, attr: query, pname: pname},
 			function(data) {
 				$('#attrSpace').html(data);
 				initializeatt();
