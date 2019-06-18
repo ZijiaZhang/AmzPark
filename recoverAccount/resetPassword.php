@@ -3,10 +3,10 @@
 	$list1 = array(
 			":bind1" => $_POST["accountName"],
 			":bind2" => $_POST["adultnm"],
-			":bind3" => $_POST["contact"]
-
+			":bind3" => $_POST["contact"],
+			":bind4" => $_POST["GroupSize"]
 	);
-	$r = executeBoundSQL("SELECT * FROM groups INNER JOIN AdultVisitor_include ON groups.groupID = AdultVisitor_include.groupID WHERE groups.groupID = :bind1 and visitorname = :bind2 and CONTACT_INFO = :bind3",$list1);
+	$r = executeBoundSQL("SELECT * FROM groups INNER JOIN AdultVisitor_include ON groups.groupID = AdultVisitor_include.groupID WHERE groups.groupID = :bind1 and visitorname = :bind2 and CONTACT_INFO = :bind3 and groups.groupSize = :bind4",$list1);
 	$row = OCI_Fetch_Array($r, OCI_BOTH);
 	var_dump($row);
 	if($row){
