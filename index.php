@@ -10,7 +10,7 @@
 
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
+	<link href="https://fonts.googleapis.com/css?family=Muli:400,700|Overpass+Mono" rel="stylesheet">
 </head>
 
 <?php include "loader.php";?>
@@ -34,7 +34,7 @@
 		<div class = "component-wrapper">
 			<div class = "fullscreen" style="background-color: rgba(255,255,255,0.7)">
 				<div id= "head-line-container">
-					<h1 id="head-line"> Welcome to My Inn</h1>
+					<h1 id="head-line"> WELCOME TO AMZ PARK</h1>
 					<div class="row">
 						<a id = "UserLogin" class= "generalButton" href = "./signup">SIGN UP</a>
 						<a href = "./login" id = "EmployeeLogin" class= "generalButton"> LOGIN
@@ -78,7 +78,7 @@
 
 							</div>
 							<div style="width: 100%">
-								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content; width:-moz-fit-content;">
 									<input id = "showToday" type="checkbox" name = "onlyTodayShow"checked>Only Show Today
 								</div>
 							</div>
@@ -131,7 +131,7 @@
 							</div>
 						</div>
 						<div style="width: 100%">
-								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;width:-moz-fit-content;	">
 									<input id = "attrRP" type="checkbox" name = "noRPAttr"checked>Exclude Repairing
 								</div>
 							</div>
@@ -197,8 +197,8 @@
 
 
 		function initialize(){
-			getShows();
-			getAttractions();
+			// getShows();
+			// getAttractions();
 			initializeatt();
 
 		}
@@ -300,7 +300,8 @@
 	});
 
 	$(window).load(function(){
-
+		getShows();
+		getAttractions();
 		document.getElementsByTagName('body')[0].style.display = 'block';
 		initializeatt();
 		AOS.init();

@@ -1,49 +1,172 @@
- <html>
+<!-- <html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> Amz Park</title>
+	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
+	<link rel="stylesheet" type = "text/css" href="../server_files/css/mycss.css">
+	<link rel="stylesheet" href="../server_files/css/form.css">
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+
+<body style="margin: 0px;" onload="initialize()" onresize="initialize()">
+	<div class="slide-item" style="background-image:url(../server_files/images/park.jpg);background-repeat:no-repeat;background-position:left top;background-size:cover;height: 100%; position: fixed;float:all;width: 100%; opacity: 1;"></div>
+	<div id = "nav-placeholder">
+	
+    <ul id="primary_nav" class = "hiddenm"> 
+
+		<li class="active interactive">
+			<a id = "menu_control" href="javascript:void(0);" onclick="expand()">
+				<i class="fa fa-bars"></i>
+			</a>
+		</li>
+
+		<li class="current-menu-item">
+			<a href="#">Home</a>
+		</li>
+		<li class="active">
+			<a href="#shows">Shows</a>
+		</li>
+		<li class="active">
+			<a href="#attractions">Attractions</a>
+		</li>
+		<li class="active">
+			<a href="#info">Contact US</a>
+		</li>
+
+	</ul>
+
+
+</div>
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar.html");
+});
+</script> -->
+
+
+
 <p> <font size = "6"> <p style="text-align:center;">Entertainment Reservation System <p>
 
+<div style="margin-top:60px"></div>
 
-<p><font size="3"> Entertainment&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Perform Time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;Group ID </font></p>
+<div style="text-align: center">
+  <img src="live.jpg">
+</div>
 
-<form method = "POST" action="reservation.php">
-  <p><input type="text" style="font-size:16pt;" name="enterName" size="15">
-     <input type="text" style="font-size:16pt;" name="time" size="15">
-     <input type="text" style="font-size:16pt;" name="groupID" size="10">
-	 <input type="submit" style="font-size:20pt;" value="insert" name="insertsubmit"></p>
+<form action="makeReservation.php" method = "POST">
+  <p> <font size = "5">
+	<div style="margin-top:150px"></div>
+	
+	<div>
+	   <label>Entertainment</label>
+	   <input type="text" style="font-size:16pt;" name="enterName" size="15">
+	</div>
+
+	<div style="margin-top:20px"></div>
+
+	<div>
+     <label>Perform Time</label>
+     <input type="text" style="font-size:16pt;" name="time" placeholder="eg:20190701 14:00"size="15">
+	</div>
+
+	<div style="margin-top:20px"></div>
+
+	<div>
+	   <label>Group ID</label>
+		 <input type="text" style="font-size:16pt;" name="groupID" size="10">
+	</div>
+
+	<div style="margin-top:20px"></div>
+
+	<div>
+	 <input type="submit" value="Make reservation" name="insertsubmit"></p>
+	</div>
 </form>
+
+
+<div style="margin-top:150px"></div>
+
 
 <?php
 include "database.php";
+include "session.php";
 $ispost =($_SERVER["REQUEST_METHOD"] == "POST");
 
-$conNo = substr(md5(uniqid(rand(), true)),0,7);
+initializeSession();
+
+$conNo = (string) rand(10000000,99999999);
 if ($ispost){
-	if (array_key_exists('insertsubmit', $_POST)) {
+	echo "Your request has been submitted.";
 	$enterName = $_POST['enterName'];
 	$time = $_POST['time'];
 	$group = $_POST['groupID'];
-	if (!ifExist('enterName','name', 'Entertainments_Determin_Status_And_Arrange_Times1')) {
-		echo "Error: The entertainment does not exit!";
+	if (array_key_exists('insertsubmit', $_POST)) {
+		if (!ifExist($enterName,'name', 'ENTERTAINMENTS_DETERMIN_STATUS_AND_ARRANGE_TIMES1')) {
+		echo '<div style="font-size:1.25em;color:red">Error: The seleted entertainment does not exit! </div>';
 	}
-	else if (!fExist('time','perform_time', 'Entertainments_Determin_Status_And_Arrange_Times1')) {
-		echo "Error: The selected perform time does not exit!";
+	 if (!ifExist($time,'perform_time', 'ENTERTAINMENTS_DETERMIN_STATUS_AND_ARRANGE_TIMES1')) {
+		echo '<div style="font-size:1.25em;color:red">Error: The selected perform time does not exit! </div>';
 	}
-	else if (!fExist('group','groupID', 'Groups')) {
-		echo "Error: Your group does not exit!";
+	 if (!ifExist($group,'groupID', 'Groups')) {
+		echo '<div style="font-size:1.25em;color:red">Error: Your group does not exit! </div>';
 	}
-	else {
-		try {
-			insertIntoReservation($conNo,$groupID,$enterName,$time);
-			header('location: ./makeReservation');
+		else{
+			try {
+			insertIntoReservation($conNo,$group,$enterName,$time);
+			echo '<div style="font-size:1.25em;color:red">Error: Reservation has been made successfully! </div>';
+			$Success = urlencode("Reservation has been made successfully");
+			header('location: makeReservation.php?Message='.$Success);
 		} catch (Exception $e) {
-			echo "Error";
+				echo '<div style="font-size:1.25em;color:red">Error: ERROR!!!! </div>';
+			}
+		}
 		}
 		
-		
 	}
-}
-}
-
 ?>
+
+
+<section id = "info" >
+	<div class="simple-chord--wrapper component-wrapper" style="background-color: rgba(100,100,100,0.7);">
+		<div class="simple-chord--inner" style="opacity: 1; color: white">
+			<div class="h-font h2">Contact Us</div>
+			<div class="simple-chord--text body-text">
+				<div> 
+					<div>E-mail: &nbsp;<a class= "emaillink" href="mailto:abcd@gmail.com">&nbsp;&nbsp; abcd@gmail.com</a>
+					</div>
+					<div> Phone: &nbsp;&nbsp; (123)456-7890</div>
+					<div><br></div>2205 Lower Mall<br>
+					<div> Vancouver, BC, Canada</div>
+					<div>V6T1Z4<br></div> 
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section>
+
+
+
+<div class="component-wrapper">
+	<div style="background-color: rgba(0,0,0,1);width: 100%">
+
+		<div class="footer">
+
+			<div>
+				<div style="text-align: center; color: white;">
+				</div>
+			</div>
+			<div class="links">
+				<a  href="https://github.com/ZijiaZhang99">
+					<img src = "../server_files/icons/github-circle.png" >
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+
 </html>

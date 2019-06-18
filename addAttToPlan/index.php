@@ -83,8 +83,10 @@
 	}
 
 	if($ispost) {
-		$pname = $_POST['planName'];
-		$aname = $_POST['attName'];
+		if(isset($_POST['planName']))
+			$pname = $_POST['planName'];
+		if(isset($_POST['attName']))
+			$aname = $_POST['attName'];
 
 		if (array_key_exists('addAtt', $_POST)){
 			if(!ifExist2($pname, $aname, 'PLANNUMBER' , 'ATTNAME', 'ofVisiting')){
