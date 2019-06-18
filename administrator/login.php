@@ -1,12 +1,3 @@
-<?php
-	##print_r($_SESSION);
-	include_once ('../login.php');
-	include_once ('../session.php');
-	if(checkSession()){
-		header("location: ../myaccount");
-	}
-?>
-
 <html lang="en"><head>
 	<meta charset="UTF-8">
 	<title> Amz Park</title>
@@ -20,7 +11,7 @@
 <?php include "../loader.php"; ?>
 <body style="margin: 0px;">
 	<div id = "nav-placeholder">
-	
+
 </div>
 <script>
 $(function(){
@@ -28,21 +19,37 @@ $(function(){
 });
 </script>
 
-<div class= "nvbarSpliter"style="height: 100px"></div>
+
+</body>
+<div style="height: 100px"></div>
 
 
 <div class = "formContainer">
 <form action ="" method="post">
-	<div id="messagebox" class = "center" style = "color:#f99500; text-align: center;"> <?php  if (isset($message)) echo $message; ?></div>
-	<h1 class = "title">Visitor Login</h1>
+	<h1 class = "title">Employee Login</h1>
+	<div id="message box"> <?php  if (isset($message)) echo $message; ?></div>
 	<input type = "text" name = "username" class = "box" placeholder="Username" /><br /><br />
     <input type = "password" name = "password" class = "box" placeholder="Password" /><br/><br />
-    <input name = "submit" type = "submit" value = "LOGIN "/><br />
-    <a pos="inform" href="../recoverAccount">Forget Password</a>
+    <input name = "submit" type = "submit" value = "LOGIN "/>
     <br>
-    <a pos = "inform" href="../administrator/login.php">Employee Login</a>
+
 </form>
 </div>
 
 
 </html>
+
+<?php
+include 'database.php';
+$ispost = isset($_POST['submit']);
+if ($ispost) {
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	$result = executeSQL("SELECT * FROM administrator1 WHERE name = '$username' AND password = '$password'");
+	if ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+		header("location: ../administrator/adminSystem.php");
+	} else {
+		echo "Cannot login! Please check your username and password";
+	}
+}
+ ?>

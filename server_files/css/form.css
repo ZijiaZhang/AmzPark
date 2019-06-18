@@ -102,7 +102,7 @@
   }
 
   form div{
-    width: 60%;
+    width: 100%;
     display: block;
     position: relative;
     margin-left: auto;
@@ -115,7 +115,16 @@
   }
 
   label{
-    font-size: 24px;    
+    font-size: 24px; 
+  }
+  
+  .center{
+	    font-size: 24px;
+margin-left: auto;
+margin-right: auto;
+position: relative;
+
+display: table;   
   }
 
   hr{

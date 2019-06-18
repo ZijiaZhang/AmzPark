@@ -13,11 +13,11 @@
 <body style="margin: 0px;" onload="initialize()" onresize="initialize()">
 	<div class="slide-item" style="background-image:url(../server_files/images/park2.jpg);background-repeat:no-repeat;background-position:left top;background-size:cover;height: 100%; position: fixed;float:all;width: 100%; opacity: 1;"></div>
 	<div id = "nav-placeholder">
-	
+
 </div>
 
 
-<ul id="primary_nav" class = "hiddenm"> 
+<ul id="primary_nav" class = "hiddenm">
 
 		<li class="active interactive">
 			<a id = "menu_control" href="javascript:void(0);" onclick="expand()">
@@ -53,7 +53,7 @@ $(function(){
 				<div id= "head-line-container">
 					<h1 id="head-line"> Welcome to Hello World</h1>
 					<div class="row">
-						<a id = "centerB" class= "generalButton" href = "../login" > Log In
+						<a id = "admLogin" class= "generalButton" href = "../administrator/login.php" > Log In
 						</a>
 					</div>
 				</div>
@@ -63,19 +63,19 @@ $(function(){
 	</section>
 
 
-	
+
 <section id = "info" >
 	<div class="simple-chord--wrapper component-wrapper" style="background-color: rgba(100,100,100,0.7);">
 		<div class="simple-chord--inner" style="opacity: 1; color: white">
 			<div class="h-font h2">Contact Us</div>
 			<div class="simple-chord--text body-text">
-				<div> 
+				<div>
 					<div>E-mail: &nbsp;<a class= "emaillink" href="mailto:abcd@gmail.com">&nbsp;&nbsp; abcd@gmail.com</a>
 					</div>
 					<div> Phone: &nbsp;&nbsp; (123)456-7890</div>
 					<div><br></div>2205 Lower Mall<br>
 					<div> Vancouver, BC, Canada</div>
-					<div>V6T1Z4<br></div> 
+					<div>V6T1Z4<br></div>
 				</div>
 			</div>
 		</div>
