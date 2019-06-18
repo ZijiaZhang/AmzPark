@@ -111,6 +111,9 @@ if(checkSession()){
 							<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
 								<input id = "max" type="checkbox" name = "maxWait">See which one has maximum waiting time
 							</div>
+							<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+								<pre> Click on any place of a row to see full information about this attraction</pre>
+							</div>
 						</div>
 						<div id = "attrSpace"  class = "contianer attractions attlist">
 							<!--Reserve For Attractions-->

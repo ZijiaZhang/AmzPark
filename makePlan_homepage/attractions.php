@@ -35,16 +35,18 @@
 		echo $e->getMessage();
 	}
 //echo "string";
- 
+	
 
 	/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
 	while ($row = OCI_Fetch_Array($stid, OCI_BOTH)) { ?>
-		<a class = "attlink listanimation listitem">
+		<a class = "attlink listanimation listitem" href = "../ATT/?attname=<?php echo $row["ATT_NAME"]?>">
 			<div class = "image contianer attElem oneRow" data-aos="fade-up"
 			data-aos-duration="500" data-aos-once="false" data-aos-offset="-50"> 
 
 			<div class='attimage'>
-				<img class= "attimg"src = "../server_files/images/<?php echo trim($row["ATT_NAME"]);?>.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;" >
+				
+					<img class= "attimg"src = "../server_files/images/<?php echo trim($row["ATT_NAME"]);?>.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;" >
+			
 
 				<div style = "position: absolute; 
 				bottom: 6px;
