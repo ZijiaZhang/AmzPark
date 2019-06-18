@@ -40,7 +40,7 @@ function executeBoundSQL($cmdstr, $list) {
         attacks.  See the sample code below for how this function is
         used. */
         $success = true;
-        $db_conn = OCILogon ("***REMOVED***", '***REMOVED***', "***REMOVED***");
+        $db_conn =  OCILogon ("***REMOVED***", '***REMOVED***', "***REMOVED***");
         if (!$db_conn) {
         	throw new Exception('Cannot Connect to db');
         }

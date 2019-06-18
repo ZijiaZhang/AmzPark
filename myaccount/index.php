@@ -1,5 +1,6 @@
 <?php
 //include_once '../login.php';
+$message = "";
 include_once '../session.php';
 include_once '../database.php';
 initializeSession();
@@ -230,6 +231,7 @@ margin: 1%;
 <div id = "groupName">
 	Welcome, Group <?php echo $name;?>
 </div>
+
 <div class="fullWidth" style="text-align: center; color: red;"><?php echo $message; ?></div>
 <div id = "mainContainer">
 	

@@ -72,6 +72,7 @@ select {
 	<div style="margin-top:60px"></div>
 
 	<?php
+	$Message = "";
 	include "../database.php";
 	include "../session.php";
 	$ispost =($_SERVER["REQUEST_METHOD"] == "POST");
@@ -116,20 +117,20 @@ select {
 
 	if ($ispost) {
 		if (array_key_exists('checksubmit', $_POST)) {
-			$group_ID = $_POST['group_ID'];
+			$group_ID = $_POST['groupID'];
 			$result = executeSQL("SELECT entertainmentName, perform_time FROM Reservation_linkedTo_ManagedBy
 							 WHERE groupID = '$group_ID'");
 			$columNames = array("Entertainment Name", "Reserved Time");
 			echo "Here is the your reservations:";
 			echo "<table>";
 			echo "<tr>";
-			foreach ($columNames as $name){
-				echo "<th>$name</th>";
+			foreach ($columNames as $ooooname){
+				echo "<th>$ooooname</th>";
 			}
 			echo "</tr>";
 
 			while ($row = OCI_Fetch_Array($result, OCI_BOTH)){
-				echo "<tr><td>" . $row['entertainmentName'] . "</td><td>" . $row['perform_time'] . "</td></tr>";
+				echo "<tr><td>" . $row['ENTERTAINMENTNAME'] . "</td><td>" . $row['PERFORM_TIME'] . "</td></tr>";
 			}
 
 			echo "</table>";	
@@ -184,13 +185,13 @@ select {
 			<input type="submit" value="Make reservation" name="insertsubmit"></p>
 		</div>
 
-		<p>If you wish to check your reservation, enter your group ID and then press the check reservation button.</p>
-
-		<div>
+		<!-- <p>If you wish to check your reservation, enter your group ID and then press the check reservation button.</p>
+ -->
+		<!-- <div>
 			<label  class = "center">Group ID</label>
 			<input type="hidden" name="group_ID" value="<?php echo$name;?>" />
 			<input type="text" style="font-size:16pt; background-color: rgba(100,100,100,0.5);" name="groupID" size="10" value = '<?php echo$name;?>'disabled>
-		</div>
+		</div> -->
 		
 		<div>
 		    <input type="submit" value="Check reservation" name="checksubmit"></p>
