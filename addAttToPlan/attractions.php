@@ -1,6 +1,8 @@
 <div class = "column">
-	<?php 
-	include_once '../database.php';
+		<?php 
+		$Message = "";
+		include_once '../database.php';
+
 
 	$NoRepair = $_POST["today"];
 	$ShortWait = $_POST["wait"];

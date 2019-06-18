@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/mycss.css">
 	<link rel="stylesheet" href="../server_files/css/form.css">
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Muli:400,700|Overpass+Mono" rel="stylesheet">
 </head>
 
 	<!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
@@ -24,7 +25,7 @@
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head> -->
 
-<body style="margin: 0px;" onload="initialize()" onresize="initialize()">
+<body style="margin: 0px;">
 	<div class="slide-item" style="background-image:url(../server_files/images/park.jpg);background-repeat:no-repeat;background-position:left top;background-size:cover;height: 100%; position: fixed;float:all;width: 100%; opacity: 1;"></div>
 	<div id = "nav-placeholder">
 		
@@ -55,7 +56,7 @@
 	</div>
 	<script>
 		$(function(){
-			$("#nav-placeholder").load("navbar.html");
+			$("#nav-placeholder").load("../navbar.html");
 		});
 	</script>
 
@@ -66,7 +67,7 @@
 		<div style="height: 100px; width: 100%; padding: 0px;"></div>
 		
 		<div style="height: 130px; width: 100%; padding: 0px;">
-			<a href="../makePlan_homepage"><button>GO BACK To Previous Page</button> </a>
+			<a href="../makePlan_homepage"><button>Go Back to Make Plan Home Page</button> </a>
 			
 			
 		</div>
@@ -76,7 +77,7 @@
 
 			<form action ="../addAttToPlan/index.php" method="post">
 				<label> Create a plan: </label>  
-				<input  type = "text" name = "planName" class = "box name" placeholder="Name of the plan" value = "<?php echo $pname;?>" required>
+				<input  type = "text" name = "planName" class = "box name" placeholder="Name of the plan" value = "" required>
 				<p class = "name-help"> Name should be no more than 20 characters including the space.</p>
 
 				<input type = "submit" value = " Create " name="createPlan" /><br />
