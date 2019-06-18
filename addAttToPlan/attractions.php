@@ -64,7 +64,7 @@
 		data-aos-duration="500" data-aos-once="false" data-aos-offset="-50"> 
 
 		<div class='attimage'>
-			<a href = "../ATT/?attname=<?php echo $row["ATT_NAME"]?>" >
+			<a href = "../ATT/?attname=<?php echo $row["ATT_NAME"]?>" target = "_blank" >
 				<img class= "attimg"src = "../server_files/images/<?php echo trim($row["ATT_NAME"]);?>.jpg" style="border-radius:16px;margin-left:0; width: 100%;float:left;">
 			</a>
 
