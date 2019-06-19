@@ -1,6 +1,6 @@
 <html lang="en"><head>
 	<meta charset="UTF-8">
-	<title> Amz Park</title>
+	<title> My Plans</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/plan.css">
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/mycss.css">
@@ -53,11 +53,9 @@ if(checkSession()){
 
 
 
-	<a href="../myaccount"><button>GO BACK To My Account</button> </a>
-	<p></p>
-	<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;color:red"> Note: To modify a plan, you have to provide a new name for the plan being changed so that other people using this plan won't be affected.
-		<p></p>
-	</div>
+<a href="../myaccount"><button>GO BACK To My Account</button> </a>
+<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;color:red"> Note: if you want to add or delete attraction to or from a plan. <br> You will need to provide a new name for the changed plan so that other people using the original plan won't be affected.
+</div>
 
 
 
@@ -145,8 +143,6 @@ if(checkSession()){
 				echo "<b>"."You have not added this plan to your own plan list yet. Please only modify a plan in your own list."."</b>";
 			}
 		}
-
-
 		else if($_POST['submit'] == 'delFromPlan'){
 			$pname = $_POST['del_from_plan'];
 			$pnameNew = $_POST['del_from_plan_new'];
@@ -184,8 +180,6 @@ if(checkSession()){
 				} catch(Exception $e){
 					echo "<b>"."Error when changing from original plan to new plan."."</b>";
 				}
-
-
 				if(!ifExist2($pname, $aname, 'PLANNUMBER', 'ATTNAME', 'ofVisiting')){
 					echo "<b>"."The attraction you entered is NOT in this plan. No change to your original plan. New plan NOT created."."</b>";
 					executeSQL("UPDATE madeBy set plannumber = '$pname' where groupid='$name'and plannumber = '$pnameNew'");
@@ -285,38 +279,38 @@ if(checkSession()){
 
 	?>
 
-	<style>
-		#myPlans tr td, #myPlans tr th{
-			border-style: solid;
-			border-width: 2px;
-			border-color:black;
-			color:black;
-		}
-		#myPlans{
-			border-collapse: collapse;
-		}
+<style>
+#myPlans tr td, #myPlans tr th{
+border-style: solid;
+border-width: 2px;
+border-color:black;
+color:black;
+}
+#myPlans{
+border-collapse: collapse;
+}
 
-		.plButtons{
-			display:flex;
-		}
+.plButtons{
+display:block;
+}
 
-		@media screen and (max-width: 790px) {
-			.plButtons{
-				display: block;
-			}
-			.popup{
-				width: 100%;
-			}
-			.center{
-				display: flex;
-			}
-		}
+@media screen and (max-width: 790px) {
+    .plButtons{
+    display: block;
+    }
+    .popup{
+    width: 100%;
+    }
+    .center{
+    display: flex;
+    }
+}
 
-		.popup{
-			border-style: solid;
-			border-color: #f99500;
-		}
-	</style>
+.popup{
+    border-style: solid;
+    border-color: #f99500;
+}
+</style>
 	<div class = "plButtons" style="">
 		<div id = "modify_add" >
 			<button id="attPanelButton" onclick="ToggleForm()" >Add Attraction To A Plan</button>

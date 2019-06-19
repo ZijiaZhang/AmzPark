@@ -1,6 +1,6 @@
 <html lang="en"><head>
 	<meta charset="UTF-8">
-	<title> Amz Park</title>
+	<title> Add Attraction To Plan</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/mycss.css">
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
@@ -166,7 +166,7 @@ $(function(){
 					$r = executeBoundSQL("SELECT LISTAGG(ATTNAME, ', ') WITHIN GROUP (ORDER BY ATTNAME) FROM ofVisiting WHERE PLANNUMBER = :bind1 GROUP BY PLANNUMBER",$list1);
 					echo oci_fetch_array($r)[0];
 				}catch(Exception $e){
-					//
+					
 				}
 				?>
 
@@ -198,7 +198,7 @@ $(function(){
 					</div>
 					<div style="width: 100%">
 						<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
-							<input id = "attrRP" type="checkbox" name = "noRPAttr" checked>Exclude Repairing
+							<input id = "attrRP" type="checkbox" name = "noRPAttr">Exclude Repairing
 						</div>
 						<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
 							<input id = "attrWait" type="checkbox" name = "ShortWait">Exclude Long Waiting Time
