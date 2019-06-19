@@ -281,10 +281,12 @@ try{
 	<div class = "nvbarSpliter" style="height: 100px"></div>
 
 
-	<div class="fullWidth" style="text-align: center; color: red;"><?php echo $message; ?></div>
+	
 	<div id = "mainContainer">
+
 		<div id = "accWraper">
 			<div id = "accinfo">
+				<div class="fullWidth" style="text-align: center; color: red;"><?php echo $message; ?></div>
 				<div id = "groupName">
 					Welcome, Group <?php echo $name;?>
 				</div>
@@ -293,7 +295,7 @@ try{
 				<p>Your Group Size is <a> <?php echo $groupSize;?> </a></p>
 				<div class="row" style="height: auto;">
 					<h1 class="fullWidth"> Adults </h1>
-					<button id="adultPanelButton" onclick="ToggleForm()" style="margin: 1em;">Create Adult</button>
+					<button id="adultPanelButton" onclick="ToggleForm()" style="margin: 1em;">Add Adult</button>
 				</div>
 				<div class="popup" id="adultAddform">
 					<form action="" class="form-container" method = "post">
@@ -357,7 +359,7 @@ try{
 				<div class="row" style="height: auto;">		
 					<h1 class="fullWidth"> Children </h1>
 
-					<button id="childPanelButton" onclick="ToggleChildForm()" style="margin: 1em;">Create Children</button>
+					<button id="childPanelButton" onclick="ToggleChildForm()" style="margin: 1em;">Add Children</button>
 				</div>
 
 				<div class="popup" id="childAddform">
@@ -375,7 +377,7 @@ try{
 							<tr>
 								<td>
 
-									<label for="contact"><b>Responsible Adult</b></label>
+									<label for="contact" style="word-wrap: break-word;"><b>Responsible Adult</b></label>
 								</td>
 								<td>
 									<input type="text" placeholder="Enter Name of the Adult" name="ins_radult" style="border-width: 2px; border-style: solid;" required>
@@ -432,11 +434,6 @@ try{
 					<a href="../makePlan_homepage" class = "generalButton" style = "background-color: green"> Make Plans</a>
 					<a href="../makePlan_mine" class = "generalButton" style = "background-color: blue">See My Plans</a>
 				</div>
-				<?php
-			$count = executeSQL("SELECT count(*) FROM madeBy WHERE groupID = '$name' Group by groupID");
-			$c = oci_fetch_array($count);
-			?> 
-			<p style = 'text-align:center'>You have <?php echo $c[0]?> Plans: </p>
 				<table id = "planInfo" class = "halfWidth bd">
 					<tr><th>Plan</th><th>Delete</th></tr>
 					<?php foreach($myplans as $plan){ ?>
