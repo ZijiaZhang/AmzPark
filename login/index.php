@@ -28,20 +28,19 @@ $(function(){
 });
 </script>
 
-
-</body>
-<div style="height: 100px"></div>
+<div class= "nvbarSpliter"style="height: 100px"></div>
 
 
 <div class = "formContainer">
 <form action ="" method="post">
-	<div id="message box"> <?php  if (isset($message)) echo $message; ?></div>
+	<div id="messagebox" class = "center" style = "color:#f99500; text-align: center;"> <?php  if (isset($message)) echo $message; ?></div>
+	<h1 class = "title">Visitor Login</h1>
 	<input type = "text" name = "username" class = "box" placeholder="Username" /><br /><br />
     <input type = "password" name = "password" class = "box" placeholder="Password" /><br/><br />
     <input name = "submit" type = "submit" value = "LOGIN "/><br />
     <a pos="inform" href="../recoverAccount">Forget Password</a>
     <br>
-    <a pos = "inform" href="../administrator">Employee Login</a>
+    <a pos = "inform" href="../administrator/login.php">Employee Login</a>
 </form>
 </div>
 

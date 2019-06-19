@@ -18,9 +18,9 @@ if(checkSession()){
 }
 
 
-if(isset($_GET['Message'])){
-    echo $_GET['Message'];
-}
+// if(isset($_GET['Message'])){
+//     echo $_GET['Message'];
+// }
 
 if($ispost) {
       // username and password sent from form 
@@ -33,13 +33,15 @@ if($ispost) {
 	if(!ifExist2($name, $pname, 'GROUPID', 'PLANNUMBER' , 'MadeBy')){
 		try {
 			insertIntoMadeBy($name, $pname);
-			$Message = urlencode("Plan added successfully");
+			$Message = "Plan added successfully";
 			header('location: ./makePlan_exisiting/index.php?Message='.$Message);
 		}catch (Exception $e){
-			echo "Cannot Create Plan";
+			echo "Cannot Create Plan because of some error";
 		}
 	}else{
-		echo "There is already a plan with the same name in your plans. Please use a new name.";
+		$Message = "There is already a plan with the same name in your plans.";
+		header('location: ./makePlan_exisiting/index.php?Message='.$Message);
+		
 	}
 }
 
