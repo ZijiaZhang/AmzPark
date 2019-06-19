@@ -1,25 +1,12 @@
-<div class = "column">
 	<?php 
 	include_once '../database.php';
 
-	// if(
-	// 	$NoRepair = $_POST["today"]
-	// 	&& $Att = $_POST["attr"]
-	// ){
-	// 	$query = "";
-	// 	if($Att!=""){
-	// 		$query = "and upper(A.ATT_NAME) LIKE upper('%$Att%')";
-	// 	}
-
-	// 	$Repir = "";
-	// 	if($NoRepair == "true"){
-	// 		$Repir = "and A.STATUS = 'OPEN'";
-	// 	}
-	// }
-	//$query = "";
-	//$Repir = "";
+	
 	$NoRepair = $_POST["today"];
 	$Att = $_POST["attr"];
+	$Swait = $_POST["shortWait"];
+	$Lwait = $_POST["longWait"];
+
 	$query = "";
 	if($Att!=""){
 		$query = "and upper(A.ATT_NAME) LIKE upper('%$Att%')";
@@ -29,13 +16,26 @@
 	if($NoRepair == "true"){
 		$Repir = "and A.STATUS = 'OPEN'";
 	}
+
+	$minTime ="";
+	if($Swait == "true"){
+		$minTime = "INTERSECT SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME, A.STATUS FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity AND B.expected_Waiting_Time = (SELECT MIN(C.expected_Waiting_Time) FROM Attractions_Insepect_And_Determines_Status2 C)";
+	}
+
+
+	$maxTime = "";
+	if($Lwait == "true"){
+		$maxTime = "INTERSECT SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME, A.STATUS FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity AND B.expected_Waiting_Time = (SELECT MAX(C.expected_Waiting_Time) FROM Attractions_Insepect_And_Determines_Status2 C)";
+	}
+
+
 	try{
-		$stid = executeSQL("SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME, A.STATUS FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity $query $Repir");
+		$stid = executeSQL("SELECT A.ATT_NAME,A.OPEN_TIME,A.CLOSE_TIME, B.EXPECTED_WAITING_TIME, A.STATUS FROM Attractions_Insepect_And_Determines_Status1 A, Attractions_Insepect_And_Determines_Status2 B WHERE A.capacity = B.capacity $query $Repir $minTime $maxTime");
 	}catch(Exception $e){
 		echo $e->getMessage();
 	}
 //echo "string";
-
+ 
 
 	/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
 	while ($row = OCI_Fetch_Array($stid, OCI_BOTH)) { ?>

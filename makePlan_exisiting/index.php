@@ -88,8 +88,8 @@ button{
 								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
 									<input id = "planAdded" type="checkbox" name = "alreadyIn">Exclude those already added in Mine
 								</div>
-								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
-									<pre> <b> Note: Empty plans (plans with no attractions in it) will not appear here </b></pre>
+								<div style="position: relative;margin-left: auto;margin-right: auto; width:100%; text-align: center;">
+									Note: Empty plans (plans with no attractions in it) will not appear here
 								</div>
 							</div>
 							<div id = "attrSpace"  class = "contianer attractions attlist">

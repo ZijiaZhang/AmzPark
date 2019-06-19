@@ -21,7 +21,7 @@
 
 	/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
 	while ($row = OCI_Fetch_Array($stid, OCI_BOTH)) { ?>
-		<a class = "attlink listanimation listitem" href = "./ATT/?attname=<?php echo $row["ATT_NAME"]?>">
+		<a class = "attlink listanimation listitem" href = "./ATT/?attname=<?php echo $row["ATT_NAME"]?>" target = "_blank">
 			<div class = "image contianer attElem oneRow" data-aos="fade-up"
 			data-aos-duration="500" data-aos-once="false" data-aos-offset="-50"> 
 

@@ -21,9 +21,6 @@ initializeSession();
 #print_r($_SESSION);
 
 if(checkSession()){
-        //header('location: ./account');
-	echo "Your Session ID: ";
-	var_dump(session_id());
 	$name = $_SESSION['login_user'];
 }else{
 	header('location: ../login');
@@ -57,8 +54,7 @@ if(checkSession()){
 
 
 <a href="../myaccount"><button>GO BACK To My Account</button> </a>
-<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
-	<pre style="color:red"> <b> Note: if you want to add or delete attraction to or from a plan. <br> You will need to provide a new name for the changed plan so that other people using the original plan won't be affected.</b></pre>
+<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;color:red"> Note: if you want to add or delete attraction to or from a plan. <br> You will need to provide a new name for the changed plan so that other people using the original plan won't be affected.
 </div>
 
 
@@ -139,13 +135,13 @@ if(isset($_POST['submit'])){
 		echo "<b>"."Cannot create this new plan, possibly because there is an existing plan with the same name. Try a new name."."</b>";
 		 return;
 			}
-
+			foreach($Att as $a){
 			try{
 					insertIntoOfVisiting($pnameNew,$a[0]);
 				} catch(Exception $e){
 					echo"Error when adding all attractions in original plan to new plan";
 				}
-
+			}
 			try{
 				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pname'");
 			}catch(Exception $e){
@@ -183,11 +179,32 @@ if(isset($_POST['submit'])){
 #myPlans{
 	border-collapse: collapse;
 }
+
+.plButtons{
+	display:block;
+}
+
+@media screen and (max-width: 790px) {
+	.plButtons{
+		display: block;
+	}
+	.popup{
+		width: 100%;
+	}
+	.center{
+		display: flex;
+	}
+}
+
+.popup{
+	border-style: solid;
+	border-color: #f99500;
+}
 </style>
-<div style="display:flex">
+<div class = "plButtons" style="">
 <div id = "modify_add" >
 	<button id="attPanelButton" onclick="ToggleForm()" >Add Attraction To A Plan</button>
-	<div class="popup" id="AddAttform" style="display:none; position:absolute; background-color:white;z-index:9;">
+	<div class="popup" id="AddAttform" style="display:none;background-color:white;z-index:9;">
 			<form action="" class="form-container" method = "post">
 		
 			<h1>ADD Attraction</h1>
@@ -227,7 +244,7 @@ if(isset($_POST['submit'])){
 
 <div id = "modify_delete">
 	<button id="att2PanelButton" onclick="ToggleForm2()">Delete Attraction From A Plan</button>
-	<div class="popup" id="DeleteAttform" style="display:none; position:absolute; background-color:white;z-index:9;">
+	<div class="popup" id="DeleteAttform" style="display:none; background-color:white;z-index:9;">
 		<form action="" class="form-container" method = "post">
 			<h1>Delete Attraction</h1>
 			<table>
