@@ -1,7 +1,7 @@
 <html lang="en"><head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<meta charset="UTF-8">
-	<title> Amz Park</title>
+	<title> From Existing Plans</title>
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/mycss.css">
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/plan.css">
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
@@ -27,10 +27,10 @@ if(checkSession()){
 ?>
 <style>
 button{
-    background-color: #00dcff;
-    border-radius: 10px;
-    color: white;
-    font-size: 24px;
+	background-color: #00dcff;
+	border-radius: 10px;
+	color: white;
+	font-size: 24px;
 }
 </style>
 <body>
@@ -52,12 +52,12 @@ button{
 				<div class="att-outer">
 					<a href="../makePlan_homepage"><button>Go Back to Make Plan Home Page</button> </a>
 					<?php if(isset($_GET['Message'])){?>
-						<p><b>
+						<p style="text-align: center; color: red;font-size: 32px;"><b>
 							<?php	echo $_GET['Message'];?>
 						</b></p>
 						<?php
 					}?>
-				
+					
 
 					<h1 style="text-align: center;"> Existing Plans </h6>
 						<div style="width: 100%">
