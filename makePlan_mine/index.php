@@ -21,9 +21,6 @@ initializeSession();
 #print_r($_SESSION);
 
 if(checkSession()){
-        //header('location: ./account');
-	echo "Your Session ID: ";
-	var_dump(session_id());
 	$name = $_SESSION['login_user'];
 }else{
 	header('location: ../login');
@@ -57,8 +54,7 @@ if(checkSession()){
 
 
 <a href="../myaccount"><button>GO BACK To My Account</button> </a>
-<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
-	<pre style="color:red"> <b> Note: if you want to add or delete attraction to or from a plan. <br> You will need to provide a new name for the changed plan so that other people using the original plan won't be affected.</b></pre>
+<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;color:red"> Note: if you want to add or delete attraction to or from a plan. <br> You will need to provide a new name for the changed plan so that other people using the original plan won't be affected.
 </div>
 
 
@@ -183,8 +179,29 @@ if(isset($_POST['submit'])){
 #myPlans{
 	border-collapse: collapse;
 }
+
+.plButtons{
+	display:flex;
+}
+
+@media screen and (max-width: 790px) {
+	.plButtons{
+		display: block;
+	}
+	.popup{
+		width: 100%;
+	}
+	.center{
+		display: flex;
+	}
+}
+
+.popup{
+	border-style: solid;
+	border-color: #f99500;
+}
 </style>
-<div style="display:flex">
+<div class = "plButtons" style="">
 <div id = "modify_add" >
 	<button id="attPanelButton" onclick="ToggleForm()" >Add Attraction To A Plan</button>
 	<div class="popup" id="AddAttform" style="display:none; position:absolute; background-color:white;z-index:9;">
