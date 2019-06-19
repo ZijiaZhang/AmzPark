@@ -1,6 +1,6 @@
 <html lang="en"><head>
 	<meta charset="UTF-8">
-	<title> Amz Park</title>
+	<title> My Plans</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/plan.css">
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/mycss.css">
@@ -135,13 +135,13 @@ if(isset($_POST['submit'])){
 		echo "<b>"."Cannot create this new plan, possibly because there is an existing plan with the same name. Try a new name."."</b>";
 		 return;
 			}
-
+			foreach($Att as $a){
 			try{
 					insertIntoOfVisiting($pnameNew,$a[0]);
 				} catch(Exception $e){
 					echo"Error when adding all attractions in original plan to new plan";
 				}
-
+			}
 			try{
 				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pname'");
 			}catch(Exception $e){
@@ -181,7 +181,7 @@ if(isset($_POST['submit'])){
 }
 
 .plButtons{
-	display:flex;
+	display:block;
 }
 
 @media screen and (max-width: 790px) {
@@ -204,7 +204,7 @@ if(isset($_POST['submit'])){
 <div class = "plButtons" style="">
 <div id = "modify_add" >
 	<button id="attPanelButton" onclick="ToggleForm()" >Add Attraction To A Plan</button>
-	<div class="popup" id="AddAttform" style="display:none; position:absolute; background-color:white;z-index:9;">
+	<div class="popup" id="AddAttform" style="display:none;background-color:white;z-index:9;">
 			<form action="" class="form-container" method = "post">
 		
 			<h1>ADD Attraction</h1>
@@ -244,7 +244,7 @@ if(isset($_POST['submit'])){
 
 <div id = "modify_delete">
 	<button id="att2PanelButton" onclick="ToggleForm2()">Delete Attraction From A Plan</button>
-	<div class="popup" id="DeleteAttform" style="display:none; position:absolute; background-color:white;z-index:9;">
+	<div class="popup" id="DeleteAttform" style="display:none; background-color:white;z-index:9;">
 		<form action="" class="form-container" method = "post">
 			<h1>Delete Attraction</h1>
 			<table>
