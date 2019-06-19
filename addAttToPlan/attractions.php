@@ -1,3 +1,27 @@
+<style>
+	input[name=addAtt]{
+		background: #4d90fe;
+		border-color: #3079ed;
+		font-weight: bold;
+		margin: 0 0 0 0;
+		color: #fff;
+		width: 80%;
+		height: 100%;
+		border-radius: 5px;
+		padding: 8px 0px 8px 8px;
+		/* font-size: 3%; */
+		position: relative;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+	}
+	@media screen and (max-width: 790px) {
+		input[name=addAtt]{
+			padding: 0 0 0 0;
+			width: 20vw;
+			font-size: 2vw;
+	}
+</style>
 <div class = "column">
 	<?php 
 	$Message = "";
@@ -80,24 +104,6 @@
 			<p style="color: #000;font-size: 50%"><?php echo trim( $row["ATT_NAME"]); ?></p>
 		</div>
 	</div>
-	<style>
-	input[name=addAtt]{
-		background: #4d90fe;
-		border-color: #3079ed;
-		font-weight: bold;
-		margin: 0 0 0 0;
-		color: #fff;
-		width: 80%;
-		height: 100%;
-		border-radius: 5px;
-		padding: 8px 0px 8px 8px;
-		/* font-size: 3%; */
-		position: relative;
-		margin-left: auto;
-		margin-right: auto;
-		display: block;
-	}
-</style>
 <div class="table-wrap">
 	<table class= "attinfo">
 		<tr>
