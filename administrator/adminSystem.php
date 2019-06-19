@@ -55,8 +55,8 @@ include "database.php";
     border-style: solid;
   }
   .tableWrap{
-    width: -webkit-fit-content; 
-    width: -moz-fit-content; 
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     margin: auto;
   }
 
@@ -103,7 +103,7 @@ include "database.php";
     background: #ebf4ee;
   }
 </style>
-<div class = "mainContainer"> 
+<div class = "mainContainer">
   <div class = "left-sidebar">
 
     <header>
@@ -195,7 +195,7 @@ include "database.php";
                   foreach ($rs as $option) {
                     echo "<option value='$option'>$option</option>\n";
                   }
-                } 
+                }
                 ?>
               </select>
             </td>
@@ -450,9 +450,14 @@ include "database.php";
           where name='$entName' and perform_time='$performTime'");
         OCICommit($db_conn);
         echo "Updated successfully";
-        $result = executeSQL("select * from ENTERTAINMENTS_DETERMIN_STATUS_AND_ARRANGE_TIMES1");
+        $result = executeSQL("select * from ENTERTAINMENTS_DETERMIN_STATUS_AND_ARRANGE_TIMES1 ORDER BY name");
       } else {
-        echo "Cannot find the record";
+        echo "Cannot find the record\n";
+        $columnNames = array("Name", "Perform Time", "Status");
+        executeSQL("insert into ENTERTAINMENTS_DETERMIN_STATUS_AND_ARRANGE_TIMES1 values('$entName','$performTime','$entStatus')");
+        OCICommit($db_conn);
+        echo "Create a new record of entertainment.";
+        $result = executeSQL("select * from ENTERTAINMENTS_DETERMIN_STATUS_AND_ARRANGE_TIMES1 ORDER BY name");
       }
 
 
