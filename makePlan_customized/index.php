@@ -1,6 +1,6 @@
 <html lang="en"><head>
 	<meta charset="UTF-8">
-	<title> Amz Park</title>
+	<title> Customized Plan</title>
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/mycss.css">
