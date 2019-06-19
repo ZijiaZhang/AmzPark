@@ -105,7 +105,7 @@ function executeBoundSQL($cmdstr, $list) {
 		try{
 			$stid = executeBoundSQL($command, $list1);
 		}catch(Exception $e){
-			echo $e.getMessage();
+			echo $e->getMessage();
 			echo "ERROR";
 			return false;
 		}

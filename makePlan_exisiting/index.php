@@ -52,7 +52,7 @@ button{
 				<div class="att-outer">
 					<a href="../makePlan_homepage"><button>Go Back to Make Plan Home Page</button> </a>
 					<?php if(isset($_GET['Message'])){?>
-						<p><b>
+						<p style="text-align: center; color: red;font-size: 32px;"><b>
 							<?php	echo $_GET['Message'];?>
 						</b></p>
 						<?php
