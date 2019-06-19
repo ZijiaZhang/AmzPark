@@ -23,7 +23,7 @@ table{
 }
 
 .fullWidth{
-	width: 100%;
+	width: 98%;
 }
 
 .halfWidth{
@@ -31,4 +31,10 @@ table{
     position: relative;
     margin-left: auto;
     margin-right: auto;
+}
+
+@media screen and (max-width: 790px) {
+    .halfWidth{
+    width:75%;
+    }
 }

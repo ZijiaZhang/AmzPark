@@ -156,6 +156,7 @@ CREATE TABLE Reservation_linkedTo_ManagedBy(
   FOREIGN KEY(entertainmentName, perform_time) 
   REFERENCES Entertainments_Determin_Status_And_Arrange_Times1(name,     perform_time)
   ON DELETE CASCADE,
+  UNIQUE(groupID,entertainmentName,perform_time),
   FOREIGN KEY(groupID) REFERENCES Groups(groupID)
 );
 
@@ -240,7 +241,7 @@ insert into Administrator1
 
 
 insert into Administrator2
-  values( 'Tomorrowland','778-9999-0000');
+  values( 'Tomorrow Land','778-9999-0000');
 insert into Administrator2
   values( 'Fantasy Town','888-2233-5566');
 insert into Administrator2
@@ -317,20 +318,20 @@ Insert into Entertainments_Determin_Status_And_Arrange_Times1
   values('FW Fantasmic','20190630 20:30','OPEN');
 Insert into Entertainments_Determin_Status_And_Arrange_Times1  
   values('FW Fantasmic','20190708 20:30','CLOSED');
-Insert into Entertainments_Determin_Status_And_Arrange_Times1  
-  values('FW Fantasmic','20190710 20:30','OPEN');
-Insert into Entertainments_Determin_Status_And_Arrange_Times1  
-  values('FW Fantasmic','20190715 20:30','OPEN');
+-- Insert into Entertainments_Determin_Status_And_Arrange_Times1  
+--   values('FW Fantasmic','20190710 20:30','OPEN');
+-- Insert into Entertainments_Determin_Status_And_Arrange_Times1  
+--   values('FW Fantasmic','20190715 20:30','OPEN');
 Insert into Entertainments_Determin_Status_And_Arrange_Times1 
   values('FW Wonderland','20190626 20:30','OPEN');
 Insert into Entertainments_Determin_Status_And_Arrange_Times1  
   values('FW Wonderland','20190628 20:30','CLOSED');
 Insert into Entertainments_Determin_Status_And_Arrange_Times1  
   values('FW Wonderland','20190707 20:30','OPEN');
-Insert into Entertainments_Determin_Status_And_Arrange_Times1  
-  values('FW Wonderland','20190715 20:30','OPEN');
-Insert into Entertainments_Determin_Status_And_Arrange_Times1  
-  values('FW Wonderland','20190717 20:30','CLOSED');
+-- Insert into Entertainments_Determin_Status_And_Arrange_Times1  
+--   values('FW Wonderland','20190715 20:30','OPEN');
+-- Insert into Entertainments_Determin_Status_And_Arrange_Times1  
+--   values('FW Wonderland','20190717 20:30','CLOSED');
 Insert into Entertainments_Determin_Status_And_Arrange_Times1  
   values('Five Dime','20190701 14:00','OPEN');
 Insert into Entertainments_Determin_Status_And_Arrange_Times1  
@@ -339,14 +340,14 @@ Insert into Entertainments_Determin_Status_And_Arrange_Times1
   values('Five Dime','20190707 14:00','OPEN');
 Insert into Entertainments_Determin_Status_And_Arrange_Times1  
   values('Five Dime','20190707 19:00','OPEN');
-Insert into Entertainments_Determin_Status_And_Arrange_Times1  
-  values('Five Dime','20190711 14:00','OPEN');
-Insert into Entertainments_Determin_Status_And_Arrange_Times1  
-  values('Five Dime','20190711 19:00','OPEN');
-Insert into Entertainments_Determin_Status_And_Arrange_Times1  
-  values('Five Dime','20190715 14:00','OPEN');
-Insert into Entertainments_Determin_Status_And_Arrange_Times1  
-  values('Five Dime','20190715 19:00','OPEN');
+-- Insert into Entertainments_Determin_Status_And_Arrange_Times1  
+--   values('Five Dime','20190711 14:00','OPEN');
+-- Insert into Entertainments_Determin_Status_And_Arrange_Times1  
+--   values('Five Dime','20190711 19:00','OPEN');
+-- Insert into Entertainments_Determin_Status_And_Arrange_Times1  
+--   values('Five Dime','20190715 14:00','OPEN');
+-- Insert into Entertainments_Determin_Status_And_Arrange_Times1  
+--   values('Five Dime','20190715 19:00','OPEN');
 Insert into Entertainments_Determin_Status_And_Arrange_Times1  
   values('Five Dime','20190718 14:00','CLOSED');
 Insert into Entertainments_Determin_Status_And_Arrange_Times1  
@@ -363,26 +364,26 @@ Insert into Entertainments_Determin_Status_And_Arrange_Times1
   values('Jazzy','20190705 14:00','CLOSED');
 Insert into Entertainments_Determin_Status_And_Arrange_Times1  
   values('Jazzy','20190707 19:00','OPEN');
-Insert into Entertainments_Determin_Status_And_Arrange_Times1  
-  values('Jazzy','20190711 14:00','OPEN');
-Insert into Entertainments_Determin_Status_And_Arrange_Times1  
-  values('Jazzy','20190714 19:00','OPEN');
-Insert into Entertainments_Determin_Status_And_Arrange_Times1  
-  values('Jazzy','20190718 14:00','OPEN');
-Insert into Entertainments_Determin_Status_And_Arrange_Times1  
-  values('Jazzy','20190723 19:00','CLOSED');
+-- Insert into Entertainments_Determin_Status_And_Arrange_Times1  
+--   values('Jazzy','20190711 14:00','OPEN');
+-- Insert into Entertainments_Determin_Status_And_Arrange_Times1  
+--   values('Jazzy','20190714 19:00','OPEN');
+-- Insert into Entertainments_Determin_Status_And_Arrange_Times1  
+--   values('Jazzy','20190718 14:00','OPEN');
+-- Insert into Entertainments_Determin_Status_And_Arrange_Times1  
+--   values('Jazzy','20190723 19:00','CLOSED');
 Insert into Entertainments_Determin_Status_And_Arrange_Times1  
   values('Legend','20190702 14:00','OPEN');
 Insert into Entertainments_Determin_Status_And_Arrange_Times1  
   values('Legend','20190707 19:00','OPEN');
 Insert into Entertainments_Determin_Status_And_Arrange_Times1  
   values('Legend','20190711 14:00','CLOSED');
-Insert into Entertainments_Determin_Status_And_Arrange_Times1  
-  values('Legend','20190714 19:00','OPEN');
-Insert into Entertainments_Determin_Status_And_Arrange_Times1  
-  values('Legend','20190716 14:00','OPEN');
-Insert into Entertainments_Determin_Status_And_Arrange_Times1  
-  values('Legend','20190718 19:00','CLOSED');
+-- Insert into Entertainments_Determin_Status_And_Arrange_Times1  
+--   values('Legend','20190714 19:00','OPEN');
+-- Insert into Entertainments_Determin_Status_And_Arrange_Times1  
+--   values('Legend','20190716 14:00','OPEN');
+-- Insert into Entertainments_Determin_Status_And_Arrange_Times1  
+--   values('Legend','20190718 19:00','CLOSED');
 Insert into Entertainments_Determin_Status_And_Arrange_Times1  
   values('Mariachi Divas', '20190701 19:00','OPEN');
 Insert into Entertainments_Determin_Status_And_Arrange_Times1  
@@ -570,4 +571,4 @@ Insert into ofVisiting
 --   Values ('Stacy White', '00000005','Tom White','00000005');
 
 
-
+commit;

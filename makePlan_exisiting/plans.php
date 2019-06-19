@@ -5,7 +5,7 @@
 	include_once '../session.php';
 	include_once '../database.php';
 	initializeSession();
-print_r($_SESSION);
+//print_r($_SESSION);
 
 	if(checkSession()){
 		//header('location: ./account');
@@ -27,16 +27,16 @@ print_r($_SESSION);
 	//var_dump($_POST);
 	$query = "";
 	if($pl!=""){
-		$query = "and upper(B.PLANNUMBER) LIKE upper('%$pl%')";
+		$query = "WHERE upper(PLANNUMBER) LIKE upper('%$pl%')";
 	}
 
 
 	$add = "";
 	if($NotAdd == "true"){
-		$add = "MINUS SELECT B.PLANNUMBER, LISTAGG(B.ATTNAME, ',') WITHIN GROUP (ORDER BY B.ATTNAME) FROM ofVisiting B, madeby A WHERE A.PLANNUMBER = B.PLANNUMBER AND A.groupID='$name' GROUP BY B.PLANNUMBER";
+		$add = "MINUS SELECT B.PLANNUMBER, LISTAGG(B.ATTNAME, ', ') WITHIN GROUP (ORDER BY B.ATTNAME) FROM ofVisiting B, madeby A WHERE A.PLANNUMBER = B.PLANNUMBER AND A.groupID='$name' GROUP BY B.PLANNUMBER";
 	}
 
-	$stid = executeSQL("SELECT PLANNUMBER, LISTAGG(ATTNAME, ', ') WITHIN GROUP (ORDER BY ATTNAME) FROM ofVisiting GROUP BY PLANNUMBER $query $add");
+	$stid = executeSQL("SELECT PLANNUMBER, LISTAGG(ATTNAME, ', ') WITHIN GROUP (ORDER BY ATTNAME) FROM ofVisiting $query GROUP BY PLANNUMBER $add");
 
 
 	/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */

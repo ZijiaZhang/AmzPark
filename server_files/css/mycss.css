@@ -3,16 +3,36 @@ html, body {
     overflow-x: hidden;
 }
 
-html *
-{
-   /*font-size: 1em !important;
-   color: #000 !important;*/
-   font-family: Courier;
+td{
+  text-align: center;
 }
+
+th{
+  text-align: center;
+}
+/*html *
+{
+   font-size: 1em !important;
+   color: #000 !important;
+   font-family: Courier;
+}*/
 
 body{
   margin: 0px;
 }
+
+  body{
+    font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+    margin: 0 auto;
+    letter-spacing: .4px;
+    color: #0d242c;
+    background: #ebf4ee;
+  }
+
+  h1{
+    font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
 #primary_nav {
   list-style: none;
   font-family: sans-serif;
@@ -69,6 +89,11 @@ body{
 #primary_nav li ul li {
   width: 250px;
 }
+
+#primary_nav li ul li:last-child {
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
 #primary_nav li ul ul {
   top: 0px;
   left: 250px;
@@ -78,7 +103,9 @@ body{
   color: #000;
   display: block;
   padding: 15px 10px 15px 18px;
+  text-align: center;
 }
+
 #primary_nav > li > a {
   text-transform: uppercase;
   text-align: center;
@@ -97,7 +124,6 @@ body{
   content: "\f107";
   font-family: FontAwesome;
   right: 5px;
-  bottom: 30px;
 }
 #primary_nav ul li.have-child > a::after {
   position: absolute;
@@ -114,6 +140,7 @@ body{
 
 #primary_nav .right{
   float: right;
+  width: 250px;
 }
 @media screen and (max-width: 790px) {
   #primary_nav, #primary_nav li, #primary_nav li a ,
@@ -133,6 +160,11 @@ body{
   }
   #primary_nav .right{
     float: none;
+    width:100%;
+  }
+
+  #primary_nav a{
+      text-align: center;
   }
   #menu_control{
     margin-right: 0px;
@@ -140,6 +172,10 @@ body{
     width: 40px;
     margin-left: auto; 
   }
+  #primary_nav li ul li:last-child {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
 }
 
 @media screen and (max-width: 790px) {
@@ -193,34 +229,6 @@ body{
   box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.75);
 }
 
-/*
-.listanimation{
-  position: relative;
-  animation-name: listload;
-  animation-duration: 1s;
-  animation-delay: 0s;
-  transition: right 1s ease-in;
-}*/
-/*
-.listanimation:nth-of-type(1) {
-  animation-delay: 0.05s;
-}
-.listanimation:nth-of-type(2) {
-  animation-delay: 0.1s;
-}
-.listanimation:nth-of-type(3) {
-  animation-delay: 0.15s;
-}
-.listanimation:nth-of-type(4) {
-  animation-delay: 0.2s;
-}
-.listanimation:nth-of-type(5) {
-  animation-delay: 0.25s;
-}
-.listanimation:nth-of-type(6) {
-  animation-delay: 0.3s;
-}*/
-
 .attimage{
   width: 20vw;
  overflow:auto;
@@ -244,14 +252,14 @@ div.component-wrapper{
   align-items:center
 }
 
-h1,h2,h3,h4,h5,h6{
+/*h1,h2,h3,h4,h5,h6{
   font-family:Quicksand;
   font-weight:normal;
   line-height:1.1;
   color:inherit;
   margin-top:0;
   margin-bottom:.5rem
-}
+}*/
 
 .h-font{
   font-family:Quicksand;
@@ -490,7 +498,7 @@ div.footer>div.links{
 #head-line{
   width:100vw;
   text-align: center;
-  font-size: 10vw;
+  font-size: 7vw;
 }
 
 .generalButton{
@@ -503,6 +511,7 @@ div.footer>div.links{
 /*    font-size: 3%;
 */    font-family: 'Open Sans', sans-serif;
     font-weight: bolder;
+    border-radius: 10px;
 }
 
 .generalButton:link, .generalButton:visited {
@@ -523,5 +532,28 @@ div.footer>div.links{
 .title{
   width: 100%;
   text-align: center;
+}
+
+@media screen and (max-width: 1220px) {
+.generalButton{
+    width: 40%;
+    font-size: 3vw;
+}
+.generalButton:first-child{
+  background-color: #4CAF50;
+  left: 5%;
+}
+
+.generalButton:last-child{
+  background-color: rgb(64, 97, 173);
+  left: 55%;
+
+}
+}
+
+@media screen and (max-width: 790px) {
+.nvbarSpliter{
+   display:none;
+}
 }
 
