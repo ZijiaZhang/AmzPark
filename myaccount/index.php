@@ -221,6 +221,10 @@ try{
 		@media screen and (max-width: 790px) {
 			#mainContainer{
 				display: block;
+				position:relative;
+			}
+			#accWraper{
+				width: 100%;
 			}
 			#accinfo{
 				width: 98%;
