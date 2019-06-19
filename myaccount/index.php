@@ -281,10 +281,12 @@ try{
 	<div class = "nvbarSpliter" style="height: 100px"></div>
 
 
-	<div class="fullWidth" style="text-align: center; color: red;"><?php echo $message; ?></div>
+	
 	<div id = "mainContainer">
+
 		<div id = "accWraper">
 			<div id = "accinfo">
+				<div class="fullWidth" style="text-align: center; color: red;"><?php echo $message; ?></div>
 				<div id = "groupName">
 					Welcome, Group <?php echo $name;?>
 				</div>
@@ -375,7 +377,7 @@ try{
 							<tr>
 								<td>
 
-									<label for="contact"><b>Responsible Adult</b></label>
+									<label for="contact" style="word-wrap: break-word;"><b>Responsible Adult</b></label>
 								</td>
 								<td>
 									<input type="text" placeholder="Enter Name of the Adult" name="ins_radult" style="border-width: 2px; border-style: solid;" required>
