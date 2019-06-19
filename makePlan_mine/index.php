@@ -135,13 +135,13 @@ if(isset($_POST['submit'])){
 		echo "<b>"."Cannot create this new plan, possibly because there is an existing plan with the same name. Try a new name."."</b>";
 		 return;
 			}
-
+			foreach($Att as $a){
 			try{
 					insertIntoOfVisiting($pnameNew,$a[0]);
 				} catch(Exception $e){
 					echo"Error when adding all attractions in original plan to new plan";
 				}
-
+			}
 			try{
 				executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pname'");
 			}catch(Exception $e){
