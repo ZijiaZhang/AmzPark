@@ -11,12 +11,24 @@
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+	<link href="https://fonts.googleapis.com/css?family=Muli:400,700|Overpass+Mono" rel="stylesheet">
 </head>
 
 <?php include "../loader.php";?>
 
 <body style="margin: 0px" onload="initialize()" onresize="initializeatt()">
 
+
+<div id = "nav-placeholder">
+	
+</div>
+<script>
+$(function(){
+  $("#nav-placeholder").load("../navbar.html");
+});
+</script>
+
+<div class= "nvbarSpliter"style="height: 100px"></div>
 
 
 
