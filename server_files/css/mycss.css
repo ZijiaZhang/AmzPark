@@ -153,6 +153,10 @@ body{
   #primary_nav .right{
     float: none;
   }
+
+  #primary_nav a{
+      text-align: center;
+  }
   #menu_control{
     margin-right: 0px;
     display: block;
