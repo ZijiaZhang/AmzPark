@@ -55,7 +55,6 @@ td input[type="submit"], td button{
     height: 100%;
     border-radius: 5px;
     padding: 8px 0px 8px 8px;
-    font-size: 1.5vw;
     position: relative;
     margin-left: auto;
     margin-right: auto;
@@ -64,4 +63,10 @@ td input[type="submit"], td button{
 
 .planinfo tr{
   background-color: rgb(255,255,255);
+}
+
+@media screen and (max-width: 790px) {
+td input[type="submit"], td button{
+font-size: 1.5vw;
+}
 }
