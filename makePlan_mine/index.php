@@ -463,6 +463,11 @@ if(checkSession()){
 					</tr>
 				</thead> -->
 				<h1 class="fullWidth"> My Plans </h1>
+				<?php
+			$count = executeSQL("SELECT count(*) FROM madeBy WHERE groupID = '$name' Group by groupID");
+			$c = oci_fetch_array($count);
+			?> 
+			<p style = 'text-align:center'>You have <?php echo $c[0]?> Plans: </p>
 				<table id = "planInfo" class = "fullWidth">
 					<tr>
 						<th width="30%">
