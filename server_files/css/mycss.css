@@ -524,6 +524,7 @@ div.footer>div.links{
 @media screen and (max-width: 790px) {
 .generalButton{
     width: 40%;
+    font-size: 3vw;
 }
 .generalButton:first-child{
   background-color: #4CAF50;
