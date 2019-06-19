@@ -181,7 +181,7 @@ if(isset($_POST['submit'])){
 }
 
 .plButtons{
-	display:flex;
+	display:block;
 }
 
 @media screen and (max-width: 790px) {
@@ -204,7 +204,7 @@ if(isset($_POST['submit'])){
 <div class = "plButtons" style="">
 <div id = "modify_add" >
 	<button id="attPanelButton" onclick="ToggleForm()" >Add Attraction To A Plan</button>
-	<div class="popup" id="AddAttform" style="display:none; position:absolute; background-color:white;z-index:9;">
+	<div class="popup" id="AddAttform" style="display:none;background-color:white;z-index:9;">
 			<form action="" class="form-container" method = "post">
 		
 			<h1>ADD Attraction</h1>
@@ -244,7 +244,7 @@ if(isset($_POST['submit'])){
 
 <div id = "modify_delete">
 	<button id="att2PanelButton" onclick="ToggleForm2()">Delete Attraction From A Plan</button>
-	<div class="popup" id="DeleteAttform" style="display:none; position:absolute; background-color:white;z-index:9;">
+	<div class="popup" id="DeleteAttform" style="display:none; background-color:white;z-index:9;">
 		<form action="" class="form-container" method = "post">
 			<h1>Delete Attraction</h1>
 			<table>
