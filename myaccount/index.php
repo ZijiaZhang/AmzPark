@@ -380,7 +380,11 @@ try{
 									<label for="contact" style="word-wrap: break-word;"><b>Responsible Adult</b></label>
 								</td>
 								<td>
-									<input type="text" placeholder="Enter Name of the Adult" name="ins_radult" style="border-width: 2px; border-style: solid;" required>
+									<select type="text" placeholder="Enter Name of the Adult" name="ins_radult" style="border-width: 2px; border-style: solid;" required>
+										<?php foreach($Adults as $adult){ ?>
+										<option value = <?php echo "'".$adult['VISITORNAME']."'";?> ><?php echo $adult['VISITORNAME'];?></option>
+									<?php }?>
+									</select>
 								</td>
 							</tr>
 						</table>
