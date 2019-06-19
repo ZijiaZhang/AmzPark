@@ -9,11 +9,12 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,700|Overpass+Mono" rel="stylesheet">
 </head>
 
 <body style="margin: 0px;" onload="initialize()" onresize="initialize()">
-<!-- 	<div class="slide-item" style="background-image:url(../server_files/images/park.jpg);background-repeat:no-repeat;background-position:left top;background-size:cover;height: 100%; position: fixed;float:all;width: 100%; opacity: 1;"></div>
-	<div id = "nav-placeholder"> -->
+<!-- 	<div class="slide-item" style="background-image:url(../server_files/images/park.jpg);background-repeat:no-repeat;background-position:left top;background-size:cover;height: 100%; position: fixed;float:all;width: 100%; opacity: 1;"></div>-->
+	<div id = "nav-placeholder">
 	
 
 
@@ -21,27 +22,29 @@
 </div>
 <script>
 $(function(){
-  $("#nav-placeholder").load("navbar.html");
+  $("#nav-placeholder").load("../navbar.html");
 });
 </script>
 
+<div class = "nvbarSpliter" style="height: 100px"></div>
 
 
 
-
-
+<?php
+            $ATTNAME = "Booster";
+            if(isset($_GET["attname"])){
+                $ATTNAME = $_GET["attname"];
+            }?>
 <section id = "Mine" style="margin: 30px" >
 	<!-- <div class="simple-chord--wrapper component-wrapper" style="background-color: rgba(100,100,100,0.7);"> -->
 		<!-- <head>
         <title>Information about Booster</title>
     </head> -->
+    <h1 style = "text-align: center;"><?php echo trim($ATTNAME);?></h1>
+    <img class= "attimg"src = "../server_files/images/<?php echo trim($ATTNAME);?>.jpg" style="width: 80%;position: relative;margin: auto;display: block;border-radius: 16px;">
     <body>
-        <table>
+        <table style="position:relative; margin: auto;">
         <?php
-        	$ATTNAME = "Booster";
-        	if(isset($_GET["attname"])){
-        		$ATTNAME = $_GET["attname"];
-        	}
             include '../database.php';
             $list1 = array(":bind1"=> $ATTNAME);
             try{
@@ -89,8 +92,6 @@ $(function(){
             </table>
     </body>
 	<!-- </div> -->
-
-	<a href="../addAttToPlan/index.php"><button>GO BACK To Previous Page</button> </a>
 
 </section>
 
