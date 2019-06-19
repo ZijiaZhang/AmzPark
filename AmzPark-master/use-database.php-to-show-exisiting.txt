@@ -1,0 +1,26 @@
+		<?php 
+								include '../database.php';
+								$stid = executeSQL('SELECT PLANNUMBER, LISTAGG(ATTNAME, ',') WITHIN GROUP (ORDER BY ATTNAME) FROM ofVisiting GROUP BY PLANNUMBER');
+								
+								/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
+								while ($row = OCI_Fetch_Array($stid, OCI_BOTH)) { ?>
+									<a class = "attlink listanimation listitem" href = "<?php echo $row["Link"]?>">
+										<div class = "image contianer attElem row" data-aos="fade-up"
+     data-aos-duration="500" data-aos-once="false"> 
+
+										<div class="table-wrap">
+											<table class= "attinfo">
+												<tr>
+													<th class = "openTimehead"> Plan Name </th>
+													<th class = "closeTimehead"> Attractions in this plan </th>
+												</tr>
+												<tr>
+													<td class = "openTime"><?php echo trim( $row["PLANNUMBER"]); ?> </td>
+													<td class = "closeTime"><?php echo trim( $row["LISTAGG(ATTNAME,',')WITHINGROUP(ORDERBYATTNAME)"]); ?> </td>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</a>
+
+							<?php } ?>
