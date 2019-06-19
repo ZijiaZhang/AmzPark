@@ -225,13 +225,16 @@ try{
 			}
 			#accWraper{
 				width: 100%;
+				height: auto; 
 			}
 			#accinfo{
 				width: 98%;
+				height: auto;
 			}
 			#operationPannel{
 				width: 100%;
 				border-style: none;
+				height: auto;
 			}
 		}
 
@@ -478,7 +481,7 @@ try{
 				?>
 
 			</section>
-			<div class = "nvbarSpliter" style="height: 100px"></div>
+			<div class = "" style="height: 100px"></div>
 
 		</div>
 

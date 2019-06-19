@@ -89,6 +89,11 @@ body{
 #primary_nav li ul li {
   width: 250px;
 }
+
+#primary_nav li ul li:last-child {
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
 #primary_nav li ul ul {
   top: 0px;
   left: 250px;
@@ -98,7 +103,9 @@ body{
   color: #000;
   display: block;
   padding: 15px 10px 15px 18px;
+  text-align: center;
 }
+
 #primary_nav > li > a {
   text-transform: uppercase;
   text-align: center;
@@ -133,6 +140,7 @@ body{
 
 #primary_nav .right{
   float: right;
+  width: 250px;
 }
 @media screen and (max-width: 790px) {
   #primary_nav, #primary_nav li, #primary_nav li a ,
@@ -152,6 +160,7 @@ body{
   }
   #primary_nav .right{
     float: none;
+    width:100%;
   }
 
   #primary_nav a{
@@ -163,6 +172,10 @@ body{
     width: 40px;
     margin-left: auto; 
   }
+  #primary_nav li ul li:last-child {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
 }
 
 @media screen and (max-width: 790px) {
