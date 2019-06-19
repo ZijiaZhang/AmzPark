@@ -305,7 +305,7 @@
 		document.getElementsByTagName('body')[0].style.display = 'block';
 		initializeatt();
 		AOS.init();
-		setInterval(initializeatt,100);
+		setInterval(initializeatt,500);
 	})
 </script>
 

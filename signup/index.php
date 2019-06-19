@@ -140,7 +140,7 @@ $allAdult = array();
 					if($chd!='')
 						?>
 		<tr><td><input type='text' name='children[]' placeholder = 'Name Of the Children' value = '<?php echo $chd;?>' required> </td>
-			<td> <label class = "selectWrap"> <select name = 'responsible[]' placeholder= 'Responsible Adult' value = '' required>
+			<td> <label class = "selectWrap" > <select name = 'responsible[]' placeholder= 'Responsible Adult' value = '' style = 'padding: 15px 40px 15px 0px;' required>
 			<option value='' disabled> Responsible Adult</option>
 			<?php foreach($allAdult as $ad){?>
 				<option value = '<?php echo $ad;?>' <?php if($res == $ad) echo "selected"?>>
@@ -220,7 +220,7 @@ $('#addAdult').click(function(){
 
 $('#addChildren').click(function(){
 	$thing_table = $('.childrenTable');
-    $thing_table.append("<tr><td><input type='text' name='children[]' placeholder = 'Name Of the Children' value = '' required></td><td> <label class = 'selectWrap'> <select name = 'responsible[]' value = '' required><option value='' disabled selected> Responsible Adult</option></select></label></td><td> <button type = button class = 'delete'>DELETE</button></td><tr>");
+    $thing_table.append("<tr><td><input type='text' name='children[]' placeholder = 'Name Of the Children' value = '' required></td><td> <label class = 'selectWrap'> <select name = 'responsible[]' value = '' style = 'padding: 15px 40px 15px 0px;' required><option value='' disabled selected> Responsible Adult</option></select></label></td><td> <button type = button class = 'delete'>DELETE</button></td><tr>");
 	updateAdult();
   // empties the input when sumbit is clicked
 
