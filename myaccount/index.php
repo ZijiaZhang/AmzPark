@@ -145,323 +145,347 @@ try{
 <?php include "../loader.php" ?>
 <body style="margin: 0px; ">
 	<style>
-	body{
-		height: 100vh;
-		margin: 0px;
-background-color : white;
-	}
-	#mainContainer{
-		width: 100vw;
-		height: 100%;
-		display: flex;
-	}
-	#operationPannel{
-/*	background-color: blue;
-*/	width: 70%;
-overflow: auto;
-display: block;
-border-width: 0 0 0 3px; border-style: solid;
-}
-#accinfo{
-	overflow: auto;
-/*	background-color: green;
-*/	width :30%;
-position: relative;
-display: block;
-margin: 1%;
-}
-#accinfo p a{
-	color: blue;
-}
-#adultInfo tr td, #adultInfo tr th{
-	border-style: solid;
-	border-width: 2px
-}
-#adultInfo{
-	border-collapse: collapse;
-}
+		body{
+			height: 100vh;
+			margin: 0px;
+			background-color : white;
+		}
+		#mainContainer{
+			width: 100vw;
+			position:fixed;
+			top:100px;
+			bottom: 0;
+			display: flex;
+			
+		}
+		#operationPannel{
+			width: 70%;
+			overflow: auto;
+			display: block;
+			height:100%;
+			overflow-y: scroll;
+			border-width: 0 0 0 3px; border-style: solid;
 
-#childInfo tr td, #childInfo tr th{
-	border-style: solid;
-	border-width: 2px
-}
-#childInfo{
-	border-collapse: collapse;
-}
+		}
+		#accWraper{
+			height:100%;
+			width :30%;
+			overflow: hidden;
+		}
+		#accinfo{
+			height:100%;
+			overflow-y: scroll;
+			width:100%;
+			position: relative;
+			display: block;
+			margin: 1%;
+			padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+			box-sizing: content-box;
+		}
+		#accinfo p a{
+			color: blue;
+		}
+		#adultInfo tr td, #adultInfo tr th{
+			border-style: solid;
+			border-width: 2px
+		}
+		#adultInfo{
+			border-collapse: collapse;
+		}
 
-.popup {
-	display:none;
-	position: absolute;
-	z-index: 9;
-	background-color: white;
-	border-style: solid;
-	border-color: red;
-	width: 90%;
-	left: 5%;
-}
+		#childInfo tr td, #childInfo tr th{
+			border-style: solid;
+			border-width: 2px
+		}
+		#childInfo{
+			border-collapse: collapse;
+		}
 
-#groupName{
-	width: 100%;
-	text-align: center;
-	font-size: 5vw;
-}
+		.popup {
+			display:none;
+			position: absolute;
+			z-index: 9;
+			background-color: white;
+			border-style: solid;
+			border-color: red;
+			width: 90%;
+			left: 5%;
+		}
 
-@media screen and (max-width: 790px) {
-  #mainContainer{
-  	display: block;
-  }
-  #accinfo{
-  	width: 98%;
-  }
-  #operationPannel{
-  	width: 100%;
-  	border-style: none;
-  }
-}
+		#groupName{
+			width: 100%;
+			text-align: center;
+			font-size: 5vw;
+		}
 
-h1{
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #f99500;
-    font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  }
-  body{
-    font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 1.2em;
-    margin: 0 auto;
-    letter-spacing: .4px;
-    color: #0d242c;
-    background: #ebf4ee;
-  }
+		@media screen and (max-width: 790px) {
+			#mainContainer{
+				display: block;
+				position:relative;
+			}
+			#accWraper{
+				width: 100%;
+				height: auto; 
+			}
+			#accinfo{
+				width: 98%;
+				height: auto;
+			}
+			#operationPannel{
+				width: 100%;
+				border-style: none;
+				height: auto;
+			}
+		}
 
-  .bd{
-  	border-collapse: collapse;
-  	margin-top: 2em;
-  }
-  .bd tr td{
-  	border-color: black;
-  	border-style: solid;
-  	border-width: 2px;
-  }
+		h1{
+			font-size: 1.5em;
+			font-weight: bold;
+			color: #f99500;
+			font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		}
+		body{
+			font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+			font-size: 1.2em;
+			margin: 0 auto;
+			letter-spacing: .4px;
+			color: #0d242c;
+			background: #ebf4ee;
+		}
 
-  .bd tr th{
-  	border-color: black;
-  	border-style: solid;
-  	border-width: 2px;
-  }
-</style>
+		.bd{
+			border-collapse: collapse;
+			margin-top: 2em;
+		}
+		.bd tr td{
+			border-color: black;
+			border-style: solid;
+			border-width: 2px;
+		}
 
-<div id = "nav-placeholder">
+		.bd tr th{
+			border-color: black;
+			border-style: solid;
+			border-width: 2px;
+		}
+	</style>
 
-</div>
-<script>
-	$(function(){
-		$("#nav-placeholder").load("../navbar.html");
-	});
-</script>
-<div class = "nvbarSpliter" style="height: 100px"></div>
-<div id = "groupName">
-	Welcome, Group <?php echo $name;?>
-</div>
+	<div id = "nav-placeholder">
 
-<div class="fullWidth" style="text-align: center; color: red;"><?php echo $message; ?></div>
-<div id = "mainContainer">
-	
-	<div id = "accinfo">
-		<a href="../logout.php" style="float: right; display: block; background-color: red; color: white; text-decoration-style: none; text-decoration-line: none; padding: 1em; border-radius: 16px; font-weight:bolder;">Log Out</a>
-		<p>Your Group Name is <a><?php echo $name ?> </a></p>
-		<p>Your Group Size is <a> <?php echo $groupSize;?> </a></p>
-<div class="row" style="height: auto;">
-<h1 class="fullWidth"> Adults </h1>
-<button id="adultPanelButton" onclick="ToggleForm()" style="margin: 1em;">Create Adult</button>
-</div>
-		<div class="popup" id="adultAddform">
-			<form action="" class="form-container" method = "post">
-				<h1>ADD ADULTS</h1>
-				<table class="halfWidth">
-					<tr>
-						<td>
-							<label for="name"><b>Name</b></label>
-						</td>
-						<td>
-							<input type="text" placeholder="Enter Name" name="ins_visitor" required style="border-width: 2px; border-style: solid;">
-						</td>
-					</tr>
-					<tr>
-						<td>
-
-							<label for="contact"><b>Contact</b></label>
-						</td>
-						<td>
-							<input type="text" placeholder="Enter Contact" name="ins_contact" required style="border-width: 2px; border-style: solid;">
-						</td>
-					</tr>
-				</table>
-				<div class = "row">
-					<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
-					<button type="button" class="" onclick="closeForm()">Close</button>
-				</div>
-			</form>
-		</div>
-
-		<table id = "adultInfo" class = "fullWidth">
-			<tr>
-				<th width="30%">
-					Name
-				</th>
-				<th width="40%">
-					Contact
-				</th>
-				<th width="30%">
-					delete
-				</th>
-			</tr>
-			<?php foreach($Adults as $adult){ ?>
-				<form action = "" method = "post">
-					<tr>
-						<td >
-							<input type = "hidden" name = "del_visitor" value = <?php echo "'".$adult['VISITORNAME']."'";?> > <?php echo $adult['VISITORNAME'];?>
-						</td>
-						<td> 
-							<?php echo $adult['CONTACT_INFO'];?>
-						</td>
-						<td>
-							<button type="submit" value = "delete_adult" name = "submit">Delete</button>
-						</td>
-					</tr>
-				</form>
-			<?php } ?>
-
-		</table>
-		<hr>
-<div class="row" style="height: auto;">		
-<h1 class="fullWidth"> Children </h1>
-
-		<button id="childPanelButton" onclick="ToggleChildForm()" style="margin: 1em;">Create Children</button>
 	</div>
+	<script>
+		$(function(){
+			$("#nav-placeholder").load("../navbar.html");
+		});
+	</script>
+	<div class = "nvbarSpliter" style="height: 100px"></div>
 
-		<div class="popup" id="childAddform">
-			<form action="" class="form-container" method = "post">
-				<h1>ADD Child</h1>
-				<table class="halfWidth">
-					<tr>
-						<td>
-							<label for="name"><b>Name</b></label>
-						</td>
-						<td>
-							<input type="text" placeholder="Enter Name" name="ins_child" style="border-width: 2px; border-style: solid;" required>
-						</td>
-					</tr>
-					<tr>
-						<td>
 
-							<label for="contact"><b>Responsible Adult</b></label>
-						</td>
-						<td>
-							<input type="text" placeholder="Enter Name of the Adult" name="ins_radult" style="border-width: 2px; border-style: solid;" required>
-						</td>
-					</tr>
-				</table>
-				<div class = "row">
-					<button type="submit" class="" name = "submit" value = 'insert_child'>Create</button>
-					<button type="button" class="" onclick="closeChildForm()">Close</button>
+	<div class="fullWidth" style="text-align: center; color: red;"><?php echo $message; ?></div>
+	<div id = "mainContainer">
+		<div id = "accWraper">
+			<div id = "accinfo">
+				<div id = "groupName">
+					Welcome, Group <?php echo $name;?>
 				</div>
-			</form>
-		</div>
+				<a href="../logout.php" style="float: right; display: block; background-color: red; color: white; text-decoration-style: none; text-decoration-line: none; padding: 1em; border-radius: 16px; font-weight:bolder;">Log Out</a>
+				<p>Your Group Name is <a><?php echo $name ?> </a></p>
+				<p>Your Group Size is <a> <?php echo $groupSize;?> </a></p>
+				<div class="row" style="height: auto;">
+					<h1 class="fullWidth"> Adults </h1>
+					<button id="adultPanelButton" onclick="ToggleForm()" style="margin: 1em;">Create Adult</button>
+				</div>
+				<div class="popup" id="adultAddform">
+					<form action="" class="form-container" method = "post">
+						<h1>ADD ADULTS</h1>
+						<table class="halfWidth">
+							<tr>
+								<td>
+									<label for="name"><b>Name</b></label>
+								</td>
+								<td>
+									<input type="text" placeholder="Enter Name" name="ins_visitor" required style="border-width: 2px; border-style: solid;">
+								</td>
+							</tr>
+							<tr>
+								<td>
 
-			<table id = "childInfo" class = "fullWidth">
-			<tr>
-				<th width="30%">
-					Name
-				</th>
-				<th width="40%">
-					Parent
-				</th>
-				<th width="30%">
-					delete
-				</th>
-			</tr>
-			<?php 
-			//var_dump($Children);
-			foreach($Children as $child){ ?>
-				<form action = "" method = "post">					
-					<tr>
-						<td >
-							<input type = "hidden" name = "del_Children" value = <?php echo "'".$child['YOUNGVISITORNAME']."'";?> > <?php echo $child['YOUNGVISITORNAME'];?>
-						</td>
-						<td> 
-							<?php echo $child['ADULTVISITORNAME'];?>
-						</td>
-						<td>
-							<button type="submit" value = "delete_Children" name = "submit">Delete</button>
-						</td>
-					</tr>
-				</form>
-			<?php } ?>
-
-		</table>
-		
-	</div>
-
-	<div id = "operationPannel" style="">
-		<section id = "plans">
-			<h1 class="subTitle">Plans</h1>
-			<div class="row">
-				<a href="../makePlan_homepage" class = "generalButton" style = "background-color: green"> Make Plans</a>
-				<a href="../makePlan_mine" class = "generalButton" style = "background-color: blue">See My Plans</a>
-			</div>
-			<table id = "planInfo" class = "halfWidth bd">
-				<tr><th>Plan</th><th>Delete</th></tr>
-				<?php foreach($myplans as $plan){ ?>
-					<form action = "" method = "post">
-						<tr>
-							<td>
-								<input type = "hidden" name = "del_plan" value = <?php echo "'".$plan[0]."'";?> > <?php echo $plan[0];?>
-							</td>
-							<td>
-								<button type="submit" value = "delete_plan" name = "submit">Delete</button>
-							</td>
-						</tr>
+									<label for="contact"><b>Contact</b></label>
+								</td>
+								<td>
+									<input type="text" placeholder="Enter Contact" name="ins_contact" required style="border-width: 2px; border-style: solid;">
+								</td>
+							</tr>
+						</table>
+						<div class = "row">
+							<button type="submit" class="" name = "submit" value = 'insert_adult'>Create</button>
+							<button type="button" class="" onclick="closeForm()">Close</button>
+						</div>
 					</form>
-				<?php } ?>
-			</table>
-			<p style="width: 100%;text-align: center;color : blue;"> ***For further modifications, please click on "See My Plans"*** </p>
-		</section>
-		<hr style="width: 90%;">
-		<section id = "reservations">
-			<h1 class="subTitle">Reservations</h1>
-			<div class="row">
-				<a href="../makeReservation" class = "generalButton" style = "background-color: green"> Make Reservation</a>
-				<a href="../myReservation" class = "generalButton" style = "background-color: blue">My Reservations</a>
+				</div>
+
+				<table id = "adultInfo" class = "fullWidth">
+					<tr>
+						<th width="30%">
+							Name
+						</th>
+						<th width="40%">
+							Contact
+						</th>
+						<th width="30%">
+							delete
+						</th>
+					</tr>
+					<?php foreach($Adults as $adult){ ?>
+						<form action = "" method = "post">
+							<tr>
+								<td >
+									<input type = "hidden" name = "del_visitor" value = <?php echo "'".$adult['VISITORNAME']."'";?> > <?php echo $adult['VISITORNAME'];?>
+								</td>
+								<td> 
+									<?php echo $adult['CONTACT_INFO'];?>
+								</td>
+								<td>
+									<button type="submit" value = "delete_adult" name = "submit">Delete</button>
+								</td>
+							</tr>
+						</form>
+					<?php } ?>
+
+				</table>
+				<hr>
+				<div class="row" style="height: auto;">		
+					<h1 class="fullWidth"> Children </h1>
+
+					<button id="childPanelButton" onclick="ToggleChildForm()" style="margin: 1em;">Create Children</button>
+				</div>
+
+				<div class="popup" id="childAddform">
+					<form action="" class="form-container" method = "post">
+						<h1>ADD Child</h1>
+						<table class="halfWidth">
+							<tr>
+								<td>
+									<label for="name"><b>Name</b></label>
+								</td>
+								<td>
+									<input type="text" placeholder="Enter Name" name="ins_child" style="border-width: 2px; border-style: solid;" required>
+								</td>
+							</tr>
+							<tr>
+								<td>
+
+									<label for="contact"><b>Responsible Adult</b></label>
+								</td>
+								<td>
+									<input type="text" placeholder="Enter Name of the Adult" name="ins_radult" style="border-width: 2px; border-style: solid;" required>
+								</td>
+							</tr>
+						</table>
+						<div class = "row">
+							<button type="submit" class="" name = "submit" value = 'insert_child'>Create</button>
+							<button type="button" class="" onclick="closeChildForm()">Close</button>
+						</div>
+					</form>
+				</div>
+
+				<table id = "childInfo" class = "fullWidth">
+					<tr>
+						<th width="30%">
+							Name
+						</th>
+						<th width="40%">
+							Parent
+						</th>
+						<th width="30%">
+							delete
+						</th>
+					</tr>
+					<?php 
+			//var_dump($Children);
+					foreach($Children as $child){ ?>
+						<form action = "" method = "post">					
+							<tr>
+								<td >
+									<input type = "hidden" name = "del_Children" value = <?php echo "'".$child['YOUNGVISITORNAME']."'";?> > <?php echo $child['YOUNGVISITORNAME'];?>
+								</td>
+								<td> 
+									<?php echo $child['ADULTVISITORNAME'];?>
+								</td>
+								<td>
+									<button type="submit" value = "delete_Children" name = "submit">Delete</button>
+								</td>
+							</tr>
+						</form>
+					<?php } ?>
+
+				</table>
+				<div class = "nvbarSpliter" style="height: 100px"></div>
 			</div>
-			<?php
-			$count = executeSQL("SELECT count(*) FROM Reservation_linkedTo_ManagedBy WHERE groupID = '$name' Group by groupID");
-			$c = oci_fetch_array($count);
-			echo "<p style = 'text-align:center'>You have $c[0] reservations:</p>";
+			
 
-			$result = executeSQL("SELECT entertainmentName, perform_time FROM Reservation_linkedTo_ManagedBy
-							 WHERE groupID = '$name'");
-			$columNames = array("Entertainment Name", "Reserved Time");
-			echo "<table class = 'halfWidth bd'>";
-			echo "<tr>";
-			foreach ($columNames as $oooname){
-				echo "<th>$oooname</th>";
-			}
-			echo "</tr>";
+		</div>
+		<div id = "operationPannel" style="">
+			<section id = "plans">
+				<h1 class="subTitle">Plans</h1>
+				<div class="row">
+					<a href="../makePlan_homepage" class = "generalButton" style = "background-color: green"> Make Plans</a>
+					<a href="../makePlan_mine" class = "generalButton" style = "background-color: blue">See My Plans</a>
+				</div>
+				<table id = "planInfo" class = "halfWidth bd">
+					<tr><th>Plan</th><th>Delete</th></tr>
+					<?php foreach($myplans as $plan){ ?>
+						<form action = "" method = "post">
+							<tr>
+								<td>
+									<input type = "hidden" name = "del_plan" value = <?php echo "'".$plan[0]."'";?> > <?php echo $plan[0];?>
+								</td>
+								<td>
+									<button type="submit" value = "delete_plan" name = "submit">Delete</button>
+								</td>
+							</tr>
+						</form>
+					<?php } ?>
+				</table>
+				<p style="width: 100%;text-align: center;color : blue;"> ***For further modifications, please click on "See My Plans"*** </p>
+			</section>
+			<hr style="width: 90%;">
+			<section id = "reservations">
+				<h1 class="subTitle">Reservations</h1>
+				<div class="row">
+					<a href="../makeReservation" class = "generalButton" style = "background-color: green"> Make Reservation</a>
+					<a href="../myReservation" class = "generalButton" style = "background-color: blue">My Reservations</a>
+				</div>
+				<?php
+				$count = executeSQL("SELECT count(*) FROM Reservation_linkedTo_ManagedBy WHERE groupID = '$name' Group by groupID");
+				$c = oci_fetch_array($count);
+				echo "<p style = 'text-align:center'>You have $c[0] reservations:</p>";
 
-			while ($row = OCI_Fetch_Array($result, OCI_BOTH)){
-				$timeResult = handleTime($row["PERFORM_TIME"]);
-				$ptime =  $numberToMonth[(int)$timeResult["month"]]." ".$timeResult["day"]." ".$timeResult["hourmin"];
-				echo "<tr><td>" . $row['ENTERTAINMENTNAME'] . "</td><td>" . $ptime . "</td></tr>";
-			}
+				$result = executeSQL("SELECT entertainmentName, perform_time FROM Reservation_linkedTo_ManagedBy
+					WHERE groupID = '$name'");
+				$columNames = array("Entertainment Name", "Reserved Time");
+				echo "<table class = 'halfWidth bd'>";
+				echo "<tr>";
+				foreach ($columNames as $oooname){
+					echo "<th>$oooname</th>";
+				}
+				echo "</tr>";
 
-			echo "</table>";
-			?>
+				while ($row = OCI_Fetch_Array($result, OCI_BOTH)){
+					$timeResult = handleTime($row["PERFORM_TIME"]);
+					$ptime =  $numberToMonth[(int)$timeResult["month"]]." ".$timeResult["day"]." ".$timeResult["hourmin"];
+					echo "<tr><td>" . $row['ENTERTAINMENTNAME'] . "</td><td>" . $ptime . "</td></tr>";
+				}
 
-		</section>
+				echo "</table>";
+				?>
+
+			</section>
+			<div class = "" style="height: 100px"></div>
+
+		</div>
+
 	</div>
-
-</div>
 
 </div>
 

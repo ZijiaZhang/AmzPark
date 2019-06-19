@@ -89,7 +89,10 @@ button{
 									<input id = "planAdded" type="checkbox" name = "alreadyIn">Exclude those already added in Mine
 								</div>
 								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
-									<pre> <b> Note: Empty plans (plans with no attractions in it) will not appear here </b></pre>
+									<input id = "allOpen" type="checkbox" name = "allOpenAtt"> See plans which include all currently-open attractions
+								</div>
+								<div style="position: relative;margin-left: auto;margin-right: auto; width:100%; text-align: center;">
+									Note: Empty plans (plans with no attractions in it) will not appear here
 								</div>
 							</div>
 							<div id = "attrSpace"  class = "contianer attractions attlist">
@@ -100,8 +103,6 @@ button{
 				</div>
 			</div>
 		</section>
-
-
 
 
 		<script>
@@ -132,6 +133,11 @@ button{
 		getPlans();
 	});
 
+	$('#allOpen').change(function(){
+		getPlans();
+	});
+
+
 
 
 	$('#search-attr').on('input',function(e){
@@ -141,8 +147,9 @@ button{
 
 	function getPlans() {
 		var added = $('input[name=alreadyIn]').is(':checked');
+		var all = $('input[name=allOpenAtt]').is(':checked');
 		var query = $('#search-attr').val();
-		$.post("../makePlan_exisiting/plans.php", { added: added, plan: query},
+		$.post("../makePlan_exisiting/plans.php", { added: added, all:all, plan: query},
 			function(data) {
 				$('#attrSpace').html(data);
 				initializeatt();

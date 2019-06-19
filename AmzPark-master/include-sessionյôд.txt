@@ -1,0 +1,16 @@
+<?php
+//include_once '../login.php';
+include_once '../session.php';
+include_once '../database.php';
+initializeSession();
+#print_r($_SESSION);
+
+if(checkSession()){
+		//header('location: ./account');
+	echo "Your Session ID: ";
+	var_dump(session_id());
+	$name = $_SESSION['login_user'];
+}else{
+	header('location: ../login');
+}
+?>

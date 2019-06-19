@@ -19,15 +19,25 @@
 	include_once '../database.php';
 
 	$NotAdd = $_POST["added"];
+	$div = $_POST["all"];
 	$pl = $_POST["plan"];
 
 
 //	echo "$pname";
 
 	//var_dump($_POST);
+	// $query = "";
+	// if($pl!=""){
+	// 	$query = "WHERE upper(PLANNUMBER) LIKE upper('%$pl%')";
+	// }
+
 	$query = "";
 	if($pl!=""){
-		$query = "WHERE upper(PLANNUMBER) LIKE upper('%$pl%')";
+		if($div == "true"){
+			$query = "AND upper(b.PLANNUMBER) LIKE upper('%$pl%')";
+		} else{
+			$query = "WHERE upper(PLANNUMBER) LIKE upper('%$pl%')";
+		}
 	}
 
 
@@ -36,7 +46,14 @@
 		$add = "MINUS SELECT B.PLANNUMBER, LISTAGG(B.ATTNAME, ', ') WITHIN GROUP (ORDER BY B.ATTNAME) FROM ofVisiting B, madeby A WHERE A.PLANNUMBER = B.PLANNUMBER AND A.groupID='$name' GROUP BY B.PLANNUMBER";
 	}
 
-	$stid = executeSQL("SELECT PLANNUMBER, LISTAGG(ATTNAME, ', ') WITHIN GROUP (ORDER BY ATTNAME) FROM ofVisiting $query GROUP BY PLANNUMBER $add");
+	if($div == "true"){
+		// executeSQL("CREATE view openAtt as SELECT * from ATTRACTIONS_INSEPECT_AND_DETERMINES_STATUS1 a where a.status='OPEN'");
+		// executeSQL("CREATE view goodPlan as SELECT * from plan a where NOT EXISTS (select * from openAtt b where NOT EXISTS (select * from ofvisiting c where a.plannumber = c.plannumber and b.att_name = c.attname))");
+		$stid = executeSQL("SELECT b.PLANNUMBER, LISTAGG(b.ATTNAME, ', ') WITHIN GROUP (ORDER BY b.ATTNAME) FROM goodPlan a, ofVisiting b WHERE a.plannumber = b.plannumber $query GROUP BY b.PLANNUMBER $add");
+	}else{
+		$stid = executeSQL("SELECT PLANNUMBER, LISTAGG(ATTNAME, ', ') WITHIN GROUP (ORDER BY ATTNAME) FROM ofVisiting $query GROUP BY PLANNUMBER $add");
+	}
+	// $stid = executeSQL("SELECT PLANNUMBER, LISTAGG(ATTNAME, ', ') WITHIN GROUP (ORDER BY ATTNAME) FROM ofVisiting $query GROUP BY PLANNUMBER $add");
 
 
 	/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */

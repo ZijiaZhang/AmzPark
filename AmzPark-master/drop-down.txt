@@ -1,0 +1,8 @@
+		  <div class="dropdown">
+                                    <button class="dropbtn">Filter Options</button>
+                                    <div class="dropdown-content">
+                                    <a id = "" href="javascript:void(0);" onclick="filter2()"> only show "open" </a>
+                                    <a id = "" href="javascript:void(0);" onclick="filter3()"> only show "time is good"</a>
+                                    <a id = "" href="javascript:void(0);" onclick="filter4()"> only show "time is good or OK"</a>
+                                    </div>
+                                </div>
