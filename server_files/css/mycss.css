@@ -534,7 +534,7 @@ div.footer>div.links{
   text-align: center;
 }
 
-@media screen and (max-width: 790px) {
+@media screen and (max-width: 1220px) {
 .generalButton{
     width: 40%;
     font-size: 3vw;
