@@ -37,7 +37,7 @@ function executeBoundSQL($cmdstr, $list) {
         attacks.  See the sample code below for how this function is
         used. */
         $success = true;
-        $db_conn = OCILogon ("ora_gary1999", 'a42252965', "dbhost.students.cs.ubc.ca:1522/stu");
+        $db_conn = OCILogon ("SYSTEM", 'gary1999', "localhost:1521/xe");
         if (!$db_conn) {
         	throw new Exception('Cannot Connect to db');
         }
@@ -105,7 +105,7 @@ function executeBoundSQL($cmdstr, $list) {
 		try{
 			$stid = executeBoundSQL($command, $list1);
 		}catch(Exception $e){
-			echo $e.getMessage();
+			echo $e->getMessage();
 			echo "ERROR";
 			return false;
 		}
