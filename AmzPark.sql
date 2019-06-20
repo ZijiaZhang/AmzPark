@@ -194,7 +194,9 @@ CREATE TABLE YoungVisitor_include_isGuradedBy(
   ON DELETE CASCADE
 );
 
+drop view openAtt cascade constraints;
 
+drop view goodPlan cascade constraints;
 
 CREATE view openAtt as SELECT * from ATTRACTIONS_INSEPECT_AND_DETERMINES_STATUS1 a where a.status='OPEN';
 
