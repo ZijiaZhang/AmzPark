@@ -270,7 +270,7 @@ if(checkSession()){
 					// executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pnameNew'");
 					// insertIntoMadeBy($name, $pname);
 					executeSQL("UPDATE madeBy set plannumber = '$pname' where groupid='$name'and plannumber = '$pnameNew'");
-					executeSQL("DELETE FROM ofVisiting where PLANNUMBER = '$pnameNew");
+					executeSQL("DELETE FROM ofVisiting where PLANNUMBER = '$pnameNew'");
 					executeSQL("DELETE FROM plan where PLANNUMBER = '$pnameNew'");
 					echo "<b>"."The attraction you entered does not exist, so no change to your plan. Please check spelling. "."</b>";
 
