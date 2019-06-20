@@ -119,8 +119,9 @@ if(checkSession()){
 				}
 
 				if(ifExist2($pname, $aname, 'PLANNUMBER', 'ATTNAME', 'ofVisiting')){
-					echo "<b>"."The attraction you entered is already in this plan. No change to your original plan. New plan NOT created."."</b>";
+					echo "<b>"."The attraction you entered is already in this plan. No change to your original plan."."</b>";
 					executeSQL("UPDATE madeBy set plannumber = '$pname' where groupid='$name'and plannumber = '$pnameNew'");
+					executeSQL("DELETE FROM ofVisiting where PLANNUMBER = '$pnameNew'");
 					executeSQL("DELETE FROM plan where PLANNUMBER = '$pnameNew'");
 					return;
 				}
@@ -135,8 +136,9 @@ if(checkSession()){
 					// executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pnameNew'");
 					// insertIntoMadeBy($name, $pname);
 					executeSQL("UPDATE madeBy set plannumber = '$pname' where groupid='$name'and plannumber = '$pnameNew'");
+					executeSQL("DELETE FROM ofVisiting where PLANNUMBER = '$pnameNew'");
 					executeSQL("DELETE FROM plan where PLANNUMBER = '$pnameNew'");
-					echo "<b>"."The attraction that you entered does not exist, so no change to your original plan. Also, the new plan name is NOT created. \nPlease check your spelling."."</b>";
+					echo "<b>"."The attraction that you entered does not exist, so no change to your original plan. Please check your spelling."."</b>";
 				}
 
 			}else{
@@ -181,8 +183,9 @@ if(checkSession()){
 					echo "<b>"."Error when changing from original plan to new plan."."</b>";
 				}
 				if(!ifExist2($pname, $aname, 'PLANNUMBER', 'ATTNAME', 'ofVisiting')){
-					echo "<b>"."The attraction you entered is NOT in this plan. No change to your original plan. New plan NOT created."."</b>";
+					echo "<b>"."The attraction you entered is NOT in this plan. No change to your original plan."."</b>";
 					executeSQL("UPDATE madeBy set plannumber = '$pname' where groupid='$name'and plannumber = '$pnameNew'");
+					executeSQL("DELETE FROM ofVisiting where PLANNUMBER = '$pnameNew'");
 					executeSQL("DELETE FROM plan where PLANNUMBER = '$pnameNew'");
 					return;
 				}
@@ -197,8 +200,9 @@ if(checkSession()){
 					// executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pnameNew'");
 					// insertIntoMadeBy($name, $pname);
 					executeSQL("UPDATE madeBy set plannumber = '$pname' where groupid='$name'and plannumber = '$pnameNew'");
+					executeSQL("DELETE FROM ofVisiting where PLANNUMBER = '$pnameNew'");
 					executeSQL("DELETE FROM plan where PLANNUMBER = '$pnameNew'");
-					echo "<b>"."The attraction you entered does not exist, so no change to your plan. Also, the new plan name is NOT created. \n Please check spelling. "."</b>";
+					echo "<b>"."The attraction you entered does not exist, so no change to your plan. Please check spelling. "."</b>";
 
 				}
 			}else{
@@ -248,8 +252,9 @@ if(checkSession()){
 
 
 				if(!ifExist2($pname, $aname, 'PLANNUMBER', 'ATTNAME', 'ofVisiting')){
-					echo "<b>"."The attraction you entered is NOT in this plan. No change to your original plan. New plan NOT created."."</b>";
+					echo "<b>"."The attraction you entered is NOT in this plan. No change to your original plan."."</b>";
 					executeSQL("UPDATE madeBy set plannumber = '$pname' where groupid='$name'and plannumber = '$pnameNew'");
+					executeSQL("DELETE FROM ofVisiting where PLANNUMBER = '$pnameNew'");
 					executeSQL("DELETE FROM plan where PLANNUMBER = '$pnameNew'");
 					return;
 				}
@@ -265,8 +270,9 @@ if(checkSession()){
 					// executeSQL("DELETE FROM madeBy where groupID = '$name' and PLANNUMBER = '$pnameNew'");
 					// insertIntoMadeBy($name, $pname);
 					executeSQL("UPDATE madeBy set plannumber = '$pname' where groupid='$name'and plannumber = '$pnameNew'");
+					executeSQL("DELETE FROM ofVisiting where PLANNUMBER = '$pnameNew");
 					executeSQL("DELETE FROM plan where PLANNUMBER = '$pnameNew'");
-					echo "<b>"."The attraction you entered does not exist, so no change to your plan. Also, the new plan name is NOT created. \n Please check spelling. "."</b>";
+					echo "<b>"."The attraction you entered does not exist, so no change to your plan. Please check spelling. "."</b>";
 
 				}
 				
