@@ -295,7 +295,7 @@ try{
 				<p>Your Group Size is <a> <?php echo $groupSize;?> </a></p>
 				<div class="row" style="height: auto;">
 					<h1 class="fullWidth"> Adults </h1>
-					<button id="adultPanelButton" onclick="ToggleForm()" style="margin: 1em;">Create Adult</button>
+					<button id="adultPanelButton" onclick="ToggleForm()" style="margin: 1em;">Add Adult</button>
 				</div>
 				<div class="popup" id="adultAddform">
 					<form action="" class="form-container" method = "post">
@@ -359,7 +359,7 @@ try{
 				<div class="row" style="height: auto;">		
 					<h1 class="fullWidth"> Children </h1>
 
-					<button id="childPanelButton" onclick="ToggleChildForm()" style="margin: 1em;">Create Children</button>
+					<button id="childPanelButton" onclick="ToggleChildForm()" style="margin: 1em;">Add Children</button>
 				</div>
 
 				<div class="popup" id="childAddform">
@@ -380,7 +380,11 @@ try{
 									<label for="contact" style="word-wrap: break-word;"><b>Responsible Adult</b></label>
 								</td>
 								<td>
-									<input type="text" placeholder="Enter Name of the Adult" name="ins_radult" style="border-width: 2px; border-style: solid;" required>
+									<select type="text" placeholder="Enter Name of the Adult" name="ins_radult" style="border-width: 2px; border-style: solid;" required>
+										<?php foreach($Adults as $adult){ ?>
+										<option value = <?php echo "'".$adult['VISITORNAME']."'";?> ><?php echo $adult['VISITORNAME'];?></option>
+									<?php }?>
+									</select>
 								</td>
 							</tr>
 						</table>

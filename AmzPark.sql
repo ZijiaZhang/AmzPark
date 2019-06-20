@@ -194,6 +194,16 @@ CREATE TABLE YoungVisitor_include_isGuradedBy(
   ON DELETE CASCADE
 );
 
+
+
+CREATE view openAtt as SELECT * from ATTRACTIONS_INSEPECT_AND_DETERMINES_STATUS1 a where a.status='OPEN';
+
+CREATE view goodPlan as 
+SELECT * from plan a 
+where NOT EXISTS (select * from openAtt b where NOT EXISTS (select * from ofvisiting c where a.plannumber = c.plannumber and b.att_name = c.attname));
+
+
+
 DROP SEQUENCE conf_seq;
 
 CREATE SEQUENCE conf_seq START WITH 1;    

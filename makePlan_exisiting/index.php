@@ -1,7 +1,7 @@
 <html lang="en"><head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<meta charset="UTF-8">
-	<title> Amz Park</title>
+	<title> From Existing Plans</title>
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/mycss.css">
 	<link rel="stylesheet" type = "text/css" href="../server_files/css/plan.css">
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
@@ -27,10 +27,10 @@ if(checkSession()){
 ?>
 <style>
 button{
-    background-color: #00dcff;
-    border-radius: 10px;
-    color: white;
-    font-size: 24px;
+	background-color: #00dcff;
+	border-radius: 10px;
+	color: white;
+	font-size: 24px;
 }
 </style>
 <body>
@@ -57,7 +57,7 @@ button{
 						</b></p>
 						<?php
 					}?>
-				
+					
 
 					<h1 style="text-align: center;"> Existing Plans </h6>
 						<div style="width: 100%">
@@ -88,6 +88,9 @@ button{
 								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
 									<input id = "planAdded" type="checkbox" name = "alreadyIn">Exclude those already added in Mine
 								</div>
+								<div style="position: relative;margin-left: auto;margin-right: auto; width:fit-content;">
+									<input id = "allOpen" type="checkbox" name = "allOpenAtt"> See plans which include all currently-open attractions
+								</div>
 								<div style="position: relative;margin-left: auto;margin-right: auto; width:100%; text-align: center;">
 									Note: Empty plans (plans with no attractions in it) will not appear here
 								</div>
@@ -100,8 +103,6 @@ button{
 				</div>
 			</div>
 		</section>
-
-
 
 
 		<script>
@@ -132,6 +133,11 @@ button{
 		getPlans();
 	});
 
+	$('#allOpen').change(function(){
+		getPlans();
+	});
+
+
 
 
 	$('#search-attr').on('input',function(e){
@@ -141,8 +147,9 @@ button{
 
 	function getPlans() {
 		var added = $('input[name=alreadyIn]').is(':checked');
+		var all = $('input[name=allOpenAtt]').is(':checked');
 		var query = $('#search-attr').val();
-		$.post("../makePlan_exisiting/plans.php", { added: added, plan: query},
+		$.post("../makePlan_exisiting/plans.php", { added: added, all:all, plan: query},
 			function(data) {
 				$('#attrSpace').html(data);
 				initializeatt();
